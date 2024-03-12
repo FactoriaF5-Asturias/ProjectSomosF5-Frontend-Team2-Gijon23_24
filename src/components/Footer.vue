@@ -9,8 +9,9 @@
         <router-link to="/faq">Preguntas Frecuentes</router-link>
         <router-link to="/about">Sobre Nosotros</router-link>
         <router-link to="/contact">Contacto</router-link>
-        
-      </nav>
+        </nav>
+    </div>
+    <div class="footer-center">
       <div class="copi">
         ©  copiright  todos los derechos reservados  
       </div>
@@ -74,6 +75,7 @@ nav a:hover {
   margin-top: 15%;
   position: relative;
   color: aliceblue;
+
   
 }
 
