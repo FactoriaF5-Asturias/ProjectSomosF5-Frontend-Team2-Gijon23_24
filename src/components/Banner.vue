@@ -12,8 +12,12 @@
 		<h2>Haciendo tangible lo inimaginable.</h2>
 		<form>
 			<div class="searchbar">
-				<input type="text" />
-				<input type="submit" />
+				<input
+					type="text"
+					class="text-input"
+					placeholder="haz tu búsqueda aquí"
+				/>
+				<input type="submit" class="submit-button" />
 			</div>
 		</form>
 	</section>
@@ -36,11 +40,14 @@ h2 {
 	color: white;
 }
 section {
-	gap: 1rem;
+	gap: 2rem;
 	font-family: "Poppins", sans-serif;
-	background-image: url(/images/banner_image.jpg);
-	background-size: auto 100%;
-	height: 50%;
+	background-image: url(/images/banner_image.png);
+	background-size: auto 60vh;
+	background-position: top;
+	background-attachment: fixed;
+	object-fit: cover;
+	height: 60vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -55,6 +62,36 @@ section {
 	img {
 		height: 100%;
 		object-fit: contain;
+	}
+}
+
+.searchbar {
+	display: flex;
+	justify-content: space-around;
+	font-size: 2rem;
+	.text-input {
+		background-color: white;
+		width: 60rem;
+		border-radius: 1.5rem 0 0 1.5rem;
+		padding: 0 1rem;
+		transition: 0.3s ease-in;
+		&:focus {
+			outline: none;
+		}
+	}
+	.submit-button {
+		background-color: #d094ff;
+		color: white;
+		padding: 1.5rem 3rem;
+		border-radius: 0 1.5rem 1.5rem 0;
+		transition: 0.1s ease-in;
+		&:hover {
+			background-color: #914ec4;
+			color: white;
+		}
+		&:focus {
+			outline: none;
+		}
 	}
 }
 </style>
