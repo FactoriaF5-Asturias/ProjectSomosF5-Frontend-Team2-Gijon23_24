@@ -1,24 +1,15 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-  <header>
+	<header></header>
 
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-    
-  </header>
-
-  <RouterView />
+	<RouterView />
 </template>
 
 <style scoped>
 .wrapper {
-  font-size: 1.5rem;
+	font-size: 1.5rem;
 }
 </style>

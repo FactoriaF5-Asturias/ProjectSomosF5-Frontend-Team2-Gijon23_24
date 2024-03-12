@@ -1,12 +1,10 @@
 <script setup>
+import Banner from "@/components/Banner.vue";
 </script>
 
 <template>
-  <main>
-    <h1>This is home page</h1>
-  </main>
+	<Banner />
+	<main></main>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
