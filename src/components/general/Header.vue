@@ -19,7 +19,7 @@ import HeaderButtons from "./header/HeaderButtons.vue";
             </div>
           </router-link>
 
-          <router-link to="/">
+          <router-link to="/about">
             <div>
               <img src="/icons/icon-shopping-cart.svg" alt="">
               <p>Carrito</p>
@@ -43,7 +43,7 @@ import HeaderButtons from "./header/HeaderButtons.vue";
 <style lang="scss" scoped>
 header > div {
   background-color: $primary-background;
-  height: 10vh;
+  height: 10rem;
   padding: 0 2rem;
   display: flex;
   justify-content: space-between;
@@ -72,7 +72,7 @@ header > div {
 }
 nav {
   background-color: $primary-background;
-  height: 6vh;
+  height: 6rem;
   padding-left: 7rem;
   display: flex;
   align-items: center;
@@ -83,6 +83,10 @@ nav {
     font-weight: 300;
     color: $inactive-primary-color;
     font-size: 1.7rem;
+    transition: all 0.2s ease-in-out;
+  }
+  a:hover {
+    color: $primary-color;
   }
 }
 .active {

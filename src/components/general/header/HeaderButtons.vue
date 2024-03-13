@@ -1,20 +1,47 @@
 <script setup>
+import LoginForm from "./LoginForm.vue";
+import RegisterForm from "./RegisterForm.vue";
+import { ref } from 'vue';
 
+let showRegisterForm = ref(false);
+let showLoginForm = ref(false);
+
+const openRegisterForm = () => {
+  showRegisterForm.value = true;
+  showLoginForm.value = false;
+};
+
+const openLoginForm = () => {
+  showLoginForm.value = true;
+  showRegisterForm.value = false;
+};
+
+const closeForm = () => {
+  showRegisterForm.value = false;
+  showLoginForm.value = false;
+};
 </script>
 
 <template>
   <div>
-    <button>
-      Iniciar sesión
-    </button>
-
-    <button>
-      Registrarse
-    </button>
+    <div>
+      <button @click="openLoginForm()">
+        Iniciar sesión
+      </button>
+  
+      <button @click="openRegisterForm()">
+        Registrarse
+      </button>
+    </div>
+    <div>
+      <RegisterForm v-if="showRegisterForm" @close="closeForm"/>
+      <LoginForm v-if="showLoginForm" @close="closeForm"/>
+    </div>
+    
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 div {
   display: flex;
   gap: 1rem;
