@@ -28,6 +28,48 @@ export const useProductsStore = defineStore('products',
         description: 'Descripción del producto 3',
         price: 39.99,
       },
+      {
+        id: 4,
+        image: '/images/start_wars_clok1.jpg',
+        title: 'Start Wars Cloak',
+        description: 'Descripción del producto 4',
+        price: 49.99,
+      },
+      {
+        id: 5,
+        image: '/images/8Star_DragonBall_1.png',
+        title: '8 Star Dragon Ball',
+        description: 'Descripción del producto 5',
+        price: 59.99,
+      },
+      {
+        id: 6,
+        image: '/images/Naruto_Niño.jpg',
+        title: 'Naruto Niño',
+        description: 'Descripción del producto 6',
+        price: 69.99,
+      },
+      {
+        id: 7,
+        image: '/images/one_piece_pirate_ship3.png',
+        title: 'One Piece Pirate Ship',
+        description: 'Descripción del producto 7',
+        price: 79.99,
+      },
+      {
+        id: 8,
+        image: '/images/dark-holocron2.JPG',
+        title: 'Dark Holocron',
+        description: 'Descripción del producto 8',
+        price: 89.99,
+      },
+      {
+        id: 9,
+        image: '/images/JapaneseTableLamp13.jpeg',
+        title: 'Japanese Table Lamp',
+        description: 'Descripción del producto 9',
+        price: 99.99,
+      },
     ]);
      
      return {
