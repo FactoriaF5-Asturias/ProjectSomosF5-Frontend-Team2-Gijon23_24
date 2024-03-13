@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { useArticleStore } from "@/stores/article";
 import { useRouter } from 'vue-router';
 import { defineEmits } from 'vue';
@@ -22,17 +22,17 @@ const deleteArticle = async (id) => {
     }
 
 }
-</script> 
+</script>  -->
 
 <template>
   <div>
 
     <button @click="editArticle">
-      <img  src="/icons/penNormal.svg" />
+      <img  src="/icons/editIcon.svg" />
     </button>
 
     <button @click="deleteArticle">
-      <img src="/icons/trashRegular.svg" /> 
+      <img src="/icons/deleteIcon.svg" /> 
     </button>
 
   </div>
@@ -42,7 +42,7 @@ const deleteArticle = async (id) => {
 
 div {
     display: flex;
-    gap:1rem;
+    gap:0.5rem;
 }
 
 img {
