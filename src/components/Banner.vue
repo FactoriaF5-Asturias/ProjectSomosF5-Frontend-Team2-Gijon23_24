@@ -43,15 +43,15 @@ section {
 	gap: 2rem;
 	font-family: "Poppins", sans-serif;
 	background-image: url(/images/banner_image.png);
-	background-size: auto 60vh;
-	background-position: top;
-	background-attachment: fixed;
+	background-size: auto 80rem;
+	background-position: center;
 	object-fit: cover;
-	height: 60vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	padding: 2rem;
+	padding-top: 16rem;
 }
 
 .logo-container {

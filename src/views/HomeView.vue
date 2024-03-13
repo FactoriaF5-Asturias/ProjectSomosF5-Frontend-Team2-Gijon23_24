@@ -3,8 +3,14 @@ import Banner from "@/components/Banner.vue";
 </script>
 
 <template>
-	<Banner />
-	<main></main>
+	<main>
+		<Banner  />
+		<p>hhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+	</main>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+p {
+	margin-top: 100rem;
+}
+</style>
