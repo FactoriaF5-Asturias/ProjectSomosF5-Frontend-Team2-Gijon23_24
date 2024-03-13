@@ -32,27 +32,30 @@ const sendDetailArticle = (id) => {
 </script>
 <template>
     <div>
-       <v-card v-for="(product, index) in products" :key="index" class="mx-auto" max-width="200" theme="dark">
+      <v-card-actions>
+       <v-card v-for="(product, index) in products" :key="index" class="mx-auto card"  theme="dark">
          <v-img class="align-end text-white" height="200" :src="product.image" cover>
            <v-card-title>{{ product.title }}</v-card-title>
          </v-img><v-card-text>
          <div v-if="showDescription === index">
           <div> {{ product.description }}</div>
-         
+          <div> {{ product.price }}</div>
         </div>
          </v-card-text>
-         <v-card-actions>
+     
          
-           <v-btn color="orange">
-             Explore
-           </v-btn>
-         </v-card-actions>
        </v-card>
+      </v-card-actions>
     </div>
    </template>
 
 
 
 
-<style lang="scss"></style>
+<style lang="scss">
+.card{
+  width: 20rem;
+  max-width: 20rem;
+}
+</style>
 
