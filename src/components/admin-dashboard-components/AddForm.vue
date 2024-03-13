@@ -23,26 +23,27 @@ const handleFileUpload = (event) => {
   <div class="titleForm">
         <h1>Añadir</h1>
   </div>
-
+    <div class="group-1">
     <div class="form-row-1">
       <div class="form-group-1">
         <p>Título</p>
-        <input type="text" class="form-control" id="title" v-model="titulo">
+        <input type="text" class="form-control" id="title" v-model="titulo" placeholder="Título">
       </div>
       <div class="form-group-2">
         <p>Precio</p>
-        <input type="number" class="form-control" id="price" v-model="precio">
+        <input type="number" class="form-control" id="price" v-model="precio" placeholder="Precio">
       </div>
     </div>
 
     <div class="form-row-2">
       <p>Categoría</p>
-      <select class="form-control" id="categorie" v-model="categorie" placeholder="Seleccione categoría">
+      <select class="form-control-1" id="categorie" v-model="categorie" placeholder="Seleccione categoría">
         <option value="categorie1">Litofanía</option>
         <option value="categorie2">Hogar</option>
         <option value="categorie2">Geek</option>
       </select>
     </div>
+  </div>
     <div class="form-row-3">
       <P>Imágenes</P>
       <input type="file" class="form-control-file" id="images">
@@ -50,9 +51,9 @@ const handleFileUpload = (event) => {
 
     <div class="form-row-4">
       <P>Descripción</P>
-      <textarea class="form-control" id="description" rows="3" v-model="description"></textarea>
+      <textarea class="form-control" id="description" rows="3" v-model="description" placeholder="Descripción..."></textarea>
     </div>
-    <button type="submit" class="btn">Enviar</button>
+    <button @click="send">Enviar</button>
  </form>
 
 </template>
@@ -60,13 +61,9 @@ const handleFileUpload = (event) => {
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-
-
-
  form {
   display: flex;
   flex-direction: column;
- 
   justify-content: center;
   width: 100%;
   max-width: 600px; 
@@ -77,23 +74,22 @@ const handleFileUpload = (event) => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
  }
 
-   .form-row-1 {
-    display: flex;
-    gap: 2rem;
-    width: 70%;
-    margin-bottom: 1rem;
+.form-row-1 {
+  display: flex;
+  gap: 2rem;
+  width: 70%;
+  margin-bottom: 1rem;
     input {
       border: 1px solid black;
-
     }
-   }
+  }
 
-   .form-group-1 {
+  .form-group-1 {
     width: 70%;
     background-color: chartreuse;
     input {
       width: 100%;
-      height: 2.5rem ;
+      height: 3rem ;
       border-radius: 0.5rem;
     }
    }
@@ -103,62 +99,77 @@ const handleFileUpload = (event) => {
     background-color: coral;
     input {
       width: 100%;
-      height: 2.5rem ;
+      height: 3rem ;
       border-radius: 0.5rem;
     }
    }
  
    .form-row-2 {
-     display: flex;
-     flex-direction: column;
-     width: 70%;
-     background-color: darksalmon;
-     input {
-      border: 1px solid black;
-     width: 100%;
-      height: 3.5rem ;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-bottom: 1rem;
+    background-color: darksalmon;
+  }
+
+  .form-control-1 {
+    width: 100%;
+      height: 3rem ;
       border-radius: 0.5rem;
-    }
+      border: 1px solid black;
   }
 
   .form-row-3 {
     background-color: cornflowerblue;
+    margin-bottom: 1rem;
     input {
       border: 1px solid black;
      width: 100%;
-      height: 3.5rem ;
+      height: 5rem ;
       border-radius: 0.5rem;
     }
   }
 
   .form-row-4 {
     width: 100%;
-    height: 10rem;
+    height: 15rem;
     background-color: darkgoldenrod;
     textarea {
      width: 100%;
-      height: 9rem ;
+      height: 12rem ;
       border-radius: 0.5rem;
       border: 1px solid black;
     }
   }
 
-
-
   h1 {
    font-family: "Poppins", sans-serif;
    font-size: 4rem;
-   margin-top: 3rem;
    margin-bottom: 3rem;
    display: flex;
    justify-content: center;
   }
 
-  .btn {
-    background-color: #AE81D1;
-    
+p {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
 
-  }
+  button {
+    background-color: #AE81D1;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.5rem;
+    color: white;
+    border-radius: 0.5rem;
+    padding: 1rem 2rem;
+    width: 8rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem;
+}
 
 
 
