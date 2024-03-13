@@ -60,15 +60,17 @@ const submitForm = () => {
           </section>
 
           <section class="form_container">
-            <button @click.stop="closeForm">
-              <img src="/icons/icon-cross.svg" alt="cross icon">
-            </button>
+            <div id="button_container">
+              <button @click.stop="closeForm">
+                <img src="/icons/icon-cross.svg" alt="cross icon">
+              </button>
+            </div>
             <form @submit.prevent="submitForm">
                 <h1>¡Unete a nosotros!</h1>
                 <div>
                   <div class="input_box">
                       <label>Email:</label>
-                      <input type="email" placeholder="correo electrónico">
+                      <input type="email" placeholder="correo electrónico" required>
                   </div>
                   <div class="input_box">
                       <label>Contraseña:</label>
@@ -143,22 +145,28 @@ section:first-child {
 }
 
 .form_container {
-  padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
-  > button {
+  > div {
     width: 100%;
     display: flex;
     justify-content: end;
+      
+    button {
+      margin: 2rem 2rem 0 0;
+    }
+    img {
+      width: 2.5rem;
+    }
   }
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 6rem;
+  gap: 3rem;
 
   > div {
     font-family: "Poppins", sans-serif;
@@ -169,7 +177,7 @@ form {
   }
 
   button {
-    color: black;
+    color: white;
     background-color: $primary-color;
     height: 3.8rem;
     text-align: center;

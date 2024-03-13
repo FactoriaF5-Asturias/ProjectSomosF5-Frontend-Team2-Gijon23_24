@@ -8,38 +8,48 @@ const closeForm = () => {
   props.onClose();
 }
 
-// submitForm
 </script>
 
 <template>
-<div class="modal" @click="closeForm">
-    <div class="modal_container" @click.stop>
-        <section class="form_container">
-            <form @submit.prevent="submitForm">
-                    <h1>¡Unete a nosotros!</h1>
+<div>
+  <ErrorPassword :show="errorVisible" />
+  
+  <div class="modal" @click="closeForm">
+      <div class="modal_container" @click.stop>
+          <section class="form_container">
+              <form @submit.prevent="submitForm">
+                  <h1>¡Bienvenido!</h1>
+                  <div>
                     <div class="input_box">
-                    <label>Email:</label>
-                    <input type="email" placeholder="correo electrónico">
-                </div>
-                <div class="input_box">
-                    <label>Contraseña:</label>
-                    <input type="password" placeholder="contraseña" v-model="password" required>
-                </div>
-                <div class="submit_container">
-                    <button type="submit">Enviar</button>
-                </div>
-            </form>
-        </section>
-
-        <section id="welcome_image">
-            <button @click.stop="closeForm">
-                    <img src="/icons/icon-cross.svg" alt="cross icon">
-            </button>
-            <img src="/images/logo.svg" alt="">
-            <img src="/images/PrintGo.svg" alt="">
-            <p>Haciendo tangible lo inimaginable.</p>
-        </section>
-    </div>
+                        <label>Email:</label>
+                        <input type="email" placeholder="correo electrónico" required>
+                    </div>
+                    <div class="input_box">
+                        <label>Contraseña:</label>
+                        <input type="password" placeholder="contraseña" v-model="password" required>
+                        <a href="">¿has olvidado tu contraseña?</a>
+                    </div>
+                    <div class="submit_container">
+                        <button type="submit">Enviar</button>
+                    </div>
+                  </div>
+              </form>
+          </section>
+  
+          <section id="welcome_image">
+              <div id="button_container">
+                <button @click.stop="closeForm">
+                  <img src="/icons/icon-cross.svg" alt="cross icon">
+                </button>
+              </div>
+              <div id="images_container">
+                <img src="/images/logo.svg" alt="">
+                <img src="/images/PrintGo.svg" alt="">
+                <p>Haciendo tangible lo inimaginable.</p>
+              </div>
+          </section>
+      </div>
+  </div>
 </div>
 </template>
 
@@ -74,24 +84,37 @@ section {
   border-radius: 0 10px 10px 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 3rem;
 
-  img {
-    width: 60%;
-  }
-  p {
-    color: $light-font;
-    font-size: 2rem;
-    font-weight: 300;
-    font-family: "Poppins", sans-serif;
-  }
-
-  > button {
+  #button_container {
+    width: 100%;
     display: flex;
     justify-content: end;
-    width: 4rem;
+      
+    button {
+      margin: 2rem 2rem 0 0;
+    }
+    img {
+      width: 2.5rem;
+    }
+  }
+
+  #images_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+
+    img {
+    width: 60%;
+    }
+    p {
+      color: $light-font;
+      font-size: 2rem;
+      font-weight: 300;
+      font-family: "Poppins", sans-serif;
+    }
   }
 }
 
@@ -99,6 +122,8 @@ section {
   padding: 2rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 2rem;
 }
 
@@ -107,10 +132,16 @@ form {
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
 
-  button {
-    color: black;
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    
+    button {
+    color: white;
     background-color: $primary-color;
     height: 3.8rem;
     text-align: center;
@@ -118,8 +149,10 @@ form {
     border-radius: 10px;
     font-size: 1.6rem;
   }
+  }
 
   h1 {
+    font-weight: 600;
     text-align: center;
     font-size: 3rem;
   }
