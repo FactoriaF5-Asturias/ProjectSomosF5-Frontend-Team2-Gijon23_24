@@ -33,13 +33,13 @@ export default {
   justify-content: space-between;
   align-items: center;
   background-color: #333; 
-  padding: 10px; /* Ajusta el padding según sea necesario */
+  padding: 26px; 
   color: white;
 }
 
 .logo {
-  width: 85px; 
-  margin-left: 20%;
+  width: 86px; 
+  margin-left: 40%;
 }
 
 .footer-left,
@@ -57,11 +57,11 @@ export default {
 
 .nav {
   display: flex;
-  gap: 60px;
+  gap: 80px;
 }
 .nav a{
   color: aliceblue;
-  font-size:large;
+  font-size:x-large;
 }
 .nav a:hover{
   color: blueviolet;
@@ -77,6 +77,9 @@ router-link {
 
 .copyright {
   margin-top: 30px;
+}
+.footer-right{
+  margin-right: 2%;
 }
 
 .paypal-logo,
