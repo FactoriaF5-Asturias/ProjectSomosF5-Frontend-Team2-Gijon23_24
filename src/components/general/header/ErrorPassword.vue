@@ -14,7 +14,7 @@ const props = defineProps({
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 div {
   position: fixed;
   top: 50%;
@@ -24,7 +24,7 @@ div {
   padding: 10px 20px;
   border-radius: 5px;
   z-index: 9999;
-  background-color: rgb(243, 92, 92);
+  background-color: $error-color;
   border: 1px solid rgb(225, 40, 40);
   display: flex;
   gap: 1rem;
