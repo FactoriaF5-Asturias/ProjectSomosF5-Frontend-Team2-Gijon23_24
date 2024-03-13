@@ -33,7 +33,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   background-color: #333; 
-  padding: 26px; 
+  padding: 54px; 
   color: white;
 }
 
@@ -65,6 +65,7 @@ export default {
 }
 .nav a:hover{
   color: blueviolet;
+  transition: 1s;
 }
 
 router-link {
@@ -76,7 +77,9 @@ router-link {
 
 
 .copyright {
-  margin-top: 30px;
+  margin-top: 65px;
+  
+  
 }
 .footer-right{
   margin-right: 2%;
