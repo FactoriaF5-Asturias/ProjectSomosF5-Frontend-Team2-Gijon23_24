@@ -36,10 +36,11 @@ const sendDetailArticle = (id) => {
        <v-card v-for="(product, index) in products" :key="index" class="mx-auto card"  theme="dark">
          <v-img class="align-end text-white" height="200" :src="product.image" cover>
            <v-card-title>{{ product.title }}</v-card-title>
+           <div> {{ product.price }}€</div>
          </v-img><v-card-text>
          <div v-if="showDescription === index">
           <div> {{ product.description }}</div>
-          <div> {{ product.price }}</div>
+         
         </div>
          </v-card-text>
      
