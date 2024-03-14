@@ -12,5 +12,7 @@ import AddButton from '@/components/admin-dashboard-components/AddButton.vue';
 </template>
 
 <style lang="scss" scoped>
-
+p {
+	margin-top: 100rem;
+}
 </style>
