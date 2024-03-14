@@ -1,28 +1,34 @@
 import { createApp } from 'vue';
-import { mount } from 'vitest';
+import { mount } from '@vue/test-utils';
 import Header from '../general/Header.vue';
+import { test, expect } from 'vitest';
+import HeaderButtons from '../general/header/HeaderButtons.vue';
 
-test('renders header component with logo, actions, and navigation links', async () => {
-  const app = createApp({});
+test('renderiza el componente header con logo, acciones y enlaces de navegación', async () => {
+ const app = createApp({});
+ const wrapper = mount(Header, { app });
 
-  const wrapper = mount(Header, { app });
+ const logo = wrapper.find('img[src="/images/logotype.png"]');
+ expect(logo.exists()).toBe(true);
 
-  const logo = wrapper.find('img[src="/images/logotype.png"]');
-  expect(logo.exists()).toBe(true);
+ const actionsContainer = wrapper.find('#actions_container');
+ expect(actionsContainer.exists()).toBe(true);
 
-  const favoriteLink = wrapper.find('router-link[to="/"] p:contains(Favoritos)');
-  const cartLink = wrapper.find('router-link[to="/about"] p:contains(Carrito)');
-  expect(favoriteLink.exists()).toBe(true);
-  expect(cartLink.exists()).toBe(true);
+ const favoritosLink = actionsContainer.find('router-link[to="/"]');
+ expect(favoritosLink.exists()).toBe(true);
+ const favoritosText = favoritosLink.find('p');
+ expect(favoritosText.text()).toBe('Favoritos');
 
-  const headerButtons = wrapper.findComponent({ ref: 'HeaderButtons' });
-  expect(headerButtons.exists()).toBe(true);
+ const carritoLink = actionsContainer.find('router-link[to="/about"]');
+ expect(carritoLink.exists()).toBe(true);
+ const carritoText = carritoLink.find('p');
+ expect(carritoText.text()).toBe('Carrito');
 
-  const homeLink = wrapper.find('nav router-link[to="/"]:contains(Inicio)');
-  const aboutLink = wrapper.find('nav router-link[to="/about"]:contains(Litofanía)');
+ const headerButtons = wrapper.findComponent(HeaderButtons);
+ expect(headerButtons.exists()).toBe(true);
 
-  expect(homeLink.exists()).toBe(true);
-  expect(aboutLink.exists()).toBe(true);
+ const navLinks = wrapper.findAll('nav router-link');
+ expect(navLinks.length).toBe(4);
 
-  await wrapper.unmount();
+ await wrapper.unmount();
 });

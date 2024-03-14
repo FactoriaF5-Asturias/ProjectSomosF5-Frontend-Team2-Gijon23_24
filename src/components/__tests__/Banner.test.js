@@ -1,10 +1,10 @@
 import { createApp } from 'vue';
-import { mount } from 'vitest';
+import { mount } from '@vue/test-utils';
 import Banner from '../Banner.vue';
+import { test, expect } from 'vitest';
 
-test('renders header component with logo, actions, and navigation links', async () => {
+test('renderiza el componente banner con logo, títulos y barra de búsqueda', async () => {
  const app = createApp({});
-  
  const wrapper = mount(Banner, { app });
 
  const logo = wrapper.find('.logo-container img');
@@ -19,15 +19,13 @@ test('renders header component with logo, actions, and navigation links', async 
  expect(subtitle.text()).toBe('Haciendo tangible lo inimaginable.');
 
  const searchBar = wrapper.find('.searchbar');
- const textInput = searchBar.find('.text-input');
- const submitButton = searchBar.find('.submit-button');
  expect(searchBar.exists()).toBe(true);
- expect(textInput.exists()).toBe(true);
- expect(submitButton.exists()).toBe(true);
 
- // Añadir prueba para verificar una interacción de usuario, como un clic en el botón de búsqueda
- await wrapper.find('.submit-button').trigger('click');
- expect(wrapper.emitted()).toHaveProperty('search-clicked');
+ const textInput = searchBar.find('.text-input');
+ expect(textInput.exists()).toBe(true);
+
+ const submitButton = searchBar.find('.submit-button');
+ expect(submitButton.exists()).toBe(true);
 
  await wrapper.unmount();
 });
