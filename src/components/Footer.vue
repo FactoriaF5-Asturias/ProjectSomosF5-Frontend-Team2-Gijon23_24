@@ -33,7 +33,9 @@
   background-color:$primary-background; 
   padding: 54px; 
   color: white;
+  background-color:transparentize($color: #1c1b1b, $amount: 0)
 }
+
 
 .logo {
   width: 86px; 
