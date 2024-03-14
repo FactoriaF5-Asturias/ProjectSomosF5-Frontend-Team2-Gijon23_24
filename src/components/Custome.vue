@@ -78,7 +78,7 @@
     cursor: pointer;
     border-radius: 5px;
     margin-top: 10px;
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .right-section {
