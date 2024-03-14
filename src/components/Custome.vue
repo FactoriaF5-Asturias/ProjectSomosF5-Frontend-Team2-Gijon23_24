@@ -12,17 +12,17 @@
 
       <div class="right-section">
         <div class="info-box">
-          <img src="" alt="Imagen 1" />
+          <img src="../assets/images/enviamodelo.png" alt="Imagen 1" />
           <p>Envíanos tu modelo</p>
         </div>
 
         <div class="info-box">
-          <img src="" alt="Imagen 2" />
+          <img src="../assets/images/locreamos.png" alt="Imagen 2" />
           <p>Lo creamos</p>
         </div>
 
         <div class="info-box">
-          <img src="" alt="Imagen 3" />
+          <img src="../assets/images/acabadofino.png" alt="Imagen 3" />
           <p>Le damos el mejor acabado</p>
         </div>
       </div>
@@ -58,6 +58,7 @@
     justify-content: center;
     align-items: flex-start;
     background-color: #252525;
+    padding: 0 12%;
   }
 
   .left-section {
@@ -85,6 +86,7 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
+    margin-top: 4%;
     justify-content: space-around; 
     align-items: center; 
     background-color: #252525;
@@ -92,7 +94,9 @@
 
   .info-box {
     text-align: center;
-    margin-bottom: 20px;
+    color: aliceblue;
+    font-size:xx-large;
+    margin-bottom: 25px;
   }
 
   .info-box img {
