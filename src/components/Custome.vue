@@ -35,7 +35,7 @@
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: $primary-background;
+    background-color:#252525;
     text-align: center;
   }
 
