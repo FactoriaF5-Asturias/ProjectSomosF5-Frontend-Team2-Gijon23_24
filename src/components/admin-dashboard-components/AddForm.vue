@@ -30,6 +30,12 @@ const handleFileUpload = (event) => {
   <div class="modal" @click="closeForm">
     <div class="modal_container" @click.stop>
 
+      <div id="button_container">
+              <button @click.stop="closeForm">
+                <img src="/icons/icon-cross.svg" alt="cross icon">
+              </button>
+            </div>
+
       <form @submit.prevent="submitForm">
         <h1>Añadir</h1>
 
@@ -100,6 +106,14 @@ const handleFileUpload = (event) => {
   display: flex;
 }
 
+.button-container {
+  display:flex;
+  justify-content: end;
+  button {
+    width: auto;
+    background-color: aquamarine;
+  }
+}
  form {
   display: flex;
   flex-direction: column;
