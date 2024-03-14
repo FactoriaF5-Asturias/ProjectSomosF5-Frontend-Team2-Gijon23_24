@@ -1,9 +1,12 @@
 <script setup>
+import ExplorerCategory from '../components/ExplorerCategory.vue';
 </script>
 
 <template>
   <main>
-    <h1>This is home page</h1>
+    <section>
+      <ExplorerCategory/>
+  </section>
   </main>
 </template>
 
