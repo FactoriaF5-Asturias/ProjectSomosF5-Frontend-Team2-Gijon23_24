@@ -80,6 +80,10 @@
     margin-top: 10px;
     font-size: 18px;
   }
+  .cta-button:hover{
+    transition: 1s;
+    background-color: #333;
+  }
 
   .right-section {
     flex: 1;
