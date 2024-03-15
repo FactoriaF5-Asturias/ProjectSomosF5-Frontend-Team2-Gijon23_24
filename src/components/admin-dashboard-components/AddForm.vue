@@ -1,5 +1,9 @@
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from "vue-router";
+//import axios from 'axios';
+
+const router = useRouter()
 
 const props = defineProps({
   onClose: Function
@@ -15,14 +19,53 @@ const closeForm = () => {
   props.onClose();
 }
 
-const submitForm = () => {
-  // lógica para manejar el envío del formulario
-  console.log('Formulario enviado:', { titulo: titulo.value, precio: precio.value, categoria: categoria.value, imagenes: imagenes.value, descripcion: descripcion.value });
-};
+const resetForm = () => {
 
-const handleFileUpload = (event) => {
-  imagenes.value = event.target.files;
-};
+titulo.value = '';
+precio.value = '';
+categoria.value = ''; //seleccionar entre 3
+descripcion.value = '';
+//faltan las imágenes¿se hace de manera diferente?
+
+}
+
+const productList = ref([])
+
+
+const addProduct = async () => {
+
+  try {
+
+    const uri = import.meta.env.VITE_APP_API_ENDPOINT
+
+    const data = {
+      titulo: titulo.value,
+      precio: precio.value,
+      categoria: categoria.value,
+      descripcion: descripcion.value,
+      //faltan imágenes
+    }
+
+    const config = {
+      withCredentials: true,
+    }
+
+    const response = await axios.post(uri + '/products', data, config)
+    const status = await response.status
+    
+    if (status == 201) {
+      router.push("/dashboard") //dashboard de admin
+    }
+
+  } catch (error) {
+    throw new Error('Error calling api: ' + error)
+  }
+
+}
+
+// const handleFileUpload = (event) => {
+//   imagenes.value = event.target.files;
+// };
 </script>
 
 <template>
@@ -86,8 +129,8 @@ const handleFileUpload = (event) => {
         </div>
 
         <div class="btns-actions">
-          <button @click="delete">Borrar</button>
-          <button @click="send">Enviar</button>
+          <button id="reset" @click="resetForm()">Borrar</button>
+          <button  id="send" @click="addProduct()">Enviar</button>
         </div>
       </form>
     </div>
