@@ -1,11 +1,12 @@
 <script setup>
-  import ExploreCategory from '../components/ExploreCategory.vue';
+import ExplorerCategory from '../components/ExplorerCategory.vue';
 </script>
 
 <template>
   <main>
-    <h1>This is home page</h1>
-  <ExploreCategory/>
+    <section>
+      <ExplorerCategory/>
+  </section>
   </main>
 </template>
 
