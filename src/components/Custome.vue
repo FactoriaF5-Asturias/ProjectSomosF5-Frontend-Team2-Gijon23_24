@@ -6,23 +6,23 @@
 
     <div class="main-content">
       <div class="left-section">
-        <img src="@/assets/images/estatua.png" alt="Imagen" />
+        <img src="/public/images/estatua.png" alt="Imagen" />
         <button class="cta-button">Envíanos tu modelo</button>
       </div>
 
       <div class="right-section">
         <div class="info-box">
-          <img src="../assets/images/enviamodelo.png" alt="Imagen 1" />
+          <img src="/public/images/enviamodelo.png" alt="Imagen 1" />
           <p>Envíanos tu modelo</p>
         </div>
 
         <div class="info-box">
-          <img src="../assets/images/locreamos.png" alt="Imagen 2" />
+          <img src="/public/images/locreamos.png" alt="Imagen 2" />
           <p>Lo creamos</p>
         </div>
 
         <div class="info-box">
-          <img src="../assets/images/acabadofino.png" alt="Imagen 3" />
+          <img src="/public/images/acabadofino.png" alt="Imagen 3" />
           <p>Le damos el mejor acabado</p>
         </div>
       </div>
@@ -83,6 +83,7 @@
   .cta-button:hover{
     transition: 1s;
     background-color: #333;
+    
   }
 
   .right-section {
