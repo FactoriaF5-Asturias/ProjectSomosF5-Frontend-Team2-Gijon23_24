@@ -38,45 +38,49 @@ const handleFileUpload = (event) => {
 
       <form @submit.prevent="submitForm">
 
-        <h1>Añadir</h1>
+        <h1>Añadir nuevo producto</h1>
+        <div class="divMain">
 
+          <div class="image-main">
+            <label>Imagen Principal</label>
+            <input title=" " type="file" class="form-control-file" id="images">
+          </div>
+          <section>
 
+            <div class="first-row">
 
-        <section>
-          <div class="first-row">
+              <div class="title-container">
+                <label>Título</label>
+                <input type="text" class="form-control" id="title" v-model="titulo" placeholder="Título">
+              </div>
 
-            <div class="title-container">
-              <p>Título</p>
-              <input type="text" class="form-control" id="title" v-model="titulo" placeholder="Título">
+              <div class="price-container">
+                <label>Precio</label>
+                <input type="number" class="form-control" id="price" v-model="precio" placeholder="Precio">
+              </div>
+
             </div>
 
-            <div class="price-container">
-              <p>Precio</p>
-              <input type="number" class="form-control" id="price" v-model="precio" placeholder="Precio">
+            <div class="categories-container">
+              <label>Categoría</label>
+              <select id="categories" v-model="categories" placeholder="Seleccione categoría">
+                <option value="home">Hogar</option>
+                <option value="geek">Geek</option>
+                <option value="litophany">Litofanía</option>
+              </select>
+
             </div>
 
-          </div>
-
-          <div class="categories-container">
-            <p>Categoría</p>
-            <select id="categories" v-model="categories" placeholder="Seleccione categoría">
-              <option value="litophany">Litofanía</option>
-              <option value="home">Hogar</option>
-              <option value="geek">Geek</option>
-            </select>
-
-          </div>
-
-        </section>
-
+          </section>
+        </div>
 
         <div class="images-container">
-          <p>Imágenes</p>
-          <input type="file" class="form-control-file" id="images">
+          <label for="file-upload" class="custom-file-upload">Imágenes</label>
+          <input type="file" class="form-control-file" id="file-upload">
         </div>
 
         <div class="description-container">
-          <p>Descripción</p>
+          <label>Descripción</label>
           <textarea class="form-control" id="description" rows="3" v-model="description"
             placeholder="Descripción..."></textarea>
         </div>
@@ -122,11 +126,6 @@ const handleFileUpload = (event) => {
   display: flex;
   padding: 3rem;
   justify-content: end;
-
-  button {
-
-    background-color: aquamarine;
-  }
 }
 
 form {
@@ -134,106 +133,134 @@ form {
   flex-direction: column;
   justify-content: center;
   width: 100%;
+ 
   max-width: 600px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 2rem 0 2rem;
   border-radius: 1rem;
 
 
 }
 
+.divMain {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.image-main {
+  width: 30%;
+
+  input {
+    //border: 1px solid black;
+    width: 100%;
+    height: 8.7rem;
+    border-radius: 0.5rem;
+    background-color: #DDD8D8;
+    font-family: "Poppins", sans-serif;
+  }
+}
+section {
+  width: 100%;
+}
+
 .first-row {
   display: flex;
   gap: 2rem;
-  width: 70%;
-  margin-bottom: 1rem;
-
-  input {
-    border: 1px solid black;
-  }
+  width: 100%;
+  margin-bottom: 1rem;  
 }
 
 .title-container {
   width: 70%;
-  background-color: chartreuse;
 
   input {
     width: 100%;
     height: 3rem;
     border-radius: 0.5rem;
+    background-color: #DDD8D8;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
   }
 }
 
 .price-container {
   width: 30%;
-  background-color: coral;
 
   input {
     width: 100%;
     height: 3rem;
     border-radius: 0.5rem;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    background-color: #DDD8D8;
   }
 }
 
 .categories-container {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 100%;
   margin-bottom: 1rem;
-  background-color: darksalmon;
 }
 
 select {
   width: 100%;
   height: 3rem;
   border-radius: 0.5rem;
-  border: 1px solid black;
+  //border: 1px solid black;
+  background-color: #DDD8D8;
+  font-family: "Poppins", sans-serif;
 }
 
 .images-container {
-  background-color: cornflowerblue;
   margin-bottom: 1rem;
 
   input {
     border: 1px solid black;
     width: 100%;
     height: 5rem;
-    border-radius: 0.5rem;
+    //border-radius: 0.5rem;
+    background-color: #DDD8D8;
+    font-family: "Poppins", sans-serif;
   }
 }
 
 .description-container {
   width: 100%;
   height: 15rem;
-  background-color: darkgoldenrod;
 
   textarea {
     width: 100%;
     height: 12rem;
     border-radius: 0.5rem;
-    border: 1px solid black;
+    //border: 1px solid black;
+    background-color: #DDD8D8;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
   }
 }
 
 h1 {
   font-family: "Poppins", sans-serif;
   font-size: 4rem;
-  margin-bottom: 3rem;
+  color:grey;
+  margin-bottom: 5rem;
   display: flex;
   justify-content: center;
 }
 
-p {
+label {
   font-family: "Poppins", sans-serif;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .btns-actions {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 
   button {
     background-color: #AE81D1;
