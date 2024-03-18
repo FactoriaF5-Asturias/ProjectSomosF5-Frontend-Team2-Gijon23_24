@@ -8,11 +8,10 @@ const router = useRouter()
 const props = defineProps({
   onClose: Function
 });
-const imageMainProduct = ref(null);
+
 const productName = ref('');
 const price = ref('');
-const categoryId = ref('1');
-
+const categoryId = ref('');
 const productDescription = ref('');
 
 const closeForm = () => {
@@ -21,10 +20,9 @@ const closeForm = () => {
 
 const resetForm = () => {
 
-  imageProduct.value = '';
   productName.value = '';
   price.value = '';
-  categoryId.value = '1';
+  categoryId.value = '';
   productDescription.value = '';
 }
 
@@ -40,7 +38,6 @@ const addProduct = async () => {
     const uri = import.meta.env.VITE_APP_API_ENDPOINT
 
     const data = {
-      imageMainProduct: imageProduct.value,
       productName: productName.value,
       price: price.value,
       categoryId: categoryId.value,
@@ -56,7 +53,7 @@ const addProduct = async () => {
     const status = await response.status
     
     if (status == 201) {
-      router.push("/dashboard") //dashboard de admin
+      router.push("/AdminDashboard") //dashboard de admin
     }
 
   } catch (error) {
@@ -108,12 +105,11 @@ const addProduct = async () => {
 
             <div class="categories-container">
               <label>Categoría</label>
-              <select id="categories" v-model="categories" placeholder="Seleccione categoría">
-                <option value="home">Hogar</option>
-                <option value="geek">Geek</option>
-                <option value="litophany">Litofanía</option>
+              <select id="categories" v-model="categoryId" placeholder="Seleccione categoría">
+                <option value=1>Hogar</option>
+                <option value=2>Geek</option>
+                <option value=3>Litofanía</option>
               </select>
-
             </div>
 
           </section>
