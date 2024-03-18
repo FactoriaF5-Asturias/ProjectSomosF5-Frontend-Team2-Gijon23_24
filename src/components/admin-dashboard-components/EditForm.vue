@@ -1,28 +1,87 @@
 <script setup>
 import { ref } from 'vue';
+import { useProductStore } from "@/stores/product";
 
 const props = defineProps({
   onClose: Function
 });
 
-const titulo = ref('');
-const precio = ref('');
-const categoria = ref('');
-const imagenes = ref(null);
-const descripcion = ref('');
+const imageProduct = ref(null);
+const productName = ref('');
+const price = ref('');
+const categoryId = ref('1');
+const productDescription = ref('');
 
 const closeForm = () => {
   props.onClose();
 }
+//Resetear Formulario
+const resetForm = () => {
+  imageProduct.value = '';
+  productName.value = '';
+  price.value = '';
+  categoryId.value = '1';
+  productDescription.value = '';
+}
 
-const submitForm = () => {
-  // lógica para manejar el envío del formulario
-  console.log('Formulario enviado:', { titulo: titulo.value, precio: precio.value, categoria: categoria.value, imagenes: imagenes.value, descripcion: descripcion.value });
-};
+//Llamada de los datos del formulario por id
+function getProductData() {
+            var productId = document.getElementById('productId').value;
 
-const handleFileUpload = (event) => {
-  imagenes.value = event.target.files;
-};
+            var productData = getData(productId);
+
+                 // Actualiza el contenido en la página con los detalles del producto
+                 var productDetailsContainer = document.getElementById('productDetails');
+            productDetailsContainer.innerHTML = `<h2>Detalles del producto:</h2>
+                                                <p>ID: ${productData.id}</p>
+                                                <p>Nombre: ${productData.name}</p>
+                                                <p>Precio: ${productData.price}</p>`;
+                 // Supongamos que esta es una función de ejemplo que hace la llamada al backend
+        function getData(productId) {
+            // Aquí iría tu lógica para hacer la llamada al backend y obtener los datos del producto
+            // Por simplicidad, devolvemos datos de ejemplo aquí
+            return {
+                id: productId,
+                name: 'Nombre del producto',
+                price: '$100'
+            };
+        }     
+
+
+//Envío del formulario
+const addProduct = async () => {
+
+try {
+
+  const uri = import.meta.env.VITE_APP_API_ENDPOINT
+
+  const data = {
+   imageProduct: imageProduct.value,
+   productName: productName.value,
+   price: price.value,
+  categoryId: categoryId.value,
+  productDescription: productDescription.value,
+  }
+
+  const config = {
+    withCredentials: true,
+  }
+
+  const response = await axios.post(uri + '/products', data, config)
+  const status = await response.status
+  
+  if (status == 201) {
+    router.push("/AdminDashboard")
+  }
+
+} catch (error) {
+  throw new Error('Error calling api: ' + error)
+}
+
+}
+
+
+
 </script>
 
 <template>
@@ -86,8 +145,8 @@ const handleFileUpload = (event) => {
         </div>
 
         <div class="btns-actions">
-          <button @click="delete">Borrar</button>
-          <button @click="send">Editar</button>
+          <button @click="resetForm">Borrar</button>
+          <button @click="addProduct">Editar</button>
         </div>
       </form>
     </div>

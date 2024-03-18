@@ -1,4 +1,6 @@
  <script setup>
+import EditForm from '@/components/admin-dashboard-components/EditForm.vue';
+import { ref } from 'vue';
 import { useArticleStore } from "@/stores/article";
 import { useRouter } from 'vue-router';
 import { defineEmits } from 'vue';
@@ -8,17 +10,25 @@ const store = useArticleStore()
 
 store.getArticles()
 
-const emit = defineEmits(['open-popup']);
+//abrir y cerrar formulario
+let showEditForm = ref(false);
 
-const openPopup = () => {
- emit('open-popup');
+const openEditForm = () => {
+  showEditForm.value = true;
 };
 
-const deleteArticle = async (id) => {
-    const isDeleted = await store.deleteArticle(id)
+
+const closeEditForm = () => {
+  showEditForm.value = false;
+};
+
+
+//Borrar el producto
+const deleteProduct = async (id) => {
+    const isDeleted = await store.deleteProduct(id)
 
     if (isDeleted) {
-        store.articles.pop()
+        store.products.pop()
     }
 
 }
@@ -27,11 +37,12 @@ const deleteArticle = async (id) => {
 <template>
   <div>
 
-    <button @click="openPopup">
+    <button @click="openEditForm">
       <img  src="/icons/editIcon.svg" />
     </button>
+    <EditForm v-if="showEditForm" @close="closeEditForm" />
 
-    <button @click="deleteArticle">
+    <button @click="deleteProduct(product.id)">
       <img src="/icons/deleteIcon.svg" /> 
     </button>
 
