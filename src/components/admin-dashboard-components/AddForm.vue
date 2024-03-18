@@ -157,6 +157,7 @@ const addProduct = async () => {
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
+  border-color: #AE81D1;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -1,9 +1,11 @@
 <script setup>
 import { ref } from 'vue';
-import { useProductStore } from "@/stores/product";
+import { useContentStore } from "@/stores/ContentStore";
+import { ref, watchEffect } from "vue";
 
 const props = defineProps({
-  onClose: Function
+  onClose: Function,
+  id_product: String, 
 });
 
 const imageProduct = ref(null);
@@ -26,6 +28,19 @@ const resetForm = () => {
 
 //Llamada de los datos del formulario por id
 
+
+const contentStore = useContentStore();
+const content = ref(null);
+
+watchEffect(() => {
+	if (props.id_product) {
+		contentStore.fetchContentById(props.id_product).then(() => {
+			content.value = contentStore.content;
+		});
+	}
+});
+
+console.log(contentStore.content);
 
   
 //Envío del formulario
@@ -59,8 +74,6 @@ try {
 
 }
 
-
-
 </script>
 
 <template>
@@ -81,7 +94,7 @@ try {
 
           <div class="image-main">
             <label>Imagen Principal</label>
-            <input title=" " type="file" class="form-control-file" id="images">
+            <input title=" " type="file" class="form-control-file" id="images">Image Main: {{ contentStore.content.productMainImage }}</input>
           </div>
           <section>
 
@@ -89,22 +102,22 @@ try {
 
               <div class="title-container">
                 <label>Título</label>
-                <input type="text" class="form-control" id="title" v-model="titulo" placeholder="Título">
+                <input type="text" class="form-control" id="title" v-model="titulo" placeholder="Título">Title: {{ contentStore.content.productName }}</input>
               </div>
 
               <div class="price-container">
                 <label>Precio</label>
-                <input type="number" class="form-control" id="price" v-model="precio" placeholder="Precio">
+                <input type="number" class="form-control" id="price" v-model="precio" placeholder="Precio">Price: {{ contentStore.content.price }}</input>
               </div>
 
             </div>
 
             <div class="categories-container">
               <label>Categoría</label>
-              <select id="categories" v-model="categories" placeholder="Seleccione categoría">
-                <option value="home">Hogar</option>
-                <option value="geek">Geek</option>
-                <option value="litophany">Litofanía</option>
+              <select id="categories" v-model="categoryId" placeholder="Seleccione categoría">Category:{{ contentStore.content.categoryId }}
+                <option value=1>Hogar</option>
+                <option value=2>Geek</option>
+                <option value=3>Litofanía</option>
               </select>
 
             </div>
@@ -114,13 +127,13 @@ try {
 
         <div class="images-container">
           <label for="file-upload" class="custom-file-upload">Imágenes</label>
-          <input type="file" class="form-control-file" id="file-upload">
+          <input type="file" class="form-control-file" id="file-upload">Other Image: {{ contentStore.content.otherProductImage }}</input>
         </div>
 
         <div class="description-container">
           <label>Descripción</label>
           <textarea class="form-control" id="description" rows="3" v-model="description"
-            placeholder="Descripción..."></textarea>
+            placeholder="Descripción...">Description:{{ contentStore.content.productDescription }}</textarea>
         </div>
 
         <div class="btns-actions">
@@ -154,6 +167,7 @@ try {
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
+  border-color: #AE81D1;
   display: flex;
   flex-direction: column;
   justify-content: center;
