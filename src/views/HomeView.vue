@@ -6,7 +6,11 @@ import AddButton from '@/components/admin-dashboard-components/AddButton.vue';
 <template>
   <main>
     <h1>This is home page</h1>
+<<<<<<< HEAD
 
+=======
+    <DeleteAndEditButtons />
+>>>>>>> feature/deleteButton
     <AddButton />
   </main>
 </template>
