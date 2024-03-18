@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 import { useContentStore } from "@/stores/ContentStore";
 import { ref, watchEffect } from "vue";
 
@@ -17,7 +16,6 @@ const productDescription = ref('');
 const closeForm = () => {
   props.onClose();
 }
-
 //Resetear Formulario
 const resetForm = () => {
   imageProduct.value = '';
