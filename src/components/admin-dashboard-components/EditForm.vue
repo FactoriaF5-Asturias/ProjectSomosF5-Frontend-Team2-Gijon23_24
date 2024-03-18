@@ -17,6 +17,7 @@ const productDescription = ref('');
 const closeForm = () => {
   props.onClose();
 }
+
 //Resetear Formulario
 const resetForm = () => {
   imageProduct.value = '';
@@ -27,8 +28,6 @@ const resetForm = () => {
 }
 
 //Llamada de los datos del formulario por id
-
-
 const contentStore = useContentStore();
 const content = ref(null);
 
@@ -40,9 +39,6 @@ watchEffect(() => {
 	}
 });
 
-console.log(contentStore.content);
-
-  
 //Envío del formulario
 const addProduct = async () => {
 

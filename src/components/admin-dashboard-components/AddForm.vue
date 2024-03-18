@@ -62,9 +62,7 @@ const addProduct = async () => {
 
 }
 
-// const handleFileUpload = (event) => {
-//   imagenes.value = event.target.files;
-// };
+
 </script>
 
 <template>

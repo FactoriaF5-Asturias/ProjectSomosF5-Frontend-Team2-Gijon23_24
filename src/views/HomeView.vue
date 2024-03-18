@@ -7,7 +7,7 @@ import DeleteAndEditButtons from '@/components/admin-dashboard-components/Delete
   <main>
     <h1>This is home page</h1>
     <DeleteAndEditButtons />
-    //<EditForm />
+    
   </main>
 </template>
 
