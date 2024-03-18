@@ -1,5 +1,5 @@
 <script setup>
-import ExplorerCategory from '../components/ExplorerCategory.vue';
+import ExplorerCategory from '../components/ExploreCategory.vue';
 </script>
 
 <template>
@@ -11,5 +11,5 @@ import ExplorerCategory from '../components/ExplorerCategory.vue';
 </template>
 
 <style lang="scss" scoped>
-
+ 
 </style>

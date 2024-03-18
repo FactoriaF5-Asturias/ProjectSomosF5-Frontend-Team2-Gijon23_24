@@ -10,18 +10,18 @@
     <div class="contenedor_imagenes">
         <div class="imagen">
             <img src="../assets/img/litofanias.png" alt="">
-            <h2>Litofanias</h2>
-            <div class="overlay"><h2>Litofanias</h2></div>
+            <h2 class="category_title">Litofanias</h2>
+            <div class="overlay"></div>
         </div>
         <div class="imagen">
             <img src="../assets/img/hogar.png" alt="">
-            <h2>Hogar</h2>
-            <div class="overlay"><h2>Hogar</h2></div>
+            <h2 class="category_title">Hogar</h2>
+            <div class="overlay"></div>
         </div>
         <div class="imagen">
             <img src="../assets/img/geek.png" alt="">
-            <h2>Geek</h2>
-            <div class="overlay"><h2>Geek</h2></div>
+            <h2 class="category_title">Geek</h2>
+            <div class="overlay"></div>
         </div>
     </div>
   </div>  
