@@ -10,7 +10,7 @@ const props = defineProps({
 const imageProduct = ref(null);
 const productName = ref('');
 const price = ref('');
-const categoryId = ref('1');
+const categoryId = ref('');
 const productDescription = ref('');
 
 const closeForm = () => {
