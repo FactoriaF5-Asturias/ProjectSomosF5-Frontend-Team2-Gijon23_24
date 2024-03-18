@@ -9,10 +9,10 @@ test('renderiza el componente ExploreCategory con la estructura esperada', async
  expect(title.exists()).toBe(true);
  expect(title.text()).toBe('Explora nuestras categorías');
 
- const imageContainer = wrapper.find('.contenedor_imagenes');
+ const imageContainer = wrapper.find('.container_images');
  expect(imageContainer.exists()).toBe(true);
 
- const images = imageContainer.findAll('.imagen');
+ const images = imageContainer.findAll('.image');
  expect(images.length).toBe(3);
 
  images.forEach((image, index) => {
