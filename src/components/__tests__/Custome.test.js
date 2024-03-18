@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import Custome from '../Custome.vue';
 import { test, expect } from 'vitest';
 
-test('renderiza el componente Custom con el título y secciones esperadas', async () => {
+test('renderiza el componente Custome con el título y secciones esperadas', async () => {
  const wrapper = mount(Custome);
 
  const title = wrapper.find('h1');
