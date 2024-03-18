@@ -1,0 +1,109 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.galeria{
+    
+    background-color: #B976ED;
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    padding: 2%;
+    
+   
+        h1{
+            color: #fff;
+            font-size: 30px;
+            padding: 3%;
+        }
+        .linea{
+            position: relative;
+            background-color: #fff;
+            height: 1px ;
+            width: 40%;
+            margin: 0 auto;
+            display: block;
+        }
+    
+    
+    .contenedor_imagenes{
+        display: flex;
+        width: 100%;
+        margin: auto;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        padding: 5%;
+       
+    }
+    .contenedor_imagenes  .imagen{
+        width: 32%;
+        position: relative;
+        height: 400px;
+        margin-bottom: 5px;
+        
+    }
+    .imagen img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+    h2{
+       
+        font-size: 30px;
+        color: #fff;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        text-align: center;
+        transform: translate(-50%, -50%);
+    }
+    .category_title{
+        z-index: 10;
+    }
+    .overlay{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: #fffbfb33;
+        width: 100%;
+        height: 0;
+        transition: 0.4s ;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        border-radius: 5px;
+    }
+     
+    .imagen:hover .overlay{
+        height: 100%;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+ @media screen and (max-width:1000px) {
+    .contenedor_imagenes{
+        width: 95%;
+    }
+ }
+ @media screen and (max-width:700px) {
+    .contenedor_imagenes{
+        width: 90%;
+    }
+    .contenedor_imagenes .imagen{
+        width: 48%;
+    }
+ }
+ @media screen and (max-width:450px) {
+    h1{
+        font-size: 22px;
+    }
+    .contenedor_imagenes{
+        width: 98%;
+    }
+    .contenedor_imagenes .imagen{
+        width: 80%;
+    }
+ }
+ 
+
+
