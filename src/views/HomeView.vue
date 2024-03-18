@@ -1,17 +1,13 @@
 <script setup>
-import AddButton from '@/components/admin-dashboard-components/AddButton.vue';
-
+import DeleteAndEditButtons from '@/components/admin-dashboard-components/DeleteAndEditButtons.vue';
+//import EditForm from '@/components/EditForm.vue';
 </script>
 
 <template>
   <main>
     <h1>This is home page</h1>
-<<<<<<< HEAD
-
-=======
     <DeleteAndEditButtons />
->>>>>>> feature/deleteButton
-    <AddButton />
+    //<EditForm />
   </main>
 </template>
 

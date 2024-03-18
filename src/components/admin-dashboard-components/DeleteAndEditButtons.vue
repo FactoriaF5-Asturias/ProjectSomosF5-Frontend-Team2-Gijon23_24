@@ -1,4 +1,4 @@
-<!-- <script setup>
+ <script setup>
 import { useArticleStore } from "@/stores/article";
 import { useRouter } from 'vue-router';
 import { defineEmits } from 'vue';
@@ -8,10 +8,10 @@ const store = useArticleStore()
 
 store.getArticles()
 
-const emit = defineEmits(['open-form']);
+const emit = defineEmits(['open-popup']);
 
-const editArticle = () => {
- emit('open-form');
+const openPopup = () => {
+ emit('open-popup');
 };
 
 const deleteArticle = async (id) => {
@@ -22,12 +22,12 @@ const deleteArticle = async (id) => {
     }
 
 }
-</script>  -->
+</script>  
 
 <template>
   <div>
 
-    <button @click="editArticle">
+    <button @click="openPopup">
       <img  src="/icons/editIcon.svg" />
     </button>
 
