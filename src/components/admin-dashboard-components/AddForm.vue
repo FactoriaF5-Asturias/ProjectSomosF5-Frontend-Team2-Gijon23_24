@@ -1,28 +1,70 @@
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from "vue-router";
+import axios from 'axios';
+
+const router = useRouter()
 
 const props = defineProps({
   onClose: Function
 });
 
-const titulo = ref('');
-const precio = ref('');
-const categoria = ref('');
-const imagenes = ref(null);
-const descripcion = ref('');
+const productName = ref('');
+const price = ref('');
+const categoryId = ref('');
+const productDescription = ref('');
 
 const closeForm = () => {
   props.onClose();
 }
 
-const submitForm = () => {
-  // lógica para manejar el envío del formulario
-  console.log('Formulario enviado:', { titulo: titulo.value, precio: precio.value, categoria: categoria.value, imagenes: imagenes.value, descripcion: descripcion.value });
-};
+const resetForm = () => {
 
-const handleFileUpload = (event) => {
-  imagenes.value = event.target.files;
-};
+  productName.value = '';
+  price.value = '';
+  categoryId.value = '';
+  productDescription.value = '';
+}
+
+
+
+const productList = ref([])
+
+
+const addProduct = async () => {
+
+  try {
+
+    const uri = import.meta.env.VITE_APP_API_ENDPOINT
+
+    const data = {
+      productName: productName.value,
+      price: price.value,
+      categoryId: categoryId.value,
+      productDescription: productDescription.value,
+      
+    }
+
+    const config = {
+      withCredentials: true,
+    }
+
+    const response = await axios.post(uri + '/products', data, config)
+    const status = await response.status
+    
+    if (status == 201) {
+      router.push("/AdminDashboard") //dashboard de admin
+    }
+
+  } catch (error) {
+    throw new Error('Error calling api: ' + error)
+  }
+
+}
+
+// const handleFileUpload = (event) => {
+//   imagenes.value = event.target.files;
+// };
 </script>
 
 <template>
@@ -63,12 +105,11 @@ const handleFileUpload = (event) => {
 
             <div class="categories-container">
               <label>Categoría</label>
-              <select id="categories" v-model="categories" placeholder="Seleccione categoría">
-                <option value="home">Hogar</option>
-                <option value="geek">Geek</option>
-                <option value="litophany">Litofanía</option>
+              <select id="categories" v-model="categoryId" placeholder="Seleccione categoría">
+                <option value=1>Hogar</option>
+                <option value=2>Geek</option>
+                <option value=3>Litofanía</option>
               </select>
-
             </div>
 
           </section>
@@ -86,8 +127,8 @@ const handleFileUpload = (event) => {
         </div>
 
         <div class="btns-actions">
-          <button @click="delete">Borrar</button>
-          <button @click="send">Enviar</button>
+          <button id="reset" @click="resetForm()">Borrar</button>
+          <button  id="send" @click="addProduct()">Enviar</button>
         </div>
       </form>
     </div>

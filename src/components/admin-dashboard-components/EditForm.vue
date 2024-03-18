@@ -25,29 +25,9 @@ const resetForm = () => {
 }
 
 //Llamada de los datos del formulario por id
-function getProductData() {
-            var productId = document.getElementById('productId').value;
-
-            var productData = getData(productId);
-
-                 // Actualiza el contenido en la página con los detalles del producto
-                 var productDetailsContainer = document.getElementById('productDetails');
-            productDetailsContainer.innerHTML = `<h2>Detalles del producto:</h2>
-                                                <p>ID: ${productData.id}</p>
-                                                <p>Nombre: ${productData.name}</p>
-                                                <p>Precio: ${productData.price}</p>`;
-                 // Supongamos que esta es una función de ejemplo que hace la llamada al backend
-        function getData(productId) {
-            // Aquí iría tu lógica para hacer la llamada al backend y obtener los datos del producto
-            // Por simplicidad, devolvemos datos de ejemplo aquí
-            return {
-                id: productId,
-                name: 'Nombre del producto',
-                price: '$100'
-            };
-        }     
 
 
+  
 //Envío del formulario
 const addProduct = async () => {
 
@@ -56,9 +36,8 @@ try {
   const uri = import.meta.env.VITE_APP_API_ENDPOINT
 
   const data = {
-   imageProduct: imageProduct.value,
-   productName: productName.value,
-   price: price.value,
+  productName: productName.value,
+  price: price.value,
   categoryId: categoryId.value,
   productDescription: productDescription.value,
   }

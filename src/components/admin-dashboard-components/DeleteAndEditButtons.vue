@@ -1,7 +1,7 @@
  <script setup>
 import EditForm from '@/components/admin-dashboard-components/EditForm.vue';
 import { ref } from 'vue';
-import { useArticleStore } from "@/stores/article";
+import { useProductStore } from "@/stores/product";
 import { useRouter } from 'vue-router';
 import { defineEmits } from 'vue';
 
