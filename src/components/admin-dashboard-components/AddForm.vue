@@ -8,12 +8,12 @@ const router = useRouter()
 const props = defineProps({
   onClose: Function
 });
+const imageMainProduct = ref(null);
+const productName = ref('');
+const price = ref('');
+const categoryId = ref('1');
 
-const titulo = ref('');
-const precio = ref('');
-const categoria = ref('');
-const imagenes = ref(null);
-const descripcion = ref('');
+const productDescription = ref('');
 
 const closeForm = () => {
   props.onClose();
@@ -21,13 +21,14 @@ const closeForm = () => {
 
 const resetForm = () => {
 
-titulo.value = '';
-precio.value = '';
-categoria.value = ''; //seleccionar entre 3
-descripcion.value = '';
-//faltan las imágenes¿se hace de manera diferente?
-
+  imageProduct.value = '';
+  productName.value = '';
+  price.value = '';
+  categoryId.value = '1';
+  productDescription.value = '';
 }
+
+
 
 const productList = ref([])
 
@@ -39,11 +40,12 @@ const addProduct = async () => {
     const uri = import.meta.env.VITE_APP_API_ENDPOINT
 
     const data = {
-      titulo: titulo.value,
-      precio: precio.value,
-      categoria: categoria.value,
-      descripcion: descripcion.value,
-      //faltan imágenes
+      imageMainProduct: imageProduct.value,
+      productName: productName.value,
+      price: price.value,
+      categoryId: categoryId.value,
+      productDescription: productDescription.value,
+      
     }
 
     const config = {
