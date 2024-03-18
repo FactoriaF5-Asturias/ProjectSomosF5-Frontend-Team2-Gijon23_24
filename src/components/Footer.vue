@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <div class="footer-left">
-      <img src="@/assets/images/Logo3d.png" alt="Logo" class="logo" />
+      <img src="/public/images/Logo3d.png" alt="Logo" class="logo" />
     </div>
     <div class="footer-center">
       <div class="nav">
@@ -15,8 +15,8 @@
       </div>
     </div>
     <div class="footer-right">
-      <img src="@/assets/images/paypal.png" alt="PayPal" class="paypal-logo" />
-      <img src="@/assets/images/visa.png" alt="Visa" class="visa-logo" />
+      <img src="/public/images/paypal.png" alt="PayPal" class="paypal-logo" />
+      <img src="/public/images/visa.png" alt="Visa" class="visa-logo" />
     </div>
   </footer>
 </template>
@@ -62,6 +62,7 @@
 .nav a{
   color: aliceblue;
   font-size:x-large;
+  
 }
 .nav a:hover{
   color: $primary-color;
