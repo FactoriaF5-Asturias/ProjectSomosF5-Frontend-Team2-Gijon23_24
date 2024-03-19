@@ -11,5 +11,6 @@ import Banner from "@/components/Banner.vue";
 </template>
 
 <style lang="scss" scoped>
+	
 </style>
 

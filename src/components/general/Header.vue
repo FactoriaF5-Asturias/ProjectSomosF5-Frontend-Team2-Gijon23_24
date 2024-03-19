@@ -44,6 +44,7 @@ import HeaderButtons from "./header/HeaderButtons.vue";
 header {
   position: fixed;
   width: 100%;
+  z-index: 99;
 
   > div {
     background-color: $primary-background;
