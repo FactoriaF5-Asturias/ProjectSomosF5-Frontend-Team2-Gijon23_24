@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
+import { useAuthStore } from "./../../../stores/AuthStore"
 
 const props = defineProps({
   onClose: Function
@@ -14,6 +15,9 @@ const uri = 'http://localhost:8080/api/v1';
 
 const username1 = ref('');
 const password1 = ref('');
+
+const authStore = useAuthStore();
+
 
 console.log(username1.value)
 console.log(password1.value)
@@ -29,14 +33,33 @@ const submitForm = async () => {
         },
         );
         const data = response.data;
-        console.log(data)
-        success.value = true;
-        return data;
+        const role = data.roles;
+
+        selectRole(role)
+
+        return data, role;
+
       } catch (error) {
         console.error(error);
       }
+      authStore = role.value;
+      console.log(authStore)
 };
 
+const selectRole = async (role) => {
+  if (role === "ROLE_ADMIN") {
+    authStore.adminAuth = true;
+    console.log('admin')
+  }
+  if (role === "ROLE_USER") {
+    authStore.userAuth = true;
+    console.log('user')
+  }
+  console.log(role)
+  console.log('algo anda mal')
+}
+
+// cuando le llegue el rol, cambie la variable en la store que le corresponda.
 </script>
 
 <template>
@@ -202,4 +225,4 @@ form {
     border-radius: 5px;
   }
 }
-</style>../../../stores/AuthStore
+</style>../../../stores/AuthStore../../../stores/AuthStore
