@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
-import Custome from '../Custome.vue';
+import Custom from '../Custom.vue';
 import { test, expect } from 'vitest';
 
 test('renderiza el componente Custome con el título y secciones esperadas', async () => {
- const wrapper = mount(Custome);
+ const wrapper = mount(Custom);
 
  const title = wrapper.find('h1');
  expect(title.exists()).toBe(true);
