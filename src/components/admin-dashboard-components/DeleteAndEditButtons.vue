@@ -24,12 +24,12 @@ const closeEditForm = () => {
 
 
 //Borrar el producto
-const deleteProduct = async (id) => {
-    const isDeleted = await store.deleteProduct(id)
+ const deleteProduct = async (id) => {
+     const isDeleted = await store.deleteProduct(id)
 
-    if (isDeleted) {
+     if (isDeleted) {
         store.products.pop()
-    }
+     }
 
 }
 </script>  
