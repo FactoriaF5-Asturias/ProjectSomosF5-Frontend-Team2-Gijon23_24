@@ -1,56 +1,84 @@
 <script setup>
+import { ref } from 'vue'
+import axios from 'axios';
 
 const props = defineProps({
   onClose: Function
 });
 
 const closeForm = () => {
-  props.onClose();
+  props.onClose()
 }
+
+const uri = 'http://localhost:8080/api/v1';
+
+const username1 = ref('');
+const password1 = ref('');
+
+console.log(username1.value)
+console.log(password1.value)
+
+const submitForm = async () => {
+      try {
+        const response = await axios.get(`${uri}/login`, {
+          auth: {
+            username: username1.value,
+            password: password1.value
+          },
+          withCredentials: true
+        },
+        );
+        const data = response.data;
+        console.log(data)
+        success.value = true;
+        return data;
+      } catch (error) {
+        console.error(error);
+      }
+};
 
 </script>
 
 <template>
-<div>
-  <ErrorPassword :show="errorVisible" />
-  
-  <div class="modal" @click="closeForm">
-      <div class="modal_container" @click.stop>
+  <div>
+    
+    <div class="modal" @click="closeForm">
+        <div class="modal_container" @click.stop>
           <section class="form_container">
-              <form @submit.prevent="submitForm">
-                  <h1>¡Bienvenido!</h1>
-                  <div>
-                    <div class="input_box">
-                        <label>Email:</label>
-                        <input type="email" placeholder="correo electrónico" required>
+                <form @submit.prevent="submitForm">
+                    <h1>¡Bienvenido!</h1>
+                    <div>
+                      <div class="input_box">
+                          <label>Nombre de usuario:</label>
+                          <input v-model="username1" type="text" placeholder="nombre de usuario" required>
+                      </div>
+                      <div class="input_box">
+                          <label>Contraseña:</label>
+                          <input v-model="password1" type="password" placeholder="contraseña" required>
+                          <a href="">¿has olvidado tu contraseña?</a>
+                      </div>
+                      <div class="submit_container">
+                          <button type="submit" >Enviar</button>
+                      </div>
                     </div>
-                    <div class="input_box">
-                        <label>Contraseña:</label>
-                        <input type="password" placeholder="contraseña" v-model="password" required>
-                        <a href="">¿has olvidado tu contraseña?</a>
-                    </div>
-                    <div class="submit_container">
-                        <button type="submit">Enviar</button>
-                    </div>
-                  </div>
-              </form>
-          </section>
-  
-          <section id="welcome_image">
-              <div id="button_container">
-                <button @click.stop="closeForm">
-                  <img src="/icons/icon-cross.svg" alt="cross icon">
-                </button>
-              </div>
-              <div id="images_container">
-                <img src="/images/logo.svg" alt="">
-                <img src="/images/PrintGo.svg" alt="">
-                <p>Haciendo tangible lo inimaginable.</p>
-              </div>
-          </section>
-      </div>
+                </form>
+            </section>
+    
+            <section id="welcome_image">
+                <div id="button_container">
+                  <button @click.stop="closeForm">
+                    <img src="/icons/icon-cross.svg" alt="cross icon">
+                  </button>
+                </div>
+                <div id="images_container">
+                  <img src="/images/logo.svg" alt="">
+                  <img src="/images/PrintGo.svg" alt="">
+                  <p>Haciendo tangible lo inimaginable.</p>
+                </div>
+            </section>
+        </div>
+    </div>
   </div>
-</div>
 </template>
 
 <style scoped lang="scss">
@@ -174,4 +202,4 @@ form {
     border-radius: 5px;
   }
 }
-</style>
+</style>../../../stores/AuthStore
