@@ -16,6 +16,19 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
+    },
+    {
+      path: '/add-form',
+      name: 'addForm',
+      component: AddForm,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/edit-form/:id_product',
+      name: 'editForm',
+      component: EditForm,
+      props: true,
+      meta: { requiresAuth: true }
     }
   ]
 })
