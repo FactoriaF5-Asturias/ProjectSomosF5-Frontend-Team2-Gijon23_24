@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import { useProductsStore } from '../../stores/productStore';
-import Card
 import { test, expect } from 'vitest';
 
 jest.mock('../../stores/productStore', () => ({
