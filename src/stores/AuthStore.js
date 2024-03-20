@@ -1,8 +1,11 @@
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const useAuthStore = defineStore('AuthStore', () => {
-    let adminAuth = false
-    let userAuth = false
+    let adminAuth = ref(false)
+    let userAuth = ref(false)
 
-    return { adminAuth, userAuth }
+    let cookies = ref(false)
+
+    return { adminAuth, userAuth, cookies }
 })

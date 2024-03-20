@@ -35,8 +35,10 @@ const submitForm = async () => {
         const data = response.data;
         const role = data.roles;
 
-        selectRole(role)
+        console.log(response)
 
+        selectRole(role)
+        closeForm()
         return data, role;
 
       } catch (error) {
@@ -56,7 +58,6 @@ const selectRole = async (role) => {
     console.log('user')
   }
   console.log(role)
-  console.log('algo anda mal')
 }
 
 // cuando le llegue el rol, cambie la variable en la store que le corresponda.
