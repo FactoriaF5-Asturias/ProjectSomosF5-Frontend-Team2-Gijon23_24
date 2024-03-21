@@ -42,7 +42,7 @@ import HeaderButtons from "./header/HeaderButtons.vue";
 
 <style lang="scss" scoped>
 header {
-  position: fixed;
+  // position: fixed;
   width: 100%;
 
   > div {
