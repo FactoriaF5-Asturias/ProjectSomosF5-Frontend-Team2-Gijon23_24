@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue'
-import axios from 'axios';
+import { ref } from 'vue';
+import axios from 'axios'
 import { useAuthStore } from "./../../../stores/AuthStore"
 
 const props = defineProps({
@@ -13,54 +13,42 @@ const closeForm = () => {
 
 const uri = 'http://localhost:8080/api/v1';
 
-const username1 = ref('');
-const password1 = ref('');
+const usernameInput = ref('');
+const passwordInput = ref('');
 
 const authStore = useAuthStore();
 
-
-console.log(username1.value)
-console.log(password1.value)
-
 const submitForm = async () => {
-      try {
-        const response = await axios.get(`${uri}/login`, {
-          auth: {
-            username: username1.value,
-            password: password1.value
+
+  console.log(usernameInput.value)
+  console.log(passwordInput.value)
+
+  try {
+    const response = await axios.get(`${uri}/login`, {
+      auth: {
+            username: usernameInput.value,
+            password: passwordInput.value
           },
           withCredentials: true
         },
         );
         const data = response.data;
-        const role = data.roles;
+        const userRole = data.roles;
 
-        console.log(response)
+        authStore.userRole = userRole;
 
-        selectRole(role)
-        closeForm()
-        return data, role;
+        authStore.isAutheticated = true;
+
+        closeForm();
+
+        console.log('UserRole enviado al store:', userRole);
+        console.log('IsAuthenticated enviado al store:', authStore.isAutheticated);
 
       } catch (error) {
         console.error(error);
       }
-      authStore = role.value;
-      console.log(authStore)
 };
 
-const selectRole = async (role) => {
-  if (role === "ROLE_ADMIN") {
-    authStore.adminAuth = true;
-    console.log('admin')
-  }
-  if (role === "ROLE_USER") {
-    authStore.userAuth = true;
-    console.log('user')
-  }
-  console.log(role)
-}
-
-// cuando le llegue el rol, cambie la variable en la store que le corresponda.
 </script>
 
 <template>
@@ -74,11 +62,11 @@ const selectRole = async (role) => {
                     <div>
                       <div class="input_box">
                           <label>Nombre de usuario:</label>
-                          <input v-model="username1" type="text" placeholder="nombre de usuario" required>
+                          <input v-model="usernameInput" type="text" placeholder="nombre de usuario" required>
                       </div>
                       <div class="input_box">
                           <label>Contraseña:</label>
-                          <input v-model="password1" type="password" placeholder="contraseña" required>
+                          <input v-model="passwordInput" type="password" placeholder="contraseña" required>
                           <a href="">¿has olvidado tu contraseña?</a>
                       </div>
                       <div class="submit_container">

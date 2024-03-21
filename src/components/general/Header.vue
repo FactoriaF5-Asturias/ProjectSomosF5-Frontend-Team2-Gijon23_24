@@ -1,8 +1,5 @@
 <script setup>
 import HeaderButtons from "./header/HeaderButtons.vue";
-import { useAuthStore } from "@/stores/AuthStore";
-
-const AuthStore = useAuthStore();
 
 </script>
 
@@ -30,9 +27,8 @@ const AuthStore = useAuthStore();
             </div>
           </router-link>
 
-          <HeaderButtons v-if="AuthStore.cookies === false || AuthStore.cookies === false"/>
-          <div v-if="AuthStore.cookies === true || AuthStore.cookies === true"> hola
-          </div>
+          <HeaderButtons/>
+
 
         </div>
         
