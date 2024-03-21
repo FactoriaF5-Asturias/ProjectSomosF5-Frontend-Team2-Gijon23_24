@@ -1,15 +1,22 @@
-
-import axios from 'axios';
+import axios from "axios";
 
 export default class ImagesService {
- uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
+  constructor() {
+    this.uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
+  }
 
- async getImages() {
+  async getImagesByName(imageName) {
     try {
-      const response = await axios.get(this.uri);
-      return response.data;
+      const response = await axios.get(`${this.uri}/${imageName}`, {
+        responseType: "blob",
+      });
+
+      const imageUrl = URL.createObjectURL(response.data);
+
+      return imageUrl;
     } catch (error) {
-      throw new Error('Error al obtener los productos: ' + error);
+      console.error("Error al obtener la imagen:", error);
+      return "default-image-url";
     }
- }
+  }
 }
