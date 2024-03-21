@@ -26,43 +26,60 @@ const resetForm = () => {
   productDescription.value = '';
 }
 
-
-
-const productList = ref([])
-
-
-const addProduct = async () => {
-
-  try {
-
-    const uri = import.meta.env.VITE_APP_API_ENDPOINT
-
-    const data = {
+const data = {
       productName: productName.value,
       price: price.value,
       categoryId: categoryId.value,
       productDescription: productDescription.value,
-      
-    }
-
-    const config = {
-      withCredentials: true,
-    }
-
-    const response = await axios.post(uri + '/products', data, config)
-    const status = await response.status
-    
-    if (status == 201) {
-      router.push("/AdminDashboard") //dashboard de admin
-    }
-
-  } catch (error) {
-    throw new Error('Error calling api: ' + error)
-  }
-
 }
 
 
+async function createProduct(data) {
+  const formData = new FormData()
+  const mainImage = document.querySelector(mainImage)
+  const images = document.querySelector(images)
+  try {
+    const response = await axios.post('localhost:8080/api/v1/products', data);
+    const productId = response.data.id; 
+    return productId;
+  } catch (error) {
+    console.error('Error al crear el producto:', error);
+    throw error; 
+  }
+}
+
+async function uploadImages(productId, mainImage, images) {
+  try {
+    await axios.post(`localhost:8080/api/v1/uploadImages/${productId}`, mainImage, images);
+    console.log('Imágenes subidas exitosamente.');
+  } catch (error) {
+    console.error('Error al subir las imágenes:', error);
+    await borrarProducto(productId);
+    throw error; 
+  }
+}
+
+async function deleteProduct(productId) {
+  try {
+    await axios.delete(`localhost:8080/api/v1/products/${productId}`);
+    console.log('Producto borrado exitosamente.');
+  } catch (error) {
+    console.error('Error al borrar el producto:', error);
+    throw error; 
+  }
+}
+
+async function handlePost(data, images, mainImage) {
+  let productId;
+  try {
+    productId = await createProduct(data.id);
+    await uploadImages(productId, images, mainImage);
+    console.log('Proceso completado exitosamente.');
+  } catch (error) {
+    console.error('Error al crear el producto', error)
+    deleteProduct(productId);
+  }
+}
 </script>
 
 <template>
@@ -83,7 +100,7 @@ const addProduct = async () => {
 
           <div class="image-main">
             <label>Imagen Principal</label>
-            <input title=" " type="file" class="form-control-file" id="images">
+            <input type="file" class="form-control-file" id="main-image" name="file">
           </div>
           <section>
 
@@ -115,7 +132,7 @@ const addProduct = async () => {
 
         <div class="images-container">
           <label for="file-upload" class="custom-file-upload">Imágenes</label>
-          <input type="file" class="form-control-file" id="file-upload">
+          <input type="file" class="form-control-file" id="file-upload" name="files" multiple>
         </div>
 
         <div class="description-container">
@@ -126,7 +143,7 @@ const addProduct = async () => {
 
         <div class="btns-actions">
           <button id="reset" @click="resetForm()">Borrar</button>
-          <button  id="send" @click="addProduct()">Enviar</button>
+          <button  id="send" @click="createProduct(data)">Enviar</button>
         </div>
       </form>
     </div>
