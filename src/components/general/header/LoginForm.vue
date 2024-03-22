@@ -20,9 +20,6 @@ const authStore = useAuthStore();
 
 const submitForm = async () => {
 
-  console.log(usernameInput.value)
-  console.log(passwordInput.value)
-
   try {
     const response = await axios.get(`${uri}/login`, {
       auth: {
@@ -37,13 +34,9 @@ const submitForm = async () => {
 
         authStore.userRole = userRole;
 
-        authStore.isAutheticated = true;
+        authStore.isAuthenticated = true;
 
         closeForm();
-
-        console.log('UserRole enviado al store:', userRole);
-        console.log('IsAuthenticated enviado al store:', authStore.isAutheticated);
-
       } catch (error) {
         console.error(error);
       }

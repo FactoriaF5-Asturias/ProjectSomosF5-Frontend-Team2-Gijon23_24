@@ -12,8 +12,3 @@ import Header from "./components/general/Header.vue";
 
 <style scoped>
 </style>
-// redirigir segun tu rol
-// poner limites
-// cambiar header
-// cambiar router para que no puedas entrar ni en dashboard ni en dashboard de admin, segun el rol abrir ruta de dashboard o el de productos.
-// logout

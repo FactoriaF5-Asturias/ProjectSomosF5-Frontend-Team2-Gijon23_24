@@ -1,5 +1,9 @@
 <script setup>
 import HeaderButtons from "./header/HeaderButtons.vue";
+import { useAuthStore } from "./../../stores/AuthStore";
+import LoggedProfile from "./header/LoggedProfile.vue";
+
+const authStore = useAuthStore();
 
 </script>
 
@@ -27,8 +31,8 @@ import HeaderButtons from "./header/HeaderButtons.vue";
             </div>
           </router-link>
 
-          <HeaderButtons/>
-
+          <HeaderButtons v-if="!authStore.isAuthenticated"/>
+          <LoggedProfile v-if="authStore.isAuthenticated"/>
 
         </div>
         
