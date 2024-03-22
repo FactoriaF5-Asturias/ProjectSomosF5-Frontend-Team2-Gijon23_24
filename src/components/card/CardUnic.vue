@@ -2,7 +2,6 @@
 
 import ImagesService from '../../services/ImagesService';
 import { useProductsStore } from '../../stores/productStore';
-
 const productsStore = useProductsStore();
 
 const imagesService = new ImagesService();
@@ -12,27 +11,58 @@ const props = defineProps({
 })
 const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
 const imageDirectory = uri + "/" + findImageForProduct(props.product);
+const defaultImage ='../../../public/images/banner-logo.svg'
 
 
 function findImageForProduct(product) {
    const image = product.images.find(img => img.mainImage === true);
-      return image.imageName
-}
+   return image.imageName  ? image.imageName : defaultImage;
+};
 
 
 </script>
 <template>
-   <v-container class="container">
+  <v-container>
       <v-card class="mx-auto card" theme="dark">
-         <v-img class="align-end text-white" height="200" :src="imageDirectory" cover>
+        
+         <v-img  class="align-end text-white" height="200" :src="imageDirectory" cover :alt="product.productName"> 
             <v-btn color="white" icon="/icons/icon-heart.svg" size="small" class="heart" variant="text"> <img
                   src="/icons/icon-heart.svg" alt="heart"></v-btn>
+                
+                  
          </v-img>
          <v-card-title class="pl-1">{{ product.productName }}</v-card-title>
          <v-card-title class="price">{{ product.price }} €</v-card-title>
       </v-card>
    </v-container>
 </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <style scoped lang="scss">
