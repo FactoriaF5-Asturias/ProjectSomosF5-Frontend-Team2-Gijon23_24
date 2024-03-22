@@ -3,6 +3,7 @@ import HeaderButtons from "./header/HeaderButtons.vue";
 import { useAuthStore } from "./../../stores/AuthStore";
 import LoggedProfile from "./header/LoggedProfile.vue";
 
+
 const authStore = useAuthStore();
 
 </script>

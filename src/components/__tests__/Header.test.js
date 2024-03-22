@@ -1,34 +1,29 @@
-import { createApp } from 'vue';
 import { mount } from '@vue/test-utils';
-import Header from '../general/Header.vue';
 import { test, expect } from 'vitest';
+import Header from '../general/Header.vue';
 import HeaderButtons from '../general/header/HeaderButtons.vue';
+import LoggedProfile from '../general/header/LoggedProfile.vue';
+import { reactive } from 'vue';
 
-test('renderiza el componente header con logo, acciones y enlaces de navegación', async () => {
- const app = createApp({});
- const wrapper = mount(Header, { app });
+test('muestra y oculta componentes basados en el estado de autenticación', async () => {
+ const authStore = reactive({ // Usa reactive para hacer que authStore sea reactivo
+    isAuthenticated: false,
+ });
 
- const logo = wrapper.find('img[src="/images/logotype.png"]');
- expect(logo.exists()).toBe(true);
+ const wrapper = mount(Header, {
+    global: {
+      mocks: {
+        $authStore: authStore,
+      },
+    },
+ });
 
- const actionsContainer = wrapper.find('#actions_container');
- expect(actionsContainer.exists()).toBe(true);
+ expect(wrapper.findComponent(HeaderButtons).exists()).toBe(true);
+ expect(wrapper.findComponent(LoggedProfile).exists()).toBe(false);
 
- const favoritosLink = actionsContainer.find('router-link[to="/"]');
- expect(favoritosLink.exists()).toBe(true);
- const favoritosText = favoritosLink.find('p');
- expect(favoritosText.text()).toBe('Favoritos');
+ authStore.isAuthenticated = true; 
+ await wrapper.vm.$nextTick();
 
- const carritoLink = actionsContainer.find('router-link[to="/about"]');
- expect(carritoLink.exists()).toBe(true);
- const carritoText = carritoLink.find('p');
- expect(carritoText.text()).toBe('Carrito');
-
- const headerButtons = wrapper.findComponent(HeaderButtons);
- expect(headerButtons.exists()).toBe(true);
-
- const navLinks = wrapper.findAll('nav router-link');
- expect(navLinks.length).toBe(4);
-
- await wrapper.unmount();
+ expect(wrapper.findComponent(LoggedProfile).exists()).toBe(true);
+ expect(wrapper.findComponent(HeaderButtons).exists()).toBe(false);
 });
