@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+#home-detail{
+   min-height:100vh;
+   background-color:#fff;
+   display: flex;
+   justify-content: flex-start;
+   align-items: flex-start;
+}
+
+.back-button {
+   background-image: url('/public/images/back-button.png');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 70% 70%;
+   background-color: transparent;
+   color:antiquewhite;
+   border: none;
+   padding: 2%;
+   cursor: pointer;
+}
+
+.detail-image-container {
+   display: grid;
+   grid-template-rows: 1fr 0.2fr;
+   width: 50%;
+}
+
+.detail-mainImage-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin: 11% 0% 5% 2%;
+}
+
+.detail-mainImage-container img {
+   width: 80%;
+   border-radius: 5%;
+   box-shadow: 6px 8px 10px 2px #0a142b;
+   background: none;
+}
+
+.detail-miniPics-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: row;
+   width: 50%;
+   margin-left: 26%;
+}
+
+.detail-miniPics-container img {
+   margin: 2%;
+   max-width: 30%;
+   border-radius: 5%;
+   box-shadow: 6px 8px 10px 2px #0a142b;
+   background: none;
+}
+
+.detail-text-container {
+   width: 50%;
+   height: 50%;
+   margin: 5.5% 8% 0% 5%;
+   padding: 1.5%;
+   border-radius: 1%;
+   box-shadow: 6px 8px 10px 2px #0a142b;
+   background:#cd9af3;
+}
+
+.detail-text-container h3 {
+   margin:2rem;
+   font-size: x-large;
+   text-decoration: underline;
+   
+
+}
+.detail-text-container h2{
+   font-size: xx-large;
+   color:#0a142b;
+   margin-left: 20%;
+   border-bottom: 2px solid #47589D;
+}
+
+.detail-text-container p {
+   font-size:medium;
+   margin-top: 2rem;
+}
+
+
+
