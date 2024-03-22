@@ -17,19 +17,21 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
-    // {
-    //   path: '/add-form',
-    //   name: 'addForm',
-    //   component: AddForm,
-    //   meta: { requiresAuth: true }
-    // },
-    // {
-    //   path: '/edit-form/:id_product',
-    //   name: 'editForm',
-    //   component: EditForm,
-    //   props: true,
-    //   meta: { requiresAuth: true }
-    // }
+    {
+      path: '/add-form',
+      name: 'addForm',
+    component: () => import('../components/admin-dashboard-components/AddForm.vue'),
+     
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/edit-form/:id_product',
+      name: 'editForm',
+    component: () => import('../components/admin-dashboard-components/EditForm.vue'),
+  
+      props: true,
+      meta: { requiresAuth: true }
+    }
   ]
 })
 
