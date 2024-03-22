@@ -9,77 +9,47 @@ const props = defineProps({
   onClose: Function
 });
 
-const productName = ref('');
-const price = ref('');
-const categoryId = ref('');
-const productDescription = ref('');
-
 const closeForm = () => {
   props.onClose();
 }
 
 const resetForm = () => {
-
+  
   productName.value = '';
   price.value = '';
   categoryId.value = '';
   productDescription.value = '';
+  selectedFiles.value = [];
 }
 
-const data = {
-      productName: productName.value,
-      price: price.value,
-      categoryId: categoryId.value,
-      productDescription: productDescription.value,
+// Form data.
+const productName = ref('');
+const price = ref('');
+const categoryId = ref('');
+const productDescription = ref('');
+const selectedFiles = ref([]);
+const selectedMainImage = ref();
+
+// Handle FILES upload.
+const handleFilesChange = (event) => {
+      selectedFiles.value = Array.from(event.target.files);
+};
+
+// Handle MAIN IMAGE upload.
+const handleMainImageChange = (event) => {
+      selectedMainImage.value = event.target.file;
+};
+
+function createProduct() {
+  console.log(productName.value, productDescription.value, price.value, categoryId.value, selectedFiles.value, selectedMainImage.value)
+  let formData = new FormData();
+    formData.append('file', selectedMainImage.value)
+  selectedFiles.value.forEach((file) => {
+    formData.append('files', file);
+  });
 }
 
 
-async function createProduct(data) {
-  const formData = new FormData()
-  const mainImage = document.querySelector(mainImage)
-  const images = document.querySelector(images)
-  try {
-    const response = await axios.post('localhost:8080/api/v1/products', data);
-    const productId = response.data.id; 
-    return productId;
-  } catch (error) {
-    console.error('Error al crear el producto:', error);
-    throw error; 
-  }
-}
-
-async function uploadImages(productId, mainImage, images) {
-  try {
-    await axios.post(`localhost:8080/api/v1/uploadImages/${productId}`, mainImage, images);
-    console.log('Imágenes subidas exitosamente.');
-  } catch (error) {
-    console.error('Error al subir las imágenes:', error);
-    await borrarProducto(productId);
-    throw error; 
-  }
-}
-
-async function deleteProduct(productId) {
-  try {
-    await axios.delete(`localhost:8080/api/v1/products/${productId}`);
-    console.log('Producto borrado exitosamente.');
-  } catch (error) {
-    console.error('Error al borrar el producto:', error);
-    throw error; 
-  }
-}
-
-async function handlePost(data, images, mainImage) {
-  let productId;
-  try {
-    productId = await createProduct(data.id);
-    await uploadImages(productId, images, mainImage);
-    console.log('Proceso completado exitosamente.');
-  } catch (error) {
-    console.error('Error al crear el producto', error)
-    deleteProduct(productId);
-  }
-}
 </script>
 
 <template>
@@ -100,7 +70,7 @@ async function handlePost(data, images, mainImage) {
 
           <div class="image-main">
             <label>Imagen Principal</label>
-            <input type="file" class="form-control-file" id="main-image" name="file">
+            <input type="file" class="form-control-file" id="main-image" name="file" @change="handleMainImageChange">
           </div>
           <section>
 
@@ -108,12 +78,12 @@ async function handlePost(data, images, mainImage) {
 
               <div class="title-container">
                 <label>Título</label>
-                <input type="text" class="form-control" id="title" v-model="titulo" placeholder="Título">
+                <input type="text" class="form-control" id="title" v-model="productName" placeholder="Título">
               </div>
 
               <div class="price-container">
                 <label>Precio</label>
-                <input type="number" class="form-control" id="price" v-model="precio" placeholder="Precio">
+                <input type="number" class="form-control" id="price" v-model="price" placeholder="Precio">
               </div>
 
             </div>
@@ -132,18 +102,18 @@ async function handlePost(data, images, mainImage) {
 
         <div class="images-container">
           <label for="file-upload" class="custom-file-upload">Imágenes</label>
-          <input type="file" class="form-control-file" id="file-upload" name="files" multiple>
+          <input type="file" class="form-control-file" id="file-upload" name="files" multiple @change="handleFilesChange">
         </div>
 
         <div class="description-container">
           <label>Descripción</label>
-          <textarea class="form-control" id="description" rows="3" v-model="description"
+          <textarea class="form-control" id="description" rows="3" v-model="productDescription"
             placeholder="Descripción..."></textarea>
         </div>
 
         <div class="btns-actions">
           <button id="reset" @click="resetForm()">Borrar</button>
-          <button  id="send" @click="createProduct(data)">Enviar</button>
+          <button  id="send" @click="createProduct()">Enviar</button>
         </div>
       </form>
     </div>
