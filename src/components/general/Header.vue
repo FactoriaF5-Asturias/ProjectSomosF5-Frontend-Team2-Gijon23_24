@@ -51,6 +51,7 @@ const authStore = useAuthStore();
 header {
   position: fixed;
   width: 100%;
+  z-index: 998;
 
   > div {
     background-color: $primary-background;
