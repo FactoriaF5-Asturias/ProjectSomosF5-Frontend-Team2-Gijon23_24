@@ -91,27 +91,43 @@
      display: flex;
      justify-content: center;
      align-items: center;
-     margin: 2rem 0;
+     margin-top: 2rem; /* Ajusta el margen superior según sea necesario */
    }
+ 
    .añadirCarrito {
-     display: inline-block;
      padding: 10px 20px;
-     margin-top: 10px;
-     background-color:#47589D;
+     background-color: #47589D;
      color: #FFFFFF;
-     border-radius: 1%;
-     box-shadow: 6px 8px 10px 2px #0a142b;
-     text-transform: uppercase;
-     font-weight: bold;
      border-radius: 5px;
      border: none;
      transition: all 0.2s ease;
      cursor: pointer;
-     &:hover {
-       background-color: #56056e;
-     }
+     font-weight: bold;
    }
  }
+ 
+ .detail-text-container {
+   position: relative; 
+ }
+ 
+ .añadirCarrito-container {
+   position: absolute; 
+   bottom: 35rem; 
+   left: 54%;
+   transform: translateX(-50%); 
+ }
+
+ .añadirFavorito{
+   position: relative;
+   left: 70%;
+
+ }
+ .añadirFavorito:hover{
+   color: #47589D;
+ }
+ 
+
+ 
 
 
 

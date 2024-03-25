@@ -1,30 +1,40 @@
 <script setup></script>
 <template>
-    <div id="home-detail">
-        <button class="back-button" onclick="goBack()"><span class="arrow-left"></span></button>
-        <div class="detail-image-container">
-            <div class="detail-mainImage-container">
-                <img src="/public/images/estatua.png" alt="">
-            </div>
-            <div class="detail-miniPics-container">
-                <img src="/public/images/estatua.png" alt="">
-                <img src="/public/images/Logo3d.png" alt="Tanjiro's plush height">
-                <img src="/public/images/PrintGo.svg" alt="kid having fun with Tanjiro's plush">
-            </div>
-        </div>
-
-        <div class="detail-text-container">
-            <h3>Nombre Producto<br></h3>
-            <h2>14,99€<br></h2>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur earum necessitatibus reprehenderit quidem esse est, veniam temporibus placeat sunt officiis. Alias nihil placeat excepturi, quisquam earum maxime eos harum inventore.</p>
-
-            <div class="añadirCarrito-container">
-              <button class="añadirCarrito">Añadir al carrito</button>
-            </div>
-        </div>
+  <div id="home-detail" class="product-detail">
+    <button class="back-button" onclick="goBack()">
+      <span class="arrow-left"></span>
+    </button>
+    <div class="detail-image-container">
+      <div class="detail-mainImage-container">
+        <img src="/public/images/estatua.png" alt="detalles" />
       </div>
-    
-  </template>
+      <div class="detail-miniPics-container">
+        <img src="/public/images/estatua.png" alt="detalles" />
+        <img src="/public/images/Logo3d.png" alt="detalles" />
+        <img src="/public/images/PrintGo.svg" alt="detalles" />
+      </div>
+    </div>
+    <div class="detail-text-container">
+      <h3 class="product-name">
+        Nombre producto
+        <button class="añadirFavorito"><i class="fas fa-heart"></i></button>
+      </h3>
+      <h2>
+        14,99<span style="font-size: 1rem">€ </span>
+        <s>19,99€</s>
+      </h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur earum
+        necessitatibus reprehenderit quidem esse est, veniam temporibus
+        placeat sunt officiis. Alias nihil placeat excepturi, quisquam earum
+        maxime eos harum inventore.
+      </p>
+    </div>
+    <div class="añadirCarrito-container">
+      <button class="añadirCarrito">Añadir al carrito</button>
+    </div>
+  </div>
+</template>
   
 
   
