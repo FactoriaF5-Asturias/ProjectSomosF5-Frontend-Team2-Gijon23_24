@@ -17,8 +17,13 @@
             <h3>Nombre Producto<br></h3>
             <h2>14,99€<br></h2>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur earum necessitatibus reprehenderit quidem esse est, veniam temporibus placeat sunt officiis. Alias nihil placeat excepturi, quisquam earum maxime eos harum inventore.</p>
+
+            <div class="añadirCarrito-container">
+              <button class="añadirCarrito">Añadir al carrito</button>
+            </div>
         </div>
       </div>
+    
   </template>
   
 
