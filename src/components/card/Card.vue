@@ -18,6 +18,7 @@ function findImageForProduct(product) {
 
 </script>
 <template>
+  
   <v-container class="container">
     <v-row class="row-card">
       <v-col class="col-card" cols="3" v-for="product in productsStore.products" :key="product.id">
