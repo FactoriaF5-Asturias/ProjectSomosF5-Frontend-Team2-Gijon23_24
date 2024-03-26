@@ -14,6 +14,7 @@
         <img src="/public/images/PrintGo.svg" alt="detalles" />
       </div>
     </div>
+    
     <div class="detail-text-container">
       <h3 class="product-name">
         Nombre producto
