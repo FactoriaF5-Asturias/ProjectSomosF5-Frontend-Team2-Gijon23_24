@@ -4,9 +4,26 @@ import { ref, watchEffect } from "vue";
 
 const props = defineProps({
   onClose: Function,
-  id: String, 
+  id_product: String, 
 });
 
+const imageProduct = ref(null);
+const productName = ref('');
+const price = ref('');
+const categoryId = ref('');
+const productDescription = ref('');
+
+const closeForm = () => {
+  props.onClose();
+}
+//Resetear Formulario
+const resetForm = () => {
+  imageProduct.value = '';
+  productName.value = '';
+  price.value = '';
+  categoryId.value = '1';
+  productDescription.value = '';
+}
 
 </script>
 
@@ -28,7 +45,7 @@ const props = defineProps({
 
           <div class="image-main">
             <label>Imagen Principal</label>
-            <input title=" " type="file" class="form-control-file" id="images">{{ contentStore.content.productMainImage }}</input>
+            <input title=" " type="file" class="form-control-file" id="images">Image Main: {{ contentStore.content.productMainImage }}</input>
           </div>
           <section>
 
@@ -36,12 +53,12 @@ const props = defineProps({
 
               <div class="title-container">
                 <label>Título</label>
-                <input type="text" class="form-control" id="title" v-model="titulo" placeholder="Título">{{ contentStore.content.productName }}</input>
+                <input type="text" class="form-control" id="title" v-model="titulo" placeholder="Título">Title: {{ contentStore.content.productName }}</input>
               </div>
 
               <div class="price-container">
                 <label>Precio</label>
-                <input type="number" class="form-control" id="price" v-model="precio" placeholder="Precio">{{ contentStore.content.price }}</input>
+                <input type="number" class="form-control" id="price" v-model="precio" placeholder="Precio">Price: {{ contentStore.content.price }}</input>
               </div>
 
             </div>
@@ -61,13 +78,13 @@ const props = defineProps({
 
         <div class="images-container">
           <label for="file-upload" class="custom-file-upload">Imágenes</label>
-          <input type="file" class="form-control-file" id="file-upload">{{ contentStore.content.otherProductImage }}</input>
+          <input type="file" class="form-control-file" id="file-upload">Other Image: {{ contentStore.content.otherProductImage }}</input>
         </div>
 
         <div class="description-container">
           <label>Descripción</label>
           <textarea class="form-control" id="description" rows="3" v-model="description"
-            placeholder="Descripción...">{{ contentStore.content.productDescription }}</textarea>
+            placeholder="Descripción...">Description:{{ contentStore.content.productDescription }}</textarea>
         </div>
 
         <div class="btns-actions">
