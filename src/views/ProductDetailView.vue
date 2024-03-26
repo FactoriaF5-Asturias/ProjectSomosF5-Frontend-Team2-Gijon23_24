@@ -34,7 +34,7 @@
       <button class="añadirCarrito">Añadir al carrito</button>
      
     <div class="cantidad-container">
-      <label for="cantidad">Cantidad:</label>
+      <label for="cantidad" class="label">Cantidad:</label>
         <input type="number" id="cantidad" name="cantidad" v-model="cantidad" min="1" class="cantidad-input">
         <button type="button" class="btn-restar" @click="restarCantidad">-</button>
         <button type="button" class="btn-sumar" @click="sumarCantidad">+</button>

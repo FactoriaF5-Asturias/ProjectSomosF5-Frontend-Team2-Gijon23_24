@@ -137,7 +137,7 @@
 
  }
  .añadirFavorito:hover{
-   color: #47589D;
+   color:red;
  }
  .cantidad-container {
    display: flex;
@@ -168,6 +168,11 @@
 
 .cantidad-input {
    color:#FFFFFF;
+   font-size: medium;
+}
+.label{
+   color: #FFFFFF;
+   font-size: medium;
 }
 
 
