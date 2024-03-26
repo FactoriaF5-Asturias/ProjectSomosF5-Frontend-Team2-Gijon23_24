@@ -17,11 +17,11 @@
     <div class="detail-text-container">
       <h3 class="product-name">
         Nombre producto
-        <button class="añadirFavorito"><i class="fas fa-heart"></i></button>
+        
       </h3>
       <h2>
         14,99<span style="font-size: 1rem">€ </span>
-        <s>19,99€</s>
+        
       </h2>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur earum
@@ -31,14 +31,15 @@
       </p>
     </div>
     <div class="añadirCarrito-container">
-      <button class="añadirCarrito">Añadir al carrito</button>
-     
-    <div class="cantidad-container">
+      <div class="cantidad-container">
       <label for="cantidad" class="label">Cantidad:</label>
         <input type="number" id="cantidad" name="cantidad" v-model="cantidad" min="1" class="cantidad-input">
         <button type="button" class="btn-restar" @click="restarCantidad">-</button>
         <button type="button" class="btn-sumar" @click="sumarCantidad">+</button>
     </div>
+      <button class="añadirCarrito">Añadir al carrito</button>
+      <button class="añadirFavorito"><i class="fas fa-heart"></i></button>
+
    
     </div>
   </div>
@@ -55,6 +56,7 @@ function restarCantidad(){
     cantidad.value--;
   }
 }
+
 
 
 </script>

@@ -60,32 +60,35 @@
 
 .detail-text-container {
    width: 50%;
-   height: 50%;
+   height: 60%;
    margin: 5.5% 8% 0% 5%;
    padding: 1.5%;
    border-radius: 1%;
    box-shadow: 6px 8px 10px 2px black;
-   background:#cd9af3;
+   background:#252525;
 }
 
 .detail-text-container h3 {
    margin:2rem;
    font-size: x-large;
-   text-decoration: underline;
+   border-bottom: 2px solid white;
+   color: white;
    
 
 }
 .detail-text-container h2{
    font-size: xx-large;
-   color:#0a142b;
+   color:white;
    margin-left: 2rem;
-   border-bottom: 2px solid #47589D;
+   border-bottom: 2px solid white;
 }
 
 .detail-text-container p {
    font-size:medium;
    margin-top: 2rem;
    margin-left: 2rem;
+   color: white;
+   border-bottom: 2px solid white;
 }
 #home-detail {
    
@@ -114,12 +117,14 @@
      cursor: pointer;
      font-weight: bold;
      margin-bottom: 2rem;
+     margin-top: 2rem;
    
    }
    .añadirCarrito:hover {
       color: #47589D;
     } 
  }
+
 
 
  
@@ -129,15 +134,18 @@
  
  .añadirCarrito-container {
    position: absolute; 
-   bottom: 35rem; 
+   bottom: 30rem; 
    left: 54%;
    transform: translateX(-50%); 
+   
  }
 
  .añadirFavorito{
+   color:#cd9af3;
    position: relative;
-   left: 70%;
-
+   left: 80%;
+   font-size:x-large;
+   transform: translateY(-196%);
  }
  .añadirFavorito:hover{
    color:red;
@@ -145,6 +153,7 @@
  .cantidad-container {
    display: flex;
    align-items: center;
+   justify-content: space-between;
 }
 
 .cantidad-container input {
@@ -161,6 +170,7 @@
    cursor: pointer;
    transition: background-color 0.3s ease;
    margin-left: 2rem;
+   margin-bottom: 1rem;
    
 }
 
