@@ -1,4 +1,4 @@
-<script setup></script>
+
 <template>
   <div id="home-detail" class="product-detail">
     <button class="back-button" onclick="goBack()">
@@ -32,9 +32,32 @@
     </div>
     <div class="añadirCarrito-container">
       <button class="añadirCarrito">Añadir al carrito</button>
+     
+    <div class="cantidad-container">
+      <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" name="cantidad" v-model="cantidad" min="1" class="cantidad-input">
+        <button type="button" class="btn-restar" @click="restarCantidad">-</button>
+        <button type="button" class="btn-sumar" @click="sumarCantidad">+</button>
+    </div>
+   
     </div>
   </div>
 </template>
+<script setup>
+import {ref} from 'vue';
+
+const cantidad = ref(1);
+function sumarCantidad(){
+  cantidad.value++;
+}
+function restarCantidad(){
+  if (cantidad.value > 1){
+    cantidad.value--;
+  }
+}
+
+
+</script>
   
 
   
