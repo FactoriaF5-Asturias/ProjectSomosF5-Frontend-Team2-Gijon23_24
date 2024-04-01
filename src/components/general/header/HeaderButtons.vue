@@ -54,7 +54,6 @@ button {
     padding: 0 2rem;
     font-size: 2rem;
     color: $primary-color;
-    font-family: "Poppins", sans-serif;
     transition: all 0.2s ease-in-out;
 }
 button:hover {

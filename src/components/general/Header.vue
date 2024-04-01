@@ -2,18 +2,22 @@
 import { useAuthStore } from "./../../stores/AuthStore";
 import HeaderButtons from "./header/HeaderButtons.vue";
 import LoggedProfile from "./header/LoggedProfile.vue";
+import FactoriaAlert from "./../alerts/FactoriaAlert.vue";
 
 const authStore = useAuthStore();
 
 </script>
 
 <template>
+
     <header>
 
+      <FactoriaAlert/>
+      
       <div>
 
-        <div>
-          <img src="/images/logotype.png" alt="PrintGo logotype">
+        <div id="logotype_container">
+          <img src="/images/Logo3d.png" alt="PrintGo logotype">
         </div>
 
         <div id="actions_container">
@@ -44,7 +48,9 @@ const authStore = useAuthStore();
         <router-link to="/about" exact-active-class="active">Hogar</router-link>
         <router-link to="/about" exact-active-class="active">Geek</router-link>
       </nav>
+
     </header>
+
 </template>
 
 <style lang="scss" scoped>
@@ -52,7 +58,7 @@ header {
   position: fixed;
   width: 100%;
   z-index: 99;
-  z-index: 998;
+
 
   > div {
     background-color: $primary-background;
@@ -62,6 +68,17 @@ header {
     justify-content: space-between;
     align-items: center;
     filter: drop-shadow(0 0 0.5rem black);
+  }
+}
+
+#logotype_container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > img {
+    height: 80%;
   }
 }
 
@@ -77,13 +94,13 @@ header {
     align-items: center;
   
     p {
-      font-family: "Poppins", sans-serif;
       font-weight: 300;
       color: $light-font;
       font-size: 1.4rem;
     }
   }
 }
+
 nav {
   background-color: $primary-background;
   height: 6rem;
@@ -93,7 +110,6 @@ nav {
   gap: 3rem;
 
   a {
-    font-family: "Poppins", sans-serif;
     font-weight: 300;
     color: $inactive-primary-color;
     font-size: 1.7rem;
