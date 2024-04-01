@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+//import AddForm from '@/components/admin-dashboard-components/AddForm.vue'
+//import EditForm from '@/components/admin-dashboard-components/EditForm.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,19 +19,19 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
-    {
-      path: '/add-form',
-      name: 'addForm',
-      component: AddForm,
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/edit-form/:id_product',
-      name: 'editForm',
-      component: EditForm,
-      props: true,
-      meta: { requiresAuth: true }
-    }
+    // {
+    //   path: '/add-form',
+    //   name: 'addForm',
+    //   component: AddForm,
+    //   meta: { requiresAuth: true }
+    // },
+    // {
+    //   path: '/edit-form/:id_product',
+    //   name: 'editForm',
+    //   component: EditForm,
+    //   props: true,
+    //   meta: { requiresAuth: true }
+    // }
   ]
 })
 

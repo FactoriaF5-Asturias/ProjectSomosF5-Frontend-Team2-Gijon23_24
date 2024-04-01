@@ -9,9 +9,7 @@
     "preview": "vite preview",
     "test:unit": "vitest",
     "test:watch": "vue-cli-service test:unit --watchAll",
-
-      "test": "jest"
-
+    "test-js": "jest",
     "test": "vitest"
 
   },
