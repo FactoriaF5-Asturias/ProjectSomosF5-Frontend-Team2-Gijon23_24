@@ -74,12 +74,11 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  position: fixed;
-  top: 0;
-  left: 0;
+  //position: fixed;
+  
   height: 100vh;
   width: 100vw;
-  z-index: 1000;
+  //z-index: 1000;
 }
 
 .modal-container {
@@ -90,10 +89,9 @@
   height: 80rem;
   width: 60rem;
   border-radius: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   background-color: white;
-
+  border: 3px solid #252525;
 }
 
 .user-profile {
