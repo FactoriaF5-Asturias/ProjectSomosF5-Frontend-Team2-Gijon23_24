@@ -1,6 +1,6 @@
 <script setup>
-import HeaderButtons from "./header/HeaderButtons.vue";
 import { useAuthStore } from "./../../stores/AuthStore";
+import HeaderButtons from "./header/HeaderButtons.vue";
 import LoggedProfile from "./header/LoggedProfile.vue";
 
 
@@ -52,6 +52,7 @@ const authStore = useAuthStore();
 header {
   position: fixed;
   width: 100%;
+  z-index: 99;
   z-index: 998;
 
   > div {
