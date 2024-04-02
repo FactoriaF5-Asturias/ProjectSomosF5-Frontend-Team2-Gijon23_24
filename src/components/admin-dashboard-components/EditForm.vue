@@ -1,10 +1,11 @@
 <script setup>
 import { useContentStore } from "@/stores/ContentStore";
+import { Axios } from "axios";
 import { ref, watchEffect } from "vue";
 
 const props = defineProps({
   onClose: Function,
-  id_product: String, 
+  productId: String
 });
 
 const imageProduct = ref(null);
@@ -16,14 +17,45 @@ const productDescription = ref('');
 const closeForm = () => {
   props.onClose();
 }
-//Resetear Formulario
 const resetForm = () => {
-  imageProduct.value = '';
   productName.value = '';
   price.value = '';
   categoryId.value = '1';
   productDescription.value = '';
 }
+
+const existingImages = [];
+const deletedImages = ref [[]]
+const addedImages = ref[[]]
+
+async function getProductData(id) {
+	try {
+		const response = await axios.post(
+			`http://localhost:8080/api/v1/products/${id}`,
+			data,
+			{
+				headers: {
+					"Content-Type": "application/json",
+				},
+				withCredentials: true,
+			}
+    );
+      existingImages.values = response.images
+      productName.value = response.productName;
+      price.value = response.price;
+      categoryId.value = response.categories.categoryName;
+      productDescription.value = response.description;
+	} catch (error) {
+		console.error("Error al conseguir los datos del producto", error);
+		throw error;
+	}
+}
+
+
+onMounted(() => {
+  getProductData(props.productId);
+});
+
 
 </script>
 
@@ -45,7 +77,7 @@ const resetForm = () => {
 
           <div class="image-main">
             <label>Imagen Principal</label>
-            <input title=" " type="file" class="form-control-file" id="images">Image Main: {{ contentStore.content.productMainImage }}</input>
+          </input title=" " type="file" class="form-control-file" id="images">{{ contentStore.content.productMainImage }}
           </div>
           <section>
 
@@ -53,19 +85,19 @@ const resetForm = () => {
 
               <div class="title-container">
                 <label>Título</label>
-                <input type="text" class="form-control" id="title" v-model="titulo" placeholder="Título">Title: {{ contentStore.content.productName }}</input>
+                <input type="text" class="form-control" id="title" v-model="titulo" placeholder="Título">{{ contentStore.content.productName }}</input>
               </div>
 
               <div class="price-container">
                 <label>Precio</label>
-                <input type="number" class="form-control" id="price" v-model="precio" placeholder="Precio">Price: {{ contentStore.content.price }}</input>
+                <input type="number" class="form-control" id="price" v-model="precio" placeholder="Precio">{{ contentStore.content.price }}</input>
               </div>
 
             </div>
 
             <div class="categories-container">
               <label>Categoría</label>
-              <select id="categories" v-model="categoryId" placeholder="Seleccione categoría">Category:{{ contentStore.content.categoryId }}
+              <select id="categories" v-model="categoryId" placeholder="Seleccione categoría">{{ contentStore.content.categoryId }}
                 <option value=1>Hogar</option>
                 <option value=2>Geek</option>
                 <option value=3>Litofanía</option>
@@ -76,10 +108,17 @@ const resetForm = () => {
           </section>
         </div>
 
+        <div class="existing-images">
+          <article v-for="image in images">
+            <img class="delete-image"/>
+          </article>
+        </div>
+
         <div class="images-container">
           <label for="file-upload" class="custom-file-upload">Imágenes</label>
           <input type="file" class="form-control-file" id="file-upload">Other Image: {{ contentStore.content.otherProductImage }}</input>
         </div>
+        
 
         <div class="description-container">
           <label>Descripción</label>
@@ -89,7 +128,7 @@ const resetForm = () => {
 
         <div class="btns-actions">
           <button @click="resetForm">Borrar</button>
-          <button @click="addProduct">Editar</button>
+          <button @click="updateProduct">Editar</button>
         </div>
       </form>
     </div>
