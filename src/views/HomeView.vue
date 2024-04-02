@@ -1,6 +1,5 @@
 <script setup>
 import Header from '@/components/general/Header.vue';
-import AdminProfile from '@/components/profiles/admin/AdminProfile.vue';
 import Footer from '@/components/Footer.vue'
 
 </script>
@@ -10,7 +9,6 @@ import Footer from '@/components/Footer.vue'
 	<Header />
 	<main>
 	
-	<AdminProfile />
 	</main>
 
 	<Footer />
