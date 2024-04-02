@@ -14,11 +14,10 @@
         <img class="image-logo" src="/images/logo.svg" alt="logo-profile">
       </div>
 
-
       <form @submit.prevent="submitForm">
 
         <div class="input-box">
-          <label>Nombre</label>
+          <label>Nombre y Apellidos</label>
           <input type="text" id="name" v-model="name">
         </div>
 
@@ -37,13 +36,11 @@
           <input type="text" id="address" v-model="address">
         </div>
 
-
-
         <div class="input-box-2">
           <label>C. P.</label>
           <input type="text" id="postal-code" v-model="postalCode">
           <label>Ciudad</label>
-          <input  type="text" id="city" v-model="city">
+          <input type="text" id="city" v-model="city">
         </div>
 
 
@@ -52,15 +49,10 @@
           <input type="text" id="province" v-model="province">
         </div>
 
-
         <div class="btns-container">
           <button id="cancel" @click="cancelData()">Cancelar</button>
           <button id="save" @click="saveData()">Guardar</button>
         </div>
-
-
-
-
       </form>
     </div>
   </div>
@@ -68,17 +60,15 @@
 </template>
 
 <style lang="scss" scoped>
+
 .modal {
-  background-color: $primary-color;
+  background-color: #CBABE4;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  //position: fixed;
-  
   height: 100vh;
   width: 100vw;
-  //z-index: 1000;
 }
 
 .modal-container {
@@ -91,7 +81,6 @@
   border-radius: 1.5rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   background-color: white;
-  border: 3px solid #252525;
 }
 
 .user-profile {
@@ -104,6 +93,7 @@ h1 {
   font-weight: 600;
   text-align: center;
   font-size: 4rem;
+  color: $primary-background;
   font-family: "Poppins", sans-serif;
 }
 
@@ -152,7 +142,7 @@ form {
 }
 
 .input-box-2 {
-  
+
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
@@ -171,7 +161,7 @@ form {
     font-size: 1.8rem;
     border: 1px solid gray;
     border-radius: 0.5rem;
-  
+
   }
 
   #city {
@@ -185,7 +175,7 @@ form {
 
 .btns-container {
   margin-top: 4rem;
-  display:flex;
+  display: flex;
   gap: 4rem;
 
   button {
@@ -200,8 +190,16 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
-
+    cursor: pointer;
+    transition: transform 0.2s ease;
   }
-}
 
+   button:hover {
+     background-color: #3C3057;
+   }
+
+   button:active {
+     transform: scale(1.1);
+   }
+}
 </style>
