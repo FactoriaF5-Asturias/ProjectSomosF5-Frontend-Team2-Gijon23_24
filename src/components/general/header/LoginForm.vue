@@ -188,6 +188,7 @@ form {
     font-weight: 600;
     text-align: center;
     font-size: 3rem;
+    
   }
 }
 
