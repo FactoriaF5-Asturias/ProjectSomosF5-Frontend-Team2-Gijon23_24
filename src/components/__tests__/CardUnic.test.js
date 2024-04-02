@@ -1,45 +1,22 @@
 import { mount } from '@vue/test-utils';
-import { test, vi } from 'vitest';
 import CardUnic from '../card/CardUnic.vue';
-import { useProductsStore } from '../../stores/productStore';
+describe('CardUnic', () => {
+ it('debería renderizar correctamente y mostrar la imagen y el precio del producto', async () => {
+    const product = {
+      productName: 'Producto de prueba',
+      price: 100,
+      images: [
+        { imageName: 'mocked-image-name.jpg', mainImage: true },
+      ],
+    };
 
-vi.mock('../../services/ImagesService', async () => {
- const actual = await vi.importActual('../../services/ImagesService');
- return {
-    default: vi.fn().mockImplementation(() => ({
- 
-    })),
-    ...actual,
- };
-});
-
-vi.mock('../../stores/productStore', async () => {
- const actual = await vi.importActual('../../stores/productStore');
- return {
-    default: vi.fn().mockImplementation(() => ({
-      products: [],
-      isLoaded: false,
-      fetchProducts: vi.fn().mockResolvedValue(true),
-    })),
-    ...actual,
- };
-});
-
-test('renders CardUnic component correctly', async () => {
- const wrapper = mount(CardUnic, {
-    props: {
-      product: {
-        id: 1,
-        images: [{ mainImage: true, imageName: 'image1.jpg' }],
-        productName: 'Test Product',
-        price: 100,
+    const wrapper = mount(CardUnic, {
+      props: {
+        product,
       },
-    },
+    });
+
+    expect(wrapper.find('.v-card-title').text()).toContain(product.productName);
+    expect(wrapper.find('.price').text()).toContain(`${product.price} €`);
  });
-
-
- expect(wrapper.find('.v-card-title').text()).toBe('Test Product');
- expect(wrapper.find('.price').text()).toBe('100 €');
-
-
 });

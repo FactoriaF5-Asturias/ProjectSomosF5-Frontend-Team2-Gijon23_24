@@ -3,6 +3,7 @@ import { test, vi } from 'vitest';
 import Card from '../card/Card.vue';
 import { useProductsStore } from '@/stores/productStore';
 
+
 vi.mock('../card/Card.vue', () => ({
  ImagesService: jest.fn().mockImplementation(() => ({
  })),
