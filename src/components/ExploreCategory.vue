@@ -25,7 +25,6 @@
         </div>
     </div>
   </div>  
-  
 </template>
 
 <style lang="scss" scoped>
@@ -35,18 +34,6 @@
     padding: 0;
 }
 
-.container { 
-
-background-color: #AE81D1;
-font-family: "Poppins", sans-serif;
-
-
-  h1{
-    color: #fff;
-    font-size: 25px;
-    padding: 3%;
-  }
-}
 
 .galery{
     
@@ -77,8 +64,8 @@ font-family: "Poppins", sans-serif;
         justify-content: space-around;
         flex-wrap: wrap;
         padding: 5%;
-       
     }
+
     .container_images  .image{
         width: 32%;
         position: relative;

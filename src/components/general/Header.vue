@@ -6,6 +6,7 @@ import FactoriaAlert from "./../alerts/FactoriaAlert.vue";
 
 const authStore = useAuthStore();
 
+
 </script>
 
 <template>
@@ -57,7 +58,7 @@ const authStore = useAuthStore();
 header {
   position: fixed;
   width: 100%;
-  z-index: 99;
+  z-index: 100;
 
 
   > div {
@@ -67,7 +68,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    filter: drop-shadow(0 0 0.5rem black);
+    filter: drop-shadow(0px 10px 0.5rem rgba(0, 0, 0, 0.31));
   }
 }
 
@@ -75,7 +76,6 @@ header {
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
 
   > img {
     height: 80%;
@@ -119,6 +119,7 @@ nav {
     color: $primary-color;
   }
 }
+
 .active {
   color: $primary-color;
 }
