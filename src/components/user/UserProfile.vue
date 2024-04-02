@@ -7,13 +7,13 @@
     <div class="user-profile">
       <h1>PERFIL DE USUARIO</h1>
     </div>
-  
+
     <div class=" modal-container">
 
       <div class="logo-container">
         <img class="image-logo" src="/images/logo.svg" alt="logo-profile">
       </div>
-     
+
 
       <form @submit.prevent="submitForm">
 
@@ -43,7 +43,7 @@
           <label>C. P.</label>
           <input type="text" id="postal-code" v-model="postalCode">
           <label>Ciudad</label>
-          <input class="input-two" type="text" id="city" v-model="city">
+          <input  type="text" id="city" v-model="city">
         </div>
 
 
@@ -68,27 +68,33 @@
 </template>
 
 <style lang="scss" scoped>
-
 .modal {
   background-color: $primary-color;
- 
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1000;
 }
 
 .modal-container {
   display: flex;
-    justify-content: center;
-    align-items: center;
-  height: 70rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80rem;
   width: 60rem;
-  border-radius: 1rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
   background-color: white;
-}
 
+}
 
 .user-profile {
   display: flex;
@@ -106,6 +112,9 @@ h1 {
 .logo-container {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
 }
 
 .image-logo {
@@ -119,9 +128,6 @@ form {
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
 }
-
-
-
 
 .input-box {
   display: flex;
@@ -147,10 +153,12 @@ form {
   flex-direction: row;
 }
 
-.input-box-extra {
-  background-color: aqua;
+.input-box-2 {
+  
   display: flex;
   flex-direction: row;
+  gap: 0.5rem;
+  margin-top: 2rem;
 
   label {
     font-size: 2rem;
@@ -160,19 +168,42 @@ form {
   }
 
   #postal-code {
-    width: 13rem;
+    width: 10rem;
     padding: 0.5rem 1rem;
     font-size: 1.8rem;
     border: 1px solid gray;
     border-radius: 0.5rem;
+  
   }
 
   #city {
-    width: 18rem;
+    width: 15rem;
     padding: 0.5rem 1rem;
     font-size: 1.8rem;
     border: 1px solid gray;
     border-radius: 0.5rem;
   }
 }
+
+.btns-container {
+  margin-top: 4rem;
+  display:flex;
+  gap: 4rem;
+
+  button {
+    background-color: $primary-color;
+    font-family: "Poppins", sans-serif;
+    font-size: 2rem;
+    color: white;
+    border-radius: 0.5rem;
+
+    width: 12rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+}
+
 </style>
