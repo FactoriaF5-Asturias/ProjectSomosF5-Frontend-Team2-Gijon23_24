@@ -11,7 +11,7 @@
         <div class="image">
             <img src="../assets/img/litofanias.png" alt="">
             <h2 class="category_title">Litofanias</h2>
-            <div class="overlay"></div>
+            <div class="overlay"></div> 
         </div>
         <div class="image">
             <img src="../assets/img/hogar.png" alt="">
