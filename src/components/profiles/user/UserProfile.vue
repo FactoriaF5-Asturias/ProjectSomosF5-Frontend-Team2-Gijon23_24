@@ -1,16 +1,11 @@
 <script setup>
 
-import Header from '@/components/general/Header.vue'
-import Footer from '@/components/Footer.vue'
-
 </script>
 
 <template>
 
-  <div class="user-profile-page">
-    <Header />
+  <body>
 
-    <body>
       <div class="user-profile">
         <h1>PERFIL DE USUARIO</h1>
       </div>
@@ -60,11 +55,13 @@ import Footer from '@/components/Footer.vue'
             <button id="cancel" @click="cancelData()">Cancelar</button>
             <button id="save" @click="saveData()">Guardar</button>
           </div>
+
         </form>
+
       </div>
     </body>
-    <Footer />
-  </div>
+    
+  
 </template>
 
 <style lang="scss" scoped>
@@ -74,7 +71,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  //height: 100vh;
   width: 100%;
 }
 

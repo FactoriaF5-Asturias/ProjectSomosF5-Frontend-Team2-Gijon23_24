@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  <div class="modal">
+
+  <body>
+
     <div class="user-profile">
       <h1>PERFIL DEL ADMINISTRADOR</h1>
     </div>
@@ -36,21 +38,22 @@
           <button id="cancel" @click="cancelData()">Cancelar</button>
           <button id="save" @click="saveData()">Guardar</button>
         </div>
+
       </form>
+
     </div>
-  </div>
+  </body>
 
 </template>
 
 <style lang="scss" scoped>
 
-.modal {
+body {
   background-color: #CBABE4;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
   width: 100vw;
 }
 
@@ -59,17 +62,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80rem;
-  width: 60rem;
+  height: 70rem;
+  width: 50rem;
   border-radius: 1.5rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   background-color: white;
+  position: sticky;
+  max-height: 60rem;
+  margin-bottom: 10rem;
 }
 
 .user-profile {
   display: flex;
   justify-content: center;
-  margin: 3rem 0 5rem 0;
+  margin: 20rem 0 5rem 0;
 }
 
 h1 {
@@ -85,8 +91,8 @@ h1 {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-top: 8rem;
-  margin-bottom: 8rem;
+  margin-top: 6rem;
+  margin-bottom: 2rem;
 }
 
 .image-logo {
@@ -105,7 +111,7 @@ form {
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  margin-bottom: 10rem;
+  margin-bottom: 8rem;
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
 }
@@ -130,7 +136,7 @@ form {
 }
 
 .btns-container {
-  margin-top: 6rem;
+  margin-top: 2rem;
   display: flex;
   gap: 4rem;
 
