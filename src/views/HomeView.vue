@@ -1,23 +1,25 @@
 <script setup>
-import Header from '@/components/general/Header.vue';
-import Footer from '@/components/Footer.vue'
-
+import ExplorerCategory from '../components/ExploreCategory.vue';
+import Banner from "@/components/Banner.vue";
+import Card from '@/components/card/Card.vue';
 </script>
 
 <template>
-
-	<Header />
 	<main>
-	
-	</main>
+		<section></section>
+		<Card/>
+  <ExplorerCategory/>
 
-	<Footer />
+	</main>
 </template>
 
 <style lang="scss" scoped>
 
-
-
+p {
+	margin-top: 100rem;
+}
+section{
+	height: 21rem;
+}
 
 </style>
-
