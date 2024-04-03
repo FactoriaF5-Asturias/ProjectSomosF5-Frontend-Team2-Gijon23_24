@@ -8,6 +8,7 @@ const authStore = useAuthStore();
 </script>
 
 <template>
+
     <header>
 
       <div>
@@ -19,7 +20,7 @@ const authStore = useAuthStore();
         <div id="actions_container">
           <router-link to="/favorite">
             <div>
-              <img src="/icons/icon-heart.svg" alt="">
+              <img src="/icons/icon-heart.svg" alt="heart-favorite">
               <p>Favoritos</p>
             </div>
           </router-link>

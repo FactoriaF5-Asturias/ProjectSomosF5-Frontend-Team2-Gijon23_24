@@ -33,7 +33,8 @@ function findImageForProduct(product) {
 @import '../../assets/scss/main.scss';
 
 .container {
- max-width: 100%;
+  margin-top: 2rem;
+  max-width: 100%;
 
   .row-card {
     display: flex;
@@ -47,4 +48,3 @@ function findImageForProduct(product) {
   }
 }
 </style>
-@/stores/ProductStore

@@ -15,14 +15,14 @@
 <style lang="scss" scoped>
 
 .searchbar {
-	
+	margin-top:-28rem;
+	margin-left: 38rem;
 	position: absolute;
-
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
 	font-size: 2rem;
 	.text-input {
-		background-color: rgb(72, 10, 10);
+		background-color: lighten($primary-color, 25%);
 		width: 60rem;
 		border-radius: 1.5rem 0 0 1.5rem;
 		padding: 0 1rem;

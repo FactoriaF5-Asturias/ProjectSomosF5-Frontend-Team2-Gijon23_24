@@ -6,6 +6,7 @@ import Pagination from '@/components/Pagination.vue';
 
 <template>
 	<main>
+		<section></section>
 		<SearchBar/>
 	<section class="favorite">
 		<Card/>
@@ -15,10 +16,12 @@ import Pagination from '@/components/Pagination.vue';
 </template>
 
 <style lang="scss" scoped>
-
+section{
+	height: 50rem;
+}
 
 .favorite {
-	margin-top: 25rem;
+	margin-top: -18rem;
 }
 
 
