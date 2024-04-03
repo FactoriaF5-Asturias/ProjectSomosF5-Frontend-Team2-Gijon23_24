@@ -15,23 +15,6 @@ const router = createRouter({
 			name: "about",
 			component: AboutView,
 		},
-		{
-			path: "/add-form",
-			name: "addForm",
-			component: () =>
-				import("../components/admin-dashboard-components/AddForm.vue"),
-
-			meta: { requiresAuth: true },
-		},
-		{
-			path: "/edit-form/:id_product",
-			name: "editForm",
-			component: () =>
-				import("../components/admin-dashboard-components/EditForm.vue"),
-
-			props: true,
-			meta: { requiresAuth: true },
-		},
 	],
 });
 
