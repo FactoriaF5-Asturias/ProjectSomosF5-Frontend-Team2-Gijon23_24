@@ -21,78 +21,66 @@
   </footer>
 </template>
 
-<script>
+<script></script>
 
-</script>
-
-<style lang="scss" scoped  >
+<style lang="scss" scoped>
 .footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color:$primary-background; 
-  padding: 54px; 
-  color: white;
-  background-color:transparentize($color: #1c1b1b, $amount: 0)
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: $primary-background;
+	padding: 54px;
+	color: white;
+	background-color: transparentize($color: #1c1b1b, $amount: 0);
 }
 
-
 .logo {
-  width: 86px; 
-  margin-left: 40%;
+	width: 86px;
+	margin-left: 40%;
 }
 
 .footer-left,
 .footer-center,
 .footer-right {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .footer-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .nav {
-  display: flex;
-  gap: 80px;
+	display: flex;
+	gap: 80px;
 }
-.nav a{
-  color: aliceblue;
-  font-size:x-large;
-  
+.nav a {
+	color: aliceblue;
+	font-size: x-large;
 }
-.nav a:hover{
-  color: $primary-color;
-  transition: 1s;
+.nav a:hover {
+	color: $primary-color;
+	transition: 1s;
 }
 
 router-link {
-  color: white;
-  text-decoration: none;
-  font-size: large;
+	color: white;
+	text-decoration: none;
+	font-size: large;
 }
-
-
 
 .copyright {
-  margin-top: 65px;
-  
-  
+	margin-top: 65px;
 }
-.footer-right{
-  margin-right: 2%;
+.footer-right {
+	margin-right: 2%;
 }
 
 .paypal-logo,
 .visa-logo {
-  width: 30px;
-  margin-left: 20px;
+	width: 30px;
+	margin-left: 20px;
 }
 </style>
-
-
-
-  
