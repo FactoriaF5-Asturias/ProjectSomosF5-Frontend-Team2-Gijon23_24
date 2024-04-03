@@ -1,6 +1,6 @@
 <script setup>
 
-import { useProductsStore } from '@/stores/productStore';
+import { useProductsStore } from '@/stores/ProductStore';
 import { onMounted } from 'vue';
 import ImagesService from '../../services/ImagesService';
 import CardUnic from './CardUnic.vue';

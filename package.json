@@ -12,13 +12,17 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@fortawesome/vue-fontawesome": "^3.0.6",
+    "@mdi/js": "^7.4.47",
     "axios": "^1.6.8",
+    "mdi-vue": "^3.0.13",
     "pinia": "^2.1.7",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5",
     "vuetify": "^3.5.7"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^6.5.1",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/test-utils": "^2.4.4",
     "jsdom": "^24.0.0",

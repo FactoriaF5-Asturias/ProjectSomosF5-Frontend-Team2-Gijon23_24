@@ -1,8 +1,6 @@
 import AboutView from '@/views/AboutView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-//import AddForm from '@/components/admin-dashboard-components/AddForm.vue'
-//import EditForm from '@/components/admin-dashboard-components/EditForm.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +26,14 @@ const router = createRouter({
       path: '/edit-form/:id_product',
       name: 'editForm',
     component: () => import('../components/admin-dashboard-components/EditForm.vue'),
+  
+      props: true,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/favorite',
+      name: 'favorite',
+    component: () => import('../views/FavoriteView.vue'),
   
       props: true,
       meta: { requiresAuth: true }

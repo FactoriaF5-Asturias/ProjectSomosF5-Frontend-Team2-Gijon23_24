@@ -1,7 +1,6 @@
 <script setup>
-import ExplorerCategory from '../components/ExploreCategory.vue';
-import Banner from "@/components/Banner.vue";
 import Card from '@/components/card/Card.vue';
+import ExplorerCategory from '../components/ExploreCategory.vue';
 </script>
 
 <template>
