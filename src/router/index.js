@@ -1,6 +1,10 @@
-import AboutView from '@/views/AboutView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import CartView from '../views/CartView.vue'
+import FavoritesView from '../views/FavoritesView.vue'
+import GeekView from '../views/GeekView.vue'
+import HouseView from '../views/HouseView.vue'
+import LithophaneView from '../views/LithophaneView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,9 +15,29 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/about',
-      name: 'about',
-      component: AboutView
+      path: '/cart',
+      name: 'cart',
+      component: CartView
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: FavoritesView
+    },
+    {
+      path: '/geek',
+      name: 'geek',
+      component: GeekView
+    },
+    {
+      path: '/house',
+      name: 'house',
+      component: HouseView
+    },
+    {
+      path: '/lithophane',
+      name: 'lithophane',
+      component: LithophaneView
     },
     {
       path: '/add-form',
