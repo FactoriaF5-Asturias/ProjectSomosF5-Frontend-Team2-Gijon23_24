@@ -1,3 +1,4 @@
+import AboutView from '@/views/AboutView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue';
 
@@ -22,6 +23,22 @@ const router = createRouter({
       path:'/Detail/:id_product',
       name: "detail",
       component: () => import('../views/ProductDetailView.vue'),
+      component: AboutView
+    },
+    {
+      path: '/add-form',
+      name: 'addForm',
+    component: () => import('../components/admin-dashboard-components/AddForm.vue'),
+     
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/edit-form/:id_product',
+      name: 'editForm',
+    component: () => import('../components/admin-dashboard-components/EditForm.vue'),
+  
+      props: true,
+      meta: { requiresAuth: true }
     }
     
     
