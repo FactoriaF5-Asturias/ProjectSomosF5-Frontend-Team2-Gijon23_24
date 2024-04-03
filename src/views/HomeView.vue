@@ -1,8 +1,6 @@
 <script setup>
 import Header from '@/components/general/Header.vue'
-import UserProfile from '@/components/profiles/user/Profile.vue'
 import Footer from '@/components/Footer.vue'
-
 
 </script>
 
@@ -11,7 +9,6 @@ import Footer from '@/components/Footer.vue'
   <Header />
 
 	<main>
-	  <UserProfile />	
 	</main>
 
 	<Footer />

@@ -71,7 +71,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
 }
 
 .modal-container {
