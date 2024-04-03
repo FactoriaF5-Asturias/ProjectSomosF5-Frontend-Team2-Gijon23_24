@@ -1,17 +1,15 @@
 <script setup>
-import Header from '@/components/general/Header.vue';
-import Footer from '@/components/Footer.vue'
-
+import UserProfile from '@/components/profiles/user/UserProfile.vue'
 </script>
 
 <template>
 
-	<Header />
+
 	<main>
-	
+<UserProfile />	
 	</main>
 
-	<Footer />
+	
 </template>
 
 <style lang="scss" scoped>
