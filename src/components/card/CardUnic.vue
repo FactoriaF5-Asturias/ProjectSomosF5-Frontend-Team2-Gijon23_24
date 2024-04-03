@@ -1,8 +1,9 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
+import { addFavorite, isFavorite, removeFavorite } from '../../services/FavoritesManager';
 import ImagesService from '../../services/ImagesService';
-import { useProductsStore } from '../../stores/productStore';
+import { useProductsStore } from '../../stores/ProductStore';
 
 const productsStore = useProductsStore();
 const imagesService = new ImagesService();
@@ -28,6 +29,25 @@ onMounted(async () => {
    imageDirectory.value = uri + "/" + findImageForProduct(props.product);
    isLoading.value = false; 
 });
+
+
+
+const toggleFavorite = () => {
+  if (isFavorite.value) {
+    removeFavorite(props.product.id);
+    console.log(productsStore);
+  } else {
+  addFavorite(props.product);
+ 
+  }
+  isFavorite.value = !isFavorite.value; 
+  console.log(productsStore.removeFavorite);
+};
+onMounted(() => {
+  isFavorite.value = productsStore.isFavorite(props.product.id);
+});
+
+
 </script>
 <template>
    <v-container>
@@ -39,9 +59,10 @@ onMounted(async () => {
          >
          <v-card class="mx-auto card" theme="dark">
             <v-img class="align-end text-white" height="200"width="400":src="imageDirectory" cover :alt="product.productName">
-               <v-btn color="white" icon="/icons/icon-heart.svg" size="small" class="heart" variant="text">
-                  <img src="/icons/icon-heart.svg" alt="heart">
-               </v-btn>
+               <v-btn color="white" icon="/icons/icon-heart.svg" size="small" class="heart" variant="text" @click="toggleFavorite">
+      <img :src="isFavorite ? '/icons/icon-heart.svg' : '/icons/icon-heart.svg'" alt="heart">
+    </v-btn>
+
             </v-img>
             <v-card-title class="pl-1">{{ product.productName }}</v-card-title>
             <v-card-title class="price">{{ product.price }} €</v-card-title> </v-card>
@@ -50,13 +71,24 @@ onMounted(async () => {
    </v-container>
   </template>
 
+
+
 <style scoped lang="scss">
 .heart {
-   position: absolute;
+   border: 2px solid #CBBB9D;
+     transition: border .15s ease-out, background .15s ease-out;
+     border-radius: 50%;
+     width: 3rem;
+     height: 3rem;
+
+     text-align: center;
+     line-height: 1.2em;
+   background: rgba(0, 0, 0, .8);
+   position: static;
    top: 1rem;
    right: 1rem;
-   background-color: none;
-   border: none;
+
+   
    display: flex;
    cursor: pointer;
    transition: color-fill 0.3s ease;

@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils';
-import { useProductsStore } from '../../stores/productStore';
+import { expect, test, vi } from 'vitest';
 import Card from '../card/Card.vue';
-import { test, expect, vi } from 'vitest';
 
 
 vi.mock('../../stores/productStore', () => ({

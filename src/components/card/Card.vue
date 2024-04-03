@@ -1,6 +1,6 @@
 <script setup>
 
-import { useProductsStore } from '@/stores/productStore';
+import { useProductsStore } from '@/stores/ProductStore';
 import { onMounted } from 'vue';
 import ImagesService from '../../services/ImagesService';
 import CardUnic from './CardUnic.vue';
@@ -33,8 +33,7 @@ function findImageForProduct(product) {
 @import '../../assets/scss/main.scss';
 
 .container {
-  margin-top: 2rem;
-  max-width: 100%;
+ max-width: 100%;
 
   .row-card {
     display: flex;
@@ -48,3 +47,4 @@ function findImageForProduct(product) {
   }
 }
 </style>
+@/stores/ProductStore

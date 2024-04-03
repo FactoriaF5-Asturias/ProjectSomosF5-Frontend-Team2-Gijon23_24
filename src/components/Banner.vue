@@ -52,6 +52,7 @@ section {
 	align-items: center;
 	padding: 2rem;
 	padding-top: 16rem;
+	margin-bottom: 2rem;
 }
 
 .logo-container {
