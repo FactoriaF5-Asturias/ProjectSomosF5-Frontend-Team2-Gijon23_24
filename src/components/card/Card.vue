@@ -33,7 +33,7 @@ function findImageForProduct(product) {
 @import '../../assets/scss/main.scss';
 
 .container {
-  margin-top: 2rem;
+  // margin-top: 2rem;
   max-width: 100%;
 
   .row-card {
