@@ -7,14 +7,17 @@ import CarouselCard from './card/CarouselCard.vue';
 
 const productStore = useProductsStore();
 const products = ref([]) 
+
+
 const getProducts = async ()=> {
     try {
     await productStore.fetchProducts();
-
-    products.value = productStore.products
+    
+    products.value = productStore.products.reverse()
+    
     //.sort((a, b) => b.id - a.id)
-    .reverse()
-    .slice(0, 5);
+    
+    .slice(0, 10);
 
 } catch (error) {
     console.error("No se consiguieron los datos:",error)
@@ -24,7 +27,7 @@ getProducts();
 
 <template>
     <v-slide-group prev-icon="mdi-chevron-left" next-icon="mdi-chevron-right" show-arrows class="slideGroup">
-       <v-slide-group-item class="slideCard" v-for="product in productStore.products" :key="product.id">
+       <v-slide-group-item class="slideCard" v-for="product in products" >
 
     
     <CarouselCard id="card" :product="product"></CarouselCard>
