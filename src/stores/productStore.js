@@ -1,15 +1,11 @@
+import { defineStore } from "pinia";
+import ProductsService from "../services/ProductsService";
 
-import { defineStore } from 'pinia';
-import ProductsService from '../services/ProductsService';
-
-export const useProductsStore = defineStore('products', {
-
- state: () => ({
-    products: [],
-    isLoaded: true,
- }),
-
-
+export const useProductsStore = defineStore("products", {
+	state: () => ({
+		products: [],
+		isLoaded: true,
+	}),
  
  actions: {
   async fetchProducts() {

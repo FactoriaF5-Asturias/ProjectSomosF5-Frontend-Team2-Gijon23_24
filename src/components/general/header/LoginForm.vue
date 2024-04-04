@@ -30,11 +30,13 @@ const submitForm = async () => {
         },
         );
         const data = response.data;
-        const userRole = data.roles;
+        
 
-        authStore.userRole = userRole;
-
+        authStore.userRole = data.roles;
+        authStore.username = data.username;
         authStore.isAuthenticated = true;
+        
+        console.log(authStore.userRole, authStore.username, authStore.isAuthenticated);
 
         closeForm();
       } catch (error) {
@@ -188,6 +190,7 @@ form {
     font-weight: 600;
     text-align: center;
     font-size: 3rem;
+    
   }
 }
 
