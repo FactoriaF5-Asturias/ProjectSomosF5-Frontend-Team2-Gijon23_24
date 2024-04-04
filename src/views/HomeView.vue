@@ -7,7 +7,6 @@ import Slider from '@/components/Slider.vue';
 
 <template>
 	<main>
-		<Banner  />
 		<Slider />
 		<Card/>
 		<ExplorerCategory/>
