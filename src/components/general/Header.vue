@@ -6,6 +6,7 @@ import LoggedProfile from "./header/LoggedProfile.vue";
 import Navbar from "./header/Navbar.vue";
 
 
+
 const authStore = useAuthStore();
 
 

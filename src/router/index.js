@@ -7,6 +7,8 @@ import GeekView from '../views/GeekView.vue'
 import HomeView from '../views/HomeView.vue'
 import HouseView from '../views/HouseView.vue'
 import LithophaneView from '../views/LithophaneView.vue'
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -69,13 +71,11 @@ const router = createRouter({
 			component: UserProfileView,
 		},
 		{
-	
-    path: "/admin/profile",
-    name: "admin-Profile",
-    component: AdminProfileView,
-  },
-],
-});
-
-export default router;
-
+			path: "/admin/profile",
+			name: "admin-Profile",
+			component: AdminProfileView,
+	  },
+  ],
+  });
+  
+  export default router;
