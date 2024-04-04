@@ -41,7 +41,7 @@ const router = createRouter({
       component: LithophaneView
     },
     {
-      path: "/user/profile/:id",
+      path: "/user/profile",
       name: "user-Profile",
       component: UserProfileView,
       props: true

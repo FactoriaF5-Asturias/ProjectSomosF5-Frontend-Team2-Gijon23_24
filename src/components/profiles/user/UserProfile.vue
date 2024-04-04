@@ -1,82 +1,79 @@
 <script setup>
-import { useAuthStore } from '@/stores/AuthStore';
-import { onMounted, ref} from 'vue';
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import axios from "axios";
+ import { useAuthStore } from '@/stores/AuthStore';
+ import { onMounted, ref} from 'vue';
+ import { useRouter } from "vue-router";
+ import axios from "axios";
 	
-const router = useRouter();
-const store = useAuthStore();
-const profileDetails = ref(null);
+ const router = useRouter();
+ const store = useAuthStore();
+ const profileDetails = ref(null);
 
-const firstName = ref('');
-const lastName = ref('');
-const email = ref('');
-const numberPhone = ref('');
-const address = ref('');
-const postalCode = ref('');
-const city = ref('');
-const province = ref('');
+ const firstName = ref('');
+ const lastName = ref('');
+ const email = ref('');
+ const numberPhone = ref('');
+ const address = ref('');
+ const postalCode = ref('');
+ const city = ref('');
+ const province = ref('');
 
-onMounted(async () => {
-    const email = store.username;
-    const content = ref('');
-
-    try {
-
-      const response = await axios.get(`http://localhost:8080/api/v1/profiles/${email}`);
-      content = response.data;
-      profileDetails.value = response.data;
-    } catch (error) {
-      console.error("Error:", error);
-    }
-
-    return content;
-
-  });
-
-
-  const cancelData = () => {
-	firstName.value = "";
-  lastName = '';
-  email.value = "";
-  numberPhone.value = "";
-  address.value = "";
-  postalCode.value = "";
-  city.value = "";
-  province.value = "";
-};
-
-const saveData = async () => {
-     const uri = import.meta.env.VITE_APP_API_ENDPOINT;
-     content = response.data;
+ onMounted(async () => {
+     const email = store.username;
+     const content = ref('');
 
      try {
-       const data = {
-         firstName: firstName.value,
-         lastName: lastName.value,
-         email: email.value,
-         numberPhone: numberPhone.value,
-         address: address.value,
-         postalCode: postalCode.value,
-         city: city.value,
-         province: province.value,
-       };
-
-       const config = {
-         withCredentials: true,
-       };
-
-       const response = await axios.put(`${uri}/profiles/${email}`, data, config);
-       if (response.status === 200) {
-         location.reload();
-       } else {
-         console.error("Error al editar perfil");
-       }
+       const response = await axios.get(`http://localhost:8080/api/v1/profiles/${email}`);
+       content = response.data;
+       profileDetails.value = response.data;
      } catch (error) {
        console.error("Error:", error);
      }
-   };
+
+     return content;
+
+   });
+
+  const cancelData = () => {
+ 	  firstName.value = "";
+    lastName = '';
+    email.value = "";
+    numberPhone.value = "";
+    address.value = "";
+    postalCode.value = "";
+    city.value = "";
+    province.value = "";
+ };
+
+ const saveData = async () => {
+    const uri = import.meta.env.VITE_APP_API_ENDPOINT;
+    content = response.data;
+
+      try {
+        const data = {
+          firstName: firstName.value,
+          lastName: lastName.value,
+          email: email.value,
+          numberPhone: numberPhone.value,
+          address: address.value,
+          postalCode: postalCode.value,
+          city: city.value,
+          province: province.value,
+        };
+
+      const config = {
+          withCredentials: true,
+      };
+
+      const response = await axios.put(`${uri}/profiles/${email}`, data, config);
+        if (response.status === 200) {
+          location.reload();
+        } else {
+          console.error("Error al editar el perfil");
+        }
+     } catch (error) {
+        console.error("Error:", error);
+      }
+    };
 
 </script>
 
@@ -103,7 +100,7 @@ const saveData = async () => {
 
           <div class="input-box">
             <label>Apellidos</label>
-            <input type="text" id="lastName" v-model="LastName">{{ content.LastName }}</input>
+            <input type="text" id="lastName" v-model="LastName">{{ content.LastName }}</input> 
           </div>
 
           <div class="input-box">
@@ -130,7 +127,8 @@ const saveData = async () => {
 
           <div class="input-box">
             <label>Provincia</label>
-            <input type="text" id="province" v-model="province">{{ content.providence }}</input>
+            <input type="text" id="province" v-model="province">
+            <!-- {{ content.providence }}</input> -->
           </div>
 
           <div class="btns-container">
@@ -160,13 +158,13 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 75rem;
-  width: 50rem;
+  height: 85rem;
+  width: 60rem;
   border-radius: 1.5rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   background-color: white;
   position: sticky;
-  max-height: 70rem;
+  max-height: 90rem;
   margin-bottom: 10rem;
 
 }
@@ -203,6 +201,7 @@ form {
   align-items: center;
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
+
 }
 
 .input-box {
