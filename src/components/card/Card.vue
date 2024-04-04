@@ -4,6 +4,7 @@ import { useProductsStore } from '@/stores/productStore';
 import { onMounted } from 'vue';
 import ImagesService from '../../services/ImagesService';
 import CardUnic from './CardUnic.vue';
+
 const imagesService = new ImagesService();
 const productsStore = useProductsStore();
 
@@ -11,10 +12,7 @@ onMounted(async () => {
   await productsStore.fetchProducts();
 });
 
-function findImageForProduct(product) {
-  const image = product.images.find(img => img.mainImage === true);
-  return image ? image.imageName : null;
-}
+
 
 </script>
 <template>
