@@ -1,22 +1,74 @@
 <script setup>
+import { onMounted, ref} from 'vue';
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 	
 const router = useRouter();
+const profileDetails = ref(null);
 
+const firstName = ref('');
+const lastName = ref('');
+const email = ref('');
+const numberPhone = ref('');
+const address = ref('');
+const postalCode = ref('');
+const city = ref('');
+const province = ref('');
 
+onMounted(async () => {
+    const id = route.params.id;
+
+    try {
+      const response = await axios.get(`http://localhost:8080/api/v1/profiles/${id}`);
+      profileDetails.value = response.data;
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  });
 
 
 const cancelData = () => {
-	name.value = "";
+	firstName.value = "";
+  lastName = '';
   email.value = "";
-  phone.value = "";
+  numberPhone.value = "";
   address.value = "";
   postalCode.value = "";
   city.value = "";
-  providence.value = "";
+  province.value = "";
 };
+
+const saveData = async () => {
+    const uri = import.meta.env.VITE_APP_API_ENDPOINT;
+    const id = route.params.id;
+
+    try {
+      const data = {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value,
+        numberPhone: numberPhone.value,
+        address: address.value,
+        postalCode: postalCode.value,
+        city: city.value,
+        province: province.value,
+      };
+
+      const config = {
+        withCredentials: true,
+      };
+
+      const response = await axios.put(`${uri}/profiles/${id}`, data, config);
+      if (response.status === 200) {
+        router.push(`/profiles/${id}`);
+      } else {
+        console.error("Error al editar la actividad");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
 </script>
 
@@ -37,36 +89,40 @@ const cancelData = () => {
         <form @submit.prevent="submitForm">
 
           <div class="input-box">
-            <label>Nombre y Apellidos</label>
-            <input type="text" id="name" v-model="name">
+            <label>Nombre</label>
+            <input type="text" id="firstName" v-model="firstName">{{ contentStore.profile.firstName }}
+          </div>
+
+          <div class="input-box">
+            <label>Apellidos</label>
+            <input type="text" id="lastName" v-model="LastName">{{ contentStore.profile.LastName }}
           </div>
 
           <div class="input-box">
             <label>E-Mail</label>
-            <input type="text" id="email" v-model="email">
+            <input type="text" id="email" v-model="email">{{ contentStore.profile.email }}
           </div>
 
           <div class="input-box">
             <label>Teléfono</label>
-            <input type="text" id="phone" v-model="phone">
+            <input type="text" id="numberPhone" v-model="numberPhone">{{ contentStore.profile.numberPhone }}
           </div>
 
           <div class="input-box">
             <label>Dirección</label>
-            <input type="text" id="address" v-model="address">
+            <input type="text" id="address" v-model="address">{{ contentStore.profile.address }}
           </div>
 
           <div class="input-box-2">
             <label>C. P.</label>
-            <input type="text" id="postal-code" v-model="postalCode">
+            <input type="text" id="postal-code" v-model="postalCode">{{ contentStore.profile.postalCode }}
             <label>Ciudad</label>
-            <input type="text" id="city" v-model="city">
+            <input type="text" id="city" v-model="city">{{ contentStore.profile.city }}
           </div>
-
 
           <div class="input-box">
             <label>Provincia</label>
-            <input type="text" id="province" v-model="province">
+            <input type="text" id="province" v-model="province">{{ contentStore.profile.providence }}
           </div>
 
           <div class="btns-container">
