@@ -16,3 +16,19 @@ export const useContentStore = defineStore('content', {
 },
 
 });
+
+export const useProfileStore = defineStore('profile', {
+  state: () => ({
+    content: null,
+    isLoading: false, 
+  }),
+  actions: {
+    async fetchContentById(id) {
+      this.isLoading = true; 
+      const response = await axios.get(`http://localhost:8080/api/v1/profiles/${id}`);
+      this.content = response.data;
+      this.isLoading = false; 
+  },
+},
+
+});
