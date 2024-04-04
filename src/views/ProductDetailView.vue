@@ -1,9 +1,11 @@
 
 <template>
   <div id="home-detail" class="product-detail">
-    <button class="back-button" onclick="goBack()">
+    <v-btn icon @click="goBack">
+    <v-icon>mdi-arrow-left</v-icon>
+  </v-btn>
       <span class="arrow-left"></span>
-    </button>
+    
     <div class="detail-image-container">
       <div class="detail-mainImage-container">
         <img src="/public/images/estatua.png" alt="detalles" />
@@ -55,6 +57,7 @@ const route = useRoute();
 // const content  =  useContentStore();
 // let images = ref([]);
 
+
 onMounted(async () => {
   const id = route.params.id_product;
   const response = await axios.get(`http://localhost:8080/api/v1/products/${id}`);
@@ -71,6 +74,10 @@ function restarCantidad(){
   if (cantidad.value > 1){
     cantidad.value--;
   }
+}
+
+function goBack() {
+  window.history.length > 1 ? history.go(-1) : router.push('/');
 }
 
 
