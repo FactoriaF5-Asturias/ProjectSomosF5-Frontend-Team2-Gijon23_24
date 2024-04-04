@@ -1,5 +1,5 @@
 <script setup>
-import AddForm from '@/components/admin-dashboard-components/AddForm.vue'
+import AddForm from './AddForm.vue';
 import { ref } from 'vue';
 
 let showAddForm = ref(false);
