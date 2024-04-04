@@ -7,6 +7,7 @@ import Card from '@/components/card/Card.vue';
 <template>
 	<main>
 		<section></section>
+		
 		<Card/>
   <ExplorerCategory/>
 

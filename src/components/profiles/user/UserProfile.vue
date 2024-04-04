@@ -98,7 +98,7 @@ body {
 h1 {
   font-weight: 600;
   text-align: center;
-  font-size: 4rem;
+  font-size: 5rem;
   color: $primary-background;
   font-family: "Poppins", sans-serif;
 }
