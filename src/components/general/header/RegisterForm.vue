@@ -164,7 +164,6 @@ section:first-child {
     color: $light-font;
     font-size: 2rem;
     font-weight: 300;
-    font-family: "Poppins", sans-serif;
   }
 }
 
@@ -193,7 +192,6 @@ form {
   gap: 3rem;
 
   > div {
-    font-family: "Poppins", sans-serif;
     display: flex;
     align-items: center;
     flex-direction: column;
