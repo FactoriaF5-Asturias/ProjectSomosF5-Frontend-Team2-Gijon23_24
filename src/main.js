@@ -12,7 +12,7 @@ import * as directives from 'vuetify/directives'
 import { useAuthStore } from './stores/AuthStore'
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
-import { createPinia } from 'pinia';
+
 
 const pinia = createPinia();
 
