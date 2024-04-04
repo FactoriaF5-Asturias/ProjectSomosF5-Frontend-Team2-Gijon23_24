@@ -41,7 +41,6 @@ h2 {
 }
 section {
 	gap: 2rem;
-	font-family: "Poppins", sans-serif;
 	background-image: url(/images/banner_image.png);
 	background-size: auto 80rem;
 	background-position: center;

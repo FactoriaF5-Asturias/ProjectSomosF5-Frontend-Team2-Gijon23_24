@@ -1,5 +1,4 @@
 <script setup>
-import Banner from '@/components/Banner.vue';
 import Card from '@/components/card/Card.vue';
 import ExplorerCategory from '../components/ExploreCategory.vue';
 </script>
@@ -7,7 +6,7 @@ import ExplorerCategory from '../components/ExploreCategory.vue';
 <template>
 	<main>
 		<section></section>
-		<Banner/>
+		
 		<Card/>
   <ExplorerCategory/>
 

@@ -148,7 +148,6 @@ section {
       color: $light-font;
       font-size: 2rem;
       font-weight: 300;
-      font-family: "Poppins", sans-serif;
     }
   }
 }
@@ -163,7 +162,6 @@ section {
 }
 
 form {
-  font-family: "Poppins", sans-serif;
   display: flex;
   align-items: center;
   flex-direction: column;

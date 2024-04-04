@@ -23,7 +23,7 @@ const closeForm = () => {
 </script>
 
 <template>
-  <div class="prueba">
+  <div class="buttons_container">
     <div>
       <button @click="openLoginForm()">
         Iniciar sesión
@@ -34,7 +34,7 @@ const closeForm = () => {
       </button>
     </div>
 
-    <div class="aqui">
+    <div class="forms_container">
       <RegisterForm v-if="showRegisterForm" @close="closeForm"/>
       <LoginForm v-if="showLoginForm" @close="closeForm"/>
     </div>
@@ -54,18 +54,18 @@ button {
     padding: 0 2rem;
     font-size: 2rem;
     color: $primary-color;
-    font-family: "Poppins", sans-serif;
     transition: all 0.2s ease-in-out;
 }
 button:hover {
   background-color: $primary-color;
   color: $light-font;
 }
-.prueba{
+.buttons_container{
   display: flex;
-flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.aqui {
+.buttons_container {
   position: relative;
 }
 
