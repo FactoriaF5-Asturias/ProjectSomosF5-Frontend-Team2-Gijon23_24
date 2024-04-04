@@ -1,34 +1,45 @@
-import { createApp } from 'vue';
+import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
+import { createPinia } from 'pinia';
 import Header from '../general/Header.vue';
-import { test, expect } from 'vitest';
 import HeaderButtons from '../general/header/HeaderButtons.vue';
+import LoggedProfile from '../general/header/LoggedProfile.vue';
+import { useAuthStore } from '@/stores/AuthStore';
 
-test('renderiza el componente header con logo, acciones y enlaces de navegación', async () => {
- const app = createApp({});
- const wrapper = mount(Header, { app });
+const pinia = createPinia();
+vi.mock('./../../stores/AuthStore', () => ({
+ useAuthStore: vi.fn().mockReturnValue({
+   isAuthenticated: false,
+ }),
+}));
 
- const logo = wrapper.find('img[src="/images/logotype.png"]');
- expect(logo.exists()).toBe(true);
+describe('Header', () => {
+ it('renders the header correctly', () => {
+    const wrapper = mount(Header, {
+      global: {
+        plugins: [pinia],
+      },
+    });
 
- const actionsContainer = wrapper.find('#actions_container');
- expect(actionsContainer.exists()).toBe(true);
+    expect(wrapper.find('#logotype_container').exists()).toBe(true);
+    expect(wrapper.find('router-link[to="/favorites"]').exists()).toBe(true);
+    expect(wrapper.find('router-link[to="/cart"]').exists()).toBe(true);
+    expect(wrapper.findComponent(HeaderButtons).exists()).toBe(true);
+    expect(wrapper.findComponent(LoggedProfile).exists()).toBe(false);
+ });
 
- const favoritosLink = actionsContainer.find('router-link[to="/"]');
- expect(favoritosLink.exists()).toBe(true);
- const favoritosText = favoritosLink.find('p');
- expect(favoritosText.text()).toBe('Favoritos');
+ it('handles authentication state', async () => {
+    useAuthStore.mockReturnValue({
+      isAuthenticated: true,
+    });
 
- const carritoLink = actionsContainer.find('router-link[to="/about"]');
- expect(carritoLink.exists()).toBe(true);
- const carritoText = carritoLink.find('p');
- expect(carritoText.text()).toBe('Carrito');
+    const wrapper = mount(Header, {
+      global: {
+        plugins: [pinia],
+      },
+    });
 
- const headerButtons = wrapper.findComponent(HeaderButtons);
- expect(headerButtons.exists()).toBe(true);
-
- const navLinks = wrapper.findAll('nav router-link');
- expect(navLinks.length).toBe(4);
-
- await wrapper.unmount();
+    expect(wrapper.findComponent(HeaderButtons).exists()).toBe(false);
+    expect(wrapper.findComponent(LoggedProfile).exists()).toBe(true);
+ });
 });
