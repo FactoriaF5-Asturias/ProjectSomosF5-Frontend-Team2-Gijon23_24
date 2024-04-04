@@ -11,17 +11,17 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'inicio',
       component: HomeView
     },
     {
       path: '/cart',
-      name: 'cart',
+      name: 'carrito',
       component: CartView
     },
     {
       path: '/favorites',
-      name: 'favorites',
+      name: 'favoritos',
       component: FavoritesView
     },
     {
@@ -31,26 +31,13 @@ const router = createRouter({
     },
     {
       path: '/house',
-      name: 'house',
+      name: 'hogar',
       component: HouseView
     },
     {
       path: '/lithophane',
-      name: 'lithophane',
+      name: 'litofanías',
       component: LithophaneView
-    },
-    {
-      path: '/add-form',
-      name: 'addForm',
-      component: () => import('../components/admin-dashboard-components/AddForm.vue'),
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/edit-form/:id_product',
-      name: 'editForm',
-      component: () => import('../components/admin-dashboard-components/EditForm.vue'),
-      props: true,
-      meta: { requiresAuth: true }
     }
   ]
 });
