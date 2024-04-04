@@ -14,9 +14,6 @@ const getProducts = async ()=> {
     await productStore.fetchProducts();
     
     products.value = productStore.products.reverse()
-    
-    //.sort((a, b) => b.id - a.id)
-    
     .slice(0, 10);
 
 } catch (error) {
