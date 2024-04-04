@@ -39,9 +39,8 @@ const router = createRouter({
   
       props: true,
       meta: { requiresAuth: true }
-    }
-  ]
-})
+    },
+ {
 			path: "/user/profile",
 			name: "user-Profile",
 			component: UserProfileView,
