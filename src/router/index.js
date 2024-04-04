@@ -68,9 +68,13 @@ const router = createRouter({
 			component: UserProfileView,
 		},
 		{
-			path: "/admin/profile",
-			name: "admin-Profile",
-			component: AdminProfileView,
-		}
-  ]})
+	
+    path: "/admin/profile",
+    name: "admin-Profile",
+    component: AdminProfileView,
+  },
+],
+});
+
+export default router;
 
