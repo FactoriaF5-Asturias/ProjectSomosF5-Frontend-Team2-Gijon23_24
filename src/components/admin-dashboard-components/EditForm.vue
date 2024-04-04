@@ -88,7 +88,7 @@ try {
 
           <div class="image-main">
             <label>Imagen Principal</label>
-            <input title=" " type="file" class="form-control-file" id="images">Image Main: {{ contentStore.content.productMainImage }}</input>
+            <input title=" " type="file" class="form-control-file" id="imageMain">Image Main: {{ contentStore.content.productMainImage }}</input>
           </div>
           <section>
 

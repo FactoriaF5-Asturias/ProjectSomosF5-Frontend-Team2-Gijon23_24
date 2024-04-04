@@ -12,6 +12,8 @@ export const useContentStore = defineStore('content', {
       const response = await axios.get(`http://localhost:8080/api/v1/products/${id_product}`);
       this.content = response.data;
       this.isLoading = false; 
+
+      console.log("response", response);
   },
 },
 

@@ -46,7 +46,22 @@
   </div>
 </template>
 <script setup>
-import {ref} from 'vue';
+import {ref,onMounted} from 'vue';
+import axios from "axios";
+import { useRoute } from 'vue-router';
+const route = useRoute();
+
+// import useContentStore from '../stores/CallByIdstore';
+// const content  =  useContentStore();
+// let images = ref([]);
+
+onMounted(async () => {
+  const id = route.params.id_product;
+  const response = await axios.get(`http://localhost:8080/api/v1/products/${id}`);
+  console.log(response)
+});
+
+
 
 const cantidad = ref(1);
 function sumarCantidad(){
@@ -57,6 +72,7 @@ function restarCantidad(){
     cantidad.value--;
   }
 }
+
 
 
 

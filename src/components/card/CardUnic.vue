@@ -45,6 +45,7 @@ onMounted(async () => {
             </v-img>
             <v-card-title class="pl-1">{{ product.productName }}</v-card-title>
             <v-card-title class="price">{{ product.price }} €</v-card-title> </v-card>
+            <router-link :to="{path: `/Detail/${props.product.id}`}">Ver más</router-link>
          </v-skeleton-loader>
 
    </v-container>
