@@ -1,4 +1,22 @@
 <script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
+	
+const router = useRouter();
+
+
+
+
+const cancelData = () => {
+	name.value = "";
+  email.value = "";
+  phone.value = "";
+  address.value = "";
+  postalCode.value = "";
+  city.value = "";
+  providence.value = "";
+};
 
 </script>
 
