@@ -1,36 +1,43 @@
+import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { createRouter, createWebHistory } from 'vue-router';
-
+import { createPinia } from 'pinia';
 import Header from '../general/Header.vue';
+import HeaderButtons from '../general/header/HeaderButtons.vue';
+import LoggedProfile from '../general/header/LoggedProfile.vue';
+import { useAuthStore } from '@/stores/AuthStore';
 
+const pinia = createPinia();
+vi.mock('./../../stores/AuthStore', () => ({
+ useAuthStore: vi.fn().mockReturnValue({
+   isAuthenticated: false,
+ }),
+}));
 
-
-const router = createRouter({
- history: createWebHistory(),
- routes: [
-    { path: '/', component: { template: '<div>Inicio</div>' } },
-    { path: '/about', component: { template: '<div>Sobre Nosotros</div>' } },
- ],
-});
-
-describe('HeaderComponent', () => {
- it('debería renderizar correctamente y mostrar/ocultar componentes basados en el estado de autenticación', () => {
-    
+describe('Header', () => {
+ it('renders the header correctly', () => {
     const wrapper = mount(Header, {
       global: {
-        plugins: [router],
-        mocks: {
-          $authStore: authStore,
-        },
+        plugins: [pinia],
       },
     });
 
-   
+    expect(wrapper.find('#logotype_container').exists()).toBe(true);
+    expect(wrapper.find('router-link[to="/favorites"]').exists()).toBe(true);
+    expect(wrapper.find('router-link[to="/cart"]').exists()).toBe(true);
+    expect(wrapper.findComponent(HeaderButtons).exists()).toBe(true);
     expect(wrapper.findComponent(LoggedProfile).exists()).toBe(false);
+ });
 
-   
-    authStore.isAuthenticated = true;
-    wrapper.vm.$nextTick();
+ it('handles authentication state', async () => {
+    useAuthStore.mockReturnValue({
+      isAuthenticated: true,
+    });
+
+    const wrapper = mount(Header, {
+      global: {
+        plugins: [pinia],
+      },
+    });
 
     expect(wrapper.findComponent(HeaderButtons).exists()).toBe(false);
     expect(wrapper.findComponent(LoggedProfile).exists()).toBe(true);
