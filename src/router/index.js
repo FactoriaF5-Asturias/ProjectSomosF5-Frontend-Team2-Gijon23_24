@@ -5,6 +5,8 @@ import FavoritesView from '../views/FavoritesView.vue'
 import GeekView from '../views/GeekView.vue'
 import HouseView from '../views/HouseView.vue'
 import LithophaneView from '../views/LithophaneView.vue'
+import UserProfileView from '../views/UserProfileView.vue'
+import AdminProfileView from '../views/AdminProfileView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,3 +52,6 @@ const router = createRouter({
 			component: AdminProfileView,
 		}
   ]
+});
+
+export default router

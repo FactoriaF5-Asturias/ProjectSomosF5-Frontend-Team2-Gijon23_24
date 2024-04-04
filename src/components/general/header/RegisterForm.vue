@@ -42,9 +42,11 @@ const submitForm = async () => {
       return;
     }
 
+    const encodedPassword = btoa(passwordInput.value);
+
     const response = await axios.post(`${uri}/users/register`, {
       username: usernameInput.value,
-      password: passwordInput.value,
+      password: encodedPassword,
       email: emailInput.value,
     });
 
