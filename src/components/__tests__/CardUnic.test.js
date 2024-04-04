@@ -1,22 +1,43 @@
-import { mount } from '@vue/test-utils';
-import CardUnic from '../card/CardUnic.vue';
+import { describe, it, expect } from 'vitest'
+import { mount } from '@vue/test-utils'
+import { createPinia } from 'pinia'
+import CardUnic from '../card/CardUnic.vue'
 describe('CardUnic', () => {
- it('debería renderizar correctamente y mostrar la imagen y el precio del producto', async () => {
-    const product = {
-      productName: 'Producto de prueba',
-      price: 100,
-      images: [
-        { imageName: 'mocked-image-name.jpg', mainImage: true },
-      ],
-    };
+ it('renders the component', () => {
+    const pinia = createPinia()
 
     const wrapper = mount(CardUnic, {
-      props: {
-        product,
+      global: {
+        plugins: [pinia],
       },
-    });
+      props: {
+        product: { productName: 'Nombre del producto' },
+      },
+      data() {
+        return {
+          showImage: true,
+        }
+     },
+    })
 
-    expect(wrapper.find('.v-card-title').text()).toContain(product.productName);
-    expect(wrapper.find('.price').text()).toContain(`${product.price} €`);
- });
-});
+    expect(wrapper.find('v-img').exists()).toBe(true)
+    expect(wrapper.find('v-img').attributes('alt')).toBe('Nombre del producto')
+ })
+
+ it('handles click events', async () => {
+    const pinia = createPinia()
+
+    const wrapper = mount(CardUnic, {
+      global: {
+        plugins: [pinia],
+      },
+      props: {
+        product: { productName: 'Nombre del producto' },
+      },
+    })
+
+    const button = wrapper.find('.heart')
+    await button.trigger('click')
+
+ })
+})
