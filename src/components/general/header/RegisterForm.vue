@@ -2,47 +2,67 @@
 import SuccessPopup from './SuccessPopup.vue';
 import ErrorPassword from './ErrorPassword.vue';
 import {  ref } from 'vue';
+import axios from 'axios';
 
 const props = defineProps({
   onClose: Function
 });
 
-const password = ref('');
-const confirmation = ref('');
-const message = ref('');
-const successVisible = ref(false);
-const errorVisible = ref(false);
-
-
 const closeForm = () => {
   props.onClose();
 }
 
+const emailInput = ref('');
+const usernameInput = ref('');
+const passwordInput = ref('');
+const confirmationInput = ref('');
+
+const message = ref('');
+const successVisible = ref(false);
+const errorVisible = ref(false);
+
 const passwordConfirmation = () => {
-  if (password.value === confirmation.value) {
+  if (passwordInput.value === confirmationInput.value) {
     message.value = "Las contraseñas coinciden.";
   } else {
     message.value = "Las contraseñas no coinciden.";
   }
 }
 
-const submitForm = () => {
-  if (password.value !== confirmation.value) {
+const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
+
+const submitForm = async () => {
+  try {
+    if (passwordInput.value !== confirmationInput.value) {
       successVisible.value = false;
       errorVisible.value = true;
       setTimeout(() => {
         errorVisible.value = false;
       }, 4000);
-  }
+      return;
+    }
 
-  if (password.value === confirmation.value) {
-      errorVisible.value = false;
+    const response = await axios.post(`${uri}/users/register`, {
+      username: usernameInput.value,
+      password: passwordInput.value,
+      email: emailInput.value,
+    });
+
+    if (response.status === 200) {
+      console.log('El usuario se ha registrado correctamente.');
       successVisible.value = true;
       setTimeout(() => {
         successVisible.value = false;
+        closeForm();
       }, 10000);
+    } else {
+      console.log('Error al registrar el usuario.');
+    }
+  } catch (error) {
+    console.error(error);
   }
-}
+};
+
 </script>
 
 <template>
@@ -70,15 +90,19 @@ const submitForm = () => {
                 <div>
                   <div class="input_box">
                       <label>Email:</label>
-                      <input type="email" placeholder="correo electrónico" required>
+                      <input type="email" placeholder="correo electrónico" v-model="emailInput" required>
+                  </div>
+                  <div class="input_box">
+                      <label>Nombre de usuario:</label>
+                      <input type="text" placeholder="nombre de usuario" v-model="usernameInput" required>
                   </div>
                   <div class="input_box">
                       <label>Contraseña:</label>
-                      <input type="password" placeholder="contraseña" v-model="password" required>
+                      <input type="password" placeholder="contraseña" v-model="passwordInput" required>
                   </div>
                   <div class="input_box">
                       <label>Confirme la contraseña:</label>
-                      <input type="password" placeholder="confirme la contraseña" v-model="confirmation" @input="passwordConfirmation" required>
+                      <input type="password" placeholder="confirme la contraseña" v-model="confirmationInput" @input="passwordConfirmation" required>
                       <span>{{ message }}</span>
                   </div>
                   <div id="terms">
@@ -140,7 +164,6 @@ section:first-child {
     color: $light-font;
     font-size: 2rem;
     font-weight: 300;
-    font-family: "Poppins", sans-serif;
   }
 }
 
@@ -169,7 +192,6 @@ form {
   gap: 3rem;
 
   > div {
-    font-family: "Poppins", sans-serif;
     display: flex;
     align-items: center;
     flex-direction: column;

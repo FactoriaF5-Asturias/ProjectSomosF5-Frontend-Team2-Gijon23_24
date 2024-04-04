@@ -10,17 +10,9 @@ import Slider from '@/components/Slider.vue';
 		<Banner  />
 		<Slider />
 		<Card/>
-  <ExplorerCategory/>
-
+		<ExplorerCategory/>
 	</main>
 </template>
 
 <style lang="scss" scoped>
-
-p {
-	margin-top: 100rem;
-}
-
-
 </style>
-

@@ -30,11 +30,13 @@ const submitForm = async () => {
         },
         );
         const data = response.data;
-        const userRole = data.roles;
+        
 
-        authStore.userRole = userRole;
-
+        authStore.userRole = data.roles;
+        authStore.username = data.username;
         authStore.isAuthenticated = true;
+        
+        console.log(authStore.userRole, authStore.username, authStore.isAuthenticated);
 
         closeForm();
       } catch (error) {
@@ -146,7 +148,6 @@ section {
       color: $light-font;
       font-size: 2rem;
       font-weight: 300;
-      font-family: "Poppins", sans-serif;
     }
   }
 }
@@ -161,7 +162,6 @@ section {
 }
 
 form {
-  font-family: "Poppins", sans-serif;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -188,6 +188,7 @@ form {
     font-weight: 600;
     text-align: center;
     font-size: 3rem;
+    
   }
 }
 
