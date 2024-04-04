@@ -6,6 +6,7 @@ import FactoriaAlert from "./../alerts/FactoriaAlert.vue";
 import Navbar from "./header/Navbar.vue";
 
 
+
 const authStore = useAuthStore();
 
 
