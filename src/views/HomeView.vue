@@ -1,16 +1,25 @@
 <script setup>
 import ExplorerCategory from '../components/ExploreCategory.vue';
 import Banner from "@/components/Banner.vue";
+import Card from '@/components/card/Card.vue';
 </script>
 
 <template>
 	<main>
-		<Banner  />
-    <ExplorerCategory/>
+		<section></section>
+		<Card/>
+  <ExplorerCategory/>
+
 	</main>
 </template>
 
 <style lang="scss" scoped>
-	
-</style>
 
+p {
+	margin-top: 100rem;
+}
+section{
+	height: 21rem;
+}
+
+</style>
