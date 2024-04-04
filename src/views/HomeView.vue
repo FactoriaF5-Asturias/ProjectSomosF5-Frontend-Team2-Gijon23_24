@@ -6,20 +6,10 @@ import Card from '@/components/card/Card.vue';
 
 <template>
 	<main>
-		<section></section>
 		<Card/>
-  <ExplorerCategory/>
-
+		<ExplorerCategory/>
 	</main>
 </template>
 
 <style lang="scss" scoped>
-
-p {
-	margin-top: 100rem;
-}
-section{
-	height: 21rem;
-}
-
 </style>
