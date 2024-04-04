@@ -2,30 +2,37 @@
 import { useAuthStore } from "./../../stores/AuthStore";
 import HeaderButtons from "./header/HeaderButtons.vue";
 import LoggedProfile from "./header/LoggedProfile.vue";
+import FactoriaAlert from "./../alerts/FactoriaAlert.vue";
+import Navbar from "./header/Navbar.vue";
+
 
 
 const authStore = useAuthStore();
 
+
 </script>
 
 <template>
+
     <header>
 
+      <FactoriaAlert/>
+      
       <div>
 
-        <div>
-          <img src="/images/logotype.png" alt="PrintGo logotype">
+        <div id="logotype_container">
+          <img src="/images/Logo3d.png" alt="PrintGo logotype">
         </div>
 
         <div id="actions_container">
-          <router-link to="/">
+          <router-link to="/favorites">
             <div>
               <img src="/icons/icon-heart.svg" alt="">
               <p>Favoritos</p>
             </div>
           </router-link>
 
-          <router-link to="/about">
+          <router-link to="/cart">
             <div>
               <img src="/icons/icon-shopping-cart.svg" alt="">
               <p>Carrito</p>
@@ -39,21 +46,17 @@ const authStore = useAuthStore();
         
       </div>
 
-      <nav>
-        <router-link to="/" exact-active-class="active">Inicio</router-link>
-        <router-link to="/about" exact-active-class="active">Litofanía</router-link>
-        <router-link to="/about" exact-active-class="active">Hogar</router-link>
-        <router-link to="/about" exact-active-class="active">Geek</router-link>
-      </nav>
+      <Navbar />
+
     </header>
+
 </template>
 
 <style lang="scss" scoped>
 header {
   position: fixed;
   width: 100%;
-  z-index: 99;
-  z-index: 998;
+  z-index: 100;
 
   > div {
     background-color: $primary-background;
@@ -62,7 +65,17 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    filter: drop-shadow(0 0 0.5rem black);
+    filter: drop-shadow(0px 10px 0.5rem rgba(0, 0, 0, 0.31));
+  }
+}
+
+#logotype_container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  > img {
+    height: 80%;
   }
 }
 
@@ -76,34 +89,22 @@ header {
     gap: 1rem;
     display: flex;
     align-items: center;
+    padding: 0.8rem;
+    transition: all 200ms ease-in-out;
+    border-radius: 5px;
   
     p {
-      font-family: "Poppins", sans-serif;
       font-weight: 300;
       color: $light-font;
       font-size: 1.4rem;
     }
   }
-}
-nav {
-  background-color: $primary-background;
-  height: 6rem;
-  padding-left: 7rem;
-  display: flex;
-  align-items: center;
-  gap: 3rem;
 
-  a {
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-    color: $inactive-primary-color;
-    font-size: 1.7rem;
-    transition: all 0.2s ease-in-out;
-  }
-  a:hover {
-    color: $primary-color;
+  a:hover > div {
+    background-color: rgb(72, 72, 72);
   }
 }
+
 .active {
   color: $primary-color;
 }
