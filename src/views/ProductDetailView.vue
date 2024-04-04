@@ -1,10 +1,8 @@
 
 <template>
   <div id="home-detail" class="product-detail">
-    <v-btn icon @click="goBack">
-    <v-icon>mdi-arrow-left</v-icon>
-  </v-btn>
-      <span class="arrow-left"></span>
+     <button class="goback" @click="goBack"></button> 
+    
     
     <div class="detail-image-container">
       <div class="detail-mainImage-container">
