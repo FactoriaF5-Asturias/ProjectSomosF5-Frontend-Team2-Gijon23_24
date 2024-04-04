@@ -8,6 +8,10 @@ import 'vuetify/styles'
 import App from './App.vue'
 import './assets/scss/main.scss'
 import router from './router'
+
+
+const pinia = createPinia();
+
 const vuetify = createVuetify({
     components,
     directives,

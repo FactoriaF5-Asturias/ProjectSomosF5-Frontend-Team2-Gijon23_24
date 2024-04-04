@@ -8,8 +8,11 @@ const productsStore = useProductsStore();
 const imagesService = new ImagesService();
 
 const props = defineProps({
-   product: Object
-});
+ product: {
+    type: Object,
+    required: true,
+ },
+})
 
 const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
 const imageDirectory = ref('');
