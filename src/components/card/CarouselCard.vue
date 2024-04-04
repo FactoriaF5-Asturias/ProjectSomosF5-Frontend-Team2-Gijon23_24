@@ -1,7 +1,7 @@
 <script setup>
 
 import ImagesService from '../../services/ImagesService';
-import { useProductsStore } from '../../stores/productStore';
+import { useProductsStore } from '../../stores/ProductStore';
 
 const productsStore = useProductsStore();
 
