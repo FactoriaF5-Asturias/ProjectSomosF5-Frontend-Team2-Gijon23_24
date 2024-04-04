@@ -38,8 +38,15 @@ const router = createRouter({
       path: '/lithophane',
       name: 'litofanías',
       component: LithophaneView
-    }
+    },
+    {
+			path: "/user/profile",
+			name: "user-Profile",
+			component: UserProfileView,
+		},
+		{
+			path: "/admin/profile",
+			name: "admin-Profile",
+			component: AdminProfileView,
+		}
   ]
-});
-
-export default router;
