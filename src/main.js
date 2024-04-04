@@ -13,6 +13,8 @@ import { useAuthStore } from './stores/AuthStore'
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 
+const pinia = createPinia
+
 const vuetify = createVuetify({
     components,
     directives,
