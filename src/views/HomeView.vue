@@ -6,6 +6,7 @@ import ExplorerCategory from '../components/ExploreCategory.vue';
 
 <template>
 	<main>
+		<section></section>
 		<Slider />
 		<Card/>
   <ExplorerCategory/>
