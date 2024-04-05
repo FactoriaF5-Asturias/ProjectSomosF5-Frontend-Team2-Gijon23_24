@@ -73,7 +73,7 @@ onMounted(() => {
    </v-container>
    </router-link>
   </template>
-</template>
+
 
 <style scoped lang="scss">
 .heart {
@@ -86,7 +86,7 @@ onMounted(() => {
    line-height: 1.2em;
    background: rgba(0, 0, 0, .8);
    top: -15rem;
-   left: 28rem;
+   left: 25rem;
    display: flex;
    cursor: pointer;
    transition: color-fill 0.3s ease;
