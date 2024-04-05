@@ -1,4 +1,79 @@
 <script setup>
+ import { useAuthStore } from '@/stores/AuthStore';
+ import { onMounted, ref} from 'vue';
+ import { useRouter } from "vue-router";
+ import axios from "axios";
+	
+ const router = useRouter();
+ const store = useAuthStore();
+ const profileDetails = ref(null);
+
+ const firstName = ref('');
+ const lastName = ref('');
+ const email = ref('');
+ const numberPhone = ref('');
+ const address = ref('');
+ const postalCode = ref('');
+ const city = ref('');
+ const province = ref('');
+
+ onMounted(async () => {
+     const email = store.username;
+     const content = ref('');
+
+     try {
+       const response = await axios.get(`http://localhost:8080/api/v1/profiles/${email}`);
+       content = response.data;
+       profileDetails.value = response.data;
+     } catch (error) {
+       console.error("Error:", error);
+     }
+
+     return content;
+
+   });
+
+  const cancelData = () => {
+ 	  firstName.value = "";
+    lastName = '';
+    email.value = "";
+    numberPhone.value = "";
+    address.value = "";
+    postalCode.value = "";
+    city.value = "";
+    province.value = "";
+ };
+
+ const saveData = async () => {
+    const uri = import.meta.env.VITE_APP_API_ENDPOINT;
+    content = response.data;
+
+      try {
+        const data = {
+          firstName: firstName.value,
+          lastName: lastName.value,
+          email: email.value,
+          numberPhone: numberPhone.value,
+          address: address.value,
+          postalCode: postalCode.value,
+          city: city.value,
+          province: province.value,
+        };
+
+      const config = {
+          withCredentials: true,
+      };
+
+      const response = await axios.put(`${uri}/profiles/${email}`, data, config);
+        if (response.status === 200) {
+          location.reload();
+        } else {
+          console.error("Error al editar el perfil");
+        }
+     } catch (error) {
+        console.error("Error:", error);
+      }
+    };
 
 </script>
 
@@ -19,36 +94,41 @@
         <form @submit.prevent="submitForm">
 
           <div class="input-box">
-            <label>Nombre y Apellidos</label>
-            <input type="text" id="name" v-model="name">
+            <label>Nombre</label>
+            <input type="text" id="firstName" v-model="firstName">{{ content.firstName }} </input>
+          </div>
+
+          <div class="input-box">
+            <label>Apellidos</label>
+            <input type="text" id="lastName" v-model="LastName">{{ content.LastName }}</input> 
           </div>
 
           <div class="input-box">
             <label>E-Mail</label>
-            <input type="text" id="email" v-model="email">
+            <input type="text" id="email" v-model="email">{{ content.email }} </input>
           </div>
 
           <div class="input-box">
             <label>Teléfono</label>
-            <input type="text" id="phone" v-model="phone">
+            <input type="text" id="numberPhone" v-model="numberPhone">{{ content.numberPhone }}</input>
           </div>
 
           <div class="input-box">
             <label>Dirección</label>
-            <input type="text" id="address" v-model="address">
+            <input type="text" id="address" v-model="address">{{ content.address }}</input>
           </div>
 
           <div class="input-box-2">
             <label>C. P.</label>
-            <input type="text" id="postal-code" v-model="postalCode">
+            <input type="text" id="postal-code" v-model="postalCode">{{ content.postalCode }}</input>
             <label>Ciudad</label>
-            <input type="text" id="city" v-model="city">
+            <input type="text" id="city" v-model="city">{{ content.city }}</input>
           </div>
-
 
           <div class="input-box">
             <label>Provincia</label>
             <input type="text" id="province" v-model="province">
+            <!-- {{ content.providence }}</input> -->
           </div>
 
           <div class="btns-container">
@@ -78,13 +158,13 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 75rem;
-  width: 50rem;
+  height: 85rem;
+  width: 60rem;
   border-radius: 1.5rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   background-color: white;
   position: sticky;
-  max-height: 70rem;
+  max-height: 90rem;
   margin-bottom: 10rem;
 
 }
@@ -98,7 +178,7 @@ body {
 h1 {
   font-weight: 600;
   text-align: center;
-  font-size: 4rem;
+  font-size: 5rem;
   color: $primary-background;
   font-family: "Poppins", sans-serif;
 }
@@ -121,6 +201,7 @@ form {
   align-items: center;
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
+
 }
 
 .input-box {
