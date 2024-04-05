@@ -33,6 +33,7 @@ onMounted(async () => {
 });
 </script>
 <template>
+   <router-link :to="{ path: `/Detail/${product.id}` }">
    <v-container>
                <v-skeleton-loader
             type="card"
@@ -48,9 +49,11 @@ onMounted(async () => {
             </v-img>
             <v-card-title class="pl-1">{{ product.productName }}</v-card-title>
             <v-card-title class="price">{{ product.price }} €</v-card-title> </v-card>
+            
          </v-skeleton-loader>
 
    </v-container>
+   </router-link>
   </template>
 
 <style scoped lang="scss">

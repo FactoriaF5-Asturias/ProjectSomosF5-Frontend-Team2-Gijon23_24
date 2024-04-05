@@ -23,6 +23,21 @@ const router = createRouter({
       component: CartView
     },
     {
+      path: '/about',
+      name: 'about',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/AboutView.vue')
+    },
+    {
+      path:'/Detail/:id_product',
+      name: "detail",
+      component: () => import('../views/ProductDetailView.vue'),
+      props: true
+      
+    },
+    {
       path: '/favorites',
       name: 'favoritos',
       component: FavoritesView
@@ -54,6 +69,8 @@ const router = createRouter({
       name: "admin-Profile",
       component: AdminProfileView,
     }
+    
+    
   ]
 });
 
