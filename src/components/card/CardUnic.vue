@@ -52,6 +52,7 @@ onMounted(() => {
 
 </script>
 <template>
+   <router-link :to="{ path: `/Detail/${product.id}` }">
    <v-container>
       <v-skeleton-loader type="card" :loading="isLoading" transition="fade-transition" theme="dark">
          <v-card class="mx-auto card" theme="dark">
@@ -65,12 +66,14 @@ onMounted(() => {
             </v-img>
             <v-card-title class="pl-1">{{ product.productName }}</v-card-title>
             <v-card-title class="price">{{ product.price }} €</v-card-title> </v-card>
+            
+         </v-skeleton-loader>
       </v-skeleton-loader>
 
    </v-container>
+   </router-link>
+  </template>
 </template>
-
-
 
 <style scoped lang="scss">
 .heart {
