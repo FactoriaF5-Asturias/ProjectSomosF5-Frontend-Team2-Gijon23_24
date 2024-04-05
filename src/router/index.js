@@ -22,6 +22,14 @@ const router = createRouter({
       name: 'carrito',
       component: CartView
     },
+    
+    {
+      path:'/Detail/:id_product',
+      name: "detail",
+      component: () => import('../views/ProductDetailView.vue'),
+      props: true
+      
+    },
     {
       path: '/favorites',
       name: 'favoritos',
@@ -54,6 +62,8 @@ const router = createRouter({
       name: "admin-Profile",
       component: AdminProfileView,
     }
+    
+    
   ]
 });
 
