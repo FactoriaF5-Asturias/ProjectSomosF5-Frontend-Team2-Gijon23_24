@@ -68,7 +68,7 @@ onMounted(() => {
             <v-card-title class="price">{{ product.price }} €</v-card-title> </v-card>
             
          </v-skeleton-loader>
-      </v-skeleton-loader>
+     
 
    </v-container>
    </router-link>
