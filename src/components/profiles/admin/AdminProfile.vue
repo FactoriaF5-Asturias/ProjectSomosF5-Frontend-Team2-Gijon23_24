@@ -63,12 +63,12 @@ body {
   justify-content: center;
   align-items: center;
   height: 70rem;
-  width: 50rem;
+  width: 60rem;
   border-radius: 1.5rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   background-color: white;
   position: sticky;
-  max-height: 60rem;
+  max-height: 70rem;
   margin-bottom: 10rem;
 }
 
