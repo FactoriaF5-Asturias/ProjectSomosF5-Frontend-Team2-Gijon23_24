@@ -49,7 +49,7 @@ const authStore = useAuthStore();
 
 <style lang="scss" scoped>
 header {
-  // position: fixed;
+  position: fixed;
   width: 100%;
   z-index: 99;
   z-index: 998;
