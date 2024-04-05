@@ -85,8 +85,8 @@ onMounted(() => {
    text-align: center;
    line-height: 1.2em;
    background: rgba(0, 0, 0, .8);
-   top: -15rem;
-   left: 25rem;
+   top: -16rem;
+   left: 20rem;
    display: flex;
    cursor: pointer;
    transition: color-fill 0.3s ease;
