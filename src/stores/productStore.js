@@ -2,12 +2,12 @@ import { defineStore } from 'pinia';
 import ProductsService from '../services/ProductsService';
 
 export const useProductsStore = defineStore('products', {
- state: () => ({
+  state: () => ({
     products: [],
     isLoaded: true,
-    favorites: [], 
- }),
- actions: {
+    favorites: [], // This array will store favorite product IDs
+  }),
+  actions: {
     async fetchProducts() {
       const productsService = new ProductsService();
       try {
@@ -20,8 +20,8 @@ export const useProductsStore = defineStore('products', {
         this.handleImageError();
       }
     },
-    addFavorite(products) {
-      this.favorites.push(products);
+    addFavorite(product) {
+      this.favorites.push(product.id);
     },
     removeFavorite(productId) {
       const index = this.favorites.findIndex(id => id === productId);
@@ -29,7 +29,8 @@ export const useProductsStore = defineStore('products', {
         this.favorites.splice(index, 1);
       }
     },
-    toggleFavorite(productId) {
+    toggleFavorite(product) {
+      const productId = product.id;
       const index = this.favorites.findIndex(id => id === productId);
       if (index === -1) {
         // Si el producto no está en la lista de favoritos, lo agregamos
@@ -45,6 +46,6 @@ export const useProductsStore = defineStore('products', {
     handleImageError() {
       this.isLoaded = false;
     },
- },
+    
+  },
 });
-

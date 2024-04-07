@@ -25,7 +25,7 @@
 
 <style lang="scss" scoped>
 .footer {
-  margin-top: 55rem;
+
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

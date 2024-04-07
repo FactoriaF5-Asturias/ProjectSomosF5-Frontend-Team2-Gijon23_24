@@ -1,5 +1,5 @@
 <script setup>
-import Card from '@/components/card/Card.vue';
+import CardContainer from '@/components/card/CardContainer.vue';
 import Slider from '@/components/Slider.vue';
 import ExplorerCategory from '../components/ExploreCategory.vue';
 </script>
@@ -8,19 +8,15 @@ import ExplorerCategory from '../components/ExploreCategory.vue';
 	<main>
 		<section></section>
 		<Slider />
-		<Card/>
+		<CardContainer/>
   <ExplorerCategory/>
 
 	</main>
 </template>
 
 <style lang="scss" scoped>
-
-p {
-	margin-top: 100rem;
-}
 section{
-	height: 21rem;
+	height:3rem;
 }
 
 </style>

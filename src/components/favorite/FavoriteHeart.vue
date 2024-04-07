@@ -1,16 +1,41 @@
 <script setup>
+import FavoritesService from '@/services/FavoriteService';
+import { useAuthStore } from '@/stores/AuthStore';
+import { useProductsStore } from '@/stores/ProductStore';
 import { ref } from 'vue';
 
-// Estado para el estado de "favorito"
+const productsStore = useProductsStore();
+const authStore = useAuthStore();
+const favoritesService = new FavoritesService();
+
 const isFavorite = ref(false);
 
-// Función para alternar el estado de "favorito"
-const toggleFavorite = () => {
- isFavorite.value = !isFavorite.value;
+const toggleFavorite = async (product) => {
+    isFavorite.value = !isFavorite.value;
+    if (!authStore.id) {
+        console.error('Profile ID is not available');
+        return;
+    }
+    const profileId = authStore.id;
+    try {
+        if (isFavorite.value) {
+            console.log('Adding favorite...');
+            await favoritesService.updateFavorites(profileId, authStore.token);
+            productsStore.addFavorite(product);
+        } else {
+            console.log('Removing favorite...');
+            await favoritesService.updateFavorites(profileId, authStore.token);
+            productsStore.removeFavorite(product.id);
+        }
+        alert("Añadido exitosamente a favoritos");
+    } catch (error) {
+    console.error('Error al añadir a favoritos:', error);
+   
+    console.error(error);
+    alert("No se pudo añadir a favoritos");
+}
 };
-
 </script>
-
 
 <template>
     <div>
@@ -32,8 +57,8 @@ $hover-active-color: $primary-color;
      display: inline-block;
      cursor: pointer;
      border-radius: 50%;
-     width: 3rem;
-     height: 3rem;
+     width: 4rem;
+     height: 4rem;
      position: relative;
      text-align: center;
      line-height: 1.2em;

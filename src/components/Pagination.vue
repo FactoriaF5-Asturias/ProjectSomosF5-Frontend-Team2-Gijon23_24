@@ -1,7 +1,7 @@
 <template>
    <div class="text-center">
     <v-pagination class="pagination" :length="4"></v-pagination>
-    <v-pagination class="pagination" :length="4"></v-pagination>
+  
    </div>
  </template>
  

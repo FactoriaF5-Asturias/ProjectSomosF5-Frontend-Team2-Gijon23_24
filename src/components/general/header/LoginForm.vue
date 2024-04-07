@@ -1,14 +1,14 @@
 <script setup>
+import axios from 'axios';
 import { ref } from 'vue';
-import axios from 'axios'
-import { useAuthStore } from "./../../../stores/AuthStore"
+import { useAuthStore } from "./../../../stores/AuthStore";
 
 const props = defineProps({
-  onClose: Function
+ onClose: Function
 });
 
 const closeForm = () => {
-  props.onClose()
+ props.onClose()
 }
 
 const uri = 'http://localhost:8080/api/v1';
@@ -17,33 +17,39 @@ const usernameInput = ref('');
 const passwordInput = ref('');
 
 const authStore = useAuthStore();
-
 const submitForm = async () => {
-
-  try {
+ console.log('Iniciando inicio de sesión...');
+ try {
     const response = await axios.get(`${uri}/login`, {
       auth: {
-            username: usernameInput.value,
-            password: passwordInput.value
-          },
-          withCredentials: true
-        },
-        );
-        const data = response.data;
-        
+        username: usernameInput.value,
+        password: passwordInput.value
+      },
+      withCredentials: true
+    });
+    console.log('Respuesta de inicio de sesión:', response.data);
+    const data = response.data;
 
-        authStore.userRole = data.roles;
-        authStore.username = data.username;
-        authStore.isAuthenticated = true;
-        
-        console.log(authStore.userRole, authStore.username, authStore.isAuthenticated);
+    // Asumiendo que el token y el userId se devuelven en la respuesta
+    const token = data.token;
+    const userId = data.userId; // Utilizar el campo userId de la respuesta
+    console.log('Token recibido:', token);
+    console.log('ID del usuario recibido:', userId);
 
-        closeForm();
-      } catch (error) {
-        console.error(error);
-      }
+    // Almacenar el token y el ID del usuario en authStore utilizando los métodos definidos
+    authStore.setToken(token);
+    authStore.setUserId(userId);
+    authStore.setUserRole(data.roles);
+    authStore.setUsername(data.username);
+    authStore.setIsAuthenticated(true);
+
+    console.log(authStore.userRole, authStore.username, authStore.isAuthenticated, authStore.token, userId);
+
+    closeForm();
+ } catch (error) {
+    console.error('Error en el inicio de sesión:', error);
+ }
 };
-
 </script>
 
 <template>
