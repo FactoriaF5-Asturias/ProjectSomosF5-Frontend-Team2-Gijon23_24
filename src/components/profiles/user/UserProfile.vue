@@ -18,18 +18,27 @@
  const province = ref('');
 
  onMounted(async () => {
-     const email = store.username;
-     const content = ref('');
+     const userEmail = store.username;
+     //const content = ref('');
 
      try {
-       const response = await axios.get(`http://localhost:8080/api/v1/profiles/${email}`);
-       content = response.data;
+       const response = await axios.get(`http://localhost:8080/api/v1/profiles/${userEmail}`);
+       //content = response.data;
        profileDetails.value = response.data;
+       firstName.value = response.data.firstName;
+       lastName.value = response.data.lastName;
+       email.value = response.data.email;
+       numberPhone.value = response.data.numberPhone;
+       address.value = response.data.address;
+       postalCode.value = response.data.postalCode;
+       city.value = response.data.city;
+       province.value = response.data.province;
+
      } catch (error) {
        console.error("Error:", error);
      }
 
-     return content;
+     //return content;
 
    });
 
@@ -46,7 +55,7 @@
 
  const saveData = async () => {
     const uri = import.meta.env.VITE_APP_API_ENDPOINT;
-    content = response.data;
+    //content = response.data;
 
       try {
         const data = {
@@ -95,34 +104,41 @@
 
           <div class="input-box">
             <label>Nombre</label>
-            <input type="text" id="firstName" v-model="firstName">{{ content.firstName }} </input>
+            <input type="text" id="firstName" v-model="firstName">
+            <!-- {{ content.firstName }} </input> -->
           </div>
 
           <div class="input-box">
             <label>Apellidos</label>
-            <input type="text" id="lastName" v-model="LastName">{{ content.LastName }}</input> 
+            <input type="text" id="lastName" v-model="lastName">
+            <!-- {{ content.LastName }}</input>  -->
           </div>
 
           <div class="input-box">
             <label>E-Mail</label>
-            <input type="text" id="email" v-model="email">{{ content.email }} </input>
+            <input type="text" id="email" v-model="email">
+            <!-- {{ content.email }} </input> -->
           </div>
 
           <div class="input-box">
             <label>Teléfono</label>
-            <input type="text" id="numberPhone" v-model="numberPhone">{{ content.numberPhone }}</input>
+            <input type="text" id="numberPhone" v-model="numberPhone">
+            <!-- {{ content.numberPhone }}</input> -->
           </div>
 
           <div class="input-box">
             <label>Dirección</label>
-            <input type="text" id="address" v-model="address">{{ content.address }}</input>
+            <input type="text" id="address" v-model="address">
+            <!-- {{ content.address }}</input> -->
           </div>
 
           <div class="input-box-2">
             <label>C. P.</label>
-            <input type="text" id="postal-code" v-model="postalCode">{{ content.postalCode }}</input>
+            <input type="text" id="postal-code" v-model="postalCode">
+            <!-- {{ content.postalCode }}</input> -->
             <label>Ciudad</label>
-            <input type="text" id="city" v-model="city">{{ content.city }}</input>
+            <input type="text" id="city" v-model="city">
+            <!-- {{ content.city }}</input> -->
           </div>
 
           <div class="input-box">
