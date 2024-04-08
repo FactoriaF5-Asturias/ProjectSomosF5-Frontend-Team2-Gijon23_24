@@ -4,7 +4,7 @@
     
     <div class="detail-image-container">
       <div class="detail-mainImage-container">
-        <img :src="imageDirectory" alt="Main image" />
+        <img :src="product.imageName" alt="Main image" />
       </div>
       <div class="detail-miniPics-container">
         <img v-for="(image, index) in product.additionalImages" :key="index" :src="image" alt="imagenes adicionales" />
@@ -37,13 +37,13 @@
 
 <script setup>
 import axios from "axios";
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 
 const route = useRoute();
 
-let product = reactive({
+let product = ref({
   productName: '',
   price: '',
   description: '',
@@ -74,31 +74,6 @@ function restarCantidad() {
 function goBack() {
   window.history.length > 1 ? history.go(-1) : route.push('/');
 }
-
-
-
-
-
-const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
-const imageDirectory = ref('');
-const defaultImage = '../../../public/images/banner-logo.svg';
-
-const isLoading = ref(true);
-
-function findImageForProduct(product) {
-   const image = product.images.find(img => img.mainImage === true);
-   return image.imageName ? image.imageName : defaultImage;
-};
-
-onMounted(async () => {
-
-   await new Promise(resolve => setTimeout(resolve, 2000));
-   imageDirectory.value = uri + "/" + findImageForProduct(product);
-   isLoading.value = false;
-});
-
-
-
 </script>
 
 
