@@ -8,7 +8,6 @@ import HomeView from '../views/HomeView.vue'
 import HouseView from '../views/HouseView.vue'
 import LithophaneView from '../views/LithophaneView.vue'
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
