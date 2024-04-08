@@ -1,13 +1,12 @@
+import AdminProfileView from '@/views/AdminProfileView.vue'
+import UserProfileView from '@/views/UserProfileView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import CartView from '../views/CartView.vue'
 import FavoritesView from '../views/FavoritesView.vue'
 import GeekView from '../views/GeekView.vue'
+import HomeView from '../views/HomeView.vue'
 import HouseView from '../views/HouseView.vue'
 import LithophaneView from '../views/LithophaneView.vue'
-import UserProfileView from '../views/UserProfileView.vue'
-import AdminProfileView from '../views/AdminProfileView.vue'
-
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,20 +50,39 @@ const router = createRouter({
       component: LithophaneView
     },
     {
-      path: "/user/profile/:id",
-      name: "user-Profile",
-      component: UserProfileView,
-      props: true
-      
+      path: '/add-form',
+      name: 'addForm',
+    component: () => import('../components/admin-dashboard-components/AddForm.vue'),
+     
+      meta: { requiresAuth: true }
     },
     {
-      path: "/admin/profile",
-      name: "admin-Profile",
-      component: AdminProfileView,
-    }
-    
-    
-  ]
-});
-
-export default router
+      path: '/edit-form/:id_product',
+      name: 'editForm',
+    component: () => import('../components/admin-dashboard-components/EditForm.vue'),
+  
+      props: true,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/favorite',
+      name: 'favorite',
+    component: () => import('../views/FavoriteView.vue'),
+  
+      props: true,
+      meta: { requiresAuth: true }
+    },
+ {
+			path: "/user/profile",
+			name: "user-Profile",
+			component: UserProfileView,
+		},
+		{
+			path: "/admin/profile",
+			name: "admin-Profile",
+			component: AdminProfileView,
+	  },
+  ],
+  });
+  
+  export default router;

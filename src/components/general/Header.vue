@@ -1,8 +1,8 @@
 <script setup>
 import { useAuthStore } from "./../../stores/AuthStore";
+import FactoriaAlert from "./../alerts/FactoriaAlert.vue";
 import HeaderButtons from "./header/HeaderButtons.vue";
 import LoggedProfile from "./header/LoggedProfile.vue";
-import FactoriaAlert from "./../alerts/FactoriaAlert.vue";
 import Navbar from "./header/Navbar.vue";
 
 
@@ -13,6 +13,7 @@ const authStore = useAuthStore();
 </script>
 
 <template>
+
 
     <header>
 
@@ -25,9 +26,9 @@ const authStore = useAuthStore();
         </div>
 
         <div id="actions_container">
-          <router-link to="/favorites">
+          <router-link to="/favorite">
             <div>
-              <img src="/icons/icon-heart.svg" alt="">
+              <img src="/icons/icon-heart.svg" alt="heart-favorite">
               <p>Favoritos</p>
             </div>
           </router-link>

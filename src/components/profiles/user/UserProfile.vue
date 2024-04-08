@@ -1,79 +1,79 @@
 <script setup>
- import { useAuthStore } from '@/stores/AuthStore';
- import { onMounted, ref} from 'vue';
- import { useRouter } from "vue-router";
- import axios from "axios";
+//  import { useAuthStore } from '@/stores/AuthStore';
+//  import { onMounted, ref} from 'vue';
+//  import { useRouter } from "vue-router";
+//  import axios from "axios";
 	
- const router = useRouter();
- const store = useAuthStore();
- const profileDetails = ref(null);
+//  const router = useRouter();
+//  const store = useAuthStore();
+//  const profileDetails = ref(null);
 
- const firstName = ref('');
- const lastName = ref('');
- const email = ref('');
- const numberPhone = ref('');
- const address = ref('');
- const postalCode = ref('');
- const city = ref('');
- const province = ref('');
+//  const firstName = ref('');
+//  const lastName = ref('');
+//  const email = ref('');
+//  const numberPhone = ref('');
+//  const address = ref('');
+//  const postalCode = ref('');
+//  const city = ref('');
+//  const province = ref('');
 
- onMounted(async () => {
-     const email = store.username;
-     const content = ref('');
+//  onMounted(async () => {
+//      const email = store.username;
+//      const content = ref('');
 
-     try {
-       const response = await axios.get(`http://localhost:8080/api/v1/profiles/${email}`);
-       content = response.data;
-       profileDetails.value = response.data;
-     } catch (error) {
-       console.error("Error:", error);
-     }
+//      try {
+//        const response = await axios.get(`http://localhost:8080/api/v1/profiles/${email}`);
+//        content = response.data;
+//        profileDetails.value = response.data;
+//      } catch (error) {
+//        console.error("Error:", error);
+//      }
 
-     return content;
+//      return content;
 
-   });
+//    });
 
-  const cancelData = () => {
- 	  firstName.value = "";
-    lastName = '';
-    email.value = "";
-    numberPhone.value = "";
-    address.value = "";
-    postalCode.value = "";
-    city.value = "";
-    province.value = "";
- };
+//   const cancelData = () => {
+//  	  firstName.value = "";
+//     lastName = '';
+//     email.value = "";
+//     numberPhone.value = "";
+//     address.value = "";
+//     postalCode.value = "";
+//     city.value = "";
+//     province.value = "";
+//  };
 
- const saveData = async () => {
-    const uri = import.meta.env.VITE_APP_API_ENDPOINT;
-    content = response.data;
+//  const saveData = async () => {
+//     const uri = import.meta.env.VITE_APP_API_ENDPOINT;
+//     content = response.data;
 
-      try {
-        const data = {
-          firstName: firstName.value,
-          lastName: lastName.value,
-          email: email.value,
-          numberPhone: numberPhone.value,
-          address: address.value,
-          postalCode: postalCode.value,
-          city: city.value,
-          province: province.value,
-        };
+//       try {
+//         const data = {
+//           firstName: firstName.value,
+//           lastName: lastName.value,
+//           email: email.value,
+//           numberPhone: numberPhone.value,
+//           address: address.value,
+//           postalCode: postalCode.value,
+//           city: city.value,
+//           province: province.value,
+//         };
 
-      const config = {
-          withCredentials: true,
-      };
+//       const config = {
+//           withCredentials: true,
+//       };
 
-      const response = await axios.put(`${uri}/profiles/${email}`, data, config);
-        if (response.status === 200) {
-          location.reload();
-        } else {
-          console.error("Error al editar el perfil");
-        }
-     } catch (error) {
-        console.error("Error:", error);
-      }
-    };
+//       const response = await axios.put(`${uri}/profiles/${email}`, data, config);
+//         if (response.status === 200) {
+//           location.reload();
+//         } else {
+//           console.error("Error al editar el perfil");
+//         }
+//      } catch (error) {
+//         console.error("Error:", error);
+//       }
+//     };
 
 </script>
 

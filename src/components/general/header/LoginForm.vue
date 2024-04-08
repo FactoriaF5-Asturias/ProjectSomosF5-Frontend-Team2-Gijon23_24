@@ -1,17 +1,17 @@
 <script setup>
+import axios from 'axios';
 import { ref } from 'vue';
-import axios from 'axios'
-import { useAuthStore } from "./../../../stores/AuthStore"
+import { useAuthStore } from "./../../../stores/AuthStore";
 
 const props = defineProps({
-  onClose: Function
+ onClose: Function
 });
 
 const closeForm = () => {
-  props.onClose()
+ props.onClose();
 }
 
-const uri = 'http://localhost:8080/api/v1';
+const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 
 const usernameInput = ref('');
 const passwordInput = ref('');
@@ -19,31 +19,35 @@ const passwordInput = ref('');
 const authStore = useAuthStore();
 
 const submitForm = async () => {
-
-  try {
+ try {
     const response = await axios.get(`${uri}/login`, {
       auth: {
-            username: usernameInput.value,
-            password: passwordInput.value
-          },
-          withCredentials: true
-        },
-        );
-        const data = response.data;
-        
+        username: usernameInput.value,
+        password: passwordInput.value
+      },
+      withCredentials: true
+    });
 
-        authStore.userRole = data.roles;
-        authStore.username = data.username;
-        authStore.isAuthenticated = true;
-        
-        console.log(authStore.userRole, authStore.username, authStore.isAuthenticated);
+    const data = response.data;
 
-        closeForm();
-      } catch (error) {
-        console.error(error);
-      }
+    // Actualiza el AuthStore con los datos recibidos
+    authStore.userRole = data.roles;
+    authStore.username = data.username;
+    authStore.isAuthenticated = true;
+
+    // Almacena el estado de autenticación y el userId en localStorage
+    localStorage.setItem('isAuthenticated', true);
+    localStorage.setItem('userId', data.userId);
+
+    console.log('ID del usuario recibido:', data.userId);
+    console.log(authStore.userRole, authStore.username, authStore.isAuthenticated);
+
+    closeForm();
+ } catch (error) {
+    console.error(error);
+ }
+
 };
-
 </script>
 
 <template>

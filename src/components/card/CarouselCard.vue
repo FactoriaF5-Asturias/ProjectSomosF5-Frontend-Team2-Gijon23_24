@@ -1,7 +1,7 @@
 <script setup>
 
 import ImagesService from '../../services/ImagesService';
-import { useProductsStore } from '../../stores/productStore';
+import { useProductsStore } from '../../stores/ProductStore';
 
 const productsStore = useProductsStore();
 
@@ -10,6 +10,7 @@ const imagesService = new ImagesService();
 const props = defineProps({
    product: Object
 })
+
 const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
 const imageDirectory = uri + "/" + findImageForProduct(props.product);
 

@@ -1,12 +1,10 @@
 <script setup>
-import { useContentStore } from "@/stores/ContentStore";
 import { ref, watchEffect } from "vue";
 
 const props = defineProps({
   onClose: Function,
   id: String, 
 });
-
 
 </script>
 
@@ -80,8 +78,6 @@ const props = defineProps({
 </template>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 .modal {
   display: flex;
   justify-content: center;
@@ -143,7 +139,6 @@ form {
     height: 8.7rem;
     border-radius: 0.5rem;
     background-color: #DDD8D8;
-    font-family: "Poppins", sans-serif;
   }
 }
 section {
@@ -165,7 +160,6 @@ section {
     height: 3rem;
     border-radius: 0.5rem;
     background-color: #DDD8D8;
-    font-family: "Poppins", sans-serif;
     font-size: 1rem;
   }
 }
@@ -177,7 +171,6 @@ section {
     width: 100%;
     height: 3rem;
     border-radius: 0.5rem;
-    font-family: "Poppins", sans-serif;
     font-size: 1rem;
     background-color: #DDD8D8;
   }
@@ -196,7 +189,6 @@ select {
   border-radius: 0.5rem;
   //border: 1px solid black;
   background-color: #DDD8D8;
-  font-family: "Poppins", sans-serif;
 }
 
 .images-container {
@@ -208,7 +200,6 @@ select {
     height: 5rem;
     //border-radius: 0.5rem;
     background-color: #DDD8D8;
-    font-family: "Poppins", sans-serif;
   }
 }
 
@@ -222,13 +213,11 @@ select {
     border-radius: 0.5rem;
     //border: 1px solid black;
     background-color: #DDD8D8;
-    font-family: "Poppins", sans-serif;
     font-size: 1rem;
   }
 }
 
 h1 {
-  font-family: "Poppins", sans-serif;
   font-size: 4rem;
   color:grey;
   margin-bottom: 5rem;
@@ -237,7 +226,6 @@ h1 {
 }
 
 label {
-  font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
@@ -250,7 +238,6 @@ label {
 
   button {
     background-color: #AE81D1;
-    font-family: "Poppins", sans-serif;
     font-size: 1.5rem;
     color: white;
     border-radius: 0.5rem;
@@ -264,4 +251,4 @@ label {
   }
 
 }
-</style>
+</style>@/stores/ProfileStore
