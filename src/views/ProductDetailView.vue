@@ -45,10 +45,20 @@ let product = reactive({
   additionalImages: []
 });
 const cantidad = ref(1);
+
 onMounted(async () => {
   const id = route.params.id_product;
   const response = await axios.get(`http://localhost:8080/api/v1/products/${id}`);
   product = response.data;
+
+const uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
+
+onMounted(async () => {
+  const id = route.params.id_product;
+  const response = await axios.get(`${uri}/${id}`);
+  product.value = response.data; 
+  
+
 });
 function sumarCantidad() {
   cantidad.value++;
@@ -59,7 +69,7 @@ function restarCantidad() {
   }
 }
 function goBack() {
-  window.history.length > 1 ? history.go(-1) : router.push('/');
+  window.history.length > 1 ? history.go(-1) : route.push('/');
 }
 const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
 const imageDirectory = ref('');
@@ -76,6 +86,4 @@ onMounted(async () => {
 });
 </script>
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import '/src/assets/scss/ProductDetail.scss';
 </style>
