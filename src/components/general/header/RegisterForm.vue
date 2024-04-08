@@ -92,11 +92,7 @@ const submitForm = async () => {
                 <div>
                   <div class="input_box">
                       <label>Email:</label>
-                      <input type="email" placeholder="correo electrónico" v-model="emailInput" required>
-                  </div>
-                  <div class="input_box">
-                      <label>Nombre de usuario:</label>
-                      <input type="text" placeholder="nombre de usuario" v-model="usernameInput" required>
+                      <input type="email" placeholder="email" v-model="usernameInput" required>
                   </div>
                   <div class="input_box">
                       <label>Contraseña:</label>
