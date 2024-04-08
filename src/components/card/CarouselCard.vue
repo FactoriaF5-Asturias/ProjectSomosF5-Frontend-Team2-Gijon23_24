@@ -10,6 +10,7 @@ const imagesService = new ImagesService();
 const props = defineProps({
    product: Object
 })
+
 const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
 const imageDirectory = uri + "/" + findImageForProduct(props.product);
 
