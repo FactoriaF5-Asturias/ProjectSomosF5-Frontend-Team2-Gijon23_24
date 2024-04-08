@@ -1,6 +1,9 @@
 <template>
   <div id="home-detail" class="product-detail">
-    <GoBackButton />
+    <div class="goback">
+    <button class="goback" @click="goback"></button>
+    </div>
+  
     
     <div class="detail-image-container">
       <div class="detail-mainImage-container">
@@ -39,9 +42,16 @@
 import axios from "axios";
 import { onMounted, reactive, ref } from 'vue';
 import { useRoute,useRouter } from 'vue-router';
-import GoBackButton from '../components/profiles/GoBackButton.vue';
+
+const goback = () => {
+  window.history.length  > 1 ? history.go(-1) :  router.push('/');
+}
+
+
+const router  = useRouter();
+console.log(router)
 const route = useRoute();
-const router = useRouter();
+
 let product = reactive({
   productName: '',
   price: '',
@@ -55,7 +65,7 @@ onMounted(async () => {
   const id = route.params.id_product;
   const response = await axios.get(`http://localhost:8080/api/v1/products/${id}`);
   product = response.data;
-  selectedThumbnail = product.additionalImages[2];
+  selectedThumbnail = product.additionalImages[0];
   imageDirectory.value = uri + "/" + findImageForProduct(product);
 });
 function sumarCantidad() {
@@ -66,6 +76,8 @@ function restarCantidad() {
     cantidad.value--;
   }
 }
+
+
 const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
 const imageDirectory = ref('');
 const defaultImage = '../../../public/images/banner-logo.svg';
@@ -84,6 +96,7 @@ function changeMainImage(image) {
   imageDirectory.value = uri + "/" + image;
   selectedThumbnail = image;
 }
+
 
 </script>
 <style lang="scss" scoped>

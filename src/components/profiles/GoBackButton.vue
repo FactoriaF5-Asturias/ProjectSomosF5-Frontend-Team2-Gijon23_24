@@ -2,14 +2,14 @@
     <button class="goback" @click="goBack"></button>
   </template>
   
-  <script >
-export default {
-  methods: {
-    goBack() {
-      window.history.length > 1 ? history.go(-1) : this.$router.push('/');
-    }
-  }
-};
+  <script setup >
+  import { useRouter } from 'vue-router';
+    function goBack(){
+ 
+    const router = useRouter();
+    const goBack = () => {
+  window.history.length > 1 ? history.go(-1) : router.push('/');
+}};
   </script>
   
   <style scoped>
