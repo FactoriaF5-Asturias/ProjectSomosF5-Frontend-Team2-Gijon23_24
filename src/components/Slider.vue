@@ -1,6 +1,6 @@
  <script setup>
 import { ref } from 'vue';
-import { useProductsStore } from "./../stores/ProductStore";
+import { useProductsStore } from "../stores/ProductStore";
 import CarouselCard from './card/CarouselCard.vue';
 
 
