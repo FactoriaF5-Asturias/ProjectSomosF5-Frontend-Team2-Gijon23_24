@@ -1,24 +1,20 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from "vue-router";
+import Header from "./components/general/Header.vue";
+import Footer from './components/Footer.vue';
+import Space from './components/general/Space.vue';
+
 </script>
 
 <template>
-  <header>
 
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-    
-  </header>
-
+  <Header />
+  <Space />
   <RouterView />
+ 
+  <Footer />
+
 </template>
 
 <style scoped>
-.wrapper {
-  font-size: 1.5rem;
-}
 </style>

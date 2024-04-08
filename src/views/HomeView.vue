@@ -1,12 +1,18 @@
 <script setup>
+// import Custome from '@/components/Custome.vue';
+import ExplorerCategory from '../components/ExploreCategory.vue';
+import Banner from "@/components/Banner.vue";
+import Card from '@/components/card/Card.vue';
+import Slider from '@/components/Slider.vue';
 </script>
 
 <template>
-  <main>
-    <h1>This is home page</h1>
-  </main>
+	<main>
+		<Slider />
+		<Card/>
+		<ExplorerCategory/>
+	</main>
 </template>
 
 <style lang="scss" scoped>
-
 </style>
