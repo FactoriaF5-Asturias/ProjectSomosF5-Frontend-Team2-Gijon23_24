@@ -52,11 +52,11 @@ let product = ref({
 });
 const cantidad = ref(1);
 
-uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
+const uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
 
 onMounted(async () => {
   const id = route.params.id_product;
-  const response = await axios.get(`${this.uri}/${id}`);
+  const response = await axios.get(`${uri}/${id}`);
   product.value = response.data; 
   
 });
