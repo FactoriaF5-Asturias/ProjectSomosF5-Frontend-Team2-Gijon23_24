@@ -8,7 +8,7 @@ const props = defineProps({
 });
 
 const closeForm = () => {
- props.onClose()
+ props.onClose();
 }
 
 const uri = 'http://localhost:8080/api/v1';
@@ -17,8 +17,8 @@ const usernameInput = ref('');
 const passwordInput = ref('');
 
 const authStore = useAuthStore();
+
 const submitForm = async () => {
- console.log('Iniciando inicio de sesión...');
  try {
     const response = await axios.get(`${uri}/login`, {
       auth: {
@@ -27,28 +27,26 @@ const submitForm = async () => {
       },
       withCredentials: true
     });
-    console.log('Respuesta de inicio de sesión:', response.data);
+
     const data = response.data;
 
-    // Asumiendo que el token y el userId se devuelven en la respuesta
-    const token = data.token;
-    const userId = data.userId; // Utilizar el campo userId de la respuesta
-    console.log('Token recibido:', token);
-    console.log('ID del usuario recibido:', userId);
+    // Actualiza el AuthStore con los datos recibidos
+    authStore.userRole = data.roles;
+    authStore.username = data.username;
+    authStore.isAuthenticated = true;
 
-    // Almacenar el token y el ID del usuario en authStore utilizando los métodos definidos
-    authStore.setToken(token);
-    authStore.setUserId(userId);
-    authStore.setUserRole(data.roles);
-    authStore.setUsername(data.username);
-    authStore.setIsAuthenticated(true);
+    // Almacena el estado de autenticación y el userId en localStorage
+    localStorage.setItem('isAuthenticated', true);
+    localStorage.setItem('userId', data.userId);
 
-    console.log(authStore.userRole, authStore.username, authStore.isAuthenticated, authStore.token, userId);
+    console.log('ID del usuario recibido:', data.userId);
+    console.log(authStore.userRole, authStore.username, authStore.isAuthenticated);
 
     closeForm();
  } catch (error) {
-    console.error('Error en el inicio de sesión:', error);
+    console.error(error);
  }
+
 };
 </script>
 

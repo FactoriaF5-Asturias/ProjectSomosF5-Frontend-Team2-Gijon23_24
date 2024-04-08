@@ -14,6 +14,7 @@ export const useProductsStore = defineStore('products', {
         const products = await productsService.getProducts();
         this.products = products;
         this.isLoaded = true;
+        
       } catch (error) {
         console.error('Error al cargar los productos:', error);
         this.isLoaded = false;

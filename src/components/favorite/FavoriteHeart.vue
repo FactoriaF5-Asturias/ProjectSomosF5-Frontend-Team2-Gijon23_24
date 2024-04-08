@@ -2,7 +2,7 @@
 import FavoritesService from '@/services/FavoriteService';
 import { useAuthStore } from '@/stores/AuthStore';
 import { useProductsStore } from '@/stores/ProductStore';
-import { ref } from 'vue';
+import { defineExpose, ref } from 'vue';
 
 const productsStore = useProductsStore();
 const authStore = useAuthStore();
@@ -11,41 +11,41 @@ const favoritesService = new FavoritesService();
 const isFavorite = ref(false);
 
 const toggleFavorite = async (product) => {
-    isFavorite.value = !isFavorite.value;
-    if (!authStore.id) {
-        console.error('Profile ID is not available');
+    if (!product || !product.id) {
+        console.error('El objeto de producto es nulo o no tiene una propiedad id definida');
         return;
     }
-    const profileId = authStore.id;
-    try {
-        if (isFavorite.value) {
-            console.log('Adding favorite...');
-            await favoritesService.updateFavorites(profileId, authStore.token);
-            productsStore.addFavorite(product);
-        } else {
-            console.log('Removing favorite...');
-            await favoritesService.updateFavorites(profileId, authStore.token);
-            productsStore.removeFavorite(product.id);
-        }
-        alert("Añadido exitosamente a favoritos");
-    } catch (error) {
-    console.error('Error al añadir a favoritos:', error);
-   
-    console.error(error);
-    alert("No se pudo añadir a favoritos");
-}
-};
-</script>
 
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+        console.error('No se encontró el userId en el localStorage');
+        return;
+    }
+
+    const action = isFavorite.value ? 'remove' : 'add';
+    try {
+        const result = await favoritesService.updateFavorites(userId, product.id, action);
+        console.log("Producto añadido/eliminado con éxito:", result.productId);
+        // Actualiza el estado de isFavorite basado en la respuesta
+        isFavorite.value = !isFavorite.value; // Actualiza el estado de isFavorite
+    } catch (error) {
+        console.error("Error al añadir a favoritos:", error);
+        alert("No se pudo añadir a favoritos");
+    }
+};
+
+defineExpose({ isFavorite, toggleFavorite });
+</script>
+//en teoria la logica de agregar favoritos funciona lo que  no esta funcionando es que no pasa los datos del producto al corazón
 <template>
     <div>
-   
-        <v-btn color="white" icon="/icons/icon-heart.svg" size="small"  variant="text" class="favorite action heart" @click="toggleFavorite " :class="{ visited: isFavorited }">
-      <img :src="isFavorite ? '/icons/icon-heart.svg' : '/icons/icon-heart.svg'" alt="heart">
-    </v-btn>
-  
+        <v-btn color="white" icon="/icons/icon-heart.svg" size="small" variant="text" class="favorite action heart" @click="() => toggleFavorite(product)" :class="{ visited: isFavorite }">
+            <img :src="isFavorite ? '/icons/icon-heart.svg' : '/icons/icon-heart.svg'" alt="heart">
+        </v-btn>
     </div>
-  </template>
+</template>
+
+
   
 <style scoped lang="scss">
 $hover-active-color: $primary-color;
@@ -102,3 +102,5 @@ $hover-active-color: $primary-color;
      }
   }
  </style>
+
+ 

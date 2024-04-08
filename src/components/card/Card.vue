@@ -29,7 +29,7 @@ onMounted(async () => {
    imageDirectory.value = uri + "/" + findImageForProduct(props.product);
    isLoading.value = false;
 });
-
+//falta acomodar nuevamente el corazón en su lugar
 
 
 
@@ -50,7 +50,7 @@ onMounted(async () => {
           </v-skeleton-loader>
         </v-container>
       </router-link>
-      <FavoriteHeart :product="product" class="heart"/>
+      <FavoriteHeart v-if="product && product.id" :product="product" class="heart"/>
    </section>
   </template>
 

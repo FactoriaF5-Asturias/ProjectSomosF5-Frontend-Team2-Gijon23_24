@@ -7,16 +7,16 @@ export const useAuthStore = defineStore('AuthStore', () => {
  let token = ref('');
  let id = ref(''); // Inicialización de id
  let isAuthenticated = ref(false);
-
+//Romi perdon pero tuve que modificar para poder pasar el user id a los favoritos
  // Función para actualizar el id del usuario
  const setUserId = (userId) => {
     console.log('Actualizando ID del usuario en authStore:', userId); // Rastrear la actualización del ID
     id.value = userId;
  };
 
- // Dentro de tu AuthStore
+ // Función para actualizar el token
  const setToken = (newToken) => {
-    token = newToken;
+    token.value = newToken;
  };
 
  // Función para actualizar el estado de autenticación
@@ -33,7 +33,7 @@ export const useAuthStore = defineStore('AuthStore', () => {
  const setUsername = (name) => {
     username.value = name;
  };
-
+ const { userId } = useAuthStore();
  return {
     userRole,
     username,
