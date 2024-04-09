@@ -8,7 +8,6 @@ import LithophaneView from '../views/LithophaneView.vue'
 import UserProfileView from '../views/UserProfileView.vue'
 import AdminProfileView from '../views/AdminProfileView.vue'
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
