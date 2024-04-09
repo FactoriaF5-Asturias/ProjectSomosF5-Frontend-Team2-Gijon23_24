@@ -18,27 +18,26 @@
  const province = ref('');
 
  onMounted(async () => {
-     const userEmail = store.username;
-     //const content = ref('');
+     const email = store.username;
+     const content = ref('');
 
      try {
-       const response = await axios.get(`http://localhost:8080/api/v1/profiles/${userEmail}`);
-       //content = response.data;
-       profileDetails.value = response.data;
-       firstName.value = response.data.firstName;
-       lastName.value = response.data.lastName;
-       email.value = response.data.email;
-       numberPhone.value = response.data.numberPhone;
-       address.value = response.data.address;
-       postalCode.value = response.data.postalCode;
-       city.value = response.data.city;
-       province.value = response.data.province;
+    const response = await axios.get(
+      `http://localhost:8080/api/v1/profiles/2`,
+      {},
+			{
+				headers: {
+					"Content-Type": "application/json",
+				},
+				withCredentials: true,
+			})
+        content = response.data;
+        profileDetails.value = response.data;
+      } catch (error) {
+        console.error("Error:", error);
+    }
 
-     } catch (error) {
-       console.error("Error:", error);
-     }
-
-     //return content;
+     return content;
 
    });
 
@@ -55,7 +54,7 @@
 
  const saveData = async () => {
     const uri = import.meta.env.VITE_APP_API_ENDPOINT;
-    //content = response.data;
+    content = response.data;
 
       try {
         const data = {
@@ -111,7 +110,7 @@
           <div class="input-box">
             <label>Apellidos</label>
             <input type="text" id="lastName" v-model="lastName">
-            <!-- {{ content.LastName }}</input>  -->
+            <!-- {{ content.lastName }}</input>  -->
           </div>
 
           <div class="input-box">
