@@ -35,7 +35,7 @@
 
   const cancelData = () => {
  	  firstName.value = "";
-    lastName.value = " ";
+    lastName.value = "";
     email.value = "";
     numberPhone.value = "";
     address.value = "";
