@@ -25,7 +25,7 @@ const userLogout = async () => {
 <template>
   <div>
     <img id="photo" src="/icons/icon-user.svg" alt="user icon">
-    <p> {{ authStore.username }} </p>
+   <router-link to="/user/profile"> <p> {{ authStore.username }} </p></router-link>
     <hr>
     <button @click="userLogout">Cerrar sesión</button>
   </div>

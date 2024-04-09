@@ -35,7 +35,7 @@
 
   const cancelData = () => {
  	  firstName.value = "";
-    lastName.value = "";
+    lastName.value = " ";
     email.value = "";
     numberPhone.value = "";
     address.value = "";
@@ -95,34 +95,41 @@
 
           <div class="input-box">
             <label>Nombre</label>
-            <input type="text" id="firstName" v-model="firstName">{{ content.firstName }} </input>
+            <input type="text" id="firstName" v-model="firstName">
+            <!-- {{ content.firstName }} </input> -->
           </div>
 
           <div class="input-box">
             <label>Apellidos</label>
-            <input type="text" id="lastName" v-model="LastName">{{ content.LastName }}</input> 
+            <input type="text" id="lastName" v-model="lastName">
+            <!-- {{ content.lastName }}</input>  -->
           </div>
 
           <div class="input-box">
             <label>E-Mail</label>
-            <input type="text" id="email" v-model="email">{{ content.email }} </input>
+            <input type="text" id="email" v-model="email">
+            <!-- {{ content.email }} </input> -->
           </div>
 
           <div class="input-box">
             <label>Teléfono</label>
-            <input type="text" id="numberPhone" v-model="numberPhone">{{ content.numberPhone }}</input>
+            <input type="text" id="numberPhone" v-model="numberPhone">
+            <!-- {{ content.numberPhone }}</input> -->
           </div>
 
           <div class="input-box">
             <label>Dirección</label>
-            <input type="text" id="address" v-model="address">{{ content.address }}</input>
+            <input type="text" id="address" v-model="address">
+            <!-- {{ content.address }}</input> -->
           </div>
 
           <div class="input-box-2">
             <label>C. P.</label>
-            <input type="text" id="postal-code" v-model="postalCode">{{ content.postalCode }}</input>
+            <input type="text" id="postal-code" v-model="postalCode">
+            <!-- {{ content.postalCode }}</input> -->
             <label>Ciudad</label>
-            <input type="text" id="city" v-model="city">{{ content.city }}</input>
+            <input type="text" id="city" v-model="city">
+            <!-- {{ content.city }}</input> -->
           </div>
 
           <div class="input-box">
