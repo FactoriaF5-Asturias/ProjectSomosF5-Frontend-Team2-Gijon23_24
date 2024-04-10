@@ -1,36 +1,127 @@
 <script setup>
 import { useContentStore } from "@/stores/ContentStore";
-import { Axios } from "axios";
-import { ref, watchEffect } from "vue";
+import axios from "axios";
+import { ref, watchEffect, reactive } from "vue";
+import { onMounted } from "vue";
+
+const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
 
 const props = defineProps({
   onClose: Function,
-  productId: String
+  productId: Number
 });
 
-const imageProduct = ref(null);
+
+const closeForm = () => {
+  props.onClose();
+}
+
+// Product data.
+
+const product = ref();
 const productName = ref('');
 const price = ref('');
 const categoryId = ref('');
 const productDescription = ref('');
 
-const closeForm = () => {
-  props.onClose();
-}
-const resetForm = () => {
-  productName.value = '';
-  price.value = '';
-  categoryId.value = '1';
-  productDescription.value = '';
+// Images.
+
+const existingImages = ref([]);
+const deletedImages = ref([]);
+const addedImages = ref([]);
+const imageDirectory = ref('');
+const otherImagesDirectory = ref([])
+
+
+
+function findImageForProduct(product) {
+    const image = product.images.find(img => img.mainImage === true);
+    return image.imageName
 }
 
-const existingImages = [];
-const deletedImages = ref [[]]
-const addedImages = ref[[]]
+function findOtherImagesForProduct(product) {
+    const images = product.images.filter(img => img.mainImage === false);
+    console.log(images)
+    return images
+}
+
+// Handle FILES upload.
+const handleFilesChange = (event) => {
+	selectedFiles.value = Array.from(event.target.files);
+};
+
+// Handle MAIN IMAGE upload.
+const handleMainImageChange = (event) => {
+	selectedMainImage.value = event.target.files[0];
+};
+
+// Get product data.
 
 async function getProductData(id) {
+  try {
+    const response = await axios.get(
+      `http://localhost:8080/api/v1/products/${id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
+    existingImages.value = response.data.images
+    product.value = response.data
+    productName.value = response.data.productName;
+    price.value = response.data.price;
+    categoryId.value = response.data.categories[0].id;
+    productDescription.value = response.data.productDescription;
+    imageDirectory.value = uri + "/" + findImageForProduct(product.value);
+    console.log(imageDirectory.value)
+    otherImagesDirectory.value = findOtherImagesForProduct(product.value)
+    console.log(otherImagesDirectory.value)
+      
+	} catch (error) {
+		console.error("Error al conseguir los datos del producto", error);
+		throw error;
+	}
+}
+
+// Add deleted images to separate array.
+
+const addDeletedImage = (imageId) => {
+  const index = existingImages.value.findIndex(image => image.id === imageId);
+  if (index !== -1) {
+    const deletedImage = existingImages.value.splice(index, 1)[0];
+    deletedImages.value.push(deletedImage);
+
+  }
+}
+
+// API Calls handler.
+
+async function handleUpdate() {
 	try {
-		const response = await axios.post(
+		await updateProduct(props.productId);
+    await uploadImages(props.productId);
+    await deleteImages(deletedImages)
+		console.log("Producto actualizado exitosamente.");
+	} catch (error) {
+		console.error("Error al actualizar el producto", error);
+
+		deleteProduct(productId);
+	}
+}
+
+// Update product data.
+
+async function updateProduct(id) {
+	const data = {
+		productName: productName.value,
+		price: price.value,
+		categoryId: categoryId.value,
+		productDescription: productDescription.value,
+	};
+	try {
+		const response = await axios.put(
 			`http://localhost:8080/api/v1/products/${id}`,
 			data,
 			{
@@ -39,17 +130,44 @@ async function getProductData(id) {
 				},
 				withCredentials: true,
 			}
-    );
-      existingImages.values = response.images
-      productName.value = response.productName;
-      price.value = response.price;
-      categoryId.value = response.categories.categoryName;
-      productDescription.value = response.description;
+		);
 	} catch (error) {
-		console.error("Error al conseguir los datos del producto", error);
+		console.error("Error al actualizar datos del producto:", error);
 		throw error;
 	}
 }
+
+// Upload new images.
+
+async function uploadImages(id) {
+	let formData = new FormData();
+	selectedFiles.value.forEach((file) => {
+		formData.append("files", file);
+	});
+	formData.append("file", selectedMainImage.value);
+	try {
+		await axios.post(
+			`http://localhost:8080/api/v1/images/uploadImages/1`,
+			formData,
+			{
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+				withCredentials: true,
+			}
+		);
+
+		console.log("Imágenes subidas exitosamente.");
+	} catch (error) {
+		console.error("Error al subir las imágenes:", error);
+
+		await deleteProduct(productId);
+
+		throw error;
+	}
+}
+
+
 
 
 onMounted(() => {
@@ -75,29 +193,34 @@ onMounted(() => {
         <h1>Editar producto</h1>
         <div class="divMain">
 
-          <div class="image-main">
+          <div class="image-main-container">
             <label>Imagen Principal</label>
-          </input title=" " type="file" class="form-control-file" id="images">{{ contentStore.content.productMainImage }}
+            <div class="image-main">
+              <article>
+                <div class="delete-image" :style="{ 'background-image': 'url(' + imageDirectory + ')' }" ></div>
+                <button @click="() => addDeletedImage()">Delete</button>
+              </article>
+            </div>
           </div>
           <section>
 
-            <div class="first-row">
+              <div class="first-row">
 
               <div class="title-container">
                 <label>Título</label>
-                <input type="text" class="form-control" id="title" v-model="titulo" placeholder="Título">{{ contentStore.content.productName }}</input>
+                <input type="text" class="form-control" id="title" v-model="productName" placeholder="Título"/>
               </div>
 
               <div class="price-container">
                 <label>Precio</label>
-                <input type="number" class="form-control" id="price" v-model="precio" placeholder="Precio">{{ contentStore.content.price }}</input>
+                <input type="number" class="form-control" id="price" v-model="price" placeholder="Precio"/>
               </div>
 
             </div>
 
             <div class="categories-container">
               <label>Categoría</label>
-              <select id="categories" v-model="categoryId" placeholder="Seleccione categoría">{{ contentStore.content.categoryId }}
+              <select id="categories" v-model="categoryId" placeholder="Seleccione categoría">
                 <option value=1>Hogar</option>
                 <option value=2>Geek</option>
                 <option value=3>Litofanía</option>
@@ -109,26 +232,26 @@ onMounted(() => {
         </div>
 
         <div class="existing-images">
-          <article v-for="image in images">
-            <img class="delete-image"/>
+          <article v-for="image in otherImagesDirectory" :key="image.id">
+            <div class="delete-image" :style="{ 'background-image': `url('http://localhost:8080/api/v1/imgs/${image.imageName}')` }"></div>
+            <button @click="() => addDeletedImage(image.id)">Delete</button>
           </article>
         </div>
 
         <div class="images-container">
           <label for="file-upload" class="custom-file-upload">Imágenes</label>
-          <input type="file" class="form-control-file" id="file-upload">Other Image: {{ contentStore.content.otherProductImage }}</input>
+          <input type="file" class="form-control-file" id="file-upload"></input>
         </div>
         
 
         <div class="description-container">
           <label>Descripción</label>
-          <textarea class="form-control" id="description" rows="3" v-model="description"
-            placeholder="Descripción...">Description:{{ contentStore.content.productDescription }}</textarea>
+          <textarea class="form-control" id="description" rows="3" v-model="productDescription"
+            placeholder="Descripción..."/>
         </div>
 
         <div class="btns-actions">
-          <button @click="resetForm">Borrar</button>
-          <button @click="updateProduct">Editar</button>
+          <button @click="updateProduct">Guardar</button>
         </div>
       </form>
     </div>
@@ -155,7 +278,7 @@ onMounted(() => {
   height: 60rem;
   width: 60rem;
   background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
   border-color: #AE81D1;
   display: flex;
@@ -190,7 +313,7 @@ form {
   gap: 1rem;
 }
 
-.image-main {
+.image-main-container {
   width: 30%;
 
   input {
@@ -319,5 +442,16 @@ label {
 
   }
 
+}
+
+.delete-image {
+  height: 8rem;
+  width: 8rem;
+  background-size: cover;
+}
+
+.existing-images {
+  display: flex;
+  gap: 2rem;
 }
 </style>

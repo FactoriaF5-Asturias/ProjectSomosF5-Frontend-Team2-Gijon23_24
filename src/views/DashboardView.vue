@@ -1,9 +1,10 @@
 <script setup>
+import EditForm from "@/components/admin-dashboard-components/EditForm.vue";
 import AddForm from "../components/admin-dashboard-components/AddForm.vue";
 </script>
 
 <template>
-	<AddForm />
+	<EditForm :productId="1" />
 </template>
 
 <style lang="scss" scoped></style>
