@@ -31,6 +31,7 @@ const submitForm = async () => {
         );
         const data = response.data;
         
+        console.log(response)
 
         authStore.userRole = data.roles;
         authStore.username = data.username;
