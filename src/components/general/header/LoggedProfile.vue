@@ -4,11 +4,11 @@ import { useAuthStore } from './../../../stores/AuthStore';
 
 const authStore = useAuthStore();
 
-console.log(authStore.userRole, authStore.username, authStore.isAuthenticated);
+const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 
 const userLogout = async () => {
     try {
-        await axios.get('http://localhost:8080/api/v1/logout', {}, {withCredentials: true});
+        await axios.get(`${uri}/logout`, {}, {withCredentials: true});
         authStore.userRole = '';
         authStore.username = '';
         authStore.isAuthenticated = false;
