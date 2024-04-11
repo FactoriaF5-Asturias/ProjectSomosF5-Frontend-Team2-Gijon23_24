@@ -60,19 +60,23 @@
 
         <div class="input-box">
           <label>Contraseña Antigüa</label>
-          <input type="text" id="current-password" v-model="currentPassword">
+          <input type="password" id="current-password" v-model="currentPassword">
         </div>
 
         <div class="input-box">
           <label>Contraseña</label>
-          <input type="text" id="newPassword" v-model="newPassword">
+          <input type="password" id="newPassword" v-model="newPassword">
         </div>
 
         <div class="input-box">
-          <label>Confirma tu contraseña</label>
-          <input type="text" id="confirmPassword" v-model="confirmPassword">
-        </div>
-
+          <label for="confirmPassword">Confirmar Contraseña</label>
+          <input type="password" id="confirmPassword" v-model="confirmPassword" required>
+          <div class="check-box">
+            <input type="checkbox" id="showPassword" v-model="showPassword">
+            <label for="showPassword">Mostrar Contraseña</label>
+          </div>
+        </div> 
+  
         <div class="btns-container">
           <button id="cancel" @click="cancelData()">Cancelar</button>
           <button id="save" @click="saveData()">Guardar</button>
@@ -81,12 +85,10 @@
       </form>
 
       <div>
-
         <v-alert v-if="successMessage" type="success" outlined>{{ successMessage }}</v-alert>
-
-
         <v-alert v-if="errorMessage" type="error" outlined>{{ errorMessage }}</v-alert>
       </div>
+
     </div>
   </body>
 
@@ -180,6 +182,12 @@ form {
     border-radius: 0.5rem;
   }
 }
+
+// .check-box {
+//   display: flex;
+//   flex-direction: row;
+  
+// }
 
 .btns-container {
   margin-top: 2rem;
