@@ -9,39 +9,103 @@
  const successMessage = ref('');
  const errorMessage = ref('');
 
-  async function changePassword() {
-   if (newPassword.value !== confirmPassword.value) {
-     errorMessage.value = 'Las contraseñas no coinciden.';
-   return;
-   }
-
-   try {
-    // Verificar la contraseña actual
-    const response = await axios.post('/api/checkPassword', { password: currentPassword.value });
-
-    if (response.data.valid) {
-      // Si la contraseña actual es correcta, actualizar en backend
-      await axios.post('/api/updatePassword', { newPassword: newPassword.value });
-      successMessage.value = 'Contraseña cambiada exitosamente.';
-
-      // Limpiar los campos de contraseña
-      currentPassword.value = '';
-      newPassword.value = '';
-      confirmPassword.value = '';
-    } else {
-      errorMessage.value = 'La contraseña actual es incorrecta.';
-    }
-  } catch (error) {
-    console.error('Error al cambiar la contraseña:', error);
-    errorMessage.value = 'Hubo un error al cambiar la contraseña. Por favor, inténtelo de nuevo más tarde.';
+ function changePassword() {
+  if (currentPassword.value !== 'contraseña_actual') {
+    errorMessage.value = 'La contraseña actual es incorrecta.';
+    setTimeout(() => {
+      errorMessage.value = '';
+    }, 5000);
+    
+    return;
   }
+
+  if (newPassword.value !== confirmPassword.value) {
+    errorMessage.value = 'Las contraseñas no coinciden.';
+    setTimeout(() => {
+      errorMessage.value = '';
+    }, 5000);
+
+    return;
+  }
+
+  successMessage.value = 'Contraseña cambiada exitosamente.';
+  setTimeout(() => {
+    successMessage.value = '';
+  }, 5000);
+
+  currentPassword.value = '';
+  newPassword.value = '';
+  confirmPassword.value = '';
 }
+
+function clearErrorMessage() {
+  errorMessage.value = '';
+}
+
+function clearSuccessMessage() {
+  successMessage.value = '';
+}
+
+//   async function changePassword() {
+//    if (newPassword.value !== confirmPassword.value) {
+//      errorMessage.value = 'Las contraseñas no coinciden.';
+//setTimeout(() => {
+  //    errorMessage.value = '';
+    //}, 5000);
+//    return;
+//    }
+
+//    try {
+//     // Verificar la contraseña actual
+//     const response = await axios.post('/api/checkPassword', { password: currentPassword.value });
+
+//     if (response.data.valid) {
+//       // Si la contraseña actual es correcta, actualizar en backend
+//       await axios.post('/api/updatePassword', { newPassword: newPassword.value });
+//       successMessage.value = 'Contraseña cambiada exitosamente.';
+
+//       // Limpiar los campos de contraseña
+//       currentPassword.value = '';
+//       newPassword.value = '';
+//       confirmPassword.value = '';
+
+//      setTimeout(() => {
+//        successMessage.value = '';
+//      }, 5000);
+
+//     } else {
+//       errorMessage.value = 'La contraseña actual es incorrecta.';
+//      
+//      setTimeout(() => {
+//      errorMessage.value = '';
+//      }, 5000);
+
+//}
+//   } catch (error) {
+//     console.error('Error al cambiar la contraseña:', error);
+//     errorMessage.value = 'Hubo un error al cambiar la contraseña. Por favor, inténtelo de nuevo más tarde.';
+//   
+//   setTimeout(() => {
+//   errorMessage.value = '';
+//    }, 5000);
+//}
+
+
+// function clearErrorMessage() {
+//   errorMessage.value = '';
+// }
+
+// function clearSuccessMessage() {
+//   successMessage.value = '';
+// }
+
+
 
 
  const cancelData = () => {
-   currentPassword.value = "";
-   newPassword.value = "";
-   confirmPassword.value = "";
+  currentPassword.value = "";
+  newPassword.value = "";
+  confirmPassword.value = "";
  };
 
 </script>
@@ -91,8 +155,11 @@
       </form>
 
       <div>
-        <v-alert v-if="successMessage" type="success" outlined>{{ successMessage }}</v-alert>
-        <v-alert v-if="errorMessage" type="error" outlined>{{ errorMessage }}</v-alert>
+
+        <div v-if="errorMessage" class="error-message" @click="clearErrorMessage">{{ errorMessage }}</div>
+    <div v-if="successMessage" class="success-message" @click="clearSuccessMessage">{{ successMessage }}</div>
+        <!-- <v-alert v-if="successMessage" type="success" outlined>{{ successMessage }}</v-alert>
+        <v-alert v-if="errorMessage" type="error" outlined>{{ errorMessage }}</v-alert> -->
       </div>
 
     </div>
