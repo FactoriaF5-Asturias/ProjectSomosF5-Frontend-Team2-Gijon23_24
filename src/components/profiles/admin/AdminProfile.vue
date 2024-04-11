@@ -10,7 +10,7 @@
  const errorMessage = ref('');
 
  function changePassword() {
-  if (currentPassword.value !== 'contraseña_actual') {
+  if (currentPassword.value !== 'asdf') {
     errorMessage.value = 'La contraseña actual es incorrecta.';
     setTimeout(() => {
       errorMessage.value = '';
