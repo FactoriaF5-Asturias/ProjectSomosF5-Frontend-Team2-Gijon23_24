@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
 const navbarVisible = ref(true);
@@ -36,16 +36,22 @@ async function fetchProducts(category) {
         console.log(response.data);
     } catch (error) {
         console.error('Error al obtener productos:', error);
+        // Puedes agregar aquí el manejo de errores, como mostrar un mensaje al usuario
     }
 }
+
+// Llamar a la función para obtener productos cuando el componente se monta
+// onMounted(() => {
+//     fetchProducts('litophane'); // Llama a la función para cargar productos de la categoría inicial al cargar la página
+// });
 </script>
 
 <template>
     <nav :class="{ 'navbar-hidden': !navbarVisible }">
         <router-link to="/" exact-active-class="active" class="link">Inicio</router-link>
-        <router-link  to ="/lithophane" @click="fetchProducts('litophane')" exact-active-class="active" class="link">Litofanía</router-link>
-        <router-link to="/house" @click="fetchProducts('house')" exact-active-class="active" class="link">Hogar</router-link>
-        <router-link to="/geek" @click="fetchProducts('geek')" exact-active-class="active" class="link">Geek</router-link>
+        <router-link to="/lithophane" exact-active-class="active" class="link">Litofanía</router-link>
+        <router-link to="/house" exact-active-class="active" class="link">Hogar</router-link>
+        <router-link to="/geek" exact-active-class="active" class="link">Geek</router-link>
     </nav>
     <main>
         <div v-if="litofaniaProducts.length">
@@ -85,6 +91,17 @@ nav {
     display: flex;
     align-items: center;
     gap: 3rem;
+
+    .link {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+        
+        &:hover {
+            color: $primary-color;
+        }
+    }
 }
 
 .active {

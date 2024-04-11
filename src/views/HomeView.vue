@@ -10,22 +10,22 @@ import Slider from '@/components/Slider.vue';
 const products = ref([]);
 const router = useRouter();
 
-async function fetchProducts(category) {
-    try {
-        const response = await axios.get(`http://localhost:8080/api/v1/products/getManyByCategoryName?categoryName=${category}`);
-        products.value = response.data; // Suponiendo que el endpoint devuelve una lista de productos
-    } catch (error) {
-        console.error('Error al obtener productos:', error);
-    }
-}
+// async function fetchProducts(category) {
+//     try {
+//         const response = await axios.get(`http://localhost:8080/api/v1/products/getManyByCategoryName/${category}`);
+//         products.value = response.data; // Suponiendo que el endpoint devuelve una lista de productos
+//     } catch (error) {
+//         console.error('Error al obtener productos:', error);
+//     }
+// }
 
-// Llamar a fetchProducts cuando la página se monta y cada vez que cambie la ruta
-const fetchProductsByRoute = async () => {
-    const category = router.currentRoute.value.params.category;
-    await fetchProducts(category);
-};
+// // Llamar a fetchProducts cuando la página se monta y cada vez que cambie la ruta
+// const fetchProductsByRoute = async () => {
+//     const category = router.currentRoute.value.params.category;
+//     await fetchProducts(category);
+// };
 
-fetchProductsByRoute();
+// fetchProductsByRoute();
 
 // Escuchar cambios en la ruta y actualizar productos
 router.afterEach(() => {

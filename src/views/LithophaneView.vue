@@ -1,69 +1,49 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import LitofaniaCardContainer from '@/components/card/LitofaniaCardContainer.vue';
 
+
+const litofanias = ref([]);
+
+
+async function fetchLitofanias() {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_PRODUCTS}/getManyByCategoryName/litofanias`);
+        litofanias.value = response.data;
+        console.log(response.data);
+    } catch (error) {
+        console.error('Error al obtener productos de litofanías:', error);
+    }
+}
+
+
+onMounted(() => {
+    fetchLitofanias();
+});
 </script>
 
 <template>
-    <body>
-        <img src="/images/website-mantenimiento.jpg" alt="">
-        <div>
-            <h1>En construccion</h1>
-            <hr>
-            <p>Lamentablemente, nuestra página aún está en construcción y algunas secciones pueden no estar disponibles temporalmente. Estamos trabajando arduamente para completarla lo antes posible y brindarles la mejor experiencia posible.</p>
-            <router-link to="/"> Volver al inicio </router-link>
+<!--     <div>
+      <h1>Litofanías</h1>
+       <div v-for="product in litofanias" :key="product.id_product">
+        <h2>{{ product.product_name }}</h2>
+        <p>{{ product.product_description }}</p>
+        <p>Precio: {{ product.price }}</p>
+        <div v-if="product.images.length > 0">
+          <h3>Imágenes:</h3>
+          <div v-for="(image, index) in product.images" :key="index">
+            <img :src="image.url" :alt="product.product_name">
+          </div>
         </div>
-    </body>
-</template>
+        <hr>
+      </div>
+    </div> --> 
+    <LitofaniaCardContainer />
+  </template>
+  
+  
 
-<style scoped lang="scss">
-
-body {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: $primary-background;
-}
-
-img {
-    width: 50%;
-}
-
-div {
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4rem;
-
-    hr {
-        width: 80%;
-    }
-
-    h1 {
-        color: white;
-        font-size: 4rem;
-        font-weight: 800;
-    }
-
-    p {
-        font-size: 2rem;
-        color: white;
-        text-align: center;
-    }
-
-    a {
-        padding: 1.1rem;
-        background-color: $primary-color;
-        border-radius: 5px;
-        font-size: 2rem;
-        color: white;
-        transition: all 200ms ease-in-out;
-        width: 16rem;
-        text-align: center;
-    }
-
-    a:hover {
-        transform: scale(1.1);
-    }
-}
+<style scoped>
+/* Estilos */
 </style>
