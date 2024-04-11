@@ -24,8 +24,8 @@ const userLogout = async () => {
 
 <template>
   <div>
-    <img id="photo" src="/icons/icon-user.svg" alt="user icon">
     <router-link to="/user/profile">
+    <img id="photo" src="/icons/icon-user.svg" alt="user icon">
       <p> {{ authStore.username }} </p>
     </router-link>
     <hr>
@@ -38,6 +38,7 @@ div {
     height: 5rem;
     padding: 0.5rem;
     display: flex;
+    flex-direction: row;
     align-items: center;
     font-size: 1.5rem;
     color: white;
@@ -48,12 +49,22 @@ hr {
   width: 4rem;
 }
 img {
-  height: 100%;
+  height: 54px;
   border: 2px solid white;
   border-radius: 100%;
-  height: 100%;
 }
 a{
-  background-color: #fff;
+  color: #fff;
+  background-color: #686868;
+  padding: 1rem;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem ;
+}
+a:hover{
+  color: #fff;
+  background-color: #3C3057;
 }
 </style>

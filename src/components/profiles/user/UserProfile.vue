@@ -1,18 +1,19 @@
 <script setup>
 import { useAuthStore } from '@/stores/AuthStore';
 import { onMounted, ref} from 'vue';
-import { useRouter } from "vue-router";
+// import { useRouter } from "vue-router";
 import axios from "axios";
 import axiosRetry from 'axios-retry';
 	
-const router = useRouter();
+// const router = useRouter();
 const store = useAuthStore();
-const profileDetails = ref(null);
+// const profileDetails = ref(null);
 
 const id = ref(Number)
+console.log(id)
 const firstName = ref('');
-const lastName = ref('');
-const email = ref('');
+let lastName = ref('');
+// const email = ref('');
 const numberPhone = ref('');
 const address = ref('');
 const postalCode = ref('');
@@ -31,10 +32,11 @@ axiosRetry(axios, {
 
 async function getProfileData(email) {
 let content = ref('')
+const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 
 	try {
 		const response = await axios.get(
-      `http://localhost:8080/api/v1/profiles/getByEmail/${email}`,
+      `${uri}/profiles/getByEmail/${email}`,
 			{
 				headers: {
 					"Content-Type": "application/json",
@@ -69,17 +71,17 @@ onMounted(() => {
 });
 
 const cancelData = () => {
-  	  firstName.value = "";
-     lastName = '';
-     numberPhone.value = "";
-     address.value = "";
-     postalCode.value = "";
-     city.value = "";
-     province.value = "";  
+  	firstName.value = ""
+     lastName.value = ""
+     numberPhone.value = ""
+     address.value = ""
+     postalCode.value = ""
+     city.value = ""
+     province.value = ""  
     };
 
  const saveData = async () => {
-    // const uri = import.meta.env.VITE_APP_API_ENDPOINT;
+    const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 
       try {
         const data = {
@@ -92,11 +94,7 @@ const cancelData = () => {
           province: province.value,
         };
 
-      // const config = {
-      //     withCredentials: true,
-      // };
-
-      const response = await axios.put(`http://localhost:8080/api/v1/profiles/${id}`, data, {
+      const response = await axios.put(`${uri}/profiles/${id.value}`, data, {
         withCredentials: true,
       });
       console.log(response);
@@ -134,7 +132,6 @@ const cancelData = () => {
         </div>
 
         <form @submit.prevent="submitForm">
-          <p>{{ id }}</p>
 
           <div class="input-box">
             <label>Nombre</label>
