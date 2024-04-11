@@ -46,7 +46,7 @@ function findOtherImagesForProduct(product) {
 }
 
 // Handle FILES upload.
-const handleFilesChange = (event) => {
+const handleFilesChange = (event) => { 
 	selectedFiles.value = Array.from(event.target.files);
 };
 
@@ -75,9 +75,7 @@ async function getProductData(id) {
     categoryId.value = response.data.categories[0].id;
     productDescription.value = response.data.productDescription;
     imageDirectory.value = uri + "/" + findImageForProduct(product.value);
-    console.log(imageDirectory.value)
     otherImagesDirectory.value = findOtherImagesForProduct(product.value)
-    console.log(otherImagesDirectory.value)
       
 	} catch (error) {
 		console.error("Error al conseguir los datos del producto", error);
