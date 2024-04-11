@@ -1,43 +1,48 @@
 <script setup>
-// import { ref } from 'vue';
-// import axios from 'axios';
-// import { VAlert } from 'vuetify/lib';
+ import { ref } from 'vue';
+ import axios from 'axios';
+ //import { VAlert } from 'vuetify/lib';
 
-// const currentPassword = ref('');
-// const newPassword = ref('');
-// const confirmPassword = ref('');
-// const successMessage = ref('');
-// const errorMessage = ref('');
+ const currentPassword = ref('');
+ const newPassword = ref('');
+ const confirmPassword = ref('');
+ const successMessage = ref('');
+ const errorMessage = ref('');
 
-// const saveData = async () => {
+  async function changePassword() {
+   if (newPassword.value !== confirmPassword.value) {
+     errorMessage.value = 'Las contraseñas no coinciden.';
+   return;
+   }
 
-//   if (newPassword.value !== confirmPassword.value) {
-//     errorMessage.value = 'Las contraseñas no coinciden';
-//     return;
-//   }
+   try {
+    // Verificar la contraseña actual
+    const response = await axios.post('/api/checkPassword', { password: currentPassword.value });
 
-//   try {
-//     const response = await axios.post('http://localhost:8080/api/v1/profiles/admin/change-password', {
-//       currentPassword: currentPassword.value,
-//       newPassword: newPassword.value
-//     });
-//     successMessage.value = '¡Contraseña cambiada con éxito!';
-//     console.log('Contraseña cambiada con éxito:', response.data);
+    if (response.data.valid) {
+      // Si la contraseña actual es correcta, actualizar en backend
+      await axios.post('/api/updatePassword', { newPassword: newPassword.value });
+      successMessage.value = 'Contraseña cambiada exitosamente.';
 
-//   } catch (error) {
-//     errorMessage.value = 'Error al cambiar la contraseña';
-//     console.error('Error al cambiar la contraseña:', error);
+      // Limpiar los campos de contraseña
+      currentPassword.value = '';
+      newPassword.value = '';
+      confirmPassword.value = '';
+    } else {
+      errorMessage.value = 'La contraseña actual es incorrecta.';
+    }
+  } catch (error) {
+    console.error('Error al cambiar la contraseña:', error);
+    errorMessage.value = 'Hubo un error al cambiar la contraseña. Por favor, inténtelo de nuevo más tarde.';
+  }
+}
 
-//   }
-// };
 
-// const cancelData = () => {
-//   currentPassword.value = "";
-//   newPassword.value = "";
-//   confirmPassword.value = "";
-//   successMessage.value = '';
-//   errorMessage.value = '';
-// };
+ const cancelData = () => {
+   currentPassword.value = "";
+   newPassword.value = "";
+   confirmPassword.value = "";
+ };
 
 </script>
 
@@ -70,16 +75,17 @@
 
         <div class="input-box">
           <label for="confirmPassword">Confirmar Contraseña</label>
-          <input type="password" id="confirmPassword" v-model="confirmPassword" required>
-          <div class="check-box">
-            <input type="checkbox" id="showPassword" v-model="showPassword">
-            <label for="showPassword">Mostrar Contraseña</label>
-          </div>
+          <input :type="showPassword ? 'text' : 'password'" id="confirmPassword" v-model="confirmPassword" required>
         </div> 
+
+        <div class="check-box">
+          <input type="checkbox" id="showPassword" v-model="showPassword">
+          <label for="showPassword">Mostrar Contraseña</label>
+        </div>
   
         <div class="btns-container">
           <button id="cancel" @click="cancelData()">Cancelar</button>
-          <button id="save" @click="saveData()">Guardar</button>
+          <button id="save" @click="changePassword()">Guardar</button>
         </div>
 
       </form>
@@ -183,11 +189,17 @@ form {
   }
 }
 
-// .check-box {
-//   display: flex;
-//   flex-direction: row;
-  
-// }
+ .check-box {
+   display: flex;
+   flex-direction: row;
+   gap: 1rem;
+
+  }
+
+  #showPassword {
+    height: 2rem;
+    width: 2rem;
+   }
 
 .btns-container {
   margin-top: 2rem;
