@@ -13,3 +13,14 @@ async getProducts() {
     }
   }
 }
+
+
+export async function fetchProductsByCategory(category) {
+    try {
+        const response = await axios.get(`http://localhost:8080/api/v1/products/getManyByCategoryName?categoryName=${category}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        throw error;
+    }
+}
