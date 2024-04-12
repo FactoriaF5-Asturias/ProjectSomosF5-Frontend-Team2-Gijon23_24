@@ -6,13 +6,21 @@
 <template>
     <section class="carrito">
         <h1>Mi Carrito</h1>
-        <div class="articulos">
-            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.
-                 Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, 
-                 cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería 
-                 de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo 
-                Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
-        </div>
+
+        
+            <div class="container articulos">
+                <div class="articulo1 ">
+                    <img class="articulo_img" src="../../public/images/8Star_DragonBall_1.png" alt="" width="150">
+                    <div class="descripcion">
+                        <h2>Articulo</h2>
+                        <p class="small">Lorem ipsum dolor sit amet.</p>
+                    </div>
+                    
+                </div>
+                 
+            </div>
+           
+       
     </section>
    
 
@@ -26,16 +34,52 @@
     .carrito{
        
         width: 100%;
-        height: 30%;
-        background-color: aqua;
+        background-color: #252525;
         color: white;
+        font-family: "Poppins", sans-serif;
         
+        h1{
+            font-size: 30px;
+            padding: 3%;
+        }
 
         .articulos{
             width: 50%;
-            background: #fff;
-            height: 30%;
+            background-color: rgb(49 48 48);
+            border-radius: 5px;
+            color:#fff; 
+            padding: 3%; 
+            margin: 0 auto; 
         }
+
+        .container {  
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-auto-rows: 1fr;
+            gap: 0px 10px;
+            grid-auto-flow: row;
+            justify-content: space-around;
+            align-content: space-around;
+            grid-template-areas:
+                "articulo1 articulo1"
+                ". .";
+        }
+
+        .articulo1 { 
+            grid-area: articulo1; 
+
+            h2{
+                font-size: 20px;
+            }
+        }
+
+
+        .articulo_img{
+            border-radius: 5px;
+        }
+
+
     }
     
 
