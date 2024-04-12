@@ -20,24 +20,24 @@ const litofanias = ref([]);
 
 
 async function fetchLitofanias() {
-    try {
-        const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_PRODUCTS}/getManyByCategoryName/Litofanías`);
-        litofanias.value = response.data;
-        console.log(response.data);
-    } catch (error) {
-        console.error('Error al obtener productos de litofanías:', error);
-    }
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_PRODUCTS}/getManyByCategoryName/Litofanías`);
+    litofanias.value = response.data;
+    console.log(response.data);
+  } catch (error) {
+    console.error('Error al obtener productos de litofanías:', error);
+  }
 }
 
 
 onMounted(() => {
-    fetchLitofanias();
-    isLoaded = true;
+  fetchLitofanias();
+  isLoaded = true;
 });
 
 </script>
 <template>
-  
+
   <v-container class="container">
     <v-row class="row-card">
       <v-col class="col-card" cols="3" v-for="product in litofanias" :key="product.id">
