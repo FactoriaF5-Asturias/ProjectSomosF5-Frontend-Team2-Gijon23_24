@@ -13,6 +13,7 @@
 	},
 	"dependencies": {
 		"@mdi/font": "^7.4.47",
+		"@stripe/stripe-js": "^3.3.0",
 		"axios": "^1.6.8",
 		"vue": "^3.4.15",
 		"vue-router": "^4.2.5",

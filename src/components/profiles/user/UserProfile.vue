@@ -23,7 +23,7 @@
 
      try {
        const response = await axios.get(`http://localhost:8080/api/v1/profiles/${email}`);
-       content = response.data;
+       content.value = response.data;
        profileDetails.value = response.data;
      } catch (error) {
        console.error("Error:", error);
