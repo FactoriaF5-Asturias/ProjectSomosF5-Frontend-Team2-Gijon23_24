@@ -1,18 +1,42 @@
-<script setup>
-
-</script>
-
 <template>
-    <body>
-        <img src="/images/website-mantenimiento.jpg" alt="">
-        <div>
-            <h1>En construccion</h1>
-            <hr>
-            <p>Lamentablemente, nuestra página aún está en construcción y algunas secciones pueden no estar disponibles temporalmente. Estamos trabajando arduamente para completarla lo antes posible y brindarles la mejor experiencia posible.</p>
-            <router-link to="/"> Volver al inicio </router-link>
-        </div>
-    </body>
-</template>
+    <div>
+      <button @click="toggleFavorite">{{ isFavorite ? 'Eliminar de favoritos' : 'Agregar a favoritos' }}</button>
+    </div>
+  </template>
+  
+  <script>
+  import axios from 'axios';
+  
+  export default {
+    data() {
+      return {
+        isFavorite: false,
+        productId: '',
+        profileId: '',
+      };
+    },
+    methods: {
+      async toggleFavorite() {
+        try {
+          const response = await axios.put(`/api/profiles/update-favorites/${this.productId}`);
+          if (response.status === 200) {
+            const updatedProfile = response.data;
+            console.log('Perfil actualizado:', updatedProfile);
+            
+            this.isFavorite = !this.isFavorite;
+           
+          } else {
+            console.error('Error al actualizar la lista de favoritos');
+          }
+        } catch (error) {
+          console.error('Error al realizar la solicitud:', error);
+        }
+      }
+    }
+  };
+  </script>
+  
+  
 
 <style scoped lang="scss">
 
