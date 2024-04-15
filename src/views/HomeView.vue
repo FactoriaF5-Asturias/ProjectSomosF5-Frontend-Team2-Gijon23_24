@@ -7,6 +7,7 @@ import Banner from "@/components/Banner.vue";
 // import Card from '@/components/card/Card.vue';
 import Slider from '@/components/Slider.vue';
 
+
 const products = ref([]);
 const router = useRouter();
 

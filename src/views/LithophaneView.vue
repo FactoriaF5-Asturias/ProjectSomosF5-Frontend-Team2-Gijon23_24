@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import LitofaniaCardContainer from '@/components/card/LitofaniaCardContainer.vue';
+import Space from '@/components/general/Space.vue';
 
 
 const litofanias = ref([]);
@@ -24,6 +25,7 @@ onMounted(() => {
 </script>
 
 <template>
+
 
   <LitofaniaCardContainer />
 </template>
@@ -50,6 +52,7 @@ div {
   align-items: center;
   justify-content: center;
   gap: 4rem;
+  margin-top: 6.5rem;
 
   hr {
     width: 80%;

@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import GeekCardContainer from '@/components/card/GeekCardContainer.vue';
-
+import Space from '@/components/general/Space.vue';
 const Geek = ref([]);
 
 async function fetchGeekProducts() {
@@ -23,6 +23,9 @@ onMounted(() => {
 </script>
 
 <template>
+   <div>
+    
+  </div>
   <GeekCardContainer />
 </template>
 
@@ -35,6 +38,7 @@ body {
   justify-content: space-evenly;
   align-items: center;
   background-color: $primary-background;
+  
 }
 
 img {
@@ -50,6 +54,7 @@ div {
   align-items: center;
   justify-content: center;
   gap: 4rem;
+  margin-top: 6.5rem;
 
   hr {
     width: 80%;

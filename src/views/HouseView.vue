@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import HouseCardContainer from '../components/card/HouseCardContainer.vue';
-
+import Space from '@/components/general/Space.vue';
 const homeProducts = ref([]);
 
 async function fetchHouseProducts() {
@@ -20,61 +20,63 @@ onMounted(() => {
 });
 </script>
 
+
 <template>
+  
     <HouseCardContainer />
 </template>
 
 <style scoped>
 body {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: #252525;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #252525;
 }
 
 img {
-    width: 100%;
-    height: 50%;
+  width: 50%;
 }
 
 div {
-    width: 30%;
-    height: 40%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4rem;
+  width: 100%;
+  height:auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  margin-top: 6.5rem;
 
-    hr {
-        width: 80%;
-    }
+  hr {
+    width: 80%;
+  }
 
-    h1 {
-        color: white;
-        font-size: 4rem;
-        font-weight: 800;
-    }
+  h1 {
+    color: white;
+    font-size: 4rem;
+    font-weight: 800;
+  }
 
-    p {
-        font-size: 2rem;
-        color: white;
-        text-align: center;
-    }
+  p {
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+  }
 
-    a {
-        padding: 1.1rem;
-        background-color: #AE81D1;
-        border-radius: 5px;
-        font-size: 2rem;
-        color: white;
-        transition: all 200ms ease-in-out;
-        width: 16rem;
-        text-align: center;
-    }
+  a {
+    padding: 1.1rem;
+    background-color:#252525;
+    border-radius: 5px;
+    font-size: 2rem;
+    color: white;
+    transition: all 200ms ease-in-out;
+    width: 16rem;
+    text-align: center;
+  }
 
-    a:hover {
-        transform: scale(1.1);
-    }
+  a:hover {
+    transform: scale(1.1);
+  }
 }
 </style>
