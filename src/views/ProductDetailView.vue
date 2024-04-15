@@ -20,7 +20,7 @@
         {{ product.productName }}
       </h3>
       <h2>
-        {{ product.price }}<span style="font-size: 3rem">€</span>
+        {{ product.price }}<span style="font-size: 1.5rem">€</span>
       </h2>
       <p>
         {{ product.productDescription}}

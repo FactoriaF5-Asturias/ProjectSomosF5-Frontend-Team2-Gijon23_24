@@ -8,7 +8,7 @@
 
 <style scoped lang="scss">
 section{
-	height: 19rem;
+	height: 25rem;
     background-color: $primary-background;
 }
 </style>
