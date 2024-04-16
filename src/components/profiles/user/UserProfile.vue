@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
  import { useAuthStore } from '@/stores/AuthStore';
  import { onMounted, ref} from 'vue';
  import { useRouter } from "vue-router";
@@ -81,9 +81,9 @@
      } catch (error) {
         console.error("Error:", error);
       }
-    };
+    }; -->
 
-</script>
+<!-- </script> -->
 
 <template>
 

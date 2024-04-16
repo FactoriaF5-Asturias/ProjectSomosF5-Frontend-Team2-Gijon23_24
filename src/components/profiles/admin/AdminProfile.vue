@@ -1,108 +1,60 @@
 <script setup>
+import SuccessPopup from '@/components/general/header/SuccessPopup.vue';
+import ErrorPassword from '@/components/general/header/ErrorPassword.vue';
  import { ref } from 'vue';
- import axios from 'axios';
- //import { VAlert } from 'vuetify/lib';
+ //import axios from 'axios';
 
- const currentPassword = ref('');
+const currentPassword = ref('');
  const newPassword = ref('');
  const confirmPassword = ref('');
- const successMessage = ref('');
- const errorMessage = ref('');
 
- function changePassword() {
-  if (currentPassword.value !== 'asdf') {
-    errorMessage.value = 'La contraseña actual es incorrecta.';
-    setTimeout(() => {
-      errorMessage.value = '';
-    }, 5000);
-    
-    return;
+  const message = ref('');
+ const errorVisible = ref(false);
+ const successVisible = ref(false);
+
+ const passwordConfirmation = () => {
+  if (newPassword.value === confirmPassword.value) {
+    message.value = "Las contraseñas coinciden.";
+  } else {
+    message.value = "Las contraseñas no coinciden.";
   }
+}
 
-  if (newPassword.value !== confirmPassword.value) {
-    errorMessage.value = 'Las contraseñas no coinciden.';
-    setTimeout(() => {
-      errorMessage.value = '';
-    }, 5000);
+const uri = import.meta.env.VITE_API_ENDPOINT_USERS;
 
-    return;
+
+const changePassword = async () => {
+  try {
+    if (newPassword.value !== confirmPassword.value) {
+      successVisible.value = false;
+      errorVisible.value = true;
+      setTimeout(() => {
+        errorVisible.value = false;
+      }, 5000);
+      return;
+    }
+
+    const response = await axios.post(`${uri}/users/profiles`, {
+      currentPassword: currentPassword.value,
+      newPassword: newPassword.value
+    });
+
+    if (response.status === 200) {
+      console.log('El cambio de contraseña se ha realizado con éxito.');
+      successVisible.value = true;
+      setTimeout(() => {
+        successVisible.value = false;
+        closeForm();
+      }, 10000);
+    } else {
+      console.log('Error al realizar el cambio de contraseña.');
+    }
+  } catch (error) {
+    console.error(error);
   }
+};
 
-  successMessage.value = 'Contraseña cambiada exitosamente.';
-  setTimeout(() => {
-    successMessage.value = '';
-  }, 5000);
-
-  currentPassword.value = '';
-  newPassword.value = '';
-  confirmPassword.value = '';
-}
-
-function clearErrorMessage() {
-  errorMessage.value = '';
-}
-
-function clearSuccessMessage() {
-  successMessage.value = '';
-}
-
-//   async function changePassword() {
-//    if (newPassword.value !== confirmPassword.value) {
-//      errorMessage.value = 'Las contraseñas no coinciden.';
-//setTimeout(() => {
-  //    errorMessage.value = '';
-    //}, 5000);
-//    return;
-//    }
-
-//    try {
-//     // Verificar la contraseña actual
-//     const response = await axios.post('/api/checkPassword', { password: currentPassword.value });
-
-//     if (response.data.valid) {
-//       // Si la contraseña actual es correcta, actualizar en backend
-//       await axios.post('/api/updatePassword', { newPassword: newPassword.value });
-//       successMessage.value = 'Contraseña cambiada exitosamente.';
-
-//       // Limpiar los campos de contraseña
-//       currentPassword.value = '';
-//       newPassword.value = '';
-//       confirmPassword.value = '';
-
-//      setTimeout(() => {
-//        successMessage.value = '';
-//      }, 5000);
-
-//     } else {
-//       errorMessage.value = 'La contraseña actual es incorrecta.';
-//      
-//      setTimeout(() => {
-//      errorMessage.value = '';
-//      }, 5000);
-
-//}
-//   } catch (error) {
-//     console.error('Error al cambiar la contraseña:', error);
-//     errorMessage.value = 'Hubo un error al cambiar la contraseña. Por favor, inténtelo de nuevo más tarde.';
-//   
-//   setTimeout(() => {
-//   errorMessage.value = '';
-//    }, 5000);
-//}
-
-
-// function clearErrorMessage() {
-//   errorMessage.value = '';
-// }
-
-// function clearSuccessMessage() {
-//   successMessage.value = '';
-// }
-
-
-
-
- const cancelData = () => {
+const cancelData = () => {
   currentPassword.value = "";
   newPassword.value = "";
   confirmPassword.value = "";
@@ -111,10 +63,14 @@ function clearSuccessMessage() {
 </script>
 
 <template>
-
+ 
   <body>
+    <div>
+      <SuccessPopup :show="successVisible" message="¡Contraseña cambiada con éxito!" />
+      <ErrorPassword :show="errorVisible" :message="'Las contraseñas no coinciden.'" @close="errorVisible = false" />
 
-    <div class="user-profile">
+    
+      <div class="user-profile">
       <h1>PERFIL DEL ADMINISTRADOR</h1>
     </div>
 
@@ -125,21 +81,22 @@ function clearSuccessMessage() {
        <h2>Bienvenido Andrés</h2> 
     </div>
 
-      <form @submit.prevent="submitForm">
+      <form @submit.prevent="changePassword">
 
         <div class="input-box">
-          <label>Contraseña Antigüa</label>
-          <input type="password" id="current-password" v-model="currentPassword">
+          <label  for="currentPassword">Contraseña Antigüa</label>
+          <input type="password" id="current-password" v-model="currentPassword" required>
         </div>
 
         <div class="input-box">
-          <label>Contraseña</label>
-          <input type="password" id="newPassword" v-model="newPassword">
+          <label  for="newPassword">Contraseña</label>
+          <input type="password" id="newPassword" v-model="newPassword" required>
         </div>
 
         <div class="input-box">
           <label for="confirmPassword">Confirmar Contraseña</label>
-          <input :type="showPassword ? 'text' : 'password'" id="confirmPassword" v-model="confirmPassword" required>
+          <input :type="showPassword ? 'text' : 'password'" id="confirmPassword" v-model="confirmPassword" @input="passwordConfirmation" required>
+          <span>{{ message }}</span>
         </div> 
 
         <div class="check-box">
@@ -149,20 +106,15 @@ function clearSuccessMessage() {
   
         <div class="btns-container">
           <button id="cancel" @click="cancelData()">Cancelar</button>
-          <button id="save" @click="changePassword()">Guardar</button>
+          <button type="submit" id="save">Guardar</button>
         </div>
 
       </form>
 
-      <div>
-
-        <div v-if="errorMessage" class="error-message" @click="clearErrorMessage">{{ errorMessage }}</div>
-    <div v-if="successMessage" class="success-message" @click="clearSuccessMessage">{{ successMessage }}</div>
-        <!-- <v-alert v-if="successMessage" type="success" outlined>{{ successMessage }}</v-alert>
-        <v-alert v-if="errorMessage" type="error" outlined>{{ errorMessage }}</v-alert> -->
-      </div>
+   
 
     </div>
+  </div>
   </body>
 
 </template>
@@ -297,4 +249,6 @@ form {
      transform: scale(1.1);
    }
 }
+
+
 </style>

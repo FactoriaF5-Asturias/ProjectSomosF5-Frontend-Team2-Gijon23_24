@@ -1,14 +1,22 @@
 <script setup>
+import { defineProps, defineEmits } from 'vue';
+
 const props = defineProps({
   message: String,
   show: Boolean
 });
+
+const emits = defineEmits(['close']);
+
+const closeMessage = () => {
+  emits('close');
+};
 </script>
 
 <template>
   <div v-if="show">
-    <img src="/icons/icon-cross-white.svg" alt="">
-    <p>Lo siento, las contraseñas no coinciden.</p>
+    <img src="/icons/icon-cross-white.svg" alt="" @click="closeMessage">
+    <p> {{ message }}</p>
   </div>
 </template>
 
