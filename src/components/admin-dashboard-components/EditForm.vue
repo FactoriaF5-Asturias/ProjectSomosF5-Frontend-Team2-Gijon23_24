@@ -26,22 +26,21 @@ const productDescription = ref('');
 
 // Images.
 
-const existingImages = ref([]);
 const deletedImages = ref([]);
 const addedImages = ref([]);
-const imageDirectory = ref('');
+const imageDirectory = ref([]);
 const otherImagesDirectory = ref([])
+const mainImage = ref('')
 
 
 
 function findImageForProduct(product) {
     const image = product.images.find(img => img.mainImage === true);
-    return image.imageName
+    return image
 }
 
 function findOtherImagesForProduct(product) {
     const images = product.images.filter(img => img.mainImage === false);
-    console.log(images)
     return images
 }
 
@@ -58,6 +57,7 @@ const handleMainImageChange = (event) => {
 // Get product data.
 
 async function getProductData(id) {
+
   try {
     const response = await axios.get(
       `http://localhost:8080/api/v1/products/${id}`,
@@ -68,33 +68,41 @@ async function getProductData(id) {
         withCredentials: true,
       }
     );
-    existingImages.value = response.data.images
+    
     product.value = response.data
     productName.value = response.data.productName;
     price.value = response.data.price;
     categoryId.value = response.data.categories[0].id;
     productDescription.value = response.data.productDescription;
-    imageDirectory.value = uri + "/" + findImageForProduct(product.value);
-    console.log(imageDirectory.value)
+    imageDirectory.value.push(findImageForProduct(product.value));
+    mainImage.value = imageDirectory.value.imageName
     otherImagesDirectory.value = findOtherImagesForProduct(product.value)
-    console.log(otherImagesDirectory.value)
+    
       
 	} catch (error) {
 		console.error("Error al conseguir los datos del producto", error);
 		throw error;
-	}
+  }
 }
 
 // Add deleted images to separate array.
 
 const addDeletedImage = (imageId) => {
-  const index = existingImages.value.findIndex(image => image.id === imageId);
+  const index = otherImagesDirectory.value.findIndex(image => image.id === imageId);
   if (index !== -1) {
-    const deletedImage = existingImages.value.splice(index, 1)[0];
+    const deletedImage = otherImagesDirectory.value.splice(index, 1)[0];
     deletedImages.value.push(deletedImage);
-
+    console.log(deletedImages.value)
+    console.log(otherImagesDirectory.value)
   }
 }
+
+function addDeletedMainImage() {
+  const deletedMainImage = imageDirectory.value.splice(0,1)[0];
+  deletedImages.value.push(deletedMainImage);
+  console.log(deletedImages.value)
+}
+
 
 // API Calls handler.
 
@@ -106,7 +114,7 @@ async function handleUpdate() {
 		console.log("Producto actualizado exitosamente.");
 	} catch (error) {
 		console.error("Error al actualizar el producto", error);
-
+  
 		deleteProduct(productId);
 	}
 }
@@ -128,7 +136,7 @@ async function updateProduct(id) {
 				headers: {
 					"Content-Type": "application/json",
 				},
-				withCredentials: true,
+            withCredentials: true,
 			}
 		);
 	} catch (error) {
@@ -178,7 +186,7 @@ onMounted(() => {
 </script>
 
 <template>
-
+<Suspense>
   <div class="modal" @click="closeForm">
     <div class="modal_container" @click.stop>
 
@@ -196,9 +204,9 @@ onMounted(() => {
           <div class="image-main-container">
             <label>Imagen Principal</label>
             <div class="image-main">
-              <article>
-                <div class="delete-image" :style="{ 'background-image': 'url(' + imageDirectory + ')' }" ></div>
-                <button @click="() => addDeletedImage()">Delete</button>
+              <article v-for="image in imageDirectory" :key="image.id">
+                  <div class="delete-image" :style="{ 'background-image': `url('http://localhost:8080/api/v1/imgs/${image.imageName}')` }"></div>
+                  <button @click="() => addDeletedMainImage()">Delete</button>
               </article>
             </div>
           </div>
@@ -256,6 +264,7 @@ onMounted(() => {
       </form>
     </div>
   </div>
+  </Suspense>
 </template>
 
 <style lang="scss" scoped>
