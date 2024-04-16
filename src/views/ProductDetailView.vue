@@ -102,9 +102,11 @@ function restarCantidad() {
     </div>
 
     <div class="detail-text-container">
-      <h3 class="product-name"> {{ product.productName }} </h3>
-      <h2> {{ product.price }} 
-        <span style="font-size: 3rem">€</span>
+      <h3 class="product-name">
+        {{ product.productName }}
+      </h3>
+      <h2>
+        {{ product.price }}<span style="font-size: 1.5rem">€</span>
       </h2>
       <p> {{ product.productDescription}} </p>
     </div>

@@ -21,7 +21,7 @@ const authStore = useAuthStore();
       <div>
 
         <div id="logotype_container">
-          <img src="/images/Logo3d.png" alt="PrintGo logotype">
+          <img src="/public/images/printgoLogo.png" alt="PrintGo logotype">
         </div>
 
         <div id="actions_container">
