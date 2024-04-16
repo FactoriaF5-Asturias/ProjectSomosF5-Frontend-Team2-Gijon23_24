@@ -40,6 +40,7 @@ getProducts();
     background-color: rgba(33, 33, 33, 1);
     color:gray;
     font-size:  4em;
+    margin-top: 5.5rem;
    
    }
    #card{
