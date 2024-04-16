@@ -80,7 +80,7 @@ onMounted(async () => {
   // }
   // messages.value.push(`Client secret returned.`);
 
-  elements = stripe?.elements({clientSecret, appearance});
+  elements = stripe.elements({clientSecret, appearance});
   const paymentElement = elements.create('payment');
   paymentElement.mount("#payment-element");
   const linkAuthenticationElement = elements.create("linkAuthentication");
@@ -135,27 +135,27 @@ const handleSubmit = async () => {
 <style lang="scss" scoped>
 h1 {
   text-align: center;
-  font-family: "Alex Brush", cursive;
   font-size: 2rem;
-  padding: 2%;
+  padding: 8% 0 2% 0;
+  
 }
 main {
   background-color: white;
-  min-height: 100vh;
 }
 
 #payment-element, #link-authentication-element {
-  width: 60%;
+  width: 50%;
   margin: auto;
 }
 
 button {
-  background-color: darkcyan;
-  padding: 0.5rem;
-  // border: 1px solid black;
+  background-color: $primary-color;
+  padding: 1rem;
   border-radius: 1rem;
-  margin-left: 20%;
+  margin-left: 25%;
   margin-top: 2%;
   color: white;
+  font-size: 1.5rem;
+  margin-bottom: 10%;
 }
 </style>

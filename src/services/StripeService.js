@@ -11,6 +11,7 @@ export default class StripeService {
             headers: { 
               'Content-Type': 'application/json'
             },
+            withCredentials: true
           };
 
         try {
