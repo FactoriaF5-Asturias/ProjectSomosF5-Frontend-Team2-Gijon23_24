@@ -45,7 +45,7 @@ function findOtherImagesForProduct(product) {
 }
 
 // Handle FILES upload.
-const handleFilesChange = (event) => {
+const handleFilesChange = (event) => { 
 	selectedFiles.value = Array.from(event.target.files);
 };
 
