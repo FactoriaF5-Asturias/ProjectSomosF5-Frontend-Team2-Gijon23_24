@@ -19,7 +19,7 @@ const profileId = 'user_id';
 
 const loadFavoriteProducts = async () => {
   try {
-    const response = await axios.get(`/api/profiles/${profileId}/favorites`);
+    const response = await axios.get(`/api/profiles/${profileId}`);
     if (response.status === 200) {
       favoriteproducts.value = response.data;
     } else {
@@ -49,7 +49,8 @@ const removeFromFavorites = async (product) => {
       isFavorite: false
     });
     if (response.status === 200) {
-      favoriteproducts.value = favoriteproducts.value.filter(item => item.id !== product.id);
+      favoriteproducts.value = response.data.favorites;
+      
     } else {
       console.error('Error al actualizar la lista de favoritos');
     }
@@ -60,7 +61,7 @@ const removeFromFavorites = async (product) => {
 
 const addToFavorites = async (product) => {
   try {
-    const response = await axios.post(`/api/profiles/add-to-favorites`, {
+    const response = await axios.post(`/api/profiles/update-favorites`, {
       productId: product.id,
       profileId
     });
@@ -74,8 +75,8 @@ const addToFavorites = async (product) => {
   }
 };
 
-const isFavorite = (product) => {
-  return favoriteproducts.value.some(item => item.id === product.id);
+const isFavorite = (products) => {
+  return favoriteproducts.value.some(favorite => favorite.id === product.id);
 };
 
 onMounted(loadFavoriteProducts);
