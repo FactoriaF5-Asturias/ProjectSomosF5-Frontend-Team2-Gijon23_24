@@ -64,7 +64,7 @@ async function createProduct() {
 	console.log(data);
 	try {
 		const response = await axios.post(
-			"http://localhost:8080/api/v1/products",
+			"https://api-printgo.factoriaf5asturias.org/api/v1/products",
 			data,
 			{
 				headers: {
@@ -89,7 +89,7 @@ async function uploadImages(productId) {
 	formData.append("file", selectedMainImage.value);
 	try {
 		await axios.post(
-			`http://localhost:8080/api/v1/images/uploadImages/${productId}`,
+			`https://api-printgo.factoriaf5asturias.org/api/v1/${productId}`,
 			formData,
 			{
 				headers: {
@@ -112,7 +112,7 @@ async function uploadImages(productId) {
 async function deleteProduct(productId) {
 	try {
 		await axios.delete(
-			`http://localhost:8080/api/v1/products/${productId}`
+			`https://api-printgo.factoriaf5asturias.org/api/v1/${productId}`
 		);
 
 		console.log("Producto borrado exitosamente.");
