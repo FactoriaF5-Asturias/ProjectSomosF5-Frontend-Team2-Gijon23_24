@@ -1,4 +1,4 @@
- <script setup>
+<script setup>
 import Card from './card/Card.vue';
 import { ref } from 'vue';
 import {useProductsStore} from "./../stores/productStore";
