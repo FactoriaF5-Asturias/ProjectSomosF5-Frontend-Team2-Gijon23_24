@@ -1,11 +1,7 @@
 <script setup>
-
 import ImagesService from '../../services/ImagesService';
-import { useProductsStore } from '../../stores/productStore';
 
-const productsStore = useProductsStore();
-
-const imagesService = new ImagesService();
+const imagesService = new ImagesService(); //borrar archivo
 
 const props = defineProps({
    product: Object
@@ -17,8 +13,12 @@ const imageDirectory = uri + "/" + findImageForProduct(props.product);
    
 function findImageForProduct(product) {
    const image = product.images.find(img => img.mainImage === true);
-      return image.imageName
-      
+   if (image == undefined) {
+      const emptyImage = 'tope-de-puerta.jpg';
+      return emptyImage
+   }   
+   return image.imageName
+
 }
 
 
