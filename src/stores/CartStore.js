@@ -18,7 +18,7 @@ export const useCartStore = defineStore({
   // Getters para obtener datos del estado de la store
   getters: {
     // Getter para obtener los elementos del carrito
-    getitems() {
+    getItems() {
       return this.items;
     },
   },

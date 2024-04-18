@@ -15,9 +15,9 @@ async function fetchHouseProducts() {
     }
 }
 
-onMounted(() => {
-    fetchHouseProducts();
-});
+// onMounted(() => {
+//     fetchHouseProducts();
+// });
 </script>
 
 

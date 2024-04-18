@@ -1,14 +1,13 @@
 <script setup>
 import { useCartStore } from '@/stores/CartStore';
-import CartCard from './../components/stripe/CartCard.vue'
+import CartCard from './../components/payments/stripe/CartCard.vue'
+import { useRouter } from 'vue-router';
 
 const store = useCartStore();
-
-
-console.log(store.cart)
+const router  = useRouter();
 
 const payWithStripe = () => {
-
+    router.push('/stripe-checkout');
 }
 </script>
 

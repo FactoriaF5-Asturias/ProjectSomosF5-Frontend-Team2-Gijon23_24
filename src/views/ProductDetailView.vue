@@ -18,7 +18,7 @@ const addCart = () => {
   let productData = {
     id: product.id,
     productName: product.productName,
-    price: product.price,
+    price: changePrice(product.price),
   };
 
   store.addToCart(product, productData);
@@ -47,7 +47,7 @@ function restarCantidad() {
     cantidad.value--;
   }
 }
-
+//string, quitar el punto y luego
 let selectedThumbnail = '';
 
 onMounted(async () => {
@@ -79,6 +79,17 @@ function changeMainImage(image) {
   imageDirectory.value = uri + "/" + image;
   selectedThumbnail = image;
 }
+
+function changePrice(decimalPrice) {
+
+  let priceString = decimalPrice.toString();
+  let [integerPart, decimalPart] = priceString.split('.');
+  let priceInteger = parseInt(integerPart) * 100 + (decimalPart ? parseInt(decimalPart) : 0);
+  
+  console.log('precio:' + priceInteger )
+  return priceInteger;
+}
+changePrice(15)
 
 </script>
 

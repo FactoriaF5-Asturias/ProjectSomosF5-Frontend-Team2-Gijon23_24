@@ -3,6 +3,7 @@
 const props = defineProps({
   product: Object
 });
+
 </script>
 
 <template>
@@ -14,4 +15,8 @@ const props = defineProps({
 
 <style scoped lang="scss">
 
+div {
+  height: 10rem;
+  background-color: red;
+}
 </style>
