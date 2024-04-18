@@ -14,7 +14,7 @@ const getProducts = async ()=> {
     await productStore.fetchProducts();
     
     products.value = productStore.products.reverse()
-    .slice(0, 10);
+    .slice(0, 15);
 
 } catch (error) {
     console.error("No se consiguieron los datos:",error)
