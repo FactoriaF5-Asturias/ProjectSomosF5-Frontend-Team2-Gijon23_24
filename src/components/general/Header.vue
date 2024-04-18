@@ -5,10 +5,7 @@ import LoggedProfile from "./header/LoggedProfile.vue";
 import FactoriaAlert from "./../alerts/FactoriaAlert.vue";
 import Navbar from "./header/Navbar.vue";
 
-
-
 const authStore = useAuthStore();
-
 
 </script>
 
@@ -21,7 +18,7 @@ const authStore = useAuthStore();
       <div>
 
         <div id="logotype_container">
-          <img src="/public/images/printgoLogo.png" alt="PrintGo logotype">
+          <img src="/images/printgoLogo.png" alt="PrintGo logotype">
         </div>
 
         <div id="actions_container">
@@ -37,7 +34,7 @@ const authStore = useAuthStore();
             </div>
           </router-link>
 
-          <router-link to="/cart">
+          <router-link to="/carrito">
             <div>
               <img src="/icons/icon-shopping-cart.svg" alt="">
               <p>Carrito</p>

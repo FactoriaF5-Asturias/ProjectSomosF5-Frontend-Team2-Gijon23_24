@@ -1,11 +1,7 @@
 <script setup>
-
 import ImagesService from '../../services/ImagesService';
-import { useProductsStore } from '../../stores/productStore';
 
-const productsStore = useProductsStore();
-
-const imagesService = new ImagesService();
+const imagesService = new ImagesService(); //borrar archivo
 
 const props = defineProps({
    product: Object

@@ -1,6 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
+import { ref } from 'vue';
 
 const navbarVisible = ref(true);
 
