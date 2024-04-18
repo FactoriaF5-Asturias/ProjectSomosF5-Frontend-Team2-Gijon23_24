@@ -1,8 +1,8 @@
 <script setup>
-    import Carrito from '../components/Carrito.vue';
+    import Cartshop from '../components/Cart.vue';
 </script>
 <template>
-    <Carrito/>
+    <Cartshop/>
 </template>
 
 <style scoped lang="scss">
