@@ -54,20 +54,6 @@ const authStore = useAuthStore();
       <Navbar />
 
     </header>
-
-		<nav>
-			<router-link to="/" exact-active-class="active">Inicio</router-link>
-			<router-link to="/about" exact-active-class="active"
-				>Litofanía</router-link
-			>
-			<router-link to="/about" exact-active-class="active"
-				>Hogar</router-link
-			>
-			<router-link to="/about" exact-active-class="active"
-				>Geek</router-link
-			>
-		</nav>
-	</header>
 </template>
 
 <style lang="scss" scoped>
