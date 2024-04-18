@@ -12,15 +12,18 @@ const props = defineProps({
 })
 
 const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
+
 const imageDirectory = uri + "/" + findImageForProduct(props.product);
 
-   
+
 function findImageForProduct(product) {
    const image = product.images.find(img => img.mainImage === true);
+   if (image == undefined) {
+      const defaultImage = 'placeholder-image.jpg';
+      return defaultImage;
+   }
       return image.imageName
-      
 }
-
 
 </script>
 <template>
