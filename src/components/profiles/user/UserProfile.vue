@@ -112,14 +112,10 @@ const cancelData = () => {
       } else {
         console.error('Error de respuesta:', error.response);
       }
-<<<<<<< HEAD
-    }; -->
-=======
     }
 };
->>>>>>> dev
 
-<!-- </script> -->
+</script>
 
 <template>
 
