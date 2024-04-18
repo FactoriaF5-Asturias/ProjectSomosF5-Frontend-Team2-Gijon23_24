@@ -12,7 +12,6 @@ import * as directives from 'vuetify/directives'
 import { useAuthStore } from './stores/AuthStore'
 import 'vuetify/styles'
 
-
 const pinia = createPinia();
 
 const vuetify = createVuetify({

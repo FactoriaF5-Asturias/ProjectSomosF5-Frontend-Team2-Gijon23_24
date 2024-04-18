@@ -7,7 +7,7 @@ import HouseView from '../views/HouseView.vue'
 import LithophaneView from '../views/LithophaneView.vue'
 import UserProfileView from '../views/UserProfileView.vue'
 import AdminProfileView from '../views/AdminProfileView.vue'
-
+import StripeCheckoutView from '@/views/StripeCheckoutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +21,14 @@ const router = createRouter({
       path: '/cart',
       name: 'carrito',
       component: CartView
+    },
+    
+    {
+      path:'/Detail/:id_product',
+      name: "detail",
+      component: () => import('../views/ProductDetailView.vue'),
+      props: true
+      
     },
     {
       path: '/favorites',
@@ -53,6 +61,11 @@ const router = createRouter({
       path: "/admin/profile",
       name: "admin-Profile",
       component: AdminProfileView,
+    },
+    {
+      path: "/stripe-checkout",
+      name: "stripe-checkout",
+      component: StripeCheckoutView,
     }
   ]
 });

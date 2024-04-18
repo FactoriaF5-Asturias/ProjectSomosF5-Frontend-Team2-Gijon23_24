@@ -4,11 +4,11 @@ import { useAuthStore } from './../../../stores/AuthStore';
 
 const authStore = useAuthStore();
 
-console.log(authStore.userRole, authStore.username, authStore.isAuthenticated);
+const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 
 const userLogout = async () => {
     try {
-        await axios.get('http://localhost:8080/api/v1/logout', {}, {withCredentials: true});
+        await axios.get(`${uri}/logout`, {}, {withCredentials: true});
         authStore.userRole = '';
         authStore.username = '';
         authStore.isAuthenticated = false;
@@ -24,8 +24,10 @@ const userLogout = async () => {
 
 <template>
   <div>
+    <router-link to="/user/profile">
     <img id="photo" src="/icons/icon-user.svg" alt="user icon">
-   <router-link to="/user/profile"> <p> {{ authStore.username }} </p></router-link>
+      <p> {{ authStore.username }} </p>
+    </router-link>
     <hr>
     <button @click="userLogout">Cerrar sesión</button>
   </div>
@@ -36,6 +38,7 @@ div {
     height: 5rem;
     padding: 0.5rem;
     display: flex;
+    flex-direction: row;
     align-items: center;
     font-size: 1.5rem;
     color: white;
@@ -46,9 +49,22 @@ hr {
   width: 4rem;
 }
 img {
-  height: 100%;
+  height: 54px;
   border: 2px solid white;
   border-radius: 100%;
-  height: 100%;
+}
+a{
+  color: #fff;
+  background-color: #686868;
+  padding: 1rem;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem ;
+}
+a:hover{
+  color: #fff;
+  background-color: #3C3057;
 }
 </style>
