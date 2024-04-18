@@ -1,6 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import AboutView from "@/views/AboutView.vue";
+import CartView from "../views/CartView.vue";
+import FavoritesView from "../views/FavoritesView.vue";
+import GeekView from "../views/GeekView.vue";
+import HouseView from "../views/HouseView.vue";
+import LithophaneView from "../views/LithophaneView.vue";
+import UserProfileView from "../views/UserProfileView.vue";
+import AdminProfileView from "../views/AdminProfileView.vue";
 import DashboardView from "@/views/DashboardView.vue";
 
 const router = createRouter({
@@ -8,13 +14,51 @@ const router = createRouter({
 	routes: [
 		{
 			path: "/",
-			name: "home",
+			name: "inicio",
 			component: HomeView,
 		},
 		{
-			path: "/about",
-			name: "about",
-			component: AboutView,
+			path: "/cart",
+			name: "carrito",
+			component: CartView,
+		},
+
+		{
+			path: "/Detail/:id_product",
+			name: "detail",
+			component: () => import("../views/ProductDetailView.vue"),
+			props: true,
+		},
+		{
+			path: "/favorites",
+			name: "favoritos",
+			component: FavoritesView,
+		},
+		{
+			path: "/geek",
+			name: "geek",
+			component: GeekView,
+		},
+		{
+			path: "/house",
+			name: "hogar",
+			component: HouseView,
+		},
+		{
+			path: "/lithophane",
+			name: "litofanías",
+			component: LithophaneView,
+		},
+		{
+			path: "/user/profile/:id",
+			name: "user-Profile",
+			component: UserProfileView,
+			props: true,
+		},
+		{
+			path: "/admin/profile",
+			name: "admin-Profile",
+			component: AdminProfileView,
 		},
 		{
 			path: "/dashboard",
@@ -23,5 +67,3 @@ const router = createRouter({
 		},
 	],
 });
-
-export default router;

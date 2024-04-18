@@ -1,9 +1,9 @@
 import axios from "axios";
 
 export default class ImagesService {
-  constructor() {
-    this.uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
-  }
+
+   uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
+
 
   async getImagesByName(imageName) {
     try {

@@ -6,8 +6,7 @@ import Card from '@/components/card/Card.vue';
 
 <template>
 	<main>
-		<Banner  />
-
+		<section></section>
 		<Card/>
   <ExplorerCategory/>
 
@@ -19,7 +18,8 @@ import Card from '@/components/card/Card.vue';
 p {
 	margin-top: 100rem;
 }
-
+section{
+	height: 21rem;
+}
 
 </style>
-

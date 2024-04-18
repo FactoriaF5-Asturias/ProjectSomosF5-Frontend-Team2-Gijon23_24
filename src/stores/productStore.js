@@ -6,18 +6,24 @@ export const useProductsStore = defineStore("products", {
 		products: [],
 		isLoaded: true,
 	}),
+ 
+ actions: {
+  async fetchProducts() {
+    const productsService = new ProductsService();
+    try {
+      const products = await productsService.getProducts();
+      this.products = products;
+      this.isLoaded = true;
+    } catch (error) {
+      console.error('Error al cargar los productos:', error);
+      this.isLoaded = false; 
+      this.handleImageError(); 
+    }
+  },
 
-	actions: {
-		async fetchProducts() {
-			const productsService = new ProductsService();
-			try {
-				const products = await productsService.getProducts();
-				this.products = products;
-				this.isLoaded = true;
-			} catch (error) {
-				console.error("Error al cargar los productos:", error);
-				this.isLoaded = false;
-			}
-		},
-	},
-});
+  handleImageError() {
+   
+    this.isLoaded = false; 
+  },
+},
+})
