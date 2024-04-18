@@ -2,36 +2,58 @@
 import { useAuthStore } from "./../../stores/AuthStore";
 import HeaderButtons from "./header/HeaderButtons.vue";
 import LoggedProfile from "./header/LoggedProfile.vue";
+import FactoriaAlert from "./../alerts/FactoriaAlert.vue";
+import Navbar from "./header/Navbar.vue";
+
+
 
 const authStore = useAuthStore();
+
+
 </script>
 
 <template>
-	<header>
-		<div>
-			<div>
-				<img src="/images/logotype.png" alt="PrintGo logotype" />
-			</div>
 
-			<div id="actions_container">
-				<router-link to="/">
-					<div>
-						<img src="/icons/icon-heart.svg" alt="" />
-						<p>Favoritos</p>
-					</div>
-				</router-link>
+    <header>
 
-				<router-link to="/about">
-					<div>
-						<img src="/icons/icon-shopping-cart.svg" alt="" />
-						<p>Carrito</p>
-					</div>
-				</router-link>
+      <FactoriaAlert/>
+      
+      <div>
 
-				<HeaderButtons v-if="!authStore.isAuthenticated" />
-				<LoggedProfile v-if="authStore.isAuthenticated" />
-			</div>
-		</div>
+        <div id="logotype_container">
+          <img src="/public/images/printgoLogo.png" alt="PrintGo logotype">
+        </div>
+
+        <div id="actions_container">
+          <router-link to="/stripe-checkout">
+            <div>
+              <p>Stripe Pay</p>
+            </div>
+          </router-link>
+          <router-link to="/favorites">
+            <div>
+              <img src="/icons/icon-heart.svg" alt="">
+              <p>Favoritos</p>
+            </div>
+          </router-link>
+
+          <router-link to="/cart">
+            <div>
+              <img src="/icons/icon-shopping-cart.svg" alt="">
+              <p>Carrito</p>
+            </div>
+          </router-link>
+
+          <HeaderButtons v-if="!authStore.isAuthenticated"/>
+          <LoggedProfile v-if="authStore.isAuthenticated"/>
+
+        </div>
+        
+      </div>
+
+      <Navbar />
+
+    </header>
 
 		<nav>
 			<router-link to="/" exact-active-class="active">Inicio</router-link>
@@ -50,19 +72,29 @@ const authStore = useAuthStore();
 
 <style lang="scss" scoped>
 header {
-	position: fixed;
-	width: 100%;
-	z-index: 99;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
 
-	> div {
-		background-color: $primary-background;
-		height: 10rem;
-		padding: 0 2rem;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		filter: drop-shadow(0 0 0.5rem black);
-	}
+  > div {
+    background-color: $primary-background;
+    height: 10rem;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    filter: drop-shadow(0px 10px 0.5rem rgba(0, 0, 0, 0.31));
+  }
+}
+
+#logotype_container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  > img {
+    height: 80%;
+  }
 }
 
 #actions_container {
@@ -71,38 +103,26 @@ header {
 	align-items: center;
 	gap: 2rem;
 
-	a > div {
-		gap: 1rem;
-		display: flex;
-		align-items: center;
+  a > div {
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+    transition: all 200ms ease-in-out;
+    border-radius: 5px;
+  
+    p {
+      font-weight: 300;
+      color: $light-font;
+      font-size: 1.4rem;
+    }
+  }
 
-		p {
-			font-family: "Poppins", sans-serif;
-			font-weight: 300;
-			color: $light-font;
-			font-size: 1.4rem;
-		}
-	}
+  a:hover > div {
+    background-color: rgb(72, 72, 72);
+  }
 }
-nav {
-	background-color: $primary-background;
-	height: 6rem;
-	padding-left: 7rem;
-	display: flex;
-	align-items: center;
-	gap: 3rem;
 
-	a {
-		font-family: "Poppins", sans-serif;
-		font-weight: 300;
-		color: $inactive-primary-color;
-		font-size: 1.7rem;
-		transition: all 0.2s ease-in-out;
-	}
-	a:hover {
-		color: $primary-color;
-	}
-}
 .active {
 	color: $primary-color;
 }

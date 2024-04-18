@@ -8,178 +8,7 @@ const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
 
 const props = defineProps({
   onClose: Function,
-  productId: Number
-});
-
-
-const closeForm = () => {
-  props.onClose();
-}
-
-// Product data.
-
-const product = ref();
-const productName = ref('');
-const price = ref('');
-const categoryId = ref('');
-const productDescription = ref('');
-
-// Images.
-
-const deletedImages = ref([]);
-const addedImages = ref([]);
-const imageDirectory = ref([]);
-const otherImagesDirectory = ref([])
-const mainImage = ref('')
-
-
-
-function findImageForProduct(product) {
-    const image = product.images.find(img => img.mainImage === true);
-    return image
-}
-
-function findOtherImagesForProduct(product) {
-    const images = product.images.filter(img => img.mainImage === false);
-    return images
-}
-
-// Handle FILES upload.
-const handleFilesChange = (event) => { 
-	selectedFiles.value = Array.from(event.target.files);
-};
-
-// Handle MAIN IMAGE upload.
-const handleMainImageChange = (event) => {
-	selectedMainImage.value = event.target.files[0];
-};
-
-// Get product data.
-
-async function getProductData(id) {
-
-  try {
-    const response = await axios.get(
-      `http://localhost:8080/api/v1/products/${id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      }
-    );
-    
-    product.value = response.data
-    productName.value = response.data.productName;
-    price.value = response.data.price;
-    categoryId.value = response.data.categories[0].id;
-    productDescription.value = response.data.productDescription;
-    imageDirectory.value.push(findImageForProduct(product.value));
-    mainImage.value = imageDirectory.value.imageName
-    otherImagesDirectory.value = findOtherImagesForProduct(product.value)
-    
-      
-	} catch (error) {
-		console.error("Error al conseguir los datos del producto", error);
-		throw error;
-  }
-}
-
-// Add deleted images to separate array.
-
-const addDeletedImage = (imageId) => {
-  const index = otherImagesDirectory.value.findIndex(image => image.id === imageId);
-  if (index !== -1) {
-    const deletedImage = otherImagesDirectory.value.splice(index, 1)[0];
-    deletedImages.value.push(deletedImage);
-    console.log(deletedImages.value)
-    console.log(otherImagesDirectory.value)
-  }
-}
-
-function addDeletedMainImage() {
-  const deletedMainImage = imageDirectory.value.splice(0,1)[0];
-  deletedImages.value.push(deletedMainImage);
-  console.log(deletedImages.value)
-}
-
-
-// API Calls handler.
-
-async function handleUpdate() {
-	try {
-		await updateProduct(props.productId);
-    await uploadImages(props.productId);
-    await deleteImages(deletedImages)
-		console.log("Producto actualizado exitosamente.");
-	} catch (error) {
-		console.error("Error al actualizar el producto", error);
-  
-		deleteProduct(productId);
-	}
-}
-
-// Update product data.
-
-async function updateProduct(id) {
-	const data = {
-		productName: productName.value,
-		price: price.value,
-		categoryId: categoryId.value,
-		productDescription: productDescription.value,
-	};
-	try {
-		const response = await axios.put(
-			`http://localhost:8080/api/v1/products/${id}`,
-			data,
-			{
-				headers: {
-					"Content-Type": "application/json",
-				},
-            withCredentials: true,
-			}
-		);
-	} catch (error) {
-		console.error("Error al actualizar datos del producto:", error);
-		throw error;
-	}
-}
-
-// Upload new images.
-
-async function uploadImages(id) {
-	let formData = new FormData();
-	selectedFiles.value.forEach((file) => {
-		formData.append("files", file);
-	});
-	formData.append("file", selectedMainImage.value);
-	try {
-		await axios.post(
-			`http://localhost:8080/api/v1/images/uploadImages/1`,
-			formData,
-			{
-				headers: {
-					"Content-Type": "multipart/form-data",
-				},
-				withCredentials: true,
-			}
-		);
-
-		console.log("Imágenes subidas exitosamente.");
-	} catch (error) {
-		console.error("Error al subir las imágenes:", error);
-
-		await deleteProduct(productId);
-
-		throw error;
-	}
-}
-
-
-
-
-onMounted(() => {
-  getProductData(props.productId);
+  id: String, 
 });
 
 
@@ -268,8 +97,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 .modal {
   display: flex;
   justify-content: center;
@@ -331,7 +158,6 @@ form {
     height: 8.7rem;
     border-radius: 0.5rem;
     background-color: #DDD8D8;
-    font-family: "Poppins", sans-serif;
   }
 }
 section {
@@ -353,7 +179,6 @@ section {
     height: 3rem;
     border-radius: 0.5rem;
     background-color: #DDD8D8;
-    font-family: "Poppins", sans-serif;
     font-size: 1rem;
   }
 }
@@ -365,7 +190,6 @@ section {
     width: 100%;
     height: 3rem;
     border-radius: 0.5rem;
-    font-family: "Poppins", sans-serif;
     font-size: 1rem;
     background-color: #DDD8D8;
   }
@@ -384,7 +208,6 @@ select {
   border-radius: 0.5rem;
   //border: 1px solid black;
   background-color: #DDD8D8;
-  font-family: "Poppins", sans-serif;
 }
 
 .images-container {
@@ -396,7 +219,6 @@ select {
     height: 5rem;
     //border-radius: 0.5rem;
     background-color: #DDD8D8;
-    font-family: "Poppins", sans-serif;
   }
 }
 
@@ -410,13 +232,11 @@ select {
     border-radius: 0.5rem;
     //border: 1px solid black;
     background-color: #DDD8D8;
-    font-family: "Poppins", sans-serif;
     font-size: 1rem;
   }
 }
 
 h1 {
-  font-family: "Poppins", sans-serif;
   font-size: 4rem;
   color:grey;
   margin-bottom: 5rem;
@@ -425,7 +245,6 @@ h1 {
 }
 
 label {
-  font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
@@ -438,7 +257,6 @@ label {
 
   button {
     background-color: #AE81D1;
-    font-family: "Poppins", sans-serif;
     font-size: 1.5rem;
     color: white;
     border-radius: 0.5rem;

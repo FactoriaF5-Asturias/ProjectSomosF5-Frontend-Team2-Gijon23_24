@@ -13,6 +13,9 @@ const closeForm = () => {
 	props.onClose();
 };
 
+uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
+uriImages = import.meta.env.VITE_API_ENDPOINT_IMAGES;
+
 const resetForm = () => {
 	productName.value = "";
 	price.value = "";
@@ -64,7 +67,7 @@ async function createProduct() {
 	console.log(data);
 	try {
 		const response = await axios.post(
-			"http://localhost:8080/api/v1/products",
+			`${this.uri}`,
 			data,
 			{
 				headers: {
@@ -89,7 +92,7 @@ async function uploadImages(productId) {
 	formData.append("file", selectedMainImage.value);
 	try {
 		await axios.post(
-			`http://localhost:8080/api/v1/images/uploadImages/${productId}`,
+			`${this.uriImages}/uploadImages/${productId}`,
 			formData,
 			{
 				headers: {
@@ -112,7 +115,7 @@ async function uploadImages(productId) {
 async function deleteProduct(productId) {
 	try {
 		await axios.delete(
-			`http://localhost:8080/api/v1/products/${productId}`
+			`${this.uri}/${productId}`
 		);
 
 		console.log("Producto borrado exitosamente.");
@@ -221,7 +224,6 @@ async function deleteProduct(productId) {
 </template>
 
 <style lang="scss" scoped>
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 .modal {
 	display: flex;
@@ -260,7 +262,6 @@ form {
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
-
 	max-width: 600px;
 	margin: 0 auto;
 	padding: 0 2rem 0 2rem;
@@ -282,7 +283,6 @@ form {
 		height: 8.7rem;
 		border-radius: 0.5rem;
 		background-color: #ddd8d8;
-		font-family: "Poppins", sans-serif;
 	}
 }
 section {
@@ -304,7 +304,6 @@ section {
 		height: 3rem;
 		border-radius: 0.5rem;
 		background-color: #ddd8d8;
-		font-family: "Poppins", sans-serif;
 		font-size: 1rem;
 	}
 }
@@ -316,7 +315,6 @@ section {
 		width: 100%;
 		height: 3rem;
 		border-radius: 0.5rem;
-		font-family: "Poppins", sans-serif;
 		font-size: 1rem;
 		background-color: #ddd8d8;
 	}
@@ -335,7 +333,6 @@ select {
 	border-radius: 0.5rem;
 	//border: 1px solid black;
 	background-color: #ddd8d8;
-	font-family: "Poppins", sans-serif;
 }
 
 .images-container {
@@ -347,7 +344,6 @@ select {
 		height: 5rem;
 		//border-radius: 0.5rem;
 		background-color: #ddd8d8;
-		font-family: "Poppins", sans-serif;
 	}
 }
 
@@ -361,13 +357,11 @@ select {
 		border-radius: 0.5rem;
 		//border: 1px solid black;
 		background-color: #ddd8d8;
-		font-family: "Poppins", sans-serif;
 		font-size: 1rem;
 	}
 }
 
 h1 {
-	font-family: "Poppins", sans-serif;
 	font-size: 4rem;
 	color: grey;
 	margin-bottom: 5rem;
@@ -376,7 +370,6 @@ h1 {
 }
 
 label {
-	font-family: "Poppins", sans-serif;
 	font-size: 1.5rem;
 	margin-bottom: 1rem;
 }
@@ -389,7 +382,6 @@ label {
 
 	button {
 		background-color: #ae81d1;
-		font-family: "Poppins", sans-serif;
 		font-size: 1.5rem;
 		color: white;
 		border-radius: 0.5rem;

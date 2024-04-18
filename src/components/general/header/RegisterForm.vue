@@ -42,9 +42,11 @@ const submitForm = async () => {
       return;
     }
 
+    const encodedPassword = btoa(passwordInput.value);
+
     const response = await axios.post(`${uri}/users/register`, {
       username: usernameInput.value,
-      password: passwordInput.value,
+      password: encodedPassword,
       email: emailInput.value,
     });
 
@@ -90,11 +92,7 @@ const submitForm = async () => {
                 <div>
                   <div class="input_box">
                       <label>Email:</label>
-                      <input type="email" placeholder="correo electrónico" v-model="emailInput" required>
-                  </div>
-                  <div class="input_box">
-                      <label>Nombre de usuario:</label>
-                      <input type="text" placeholder="nombre de usuario" v-model="usernameInput" required>
+                      <input type="email" placeholder="email" v-model="usernameInput" required>
                   </div>
                   <div class="input_box">
                       <label>Contraseña:</label>
@@ -164,7 +162,6 @@ section:first-child {
     color: $light-font;
     font-size: 2rem;
     font-weight: 300;
-    font-family: "Poppins", sans-serif;
   }
 }
 
@@ -193,7 +190,6 @@ form {
   gap: 3rem;
 
   > div {
-    font-family: "Poppins", sans-serif;
     display: flex;
     align-items: center;
     flex-direction: column;
