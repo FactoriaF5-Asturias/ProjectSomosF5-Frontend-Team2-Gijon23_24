@@ -6,7 +6,7 @@ import ExplorerCategory from '../components/ExploreCategory.vue';
 import Banner from "@/components/Banner.vue";
 // import Card from '@/components/card/Card.vue';
 import Slider from '@/components/Slider.vue';
-
+import SearchBar from '@/components/searchbar/SearchBar.vue';
 
 const products = ref([]);
 const router = useRouter();
@@ -19,6 +19,7 @@ router.afterEach(() => {
 
 <template>
     <main>
+        <SearchBar />
         <Slider />
         <Card/>
         <ExplorerCategory/>
