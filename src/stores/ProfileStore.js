@@ -1,18 +1,19 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 
-export const useContentStore = defineStore('content', {
+uri = import.meta.env.VITE_API_ENDPOINT_PROFILE;
+
+export const useProfileStore = defineStore('profile', {
   state: () => ({
     content: null,
     isLoading: false, 
   }),
   actions: {
-    async fetchContentById(id_product) {
+    async fetchContentById(id) {
       this.isLoading = true; 
-      const response = await axios.get(`http://localhost:8080/api/v1/products/${id_product}`);
+      const response = await axios.get(`${this.uri}/${id}`);
       this.content = response.data;
       this.isLoading = false; 
   },
 },
-
 });

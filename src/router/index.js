@@ -5,6 +5,9 @@ import FavoritesView from '../views/FavoritesView.vue'
 import GeekView from '../views/GeekView.vue'
 import HouseView from '../views/HouseView.vue'
 import LithophaneView from '../views/LithophaneView.vue'
+import UserProfileView from '../views/UserProfileView.vue'
+import AdminProfileView from '../views/AdminProfileView.vue'
+import StripeCheckoutView from '@/views/StripeCheckoutView.vue'
 
 
 const router = createRouter({
@@ -19,6 +22,14 @@ const router = createRouter({
       path: '/cart',
       name: 'cart',
       component: CartshopView
+    },
+    
+    {
+      path:'/Detail/:id_product',
+      name: "detail",
+      component: () => import('../views/ProductDetailView.vue'),
+      props: true
+      
     },
     {
       path: '/favorites',
@@ -40,7 +51,24 @@ const router = createRouter({
       name: 'litofanías',
       component: LithophaneView
     },
+    {
+      path: "/user/profile",
+      name: "user-Profile",
+      component: UserProfileView,
+      props: true
+      
+    },
+    {
+      path: "/admin/profile",
+      name: "admin-Profile",
+      component: AdminProfileView,
+    },
+    {
+      path: "/stripe-checkout",
+      name: "stripe-checkout",
+      component: StripeCheckoutView,
+    }
   ]
 });
 
-export default router;
+export default router

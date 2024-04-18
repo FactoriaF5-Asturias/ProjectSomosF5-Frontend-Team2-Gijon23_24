@@ -1,4 +1,43 @@
 <script setup>
+// import { ref } from 'vue';
+// import axios from 'axios';
+// import { VAlert } from 'vuetify/lib';
+
+// const currentPassword = ref('');
+// const newPassword = ref('');
+// const confirmPassword = ref('');
+// const successMessage = ref('');
+// const errorMessage = ref('');
+
+// const saveData = async () => {
+
+//   if (newPassword.value !== confirmPassword.value) {
+//     errorMessage.value = 'Las contraseñas no coinciden';
+//     return;
+//   }
+
+//   try {
+//     const response = await axios.post('http://localhost:8080/api/v1/profiles/admin/change-password', {
+//       currentPassword: currentPassword.value,
+//       newPassword: newPassword.value
+//     });
+//     successMessage.value = '¡Contraseña cambiada con éxito!';
+//     console.log('Contraseña cambiada con éxito:', response.data);
+
+//   } catch (error) {
+//     errorMessage.value = 'Error al cambiar la contraseña';
+//     console.error('Error al cambiar la contraseña:', error);
+
+//   }
+// };
+
+// const cancelData = () => {
+//   currentPassword.value = "";
+//   newPassword.value = "";
+//   confirmPassword.value = "";
+//   successMessage.value = '';
+//   errorMessage.value = '';
+// };
 
 </script>
 
@@ -21,17 +60,17 @@
 
         <div class="input-box">
           <label>Contraseña Antigüa</label>
-          <input type="text" id="old-password" v-model="oldPassword">
+          <input type="text" id="current-password" v-model="currentPassword">
         </div>
 
         <div class="input-box">
           <label>Contraseña</label>
-          <input type="text" id="password" v-model="password">
+          <input type="text" id="newPassword" v-model="newPassword">
         </div>
 
         <div class="input-box">
           <label>Confirma tu contraseña</label>
-          <input type="text" id="confirm" v-model="confirm">
+          <input type="text" id="confirmPassword" v-model="confirmPassword">
         </div>
 
         <div class="btns-container">
@@ -41,6 +80,13 @@
 
       </form>
 
+      <div>
+
+        <v-alert v-if="successMessage" type="success" outlined>{{ successMessage }}</v-alert>
+
+
+        <v-alert v-if="errorMessage" type="error" outlined>{{ errorMessage }}</v-alert>
+      </div>
     </div>
   </body>
 
@@ -63,12 +109,12 @@ body {
   justify-content: center;
   align-items: center;
   height: 70rem;
-  width: 50rem;
+  width: 60rem;
   border-radius: 1.5rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   background-color: white;
   position: sticky;
-  max-height: 60rem;
+  max-height: 70rem;
   margin-bottom: 10rem;
 }
 

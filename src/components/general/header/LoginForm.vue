@@ -11,7 +11,7 @@ const closeForm = () => {
   props.onClose()
 }
 
-const uri = 'http://localhost:8080/api/v1';
+const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 
 const usernameInput = ref('');
 const passwordInput = ref('');
@@ -31,6 +31,7 @@ const submitForm = async () => {
         );
         const data = response.data;
         
+        console.log(response)
 
         authStore.userRole = data.roles;
         authStore.username = data.username;

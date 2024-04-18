@@ -15,6 +15,7 @@ const props = defineProps({
 })
 
 const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
+
 const imageDirectory = ref('');
 const defaultImage ='../../../public/images/banner-logo.svg';
 
@@ -27,12 +28,14 @@ function findImageForProduct(product) {
 
 onMounted(async () => {
   
-   await new Promise(resolve => setTimeout(resolve, 2000));
+   await new Promise(resolve => setTimeout(resolve, 1500));
    imageDirectory.value = uri + "/" + findImageForProduct(props.product);
    isLoading.value = false; 
 });
 </script>
+
 <template>
+   <router-link :to="{ path: `/Detail/${product.id}` }">
    <v-container>
                <v-skeleton-loader
             type="card"
@@ -48,10 +51,12 @@ onMounted(async () => {
             </v-img>
             <v-card-title class="pl-1">{{ product.productName }}</v-card-title>
             <v-card-title class="price">{{ product.price }} €</v-card-title> </v-card>
+            
          </v-skeleton-loader>
 
    </v-container>
-  </template>
+   </router-link>
+</template>
 
 <style scoped lang="scss">
 .heart {
