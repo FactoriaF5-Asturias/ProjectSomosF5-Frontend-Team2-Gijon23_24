@@ -1,8 +1,8 @@
 <script setup>
 import SuccessPopup from '@/components/general/header/SuccessPopup.vue';
 import ErrorPassword from '@/components/general/header/ErrorPassword.vue';
- import { ref } from 'vue';
- //import axios from 'axios';
+import { ref } from 'vue';
+import axios from 'axios';
 
 const currentPassword = ref('');
  const newPassword = ref('');
