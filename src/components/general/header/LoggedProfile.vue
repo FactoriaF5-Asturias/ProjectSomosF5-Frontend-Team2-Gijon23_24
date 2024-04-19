@@ -24,11 +24,17 @@ const userLogout = async () => {
 
 <template>
   <div>
-    <router-link to="/user/profile">
-    <img id="photo" src="/icons/icon-user.svg" alt="user icon">
+    <router-link v-if="authStore.isAuthenticated && authStore.userRole == 'ROLE_USER'" to="/user/profile">
+      <!-- <router-link to="/user/profile"> -->
+      <img id="photo" src="/icons/icon-user.svg" alt="user icon">
       <p> {{ authStore.username }} </p>
     </router-link>
-    <hr>
+
+    <router-link v-if="authStore.isAuthenticated && authStore.userRole == 'ROLE_ADMIN'" to="/admin/profile">
+      <img id="photo" src="/icons/icon-user.svg" alt="user icon">
+      <p>{{ authStore.username }}</p>
+    </router-link>
+
     <button @click="userLogout">Cerrar sesión</button>
   </div>
 </template>
