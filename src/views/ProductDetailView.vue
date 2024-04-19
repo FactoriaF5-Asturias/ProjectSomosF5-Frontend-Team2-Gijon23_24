@@ -17,7 +17,7 @@ const addCart = () => {
 
   let productData = {
     id: product.id,
-    productName: product.productName,
+    name: product.productName,
     price: changePrice(product.price),
   };
 
@@ -47,8 +47,12 @@ function restarCantidad() {
     cantidad.value--;
   }
 }
-//string, quitar el punto y luego
 let selectedThumbnail = '';
+const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
+
+const imageDirectory = ref('');
+const defaultImage = '../../../public/images/banner-logo.svg';
+const isLoading = ref(true);
 
 onMounted(async () => {
   const id = route.params.id_product;
@@ -58,11 +62,6 @@ onMounted(async () => {
   imageDirectory.value = uri + "/" + findImageForProduct(product);
 });
 
-const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
-
-const imageDirectory = ref('');
-const defaultImage = '../../../public/images/banner-logo.svg';
-const isLoading = ref(true);
 
 function findImageForProduct(product) {
   const image = product.images.find(img => img.mainImage === true);
@@ -98,7 +97,6 @@ changePrice(15)
     <div class="goback">
     <button class="goback" @click="goback"></button>
     </div>
-  
     
     <div class="detail-image-container">
       <div class="detail-mainImage-container">

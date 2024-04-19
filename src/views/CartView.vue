@@ -13,7 +13,7 @@ const payWithStripe = () => {
 
 <template>
     <body>
-        <CartCard v-for="(product, index) in store.cart" :key="id" :product="product"/>
+        <CartCard v-for="(product, index) in store.cart" :key="product.id" :product="product"/>
         <button @click="payWithStripe">pagar</button>
     </body>
 </template>
