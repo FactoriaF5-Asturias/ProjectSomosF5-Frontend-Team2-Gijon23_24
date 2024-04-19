@@ -1,6 +1,6 @@
 <script setup>
-import SuccessPopup from '@/components/general/header/SuccessPopup.vue';
-import ErrorPassword from '@/components/general/header/ErrorPassword.vue';
+import SuccessPopup from '@/components/alerts/SuccessPopup.vue';
+import ErrorPassword from '@/components/alerts/ErrorPassword.vue';
 
 import { ref } from 'vue';
 import axios from 'axios';

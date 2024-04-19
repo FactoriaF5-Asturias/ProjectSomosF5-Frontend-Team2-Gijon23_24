@@ -1,6 +1,6 @@
 <script setup>
-import SuccessPopup from './SuccessPopup.vue';
-import ErrorPassword from './ErrorPassword.vue';
+import SuccessPopup from '@/components/alerts/SuccessPopup.vue';
+import ErrorPassword from '@/components/alerts/ErrorPassword.vue';
 import {  ref } from 'vue';
 import axios from 'axios';
 
@@ -69,9 +69,8 @@ const submitForm = async () => {
 
 <template>
   <div>
-    <SuccessPopup :show="successVisible" />
-    <ErrorPassword :show="errorVisible" />
-
+    <SuccessPopup :show="successVisible" message="El cambio de contraseña se ha realizado con éxito." />
+      <ErrorPassword :show="errorVisible" message="Error al cambiar la contraseña." @close="errorPassword = false" />
     <div class="modal" @click="closeForm">
         <div class="modal_container" @click.stop>
 
