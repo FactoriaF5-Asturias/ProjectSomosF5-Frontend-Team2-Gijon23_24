@@ -98,46 +98,6 @@ function changeMainImage(image) {
 }
 
 
-function toggleFavorite(product) {
-  console.log
-  const userId = 'user_id'; 
-  const productId = product.id; 
-
-  // Verifica si el producto ya está en la lista de favoritos
-  if (isFavorite(product)) {
-    // Si el producto ya está en la lista de favoritos, realiza una solicitud DELETE para eliminarlo
-    axios.delete(`/api/profiles/${userId}/favorites/${productId}`)
-      .then(response => {
-        // Elimina el producto de la lista de favoritos localmente si la solicitud se completa con éxito
-        if (response.status === 200) {
-          favoriteproducts.value = favoriteproducts.value.filter(item => item.id !== product.id);
-        }
-      })
-      .catch(error => {
-        console.error('Error al eliminar el producto de favoritos:', error);
-      });
-  } else {
-    // Si el producto no está en la lista de favoritos, realiza una solicitud POST para agregarlo
-    axios.post(`/api/profiles/${userId}/favorites`, { productId })
-      .then(response => {
-        // Agrega el producto a la lista de favoritos localmente si la solicitud se completa con éxito
-        if (response.status === 200) {
-          favoriteproducts.value.push(product);
-        }
-      })
-      .catch(error => {
-        console.error('Error al agregar el producto a favoritos:', error);
-      });
-  }
-}
-
-function isFavorite(product) {
-  // Verifica si el ID del producto está presente en la lista de IDs de productos favoritos
-  return favoriteproducts.value.some(item => item.id === product.id);
-}
-
-
-
 </script>
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
