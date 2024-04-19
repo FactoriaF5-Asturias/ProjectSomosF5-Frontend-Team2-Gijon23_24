@@ -1,58 +1,92 @@
 <script setup>
- import { useAuthStore } from '@/stores/AuthStore';
- import { onMounted, ref} from 'vue';
- import { useRouter } from "vue-router";
- import axios from "axios";
+import { useAuthStore } from '@/stores/AuthStore';
+import { onMounted, ref} from 'vue';
+// import { useRouter } from "vue-router";
+import axios from "axios";
+import axiosRetry from 'axios-retry';
 	
- const router = useRouter();
- const store = useAuthStore();
- const profileDetails = ref(null);
+// const router = useRouter();
+const store = useAuthStore();
+// const profileDetails = ref(null);
 
- const firstName = ref('');
- const lastName = ref('');
- const email = ref('');
- const numberPhone = ref('');
- const address = ref('');
- const postalCode = ref('');
- const city = ref('');
- const province = ref('');
+const id = ref(Number)
+console.log(id)
+const firstName = ref('');
+let lastName = ref('');
+// const email = ref('');
+const numberPhone = ref('');
+const address = ref('');
+const postalCode = ref('');
+const city = ref('');
+const province = ref('');
 
- onMounted(async () => {
-     const email = store.username;
-     const content = ref('');
+axiosRetry(axios, {
+ retries: 3, 
+ retryDelay: (retryCount) => {
+    return retryCount * 1000; 
+ },
+ retryCondition: (error) => {
+    return error.code === 'ERR_NETWORK';
+ },
+});
 
-     try {
-       const response = await axios.get(`http://localhost:8080/api/v1/profiles/${email}`);
-       content = response.data;
-       profileDetails.value = response.data;
-     } catch (error) {
-       console.error("Error:", error);
-     }
+async function getProfileData(email) {
+let content = ref('')
+const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 
-     return content;
+	try {
+		const response = await axios.get(
+      `${uri}/profiles/getByEmail/${email}`,
+			{
+				headers: {
+					"Content-Type": "application/json",
+				},
+				withCredentials: true,
+			}
+    );
+    console.log(response.data)
+    content = response.data
+    console.log(content)
+ 
+    id.value = response.data.id;
+    firstName.value = response.data.firstName;
+    lastName.value = response.data.lastName;
+    numberPhone.value = response.data.numberPhone;
+    address.value = response.data.address;
+    postalCode.value = response.data.postalCode;
+    city.value = response.data.city;
+    province.value = response.data.province;
+	} catch (error) {
+		console.error("Error al conseguir los datos del producto", error);
+		throw error;
+	}
 
-   });
+  return { content }
+}
 
-  const cancelData = () => {
- 	  firstName.value = "";
-    lastName.value = '';
-    email.value = "";
-    numberPhone.value = "";
-    address.value = "";
-    postalCode.value = "";
-    city.value = "";
-    province.value = "";
- };
+console.log(store.username)
+
+onMounted(() => {
+  getProfileData(store.username);
+});
+
+const cancelData = () => {
+  	firstName.value = ""
+     lastName.value = ""
+     numberPhone.value = ""
+     address.value = ""
+     postalCode.value = ""
+     city.value = ""
+     province.value = ""  
+    };
 
  const saveData = async () => {
-    const uri = import.meta.env.VITE_APP_API_ENDPOINT;
-    content = response.data;
+    const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 
       try {
         const data = {
           firstName: firstName.value,
           lastName: lastName.value,
-          email: email.value,
           numberPhone: numberPhone.value,
           address: address.value,
           postalCode: postalCode.value,
@@ -60,20 +94,26 @@
           province: province.value,
         };
 
-      const config = {
-          withCredentials: true,
-      };
+      const response = await axios.put(`${uri}/profiles/${id.value}`, data, {
+        withCredentials: true,
+      });
+      console.log(response);
 
-      const response = await axios.put(`${uri}/profiles/${email}`, data, config);
         if (response.status === 200) {
           location.reload();
+          console.log(response.data);
         } else {
           console.error("Error al editar el perfil");
         }
+
      } catch (error) {
-        console.error("Error:", error);
+      if (!error.response) {
+        console.error('Error de red:', error);
+      } else {
+        console.error('Error de respuesta:', error.response);
       }
-    };
+    }
+};
 
 </script>
 
@@ -95,45 +135,40 @@
 
           <div class="input-box">
             <label>Nombre</label>
-            <input type="text" id="firstName" v-model="firstName">{{ content.firstName }} </input>
+            <input type="text" id="firstName" v-model="firstName"> 
           </div>
 
           <div class="input-box">
             <label>Apellidos</label>
-            <input type="text" id="lastName" v-model="LastName">{{ content.LastName }}</input> 
-          </div>
-
-          <div class="input-box">
-            <label>E-Mail</label>
-            <input type="text" id="email" v-model="email">{{ content.email }} </input>
+            <input type="text" id="lastName" v-model="lastName">
           </div>
 
           <div class="input-box">
             <label>Teléfono</label>
-            <input type="text" id="numberPhone" v-model="numberPhone">{{ content.numberPhone }}</input>
+            <input type="text" id="numberPhone" v-model="numberPhone">
           </div>
 
           <div class="input-box">
             <label>Dirección</label>
-            <input type="text" id="address" v-model="address">{{ content.address }}</input>
+            <input type="text" id="address" v-model="address">
           </div>
 
           <div class="input-box-2">
             <label>C. P.</label>
-            <input type="text" id="postal-code" v-model="postalCode">{{ content.postalCode }}</input>
+            <input type="text" id="postal-code" v-model="postalCode">
+
             <label>Ciudad</label>
-            <input type="text" id="city" v-model="city">{{ content.city }}</input>
+            <input type="text" id="city" v-model="city">
           </div>
 
           <div class="input-box">
             <label>Provincia</label>
             <input type="text" id="province" v-model="province">
-            <!-- {{ content.providence }}</input> -->
           </div>
 
           <div class="btns-container">
             <button id="cancel" @click="cancelData()">Cancelar</button>
-            <button id="save" @click="saveData()">Guardar</button>
+            <button id="save" @click="saveData">Guardar</button>
           </div>
 
         </form>
