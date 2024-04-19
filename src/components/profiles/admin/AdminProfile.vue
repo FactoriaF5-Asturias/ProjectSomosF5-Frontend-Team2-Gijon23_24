@@ -74,8 +74,8 @@ const cancelData = () => {
   <body>
     <div>
       <SuccessPopup :show="successVisible" message= "Las contraseñas coinciden" />
-      <ErrorPassword :show="errorVisible" :message= "Las contraseñas no coinciden." @close="errorVisible = false" />
-
+      <ErrorPassword :show="errorVisible" :message= "Las contraseñas no coinciden" @close="errorVisible = false" />
+      <SuccessChangePassword :show="successVisible" message= "El cambio de contraseña se ha realizado con éxito" />
 
       <div class="user-profile">
         <h1>PERFIL DEL ADMINISTRADOR</h1>
