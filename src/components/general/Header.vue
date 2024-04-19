@@ -37,7 +37,7 @@ const authStore = useAuthStore();
             </div>
           </router-link>
 
-          <router-link to="/cart">
+          <router-link to="/carrito">
             <div>
               <img src="/icons/icon-shopping-cart.svg" alt="">
               <p>Carrito</p>
