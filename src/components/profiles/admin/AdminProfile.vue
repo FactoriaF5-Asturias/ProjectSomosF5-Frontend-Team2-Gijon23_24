@@ -4,15 +4,15 @@ import ErrorPassword from '@/components/general/header/ErrorPassword.vue';
 import { ref } from 'vue';
 import axios from 'axios';
 
-const currentPassword = ref('');
- const newPassword = ref('');
- const confirmPassword = ref('');
+//const currentPassword = ref('');
+const newPassword = ref('');
+const confirmPassword = ref('');
 
-  const message = ref('');
- const errorVisible = ref(false);
- const successVisible = ref(false);
+const message = ref('');
+const errorVisible = ref(false);
+const successVisible = ref(false);
 
- const passwordConfirmation = () => {
+const passwordConfirmation = () => {
   if (newPassword.value === confirmPassword.value) {
     message.value = "Las contraseñas coinciden.";
   } else {
@@ -20,7 +20,7 @@ const currentPassword = ref('');
   }
 }
 
-const uri = import.meta.env.VITE_API_ENDPOINT_USERS;
+// const uri = import.meta.env.VITE_API_ENDPOINT_USERS;
 
 
 const changePassword = async () => {
@@ -34,93 +34,94 @@ const changePassword = async () => {
       return;
     }
 
-    const response = await axios.post(`${uri}/users/profiles`, {
-      currentPassword: currentPassword.value,
-      newPassword: newPassword.value
-    });
+    const encodedPassword = btoa(newPassword.value);
 
-    if (response.status === 200) {
-      console.log('El cambio de contraseña se ha realizado con éxito.');
-      successVisible.value = true;
-      setTimeout(() => {
-        successVisible.value = false;
-        closeForm();
-      }, 10000);
-    } else {
-      console.log('Error al realizar el cambio de contraseña.');
+    const data = {
+      password: newPassword.value
     }
+    const credentials = {
+      withCredentials: true
+    }
+    const response = await axios.put(`http://localhost:8080/api/v1/users/updatePassword/1`, data, credentials);
+
+    console.log(response)
+
+    // if (response.status === 202) {
+    //   console.log('El cambio de contraseña se ha realizado con éxito.');
+    //   successVisible.value = true;
+    //   setTimeout(() => {
+    //     successVisible.value = false;
+    //     closeForm();
+    //   }, 10000);
+    // } else {
+    //   console.log('Error al realizar el cambio de contraseña.');
+    // }
   } catch (error) {
     console.error(error);
   }
 };
 
 const cancelData = () => {
-  currentPassword.value = "";
+  //currentPassword.value = "";
   newPassword.value = "";
   confirmPassword.value = "";
- };
+};
 
 </script>
 
 <template>
- 
+
   <body>
     <div>
-      <SuccessPopup :show="successVisible" message="¡Contraseña cambiada con éxito!" />
-      <ErrorPassword :show="errorVisible" :message="'Las contraseñas no coinciden.'" @close="errorVisible = false" />
+      <SuccessPopup :show="successVisible" message= "Las contraseñas coinciden" />
+      <ErrorPassword :show="errorVisible" :message= "Las contraseñas no coinciden." @close="errorVisible = false" />
 
-    
+
       <div class="user-profile">
-      <h1>PERFIL DEL ADMINISTRADOR</h1>
+        <h1>PERFIL DEL ADMINISTRADOR</h1>
+      </div>
+
+      <div class=" modal-container">
+
+        <div class="logo-container">
+          <img class="image-logo" src="/images/logo.svg" alt="logo-profile">
+          <h2>Bienvenido Andrés</h2>
+        </div>
+
+        <form @submit.prevent="changePassword">
+
+          <div class="input-box">
+            <label for="newPassword">Contraseña</label>
+            <input type="password" id="newPassword" v-model="newPassword" required>
+          </div>
+
+          <div class="input-box">
+            <label for="confirmPassword">Confirmar Contraseña</label>
+            <input :type="showPassword ? 'text' : 'password'" id="confirmPassword" v-model="confirmPassword"
+              @input="passwordConfirmation" required>
+          </div>
+
+          <div class="check-box">
+            <input type="checkbox" id="showPassword" v-model="showPassword">
+            <label for="showPassword">Mostrar Contraseña</label>
+          </div>
+
+          <div class="btns-container">
+            <button id="cancel" @click="cancelData()">Cancelar</button>
+            <button type="submit" id="save">Guardar</button>
+          </div>
+
+        </form>
+
+
+
+      </div>
     </div>
-
-    <div class=" modal-container">
-
-      <div class="logo-container">
-        <img class="image-logo" src="/images/logo.svg" alt="logo-profile">
-       <h2>Bienvenido Andrés</h2> 
-    </div>
-
-      <form @submit.prevent="changePassword">
-
-        <div class="input-box">
-          <label  for="currentPassword">Contraseña Antigüa</label>
-          <input type="password" id="current-password" v-model="currentPassword" required>
-        </div>
-
-        <div class="input-box">
-          <label  for="newPassword">Contraseña</label>
-          <input type="password" id="newPassword" v-model="newPassword" required>
-        </div>
-
-        <div class="input-box">
-          <label for="confirmPassword">Confirmar Contraseña</label>
-          <input :type="showPassword ? 'text' : 'password'" id="confirmPassword" v-model="confirmPassword" @input="passwordConfirmation" required>
-          <span>{{ message }}</span>
-        </div> 
-
-        <div class="check-box">
-          <input type="checkbox" id="showPassword" v-model="showPassword">
-          <label for="showPassword">Mostrar Contraseña</label>
-        </div>
-  
-        <div class="btns-container">
-          <button id="cancel" @click="cancelData()">Cancelar</button>
-          <button type="submit" id="save">Guardar</button>
-        </div>
-
-      </form>
-
-   
-
-    </div>
-  </div>
   </body>
 
 </template>
 
 <style lang="scss" scoped>
-
 body {
   background-color: #CBABE4;
   display: flex;
@@ -170,13 +171,13 @@ h1 {
 
 .image-logo {
   height: 13rem;
-  
+
 }
 
 h2 {
-    font-family: "Poppins", sans-serif; 
-    color: #3C3057; 
-    font-size: 4rem;
+  font-family: "Poppins", sans-serif;
+  color: #3C3057;
+  font-size: 4rem;
 }
 
 form {
@@ -208,17 +209,17 @@ form {
   }
 }
 
- .check-box {
-   display: flex;
-   flex-direction: row;
-   gap: 1rem;
+.check-box {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 
-  }
+}
 
-  #showPassword {
-    height: 2rem;
-    width: 2rem;
-   }
+#showPassword {
+  height: 2rem;
+  width: 2rem;
+}
 
 .btns-container {
   margin-top: 2rem;
@@ -241,14 +242,12 @@ form {
     transition: transform 0.2s ease;
   }
 
-   button:hover {
-     background-color: #3C3057;
-   }
+  button:hover {
+    background-color: #3C3057;
+  }
 
-   button:active {
-     transform: scale(1.1);
-   }
+  button:active {
+    transform: scale(1.1);
+  }
 }
-
-
 </style>
