@@ -23,7 +23,7 @@ const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 async function userLogout() {
 
 try {
-    const response = await fetch(this.uri + '/logout', {
+    const response = await fetch(uri + '/logout', {
         method: 'GET',
         credentials: 'include'
     });
