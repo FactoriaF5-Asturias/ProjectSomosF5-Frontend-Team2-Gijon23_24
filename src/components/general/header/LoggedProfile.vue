@@ -6,19 +6,37 @@ const authStore = useAuthStore();
 
 const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 
-const userLogout = async () => {
-    try {
-        await axios.get(`${uri}/logout`, {}, {withCredentials: true});
-        authStore.userRole = '';
-        authStore.username = '';
-        authStore.isAuthenticated = false;
-        console.log('ha funcionado adioos!!!!!!!', authStore.userRole, authStore.username, authStore.isAuthenticated);
-    } catch (error) {
-        console.error('Ha ocurrido un error durante el logout: ', error);
-        console.log(authStore.userRole, authStore.username, authStore.isAuthenticated);
+// const userLogout = async () => {
+//     try {
+//         await axios.get("http://localhost:8080/api/v1/logout", {}, {withCredentials: true});
+//         authStore.userRole = '';
+//         authStore.username = '';
+//         authStore.isAuthenticated = false;
+//         console.log('ha funcionado adioos!!!!!!!', authStore.userRole, authStore.username, authStore.isAuthenticated);
+//     } catch (error) {
+//         console.error('Ha ocurrido un error durante el logout: ', error);
+//         console.log(authStore.userRole, authStore.username, authStore.isAuthenticated);
         
-    }
-};
+//     }
+// };
+
+async function userLogout() {
+
+try {
+    const response = await fetch(this.uri + '/logout', {
+        method: 'GET',
+        credentials: 'include'
+    });
+    console.log("Logout successfull"); 
+    authStore.userRole = '';
+    authStore.username = '';
+    authStore.isAuthenticated = false;
+    return response.status
+} catch (error) {
+    throw new Error('Error occured during API fetch GET request while logout')
+}
+
+}
 
 </script>
 
@@ -29,7 +47,7 @@ const userLogout = async () => {
       <p> {{ authStore.username }} </p>
     </router-link>
     <hr>
-    <button @click="userLogout">Cerrar sesión</button>
+    <button @click.prevent="userLogout()">Cerrar sesión</button>
   </div>
 </template>
 
