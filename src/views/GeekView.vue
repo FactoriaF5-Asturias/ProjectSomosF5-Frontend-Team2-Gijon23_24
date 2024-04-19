@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import GeekCardContainer from '@/components/card/GeekCardContainer.vue';
-import Space from '@/components/general/Space.vue';
+
 const Geek = ref([]);
 
 async function fetchGeekProducts() {
