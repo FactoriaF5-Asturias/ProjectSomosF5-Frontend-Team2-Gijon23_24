@@ -1,24 +1,46 @@
 <script setup>
 import SuccessPopup from '@/components/general/header/SuccessPopup.vue';
 import ErrorPassword from '@/components/general/header/ErrorPassword.vue';
+import SuccessChangePassword from '@/components/general/header/SuccessChangePassword.vue';
+import ErrorChangePassword from '@/components/general/header/ErrorChangePassword.vue';
+
 import { ref } from 'vue';
 import axios from 'axios';
 
-//const currentPassword = ref('');
 const newPassword = ref('');
 const confirmPassword = ref('');
+const showPassword = ref(false);
 
-const message = ref('');
-const errorVisible = ref(false);
 const successVisible = ref(false);
+const successChangePasswordVisible = ref(false);
+const errorPasswordVisible = ref(false);
+const errorChangePasswordVisible = ref(false);
+const errorMessage = ref('');
 
 const passwordConfirmation = () => {
   if (newPassword.value === confirmPassword.value) {
-    message.value = "Las contraseñas coinciden.";
+    successVisible.value = true;
+    erroPasswordVisible.value = false;
+    setTimeout(() => {
+      successVisible.value = false;
+    }, 10000);
+
   } else {
-    message.value = "Las contraseñas no coinciden.";
+    errorMessage.value = "Las contraseñas no coinciden";
+    errorPasswordVisible.value = true;
+    successVisible.value = false;
+    setTimeout(() => {
+      errorPasswordVisible.value = false;
+    }, 10000);
   }
-}
+};
+//     errorMessage.value = true;
+//     successVisible.value = false;
+//     setTimeout(() => {
+//       errorVisible.value = false;
+//     }, 10000);
+//   }
+// }
 
 // const uri = import.meta.env.VITE_API_ENDPOINT_USERS;
 
@@ -26,10 +48,13 @@ const passwordConfirmation = () => {
 const changePassword = async () => {
   try {
     if (newPassword.value !== confirmPassword.value) {
-      successVisible.value = false;
-      errorVisible.value = true;
+      errorPasswordVisible.value = true;
+      errorMessage.value = "Las contraseñas no coinciden";
+
+      // successVisible.value = false;
+      // errorVisible.value = true;
       setTimeout(() => {
-        errorVisible.value = false;
+        errorPasswordVisible.value = false;
       }, 5000);
       return;
     }
@@ -46,26 +71,58 @@ const changePassword = async () => {
 
     console.log(response)
 
-    // if (response.status === 202) {
-    //   console.log('El cambio de contraseña se ha realizado con éxito.');
-    //   successVisible.value = true;
-    //   setTimeout(() => {
-    //     successVisible.value = false;
-    //     closeForm();
-    //   }, 10000);
-    // } else {
-    //   console.log('Error al realizar el cambio de contraseña.');
-    // }
+    if (response.status === 202) {
+      successChangePasswordVisible.value = true;
+      setTimeout(() => {
+        successChangePasswordVisible.value = false;
+        clearFormFields();
+      }, 10000);
+    } else {
+      errorChangePasswordVisible.value = true;
+      setTimeout(() => {
+        errorChangePasswordVisible.value = false;
+      }, 10000);
+    }
   } catch (error) {
     console.error(error);
   }
 };
 
 const cancelData = () => {
-  //currentPassword.value = "";
   newPassword.value = "";
   confirmPassword.value = "";
 };
+
+const clearFormFields = () => {
+  newPassword.value = "";
+  confirmPassword.value = "";
+};
+
+//      if (response.status === 202) {
+//        console.log('El cambio de contraseña se ha realizado con éxito.');
+//        successChangePasswordVisible.value = true;
+//        setTimeout(() => {
+//         successChangePasswordVisible.value = false;
+//          closeForm();
+//        }, 10000);
+//      } else {
+//        console.log('Error al realizar el cambio de contraseña.');
+//        errorChangePasswordVisible.value = true; 
+//        setTimeout(() => {
+//          errorChangePasswordVisible.value = false;
+//        }, 10000);
+//      }
+//      }
+
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+// const cancelData = () => {
+//   newPassword.value = "";
+//   confirmPassword.value = "";
+// };
 
 </script>
 
@@ -73,9 +130,25 @@ const cancelData = () => {
 
   <body>
     <div>
-      <SuccessPopup :show="successVisible" message= "Las contraseñas coinciden" />
+
+  <!-- Alerta de éxito cuando las contraseñas coinciden -->
+  <SuccessPopup :show="successVisible" message="Las contraseñas coinciden" />
+
+<!-- Alerta de error cuando las contraseñas no coinciden -->
+<ErrorPassword :show="errorPasswordVisible" :message="errorMessage" @close="errorPasswordVisible = false" />
+
+<!-- Alerta de éxito cuando se cambia la contraseña con éxito -->
+<SuccessChangePassword :show="successChangePasswordVisible" message="El cambio de contraseña se ha realizado con éxito" />
+
+<!-- Alerta de error al cambiar la contraseña -->
+<ErrorChangePassword :show="errorChangePasswordVisible" message="Error al cambiar las contraseñas" @close="errorChangePasswordVisible = false" />
+
+
+      <!-- <SuccessPopup :show="successVisible" message= "Las contraseñas coinciden" />
       <ErrorPassword :show="errorVisible" :message= "Las contraseñas no coinciden" @close="errorVisible = false" />
       <SuccessChangePassword :show="successVisible" message= "El cambio de contraseña se ha realizado con éxito" />
+      <ErrorPassword :show="errorVisible" :message= "Error al cambiar las contraseñas" @close="errorVisible = false" /> -->
+
 
       <div class="user-profile">
         <h1>PERFIL DEL ADMINISTRADOR</h1>

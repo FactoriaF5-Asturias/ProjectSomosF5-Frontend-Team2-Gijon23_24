@@ -31,3 +31,5 @@ div {
 p {
   font-size: 1.6rem;
 }
+
+</style>
