@@ -69,7 +69,7 @@ const submitForm = async () => {
 
 <template>
   <div>
-    <SuccessPopup :show="successVisible" message="El cambio de contraseña se ha realizado con éxito." />
+    <SuccessPopup :show="successVisible" message="Se ha registrado con éxito, revise su correo electronico para confirmar su solicitud." />
       <ErrorPassword :show="errorVisible" message="Lo siento, las contraseñas no coinciden." @close="errorPassword = false" />
     <div class="modal" @click="closeForm">
         <div class="modal_container" @click.stop>
