@@ -49,6 +49,7 @@ function restarCantidad() {
 }
 let selectedThumbnail = '';
 const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
+const url = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
 
 const imageDirectory = ref('');
 const defaultImage = '../../../public/images/banner-logo.svg';
@@ -56,7 +57,7 @@ const isLoading = ref(true);
 
 onMounted(async () => {
   const id = route.params.id_product;
-  const response = await axios.get(`https://api-printgo.factoriaf5asturias.org/api/v1/products/${id}`);
+  const response = await axios.get(`${url}/${id}`);
   product = response.data;
   selectedThumbnail = product.additionalImages[0];
   imageDirectory.value = uri + "/" + findImageForProduct(product);
