@@ -89,8 +89,6 @@ function changePrice(decimalPrice) {
   console.log('precio:' + priceInteger )
   return priceInteger;
 }
-changePrice(15)
-
 </script>
 
 <template>

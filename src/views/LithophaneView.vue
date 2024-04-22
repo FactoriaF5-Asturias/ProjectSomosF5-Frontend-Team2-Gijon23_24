@@ -1,23 +1,20 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import Card from './../components/card/Card.vue';
 import axios from 'axios';
-import LitofaniaCardContainer from '@/components/card/LitofaniaCardContainer.vue';
-import Space from '@/components/general/Space.vue';
-
 
 const litofanias = ref([]);
-
+const isLoaded = ref(false);
 
 async function fetchLitofanias() {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_PRODUCTS}/getManyByCategoryName/litofanias`);
+    const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_PRODUCTS}/getManyByCategoryName/Litofanías`);
     litofanias.value = response.data;
-    console.log(response.data);
+    isLoaded.value = true;
   } catch (error) {
     console.error('Error al obtener productos de litofanías:', error);
   }
 }
-
 
 onMounted(() => {
   fetchLitofanias();
@@ -25,64 +22,42 @@ onMounted(() => {
 </script>
 
 <template>
-
-
-  <LitofaniaCardContainer />
+  <body>
+    <div>
+      <h1>Litofanías</h1>
+      <hr>
+      <section>
+        <Card :product="product" v-for="product in litofanias" :key="product.id" v-if="isLoaded" />
+      </section>     
+    </div>
+  </body>
 </template>
 
-
-
-<style scoped>
+<style scoped lang="scss">
 body {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  background-color: #252525;
-}
-
-img {
-  width: 50%;
-}
-
-div {
-  width: 100%;
-  height:auto;
+  background-color: $primary-background;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  div {
+    margin-top: 3rem;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    color: white;
+    font-weight: 200;
+    font-family: "Poppins", sans-serif;
+  }
+}
+h1 {
+  font-size: 4rem;
+}
+section {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 4rem;
-  margin-top: 6.5rem;
-
-  hr {
-    width: 80%;
-  }
-
-  h1 {
-    color: white;
-    font-size: 4rem;
-    font-weight: 800;
-  }
-
-  p {
-    font-size: 2rem;
-    color: white;
-    text-align: center;
-  }
-
-  a {
-    padding: 1.1rem;
-    background-color:#252525;
-    border-radius: 5px;
-    font-size: 2rem;
-    color: white;
-    transition: all 200ms ease-in-out;
-    width: 16rem;
-    text-align: center;
-  }
-
-  a:hover {
-    transform: scale(1.1);
-  }
 }
 </style>

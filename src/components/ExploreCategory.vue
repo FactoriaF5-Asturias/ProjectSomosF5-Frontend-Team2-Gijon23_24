@@ -1,5 +1,5 @@
 <script setup>
-
+import {  } from 'vue'
 </script>
 
 <template>
@@ -8,21 +8,21 @@
     <h1 class="text-center">Explora nuestras categorías</h1>
     <span class="line"></span>
     <div class="container_images">
-        <Router-link to="/lithophane" class="image">
+        <router-link to="/lithophane" class="image">
             <img src="../assets/img/litofanias.png" alt="">
             <h2 class="category_title">Litofanias</h2>
             <div class="overlay"></div> 
-        </Router-link to="/">
-        <Router-link to="/house" class="image">
+        </router-link>
+        <router-link to="/house" class="image">
             <img src="../assets/img/hogar.png" alt="">
             <h2 class="category_title">Hogar</h2>
             <div class="overlay"></div>
-        </Router-link to="/">
-        <Router-link to="/geek" class="image">
+        </router-link>
+        <router-link to="/geek" class="image">
             <img src="../assets/img/geek.png" alt="">
             <h2 class="category_title">Geek</h2>
             <div class="overlay"></div>
-        </Router-link to="/">
+        </router-link>
     </div>
   </div>  
 </template>
@@ -33,7 +33,6 @@
     margin: 0;
     padding: 0;
 }
-
 
 .galery{
     

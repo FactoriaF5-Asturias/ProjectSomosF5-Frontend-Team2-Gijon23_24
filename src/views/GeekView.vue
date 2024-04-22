@@ -1,90 +1,66 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import Card from './../components/card/Card.vue';
 import axios from 'axios';
-import GeekCardContainer from '@/components/card/GeekCardContainer.vue';
-
+  
 const Geek = ref([]);
+const isLoaded = ref(false);
 
 async function fetchGeekProducts() {
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_PRODUCTS}/getManyByCategoryName/Zona Geek`);
-    products.value = response.data;
-    console.log(response.data);
+    Geek.value = response.data;
+    isLoaded.value = true;
   } catch (error) {
-    console.error('Error al obtener productos de la Zona Geek:', error);
+    console.error('Error al obtener productos de zona geek:', error);
   }
 }
 
 onMounted(() => {
   fetchGeekProducts();
-});
-
+})
 
 </script>
 
 <template>
-   <div>
-    
-  </div>
-  <GeekCardContainer />
+  <body>
+    <div>
+      <h1>Geek</h1>
+      <hr>
+      <section>
+        <Card :product="product" v-for="product in Geek" :key="product.id" v-if="isLoaded" />
+      </section>     
+    </div>
+  </body>
 </template>
-
-
-
-
+  
 <style scoped lang="scss">
 body {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  background-color: $primary-background;
-  
-}
+    background-color: $primary-background;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-img {
-  width: 100%;
-  height:auto;
-}
-
-div {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4rem;
-  margin-top: 6.5rem;
-
-  hr {
-    width: 80%;
+    div {
+      margin-top: 3rem;
+      width: 85%;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      color: white;
+      font-weight: 200;
+      font-family: "Poppins", sans-serif;
+    }
   }
-
   h1 {
-    color: white;
     font-size: 4rem;
-    font-weight: 800;
   }
-
-  p {
-    font-size: 2rem;
-    color: white;
-    text-align: center;
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4rem;
   }
-
-  a {
-    padding: 1.1rem;
-    background-color: $primary-color;
-    border-radius: 5px;
-    font-size: 2rem;
-    color: white;
-    transition: all 200ms ease-in-out;
-    width: 16rem;
-    text-align: center;
-  }
-
-  a:hover {
-    transform: scale(1.1);
-  }
-}
 </style>
+  
+  

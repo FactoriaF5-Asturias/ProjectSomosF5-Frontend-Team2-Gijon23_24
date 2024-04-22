@@ -42,7 +42,7 @@ const uniqueProducts = computed(() => {
         <h1>Mi carrito</h1>
         <div>
             <div id="products_content">
-                <CartCard v-for="(product, index) in uniqueProducts" :key="product.id" :product="product" :count="productCounts[product.id]" />
+                <CartCard v-for="(product) in uniqueProducts" :key="product.id" :product="product" :count="productCounts[product.id]" />
             </div>
             <div id="payment">
                 <p>Subtotal ({{ countArticles }} artículos)</p>
@@ -64,6 +64,7 @@ body {
     }
 }
 h1 {
+    margin-left: 4rem;
     font-size: 3rem;
 }
 #products_content {

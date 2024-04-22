@@ -2,8 +2,6 @@
 import Card from './card/Card.vue';
 import { ref } from 'vue';
 import {useProductsStore} from "./../stores/productStore";
-import CarouselCard from './card/CarouselCard.vue';
-
 
 const productStore = useProductsStore();
 const products = ref([]) 
@@ -21,31 +19,42 @@ const getProducts = async ()=> {
 }}
 getProducts();
 
-
 </script>
 
 <template>
-    <v-slide-group prev-icon="mdi-chevron-left" next-icon="mdi-chevron-right" show-arrows class="slideGroup">
-        <router-link :to="'/Detail/' + product.id" v-for="product in products" :key="product.id">
-            <v-slide-group-item class="slideCard">
-                <CarouselCard :product="product"></CarouselCard>
-            </v-slide-group-item>
-        </router-link>
-    </v-slide-group>
+    <div>
+        <h1>Novedades</h1>
+        <v-slide-group prev-icon="mdi-chevron-left" next-icon="mdi-chevron-right" show-arrows class="slideGroup">
+            <router-link class="slideCard" :to="'/Detail/' + product.id" v-for="product in products" :key="product.id">
+                <v-slide-group-item class="display">
+                    <Card :product="product" />
+                </v-slide-group-item>
+            </router-link>
+        </v-slide-group>
+    </div>
 </template>
+
 <style lang="scss" scoped>
-
 .slideGroup {
-    align-self: center;
-    background-color: rgba(33, 33, 33, 1);
-    color:gray;
-    font-size:  4em;
-    margin-top: 5.5rem;
-   
-   }
-   #card{
-    filter: drop-shadow(1px 14px 9px #000000);;
-   }
-   
+    color: white
+}
 
-   </style> 
+.slideCard {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+div {
+    font-family: "Poppins", sans-serif;
+    background-color:$primary-background;
+    color: white;
+    font-size: 3rem;
+
+    h1 {
+        margin-left: 6rem;
+        margin-bottom: 1rem;
+        font-weight: 200;
+    }
+}
+</style> 
