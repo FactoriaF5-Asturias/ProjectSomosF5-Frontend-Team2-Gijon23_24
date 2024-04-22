@@ -2,6 +2,7 @@
 import ExplorerCategory from "../components/ExploreCategory.vue";
 import Banner from "@/components/Banner.vue";
 import Slider from "@/components/Slider.vue";
+import Custom from "@/components/Custom.vue";
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import Slider from "@/components/Slider.vue";
 		<!-- <Banner /> -->
 		<Slider />
 		<ExplorerCategory />
+		<Custom />
 	</main>
 </template>
 

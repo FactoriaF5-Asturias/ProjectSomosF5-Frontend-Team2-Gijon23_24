@@ -9,17 +9,17 @@ import {  } from 'vue'
     <span class="line"></span>
     <div class="container_images">
         <router-link to="/lithophane" class="image">
-            <img src="../assets/img/litofanias.png" alt="">
+            <img src="/images/litofanias.png" alt="">
             <h2 class="category_title">Litofanias</h2>
             <div class="overlay"></div> 
         </router-link>
         <router-link to="/house" class="image">
-            <img src="../assets/img/hogar.png" alt="">
+            <img src="/images/hogar.png" alt="">
             <h2 class="category_title">Hogar</h2>
             <div class="overlay"></div>
         </router-link>
         <router-link to="/geek" class="image">
-            <img src="../assets/img/geek.png" alt="">
+            <img src="/images/geek.png" alt="">
             <h2 class="category_title">Geek</h2>
             <div class="overlay"></div>
         </router-link>
