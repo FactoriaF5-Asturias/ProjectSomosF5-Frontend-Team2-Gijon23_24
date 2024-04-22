@@ -10,9 +10,10 @@ import Slider from "@/components/Slider.vue";
 const products = ref([]);
 const router = useRouter();
 
-router.afterEach(() => {
-	fetchProductsByRoute();
-});
+
+// router.afterEach(() => {
+//     fetchProductsByRoute();
+// });
 </script>
 
 <template>

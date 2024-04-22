@@ -9,11 +9,15 @@ import Space from './components/general/Space.vue';
 
 <template>
 
-  <Header />
-  <Space />
+  <div>
+    <router-link to="/">casa</router-link>
+    <router-link to="/cart">carrito</router-link>
+    <RouterView />
+  </div>
+
+    <!-- <Space />
   <RouterView />
- 
-  <Footer />
+  <Footer />  -->
 
 </template>
 
