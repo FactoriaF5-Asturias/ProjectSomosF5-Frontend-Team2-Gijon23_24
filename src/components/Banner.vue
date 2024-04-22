@@ -2,7 +2,7 @@
 
 <template>
 	<section>
-		<div class="logo-container">
+		<!-- <div class="logo-container">
 			<img src="/images/banner-logo.svg" />
 		</div>
 		<h1>
@@ -19,7 +19,7 @@
 				/>
 				<input type="submit" class="submit-button" />
 			</div>
-		</form>
+		</form> -->
 	</section>
 </template>
 

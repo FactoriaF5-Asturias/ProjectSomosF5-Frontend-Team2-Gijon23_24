@@ -1,10 +1,14 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import Card from './../components/card/Card.vue';
 import axios from 'axios';
 
 const Hogar = ref([]);
 const isLoaded = ref(false);
+const currentPage = ref(1);
+const ProductsPerPage = 15;
+
+const totalPages = computed(() => Math.ceil(Hogar.value.length / ProductsPerPage));
 
 async function fetchHouseProducts() {
     try {
@@ -20,6 +24,22 @@ onMounted(() => {
     fetchHouseProducts();
 });
 
+const paginatedProducts= computed(() => {
+  const startIndex = (currentPage.value - 1) * ProductsPerPage;
+  return Hogar.value.slice(startIndex, startIndex + ProductsPerPage);
+});
+
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++;
+  }
+};
+
+const prevPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--;
+  }
+};
 </script>
 
 <template>
@@ -28,8 +48,15 @@ onMounted(() => {
         <h1>Hogar</h1>
         <hr>
         <section>
-          <Card :product="product" v-for="product in Hogar" :key="product.id" v-if="isLoaded" />
-        </section>     
+          <div v-if="paginatedProducts.length">
+              <Card :product="product" v-for="product in paginatedProducts" :key="product.id" v-if="isLoaded" />
+          </div>
+        </section>
+        <div id="pagination">
+            <button @click="prevPage" :disabled="currentPage === 1">Anterior</button>
+            <button v-for="page in totalPages" :key="page" @click="goToPage(page)" :disabled="currentPage === page">Página {{ page }}</button>
+            <button @click="nextPage" :disabled="currentPage === totalPages">Siguiente</button>
+        </div>
       </div>
     </body>
 </template>
@@ -42,7 +69,7 @@ body {
     flex-direction: column;
     align-items: center;
 
-    div {
+    > div {
       margin-top: 3rem;
       width: 85%;
       display: flex;
@@ -57,9 +84,14 @@ body {
     font-size: 4rem;
   }
   section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4rem;
+    text-align: center;
+
+    > div {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+        gap: 2rem;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
   }
 </style>

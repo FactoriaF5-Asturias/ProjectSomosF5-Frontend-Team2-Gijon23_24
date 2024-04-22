@@ -1,5 +1,4 @@
 <script setup>
-import {  } from 'vue'
 </script>
 
 <template>
@@ -43,8 +42,8 @@ import {  } from 'vue'
     
         h1{
             color: #fff;
-            font-size: 30px;
-            padding: 3%;
+            font-size: 3rem;
+            padding: 2rem;
         }
         .line{
             position: relative;
@@ -103,7 +102,7 @@ import {  } from 'vue'
         backdrop-filter: blur(10px);
         border-radius: 5px;
     }
-     
+
     .image:hover .overlay{
         height: 100%;
         text-decoration: underline;
