@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import HouseCardContainer from '../components/card/HouseCardContainer.vue';
-import Space from '@/components/general/Space.vue';
+
 const homeProducts = ref([]);
 
 async function fetchHouseProducts() {

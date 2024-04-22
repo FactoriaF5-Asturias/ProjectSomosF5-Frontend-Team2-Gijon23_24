@@ -14,25 +14,25 @@ const getProducts = async ()=> {
     await productStore.fetchProducts();
     
     products.value = productStore.products.reverse()
-    .slice(0, 10);
+    .slice(0, 15);
 
 } catch (error) {
     console.error("No se consiguieron los datos:",error)
 }}
 getProducts();
+
+
 </script>
 
 <template>
     <v-slide-group prev-icon="mdi-chevron-left" next-icon="mdi-chevron-right" show-arrows class="slideGroup">
-       <v-slide-group-item class="slideCard" v-for="product in products" >
-
-    
-    <CarouselCard id="card" :product="product"></CarouselCard>
-        
-         
-       </v-slide-group-item>
+        <router-link :to="'/Detail/' + product.id" v-for="product in products" :key="product.id">
+            <v-slide-group-item class="slideCard">
+                <CarouselCard :product="product"></CarouselCard>
+            </v-slide-group-item>
+        </router-link>
     </v-slide-group>
-   </template>
+</template>
 <style lang="scss" scoped>
 
 .slideGroup {
