@@ -21,7 +21,7 @@ const passwordConfirmation = () => {
   }
 }
 
-// const uri = import.meta.env.VITE_API_ENDPOINT_USERS;
+ const uri = import.meta.env.VITE_API_ENDPOINT_USERS;
 
 const changePassword = async () => {
   try {
@@ -45,7 +45,7 @@ const changePassword = async () => {
     const credentials = {
       withCredentials: true
     }
-    const response = await axios.put(`http://localhost:8080/api/v1/users/updatePassword/1`, data, credentials);
+    const response = await axios.put(uri, data, credentials);
 
     console.log(response)
 
