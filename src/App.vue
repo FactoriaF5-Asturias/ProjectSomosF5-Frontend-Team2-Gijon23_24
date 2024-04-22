@@ -10,7 +10,7 @@ import Space from './components/general/Space.vue';
   <Header />
   <Space />
   <RouterView />
-  <Footer /> 
+  <!-- <Footer />  -->
 
 </template>
 

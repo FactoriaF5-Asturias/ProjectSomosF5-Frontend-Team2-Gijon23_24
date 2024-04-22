@@ -5,15 +5,15 @@
     <article>
         <img src="/images/factoria5-logo.png" alt="">
         <div>
-            <p>"Este sitio es solo para fines educativos. No ingrese información personal o realice pagos aquí."</p>
+            <p>"Este sitio es solo para fines educativos. No ingrese información personal ni realice pagos aquí."</p>
         </div>
     </article>
 </template>
 
 <style scoped lang="scss">
 article {
-    height: 15rem;
-    z-index: 99;
+    padding: 0 2rem;
+    height: 10rem;
     background-color: #FF4700;
     display: flex;
     justify-content: center;
@@ -27,6 +27,21 @@ article {
         margin-top: 0.5rem;
         font-size: 2.5rem;
         color: white;
+        text-align: center;
+    }
+}
+@media screen and (max-width: 1000px) {
+    article {
+        height: 10rem;
+
+        img {
+        height: 60%;
+        }
+
+        p {
+            margin-top: 0.5rem;
+            font-size: 1.5rem;
+        }
     }
 }
 </style>

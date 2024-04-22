@@ -61,7 +61,6 @@ article:hover {
    width: 100%;
    background-color: rgb(73, 73, 73);
    background-size: contain;
-   background-color: white;
    background-position: center;
 }
 .product-data {

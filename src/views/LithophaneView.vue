@@ -81,7 +81,6 @@ body {
     align-items: center;
 
     > div {
-      margin-top: 3rem;
       width: 85%;
       display: flex;
       flex-direction: column;
