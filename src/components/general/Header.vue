@@ -15,17 +15,12 @@ const authStore = useAuthStore();
 		<div>
 			<div id="logotype_container">
 				<img
-					src="/public/images/printgoLogo.png"
+					src="/images/logotype-printgo.svg"
 					alt="PrintGo logotype"
 				/>
 			</div>
 
 			<div id="actions_container">
-				<router-link to="/stripe-checkout">
-					<div>
-						<p>Stripe Pay</p>
-					</div>
-				</router-link>
 				<router-link to="/favorites">
 					<div>
 						<img src="/icons/icon-heart.svg" alt="" />
@@ -33,12 +28,12 @@ const authStore = useAuthStore();
 					</div>
 				</router-link>
 
-          <router-link to="/carrito">
-            <div>
-              <img src="/icons/icon-shopping-cart.svg" alt="">
-              <p>Carrito</p>
-            </div>
-          </router-link>
+				<router-link to="/cart">
+					<div>
+					<img src="/icons/icon-shopping-cart.svg" alt="">
+					<p>Carrito</p>
+					</div>
+				</router-link>
 
 				<HeaderButtons v-if="!authStore.isAuthenticated" />
 				<LoggedProfile v-if="authStore.isAuthenticated" />
@@ -102,7 +97,4 @@ header {
 	}
 }
 
-.active {
-	color: $primary-color;
-}
 </style>
