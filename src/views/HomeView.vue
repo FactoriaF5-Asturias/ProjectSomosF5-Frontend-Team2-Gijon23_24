@@ -19,10 +19,12 @@ router.afterEach(() => {
 
 <template>
     <main>
-        <SearchBar />
+       
         <Slider />
+
         <Card/>
         <ExplorerCategory/>
+        <SearchBar />
 
         <div v-if="products.length">
             <h2>Productos</h2>
