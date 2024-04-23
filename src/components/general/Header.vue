@@ -21,6 +21,11 @@ const authStore = useAuthStore();
 			</div>
 
 			<div id="actions_container">
+				<router-link to="/dashboard">
+					<div>
+						<p>Dashboard</p>
+					</div>
+				</router-link>
 				<router-link to="/stripe-checkout">
 					<div>
 						<p>Stripe Pay</p>
@@ -33,12 +38,12 @@ const authStore = useAuthStore();
 					</div>
 				</router-link>
 
-          <router-link to="/carrito">
-            <div>
-              <img src="/icons/icon-shopping-cart.svg" alt="">
-              <p>Carrito</p>
-            </div>
-          </router-link>
+				<router-link to="/carrito">
+					<div>
+						<img src="/icons/icon-shopping-cart.svg" alt="" />
+						<p>Carrito</p>
+					</div>
+				</router-link>
 
 				<HeaderButtons v-if="!authStore.isAuthenticated" />
 				<LoggedProfile v-if="authStore.isAuthenticated" />

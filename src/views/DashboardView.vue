@@ -5,7 +5,7 @@ import AddButton from "@/components/admin-dashboard-components/AddButton.vue";
 import { ref } from "vue";
 
 let showAddForm = ref(false);
-let showEditForm = ref(false);
+let showEditForm = ref(true);
 
 const openAddForm = () => {
 	showAddForm.value = true;
@@ -27,11 +27,7 @@ const closeForm = () => {
 <template>
 	<main>
 		<AddForm v-if="showAddForm" @close="closeForm" />
-		<EditForm
-			v-if="showEditForm"
-			@close="closeForm"
-			productId="{productId}"
-		/>
+		<EditForm v-if="showEditForm" @close="closeForm" productId="1" />
 		<section>
 			<h1>ADMINISTRADOR</h1>
 			<AddButton @click="openAddForm()" />

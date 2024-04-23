@@ -66,7 +66,7 @@ const router = createRouter({
 			component: StripeCheckoutView,
 		},
 		{
-			path: "/dashboard	",
+			path: "/dashboard",
 			name: "dashboard",
 			component: DashboardView,
 		},
