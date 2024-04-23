@@ -15,7 +15,7 @@ const authStore = useAuthStore();
 		<div>
 			<div id="logotype_container">
 				<img
-					src="/public/images/printgoLogo.png"
+					src="/images/logotype-printgo.svg"
 					alt="PrintGo logotype"
 				/>
 			</div>
@@ -38,10 +38,10 @@ const authStore = useAuthStore();
 					</div>
 				</router-link>
 
-				<router-link to="/carrito">
+				<router-link to="/cart">
 					<div>
-						<img src="/icons/icon-shopping-cart.svg" alt="" />
-						<p>Carrito</p>
+					<img src="/icons/icon-shopping-cart.svg" alt="">
+					<p>Carrito</p>
 					</div>
 				</router-link>
 
@@ -107,7 +107,4 @@ header {
 	}
 }
 
-.active {
-	color: $primary-color;
-}
 </style>
