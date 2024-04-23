@@ -3,8 +3,11 @@ import axios from "axios";
 import { onMounted, reactive, ref } from 'vue';
 import { useRoute,useRouter } from 'vue-router';
 import { useCartStore } from "./../stores/CartStore";
+import FavoriteHeart from "@/components/favorite/FavoriteHeart.vue";
+import { useFavoritesStore } from '@/stores/FavoritesStore';
 
 const store = useCartStore();
+const favoritesStore = useFavoritesStore();
 
 const router  = useRouter();
 const route = useRoute();
@@ -12,6 +15,9 @@ const route = useRoute();
 const goback = () => {
   window.history.length  > 1 ? history.go(-1) :  router.push('/');
 }
+
+// let id;
+// id = route.params.id_product;
 
 const addCart = () => {
 
@@ -34,6 +40,7 @@ let product = reactive({
   image: '',
   additionalImages: []
 });
+
 
 console.log(product.additionalImages);
 
@@ -91,10 +98,11 @@ function changePrice(decimalPrice) {
 }
 </script>
 
+
 <template>
   <div id="home-detail" class="product-detail">
     <div class="goback">
-    <button class="goback" @click="goback"></button>
+      <button class="goback" @click="goBack"></button>
     </div>
     
     <div class="detail-image-container">
@@ -102,11 +110,11 @@ function changePrice(decimalPrice) {
         <img :src="imageDirectory" alt="Main image" />
       </div>
       <div class="detail-miniPics-container">
-      <img :src="imageDirectory" alt="Miniatura" @click="changeMainImage(imageDirectory)" :class="{ 'active': imageDirectory === selectedThumbnail }" />
-      <img v-for="(image, index) in product.additionalImages" :key="index" :src="image" alt="Miniatura" @click="changeMainImage(image)" :class="{ 'active': image === selectedThumbnail }" />
+        <img :src="imageDirectory" alt="Miniatura" @click="changeMainImage(imageDirectory)" :class="{ 'active': imageDirectory === selectedThumbnail }" />
+        <img v-for="(image, index) in product.additionalImages" :key="index" :src="image" alt="Miniatura" @click="changeMainImage(image)" :class="{ 'active': image === selectedThumbnail }" />
+      </div>
     </div>
-
-    </div>
+    
     <div class="detail-text-container">
       <h3 class="product-name">
         {{ product.productName }}
@@ -115,9 +123,10 @@ function changePrice(decimalPrice) {
         {{ product.price }}<span style="font-size: 3rem">€</span>
       </h2>
       <p>
-        {{ product.productDescription}}
+        {{ product.productDescription }}
       </p>
     </div>
+    
     <div class="añadirCarrito-container">
       <div class="cantidad-container">
         <label for="cantidad" class="label">Cantidad:</label>
@@ -126,11 +135,10 @@ function changePrice(decimalPrice) {
         <button type="button" class="btn-sumar" @click="sumarCantidad">+</button>
       </div>
       <button class="añadirCarrito" @click="addCart">Añadir al carrito</button>
-      <button class="añadirFavorito"><i class="fas fa-heart"></i></button>
+      <FavoriteHeart :key="id" :product="product" />
     </div>
   </div>
 </template>
-
 
 
 <style lang="scss" scoped>
