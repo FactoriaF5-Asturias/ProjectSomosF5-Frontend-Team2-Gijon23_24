@@ -1,18 +1,21 @@
 <script setup>
- import { ref, computed, onMounted } from 'vue';
+ import { ref } from 'vue';
  import axios from 'axios';
+ import { useRouter } from 'vue-router';
 
-// const products = ref([]);
+ const router = useRouter();
+
  const name = ref('');
- 
+
  const uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS_BYNAME;
 
 
  const searchProducts = async () => {
   try {
     const response = await axios.get(`${uri}/${name.value}`);
-    // Aquí puedes manejar la respuesta y actualizar tu estado de productos con los resultados
     console.log(response.data); 
+    router.push({ name: 'results', query: { results: JSON.stringify(response.data) } });
+  
   } catch (error) {
     console.error('Error al buscar productos:', error);
   }

@@ -9,7 +9,7 @@ import UserProfileView from '../views/UserProfileView.vue'
 import AdminProfileView from '../views/AdminProfileView.vue'
 import StripeCheckoutView from '@/views/StripeCheckoutView.vue'
 import DashboardView from '../views/DashboardView.vue'
-
+import ResultsPageView from '../views/ResultsPageView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -72,7 +72,13 @@ const router = createRouter({
 		path: "/dashboard",
 		name: "dashboard",
 		component: DashboardView,
-	  }
+	  },
+    {
+      path: '/results',
+      name: 'results',
+      component: ResultsPageView,
+      props: route => ({ results: JSON.parse(route.query.results) })
+    }
   ]
 });
 
