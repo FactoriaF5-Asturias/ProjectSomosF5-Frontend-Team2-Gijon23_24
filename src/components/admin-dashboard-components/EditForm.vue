@@ -30,8 +30,15 @@ const addedImages = ref([]);
 const imageDirectory = ref([]);
 const otherImagesDirectory = ref([])
 const mainImage = ref('')
+const mainImageUrl = ref('')
+const selectedMainImage = ref([])
+const selectedFiles = ref([])
 
+// Inputs.
 
+const showMainImageInput = ref(false)
+
+// Find images.
 
 function findImageForProduct(product) {
     const image = product.images.find(img => img.mainImage === true);
@@ -45,12 +52,27 @@ function findOtherImagesForProduct(product) {
 
 // Handle FILES upload.
 const handleFilesChange = (event) => {
-	selectedFiles.value = Array.from(event.target.files);
+  selectedFiles.value = Array.from(event.target.files);
+  console.log(selectedFiles.value)
 };
 
 // Handle MAIN IMAGE upload.
 const handleMainImageChange = (event) => {
-	selectedMainImage.value = event.target.files[0];
+  selectedMainImage.value = event.target.files[0];
+  console.log(1)
+  const reader = new FileReader();
+  console.log(reader)
+  reader.onload = (e) => {
+  console.log(e.target.result)
+  mainImageUrl.value = e.target.result;
+  reader.readAsDataURL(selectedMainImage.value)
+  }
+  showMainImageInput.value = false
+  console.log(mainImageUrl.value)
+  console.log(selectedMainImage.value)
+  reader.onerror = (e) => {
+    console.error('FileReader error:', e.target.error);
+  };
 };
 
 // Get product data.
@@ -97,9 +119,11 @@ const addDeletedImage = (imageId) => {
 }
 
 function addDeletedMainImage() {
-  const deletedMainImage = imageDirectory.value.splice(0,1)[0];
+  const deletedMainImage = imageDirectory.value.splice(0, 1)[0];
+  showMainImageInput.value = true
   deletedImages.value.push(deletedMainImage);
   console.log(deletedImages.value)
+  console.log(showMainImageInput.value)
 }
 
 
@@ -109,7 +133,9 @@ async function handleUpdate() {
 	try {
 		await updateProduct(props.productId);
     await uploadImages(props.productId);
-    await deleteImages(deletedImages)
+    for (image in deletedImages) {
+      await deleteImages(image.name)
+    }
 		console.log("Producto actualizado exitosamente.");
 	} catch (error) {
 		console.error("Error al actualizar el producto", error);
@@ -154,7 +180,7 @@ async function uploadImages(id) {
 	formData.append("file", selectedMainImage.value);
 	try {
 		await axios.post(
-			`http://localhost:8080/api/v1/images/uploadImages/1`,
+			`http://localhost:8080/api/v1/images/uploadImages/${id}`,
 			formData,
 			{
 				headers: {
@@ -167,9 +193,23 @@ async function uploadImages(id) {
 		console.log("Imágenes subidas exitosamente.");
 	} catch (error) {
 		console.error("Error al subir las imágenes:", error);
+		throw error;
+	}
+}
 
-		await deleteProduct(productId);
+async function deleteImageByName(name) {
+  try {
+		await axios.delete(
+			`http://localhost:8080/api/v1/images/${name}`,
+			{},
+			{
+				withCredentials: true,
+			}
+		);
 
+		console.log("Imágen borrada exitosamente.");
+	} catch (error) {
+		console.error("Error al borrar la imagen:", error);
 		throw error;
 	}
 }
@@ -203,6 +243,15 @@ onMounted(() => {
           <div class="image-main-container">
             <label>Imagen Principal</label>
             <div class="image-main">
+              <input
+							type="file"
+							class="form-control-file"
+							id="file"
+							name="file"
+							@change="handleMainImageChange"
+              v-if="showMainImageInput"
+						  />
+              <img v-if="!showMainImageInput" :src="mainImageUrl.value" alt="Uploaded Image"> 
               <article v-for="image in imageDirectory" :key="image.id">
                   <div class="delete-image" :style="{ 'background-image': `url('http://localhost:8080/api/v1/imgs/${image.imageName}')` }"></div>
                   <button @click="() => addDeletedMainImage()">Delete</button>
@@ -244,6 +293,12 @@ onMounted(() => {
             <button @click="() => addDeletedImage(image.id)">Delete</button>
           </article>
         </div>
+        <div class="selected-images">
+          <article v-for="image in selectedFiles" :key="image.id">
+            <div class="delete-image" :style="{ 'background-image': `url('http://localhost:8080/api/v1/imgs/${image.imageName}')` }"></div>
+            <button @click="() => addDeletedImage(image.id)">Delete</button>
+          </article>
+        </div>
 
         <div class="images-container">
           <label for="file-upload" class="custom-file-upload">Imágenes</label>
@@ -258,7 +313,7 @@ onMounted(() => {
         </div>
 
         <div class="btns-actions">
-          <button @click="updateProduct">Guardar</button>
+          <button @click="handleUpdate">Guardar</button>
         </div>
       </form>
     </div>
