@@ -92,7 +92,7 @@ async function uploadImages(productId) {
 	formData.append("file", selectedMainImage.value);
 	try {
 		await axios.post(
-			`https://api-printgo.factoriaf5asturias.org/api/v1/images/uploadImages/${productId}`,
+			`https://api-printgo.factoriaf5asturias.org/api/v1/images/uploadToS3/${productId}`,
 			formData,
 			{
 				headers: {
