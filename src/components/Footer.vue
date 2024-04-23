@@ -45,12 +45,31 @@
   .footer-right {
 	display: flex;
 	align-items: center;
+	margin: 1rem;
+  }
+
+  @media (max-width: 1200px) {
+	.footer{
+		flex-direction: column;
+	}
   }
   
   .footer-center {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	flex-wrap: wrap;
+  }
+  @media (max-width: 636px) {
+	.nav{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.footer{
+		align-items: center;
+		justify-content: center;
+	}
   }
   
   .nav {
@@ -80,6 +99,8 @@
   
   .footer-right {
 	margin-right: 2%;
+	gap: 1rem;
+	
   }
   
   .paypal-logo,
