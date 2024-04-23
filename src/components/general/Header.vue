@@ -21,6 +21,16 @@ const authStore = useAuthStore();
 			</div>
 
 			<div id="actions_container">
+				<router-link to="/dashboard">
+					<div>
+						<p>Dashboard</p>
+					</div>
+				</router-link>
+				<router-link to="/stripe-checkout">
+					<div>
+						<p>Stripe Pay</p>
+					</div>
+				</router-link>
 				<router-link to="/favorites">
 					<div>
 						<img src="/icons/icon-heart.svg" alt="" />
