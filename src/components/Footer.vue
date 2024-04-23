@@ -6,9 +6,9 @@
 	  <div class="footer-center">
 		<div class="nav">
 		  <router-link to="/">Inicio</router-link>
-		  <router-link to="/faq">Preguntas Frecuentes</router-link>
-		  <router-link to="/about">Sobre Nosotros</router-link>
-		  <router-link to="/contact">Contacto</router-link>
+		  <router-link to="/">Preguntas Frecuentes</router-link>
+		  <router-link to="/">Sobre Nosotros</router-link>
+		  <router-link to="/">Contacto</router-link>
 		</div>
 		<div class="copyright-container">
 		  <div class="copyright">
