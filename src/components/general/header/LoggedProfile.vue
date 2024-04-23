@@ -6,30 +6,53 @@ const authStore = useAuthStore();
 
 const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 
-const userLogout = async () => {
-    try {
-        await axios.get(`${uri}/logout`, {}, {withCredentials: true});
-        authStore.userRole = '';
-        authStore.username = '';
-        authStore.isAuthenticated = false;
-        console.log('ha funcionado adioos!!!!!!!', authStore.userRole, authStore.username, authStore.isAuthenticated);
-    } catch (error) {
-        console.error('Ha ocurrido un error durante el logout: ', error);
-        console.log(authStore.userRole, authStore.username, authStore.isAuthenticated);
+// const userLogout = async () => {
+//     try {
+//         await axios.get("http://localhost:8080/api/v1/logout", {}, {withCredentials: true});
+//         authStore.userRole = '';
+//         authStore.username = '';
+//         authStore.isAuthenticated = false;
+//         console.log('ha funcionado adioos!!!!!!!', authStore.userRole, authStore.username, authStore.isAuthenticated);
+//     } catch (error) {
+//         console.error('Ha ocurrido un error durante el logout: ', error);
+//         console.log(authStore.userRole, authStore.username, authStore.isAuthenticated);
         
-    }
-};
+//     }
+// };
+
+async function userLogout() {
+
+try {
+    const response = await fetch(uri + '/logout', {
+        method: 'GET',
+        credentials: 'include'
+    });
+    console.log("Logout successfull"); 
+    authStore.userRole = '';
+    authStore.username = '';
+    authStore.isAuthenticated = false;
+    return response.status
+} catch (error) {
+    throw new Error('Error occured during API fetch GET request while logout')
+}
+
+}
 
 </script>
 
 <template>
   <div>
-    <router-link to="/user/profile">
-    <img id="photo" src="/icons/icon-user.svg" alt="user icon">
+    <router-link v-if="authStore.isAuthenticated && authStore.userRole == 'ROLE_USER'" to="/user/profile">
+      <img id="photo" src="/icons/icon-user.svg" alt="user icon">
       <p> {{ authStore.username }} </p>
     </router-link>
-    <hr>
-    <button @click="userLogout">Cerrar sesión</button>
+
+    <router-link v-if="authStore.isAuthenticated && authStore.userRole == 'ROLE_ADMIN'" to="/admin/profile">
+      <img id="photo" src="/icons/icon-user.svg" alt="user icon">
+      <p>{{ authStore.username }}</p>
+    </router-link>
+
+    <button @click.prevent="userLogout()">Cerrar sesión</button>
   </div>
 </template>
 

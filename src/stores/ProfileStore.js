@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
-import axios from 'axios';
+import { defineStore } from "pinia";
+import axios from "axios";
 
 uri = import.meta.env.VITE_API_ENDPOINT_PROFILE;
 
