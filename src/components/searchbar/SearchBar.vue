@@ -1,9 +1,19 @@
 <script setup>
-// import { ref, computed, onMounted } from 'vue';
-// import axios from 'axios';
+ import { ref, computed, onMounted } from 'vue';
+ import axios from 'axios';
 
 // const products = ref([]);
-// const searchByName = ref('');
+ const searTerm = ref('');
+
+ const searchProducts = async () => {
+  try {
+    const response = await axios.get(`URL_DEL_BACKEND/productos?nombre=${searchTerm.value}`);
+    // Aquí puedes manejar la respuesta y actualizar tu estado de productos con los resultados
+    console.log(response.data); // Solo para ver la respuesta en la consola por ahora
+  } catch (error) {
+    console.error('Error al buscar productos:', error);
+  }
+}
 
 // const fetchProducts = async () => {
 //   try {
@@ -28,12 +38,12 @@
 <template>
 
   <div class="search-container">
+
     <input type="text" class="input" v-model="searchTerm" placeholder="Buscar producto por nombre...">
 
     <div class="btn-container">
       <button class="btn">Buscar</button>
     </div>
-
 
   </div>
 
