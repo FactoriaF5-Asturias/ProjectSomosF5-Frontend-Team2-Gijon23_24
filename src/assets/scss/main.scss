@@ -11,11 +11,21 @@ html {
 
 body {
 	width: 100%;
-	min-height: 100vh;
 }
 
 a {
 	text-decoration: none;
+}
+
+.link:hover{
+	color: $primary-color;
+}
+
+.link {
+	font-weight: 300;
+	color: $inactive-primary-color;
+	font-size: 1.7rem;
+	transition: all 0.2s ease-in-out;
 }
 
 .link:hover{

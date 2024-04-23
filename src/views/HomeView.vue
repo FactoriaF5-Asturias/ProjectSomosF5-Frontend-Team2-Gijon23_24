@@ -1,20 +1,7 @@
 <script setup>
-import { ref } from 'vue';
-import axios from 'axios';
-import { useRouter } from 'vue-router';
-import ExplorerCategory from '../components/ExploreCategory.vue';
+import ExplorerCategory from "../components/ExploreCategory.vue";
 import Banner from "@/components/Banner.vue";
-// import Card from '@/components/card/Card.vue';
-import Slider from '@/components/Slider.vue';
-
-
-const products = ref([]);
-const router = useRouter();
-
-
-router.afterEach(() => {
-    fetchProductsByRoute();
-});
+import Slider from "@/components/Slider.vue";
 </script>
 
 <template>
@@ -35,7 +22,4 @@ router.afterEach(() => {
     </main>
 </template>
 
-<style lang="scss" scoped>
-</style>
-
-
+<style lang="scss" scoped></style>

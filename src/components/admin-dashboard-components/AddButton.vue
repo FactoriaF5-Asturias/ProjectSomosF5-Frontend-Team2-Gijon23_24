@@ -1,39 +1,23 @@
 <script setup>
-import AddForm from './AddForm.vue';
-import { ref } from 'vue';
-
-let showAddForm = ref(false);
-
-const openAddForm = () => {
-  showAddForm.value = true;
-};
-
-const closeForm = () => {
-  showAddForm.value = false;
-};
+import AddForm from "@/components/admin-dashboard-components/AddForm.vue";
+import { ref } from "vue";
 </script>
 
 <template>
-    <div class="btn-open">
-    <button  @click="openAddForm"> + Añadir nuevo artículo</button>
-    <AddForm v-if="showAddForm" @close="closeForm"/>
-</div>
+	<button>Añadir nuevo artículo</button>
 </template>
 
 <style lang="scss" scoped>
-.btn-open {
-display: flex;
-justify-content: end;
-margin-top: 3rem;
-margin-right: 4rem;
-}
-
 button {
-    background-color: #AE81D1;
-    color: white;
-    border-radius: 1rem;
-    padding: 1rem 2rem;
-    
+	background-color: #ae81d1;
+	color: white;
+	border-radius: 1rem;
+	padding: 1rem 2rem;
+	transition: ease-in-out 3s;
 }
 
+button:hover {
+	background-color: #422359;
+}
 </style>
+ 

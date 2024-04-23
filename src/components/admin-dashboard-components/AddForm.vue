@@ -13,8 +13,8 @@ const closeForm = () => {
 	props.onClose();
 };
 
-uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
-uriImages = import.meta.env.VITE_API_ENDPOINT_IMAGES;
+// uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
+// uriImages = import.meta.env.VITE_API_ENDPOINT_IMAGES;
 
 const resetForm = () => {
 	productName.value = "";
@@ -67,7 +67,7 @@ async function createProduct() {
 	console.log(data);
 	try {
 		const response = await axios.post(
-			`${this.uri}`,
+			`https://api-printgo.factoriaf5asturias.org/api/v1/products`,
 			data,
 			{
 				headers: {
@@ -92,7 +92,7 @@ async function uploadImages(productId) {
 	formData.append("file", selectedMainImage.value);
 	try {
 		await axios.post(
-			`${this.uriImages}/uploadImages/${productId}`,
+			`https://api-printgo.factoriaf5asturias.org/api/v1/images/uploadToS3/${productId}`,
 			formData,
 			{
 				headers: {
@@ -115,7 +115,8 @@ async function uploadImages(productId) {
 async function deleteProduct(productId) {
 	try {
 		await axios.delete(
-			`${this.uri}/${productId}`
+			`https://api-printgo.factoriaf5asturias.org/api/v1/products/${productId}`, {},
+			{ withCredentials: true }
 		);
 
 		console.log("Producto borrado exitosamente.");
@@ -224,7 +225,6 @@ async function deleteProduct(productId) {
 </template>
 
 <style lang="scss" scoped>
-
 .modal {
 	display: flex;
 	justify-content: center;
