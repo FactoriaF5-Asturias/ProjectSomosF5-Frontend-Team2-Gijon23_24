@@ -3,26 +3,20 @@
  import axios from 'axios';
 
 // const products = ref([]);
- const searTerm = ref('');
+ const name = ref('');
+ 
+ const uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS_BYNAME;
+
 
  const searchProducts = async () => {
   try {
-    const response = await axios.get(`URL_DEL_BACKEND/productos?nombre=${searchTerm.value}`);
+    const response = await axios.get(`${uri}/${name.value}`);
     // Aquí puedes manejar la respuesta y actualizar tu estado de productos con los resultados
-    console.log(response.data); // Solo para ver la respuesta en la consola por ahora
+    console.log(response.data); 
   } catch (error) {
     console.error('Error al buscar productos:', error);
   }
 }
-
-// const fetchProducts = async () => {
-//   try {
-//     const response = await axios.get(`https://api-printgo.factoriaf5asturias.org/api/v1/products`);
-//     products.value = response.data;
-//   } catch (error) {
-//     console.error('Error fetching products:', error);
-//   }
-// };
 
 // onMounted(fetchProducts);
 
@@ -39,10 +33,10 @@
 
   <div class="search-container">
 
-    <input type="text" class="input" v-model="searchTerm" placeholder="Buscar producto por nombre...">
+    <input type="text" class="input" v-model="name" placeholder="Buscar producto por nombre...">
 
     <div class="btn-container">
-      <button class="btn">Buscar</button>
+      <button class="btn" @click="searchProducts">Buscar</button>
     </div>
 
   </div>
