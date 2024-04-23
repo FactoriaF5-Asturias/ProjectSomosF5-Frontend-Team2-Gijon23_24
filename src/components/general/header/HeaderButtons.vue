@@ -69,4 +69,14 @@ button:hover {
   position: relative;
 }
 
+@media (max-width: 1000px) {
+  button {
+    height: 5rem;
+    border-radius: 5px;
+    width: 10rem;
+    padding: 0 0.5rem;
+    font-size: 1.6rem;
+    transition: all 0.2s ease-in-out;
+}
+}
 </style>

@@ -44,20 +44,16 @@ nav {
     display: flex;
     align-items: center;
     gap: 3rem;
-
-    .link {
-        color: white;
-        text-decoration: none;
-        font-size: 1.2rem;
-        transition: color 0.3s ease;
-        
-        &:hover {
-            color: $primary-color;
-        }
-    }
 }
 
 .active {
     color: $primary-color;
+}
+
+@media (max-width: 600px) {
+    nav {
+        padding-left: 0;
+        justify-content: center;
+    }
 }
 </style>
