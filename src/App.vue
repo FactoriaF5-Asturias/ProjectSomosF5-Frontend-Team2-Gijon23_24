@@ -1,4 +1,5 @@
 <script setup>
+<<<<<<< HEAD
 import { RouterView } from 'vue-router'
 import Header from "./components/general/Header.vue";
 </script>
@@ -14,11 +15,22 @@ import Header from "./components/general/Header.vue";
       </nav>
     </div>
 
+=======
+import { RouterView } from "vue-router";
+import Header from "./components/general/Header.vue";
+import Footer from './components/Footer.vue';
+import Space from './components/general/Space.vue';
+</script>
+
+<template>
+  
+  <Header />
+  <Space />
+>>>>>>> dev
   <RouterView />
+  <!-- <Footer />  -->
+
 </template>
 
 <style scoped>
-.wrapper {
-  font-size: 1.5rem;
-}
 </style>

@@ -1,14 +1,40 @@
-@import './base.scss';
+@import "./variables.scss";
+@import "./base.scss";
+
+* {
+    font-family: "Poppins", sans-serif;
+}
 
 html {
-    font-size: 62.5% !important; 
+	font-size: 62.5% !important;
 }
 
 body {
-    width: 100%;
-    min-height: 100vh;
+	width: 100%;
 }
 
 a {
-    text-decoration: none;
+	text-decoration: none;
+}
+
+.link:hover{
+	color: $primary-color;
+}
+
+.link {
+	font-weight: 300;
+	color: $inactive-primary-color;
+	font-size: 1.7rem;
+	transition: all 0.2s ease-in-out;
+}
+
+.link:hover{
+	color: $primary-color;
+}
+
+.link {
+	font-weight: 300;
+	color: $inactive-primary-color;
+	font-size: 1.7rem;
+	transition: all 0.2s ease-in-out;
 }
