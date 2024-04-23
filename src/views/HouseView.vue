@@ -30,17 +30,13 @@ const paginatedProducts = computed(() => {
 });
 
 const nextPage = () => {
-  if (currentPage.value < totalPages.value) {
-    currentPage.value++;
+    currentPage.value = Math.min(currentPage.value + 4, totalPages.value); // Avanzar de cuatro en cuatro páginas
     scrollToTop();
-  }
 };
 
 const prevPage = () => {
-  if (currentPage.value > 1) {
-    currentPage.value--;
+    currentPage.value = Math.max(currentPage.value - 4, 1); // Retroceder de cuatro en cuatro páginas
     scrollToTop();
-  }
 };
 
 const changePage = (page) => {
@@ -51,6 +47,16 @@ const changePage = (page) => {
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+const visiblePages = computed(() => {
+    const pagesToShow = 4;
+    const visible = [];
+    const startPage = Math.max(1, currentPage.value);
+    for (let i = startPage; i < startPage + pagesToShow && i <= totalPages.value; i++) {
+        visible.push(i);
+    }
+    return visible;
+});
 </script>
 
 <template>
@@ -59,15 +65,15 @@ function scrollToTop() {
         <h1>Hogar</h1>
         <hr>
         <section>
-        <div v-if="paginatedProducts.length">
-          <Card :product="product" v-for="product in paginatedProducts" :key="product.id" v-if="isLoaded" />
-        </div>
-      </section>
-      <div id="pagination">
-        <button class="pagination-arrow" @click="prevPage" :disabled="currentPage === 1"> << </button>
-        <button v-for="page in totalPages" :key="page" @click="changePage(page)" :disabled="currentPage === page" :class="{ 'active-page': currentPage === page }">{{ page }}</button>
-        <button class="pagination-arrow" @click="nextPage" :disabled="currentPage === totalPages"> >> </button>
-      </div>
+          <div v-if="paginatedProducts.length">
+            <Card :product="product" v-for="product in paginatedProducts" :key="product.id" v-if="isLoaded" />
+          </div>
+        </section>
+          <div id="pagination">
+            <button class="pagination-arrow" @click="prevPage" :disabled="currentPage <= 1"> << </button>
+            <button v-for="page in visiblePages" :key="page" @click="changePage(page)" :class="{ 'active-page': currentPage === page }">{{ page }}</button>
+            <button class="pagination-arrow" @click="nextPage" :disabled="currentPage >= totalPages"> >> </button>
+          </div>
       </div>
     </body>
 </template>

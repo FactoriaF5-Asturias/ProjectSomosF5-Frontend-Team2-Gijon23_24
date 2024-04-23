@@ -47,6 +47,7 @@ onMounted(async () => {
 <style scoped lang="scss">
 article {
   transition: transform 0.2s ease-in-out;
+  filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.357));
 }
 
 article:hover {
