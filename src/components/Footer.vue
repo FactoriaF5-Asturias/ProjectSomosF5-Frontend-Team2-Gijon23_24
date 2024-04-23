@@ -36,16 +36,15 @@
   
   .logo {
 	width: 86px;
-	margin-left: 40%;
-	margin-bottom: 24%;
   }
-  
+
   .footer-left,
   .footer-center,
   .footer-right {
 	display: flex;
 	align-items: center;
 	margin: 1rem;
+	justify-content: center
   }
 
   @media (max-width: 1200px) {

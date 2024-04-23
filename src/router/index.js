@@ -9,6 +9,8 @@ import UserProfileView from '../views/UserProfileView.vue'
 import AdminProfileView from '../views/AdminProfileView.vue'
 import StripeCheckoutView from '@/views/StripeCheckoutView.vue'
 import DashboardView from '../views/DashboardView.vue'
+import { useAuthStore } from '@/stores/AuthStore'
+import LoginForm from '@/components/general/header/LoginForm.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,7 +23,8 @@ const router = createRouter({
     {
       path: '/cart',
       name: 'cart',
-      component: CartView
+      component: CartView,
+      meta: {requiresAuth: true}
     },
     
     {
@@ -34,7 +37,8 @@ const router = createRouter({
     {
       path: '/favorites',
       name: 'favoritos',
-      component: FavoritesView
+      component: FavoritesView,
+      meta: {requiresAuth: true}
     },
     {
       path: '/geek',
@@ -68,16 +72,29 @@ const router = createRouter({
       name: "stripe-checkout",
       component: StripeCheckoutView,
     },
-	{
+	  {
 		path: "/dashboard",
 		name: "dashboard",
 		component: DashboardView,
-	  }
+	  },
+    // {
+    //   name: "login",
+    //   component: LoginForm
+    // }
   ]
 });
 
 router.afterEach(() => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+router.beforeEach((to) =>{
+  const store = useAuthStore()
+
+  if (to.meta.requiresAuth && !store.isAuthenticated){
+    alert("debe iniciar sesion")
+    return {name: 'inicio'}
+  }
+})
 
 export default router;
