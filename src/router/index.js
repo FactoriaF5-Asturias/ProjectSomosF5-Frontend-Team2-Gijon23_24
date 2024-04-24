@@ -73,9 +73,10 @@ const router = createRouter({
       component: StripeCheckoutView,
     },
 	  {
-		path: "/dashboard",
-		name: "dashboard",
-		component: DashboardView,
+      path: "/dashboard",
+      name: "dashboard",
+      component: DashboardView,
+      meta: {requiresAuth: true}
 	  },
     // {
     //   name: "login",

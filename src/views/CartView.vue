@@ -64,15 +64,17 @@ body {
     grid-template-columns: 2fr 1fr;
     background-color: $primary-background;
 }
-@media (max-width: 768px) {
-    
+@media (max-width: 938px) {
+    .container{
+        grid-template-columns: 1fr;
+    }
 }
 h1 {
     margin-left: 4rem;
     font-size: 3rem;
 }
 #products_content {
-    width: 70%;
+    width: 100%;
     padding: 4rem;
     display: flex;
     flex-direction: column;
@@ -84,6 +86,7 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
     height: 14rem;
+    width: 70%;
     border-radius: 15px;
     padding: 2rem;
     right: 0;

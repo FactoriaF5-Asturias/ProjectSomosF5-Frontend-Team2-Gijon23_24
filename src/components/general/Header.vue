@@ -20,7 +20,7 @@ const authStore = useAuthStore();
 			</div>
 
 			<div id="actions_container">
-				<router-link to="/dashboard" exact-active-class="active">
+				<router-link to="/dashboard" exact-active-class="active" v-if="authStore.userRole == 'ROLE_ADMIN'">
 					<div>
                         <img src="/icons/admin-icon.svg" alt="">
                         <p>Dashboard</p>
