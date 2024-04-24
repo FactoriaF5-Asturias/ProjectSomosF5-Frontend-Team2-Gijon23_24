@@ -1,7 +1,7 @@
 <template>
     <div>
       <button class="añadirFavorito" @click="addFavorites(product.id)">
-        <i class="fas fa-heart"></i>
+        <i class="fas fa-heart" ></i>
       </button>
     </div>
   </template>

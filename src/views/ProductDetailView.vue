@@ -12,9 +12,8 @@ const favoritesStore = useFavoritesStore();
 const router  = useRouter();
 const route = useRoute();
 
-const goback = () => {
-  window.history.length  > 1 ? history.go(-1) :  router.push('/');
-}
+
+
 
 // let id;
 // id = route.params.id_product;
@@ -66,7 +65,7 @@ onMounted(async () => {
   const id = route.params.id_product;
   const response = await axios.get(`${url}/${id}`);
   product = response.data;
-  selectedThumbnail = product.additionalImages[0];
+  // selectedThumbnail = product.additionalImages[0];
   imageDirectory.value = uri + "/" + findImageForProduct(product);
 });
 
@@ -88,13 +87,16 @@ function changeMainImage(image) {
 }
 
 function changePrice(decimalPrice) {
-
+  
   let priceString = decimalPrice.toString();
   let [integerPart, decimalPart] = priceString.split('.');
   let priceInteger = parseInt(integerPart) * 100 + (decimalPart ? parseInt(decimalPart) : 0);
   
   console.log('precio:' + priceInteger )
   return priceInteger;
+}
+const goBack = () => {
+  window.history.length  > 1 ? history.go(-1) :  router.push('/');
 }
 </script>
 
