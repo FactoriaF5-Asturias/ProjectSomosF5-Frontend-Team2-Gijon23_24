@@ -1,44 +1,44 @@
 <script setup>
+import { ref } from 'vue';
 import LoginForm from "./LoginForm.vue";
 import RegisterForm from "./RegisterForm.vue";
-import { ref } from 'vue';
 
 let showRegisterForm = ref(false);
 let showLoginForm = ref(false);
 
 const openRegisterForm = () => {
-  showRegisterForm.value = true;
-  showLoginForm.value = false;
+ showRegisterForm.value = true;
+ showLoginForm.value = false;
 };
 
 const openLoginForm = () => {
-  showLoginForm.value = true;
-  showRegisterForm.value = false;
+ showLoginForm.value = true;
+ showRegisterForm.value = false;
 };
 
 const closeForm = () => {
-  showRegisterForm.value = false;
-  showLoginForm.value = false;
+ showRegisterForm.value = false;
+ showLoginForm.value = false;
 };
 </script>
 
 <template>
-  <div class="buttons_container">
+   <div class="buttons_container">
     <div>
       <button @click="openLoginForm()">
         Iniciar sesión
       </button>
   
-      <button @click="openRegisterForm()">
+      <button class="mobile" @click="openRegisterForm()">
         Registrarse
       </button>
     </div>
 
     <div class="forms_container">
-      <RegisterForm v-if="showRegisterForm" @close="closeForm"/>
-      <LoginForm v-if="showLoginForm" @close="closeForm"/>
+      <RegisterForm v-if="showRegisterForm" @close="closeForm" :loginClick="openLoginForm" />
+      <LoginForm v-if="showLoginForm" @close="closeForm" :registerClick="openRegisterForm" />
     </div>
-  </div>
+ </div>
 </template>
 
 <style scoped lang="scss">
@@ -70,13 +70,8 @@ button:hover {
 }
 
 @media (max-width: 1000px) {
-  button {
-    height: 5rem;
-    border-radius: 5px;
-    width: 10rem;
-    padding: 0 0.5rem;
-    font-size: 1.6rem;
-    transition: all 0.2s ease-in-out;
-}
+  .mobile {
+    display: none;
+  }
 }
 </style>
