@@ -61,9 +61,12 @@ body {
 
 .container {
     display: grid;
+    grid-template-columns: 2fr 1fr;
     background-color: $primary-background;
 }
-
+@media (max-width: 768px) {
+    
+}
 h1 {
     margin-left: 4rem;
     font-size: 3rem;
@@ -77,7 +80,6 @@ h1 {
 }
 
 #payment {
-    // position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -85,8 +87,7 @@ h1 {
     border-radius: 15px;
     padding: 2rem;
     right: 0;
-    margin-right: 3%;
-    width: 25%;
+    margin: 2rem;
     background-color: #2B2B2B;
 
     p {
