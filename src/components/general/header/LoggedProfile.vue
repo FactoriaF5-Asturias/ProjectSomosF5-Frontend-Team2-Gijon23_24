@@ -42,7 +42,7 @@ cleanUsername(authStore.username);
       <img id="photo" src="/icons/icon-user.svg" alt="user icon">
       <p> {{ usernameCleaned }} </p>
     </router-link>
-
+    
     <hr class="mobile">
     <button @click.prevent="userLogout()">
       <p class="mobile">Cerrar sesión</p>
