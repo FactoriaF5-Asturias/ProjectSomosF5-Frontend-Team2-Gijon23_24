@@ -194,7 +194,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 85rem;
-  width: 60rem;
+  width: 80%;
   border-radius: 1.5rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   background-color: white;
@@ -258,6 +258,13 @@ form {
   }
 }
 
+@media (max-width: 539px) {
+  .input-box{
+    input{
+      width: 100%;
+    }
+  }
+}
 .second-row {
   display: flex;
   flex-direction: row;
@@ -292,6 +299,19 @@ form {
     font-size: 1.8rem;
     border: 1px solid gray;
     border-radius: 0.5rem;
+  }
+
+  @media (max-width: 517px){
+    #postal-code, #city{
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 517px) {
+  .input-box-2{
+    flex-direction: column;
+    
   }
 }
 

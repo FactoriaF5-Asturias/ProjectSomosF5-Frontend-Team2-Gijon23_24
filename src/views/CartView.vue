@@ -40,7 +40,7 @@ const uniqueProducts = computed(() => {
 <template>
     <body>
         <h1>Mi carrito</h1>
-        <div>
+        <div class="container">
             <div id="products_content">
                 <CartCard v-for="(product) in uniqueProducts" :key="product.id" :product="product" :count="productCounts[product.id]" />
             </div>
@@ -57,10 +57,16 @@ const uniqueProducts = computed(() => {
 body {
     color: white;
     background-color: $primary-background;
+}
 
-    > div {
-        display: flex;
-        background-color: $primary-background;
+.container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    background-color: $primary-background;
+}
+@media (max-width: 938px) {
+    .container{
+        grid-template-columns: 1fr;
     }
 }
 h1 {
@@ -68,7 +74,7 @@ h1 {
     font-size: 3rem;
 }
 #products_content {
-    width: 70%;
+    width: 100%;
     padding: 4rem;
     display: flex;
     flex-direction: column;
@@ -76,16 +82,15 @@ h1 {
 }
 
 #payment {
-    position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 14rem;
+    width: 70%;
     border-radius: 15px;
     padding: 2rem;
     right: 0;
-    margin-right: 3%;
-    width: 25%;
+    margin: 2rem;
     background-color: #2B2B2B;
 
     p {

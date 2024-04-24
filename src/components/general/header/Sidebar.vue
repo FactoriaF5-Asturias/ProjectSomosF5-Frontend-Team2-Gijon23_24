@@ -47,7 +47,7 @@ router.beforeEach((to, from, next) => {
 					</div>
 				</router-link>
                 <hr>
-                <router-link to="/dashboard" exact-active-class="active">
+                <router-link to="/dashboard" exact-active-class="active" v-if="authStore.userRole == 'ROLE_ADMIN'">
 					<div>
                         <img src="/icons/admin-icon.svg" alt="">
                         <p>Dashboard</p>

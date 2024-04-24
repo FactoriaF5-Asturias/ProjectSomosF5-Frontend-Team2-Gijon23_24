@@ -57,15 +57,15 @@
     
     .container_images{
         display: flex;
-        width: 100%;
+        flex-direction: row;
+        gap: 1rem;
         margin: auto;
         justify-content: space-around;
-        flex-wrap: wrap;
         padding: 5%;
     }
 
     .container_images  .image{
-        width: 32%;
+        // width: 32%;
         position: relative;
         height: 400px;
         margin-bottom: 5px;
@@ -109,29 +109,11 @@
         cursor: pointer;
     }
 }
- @media screen and (max-width:1000px) {
+ @media (max-width:700px) {
     .container_images{
-        width: 95%;
+        flex-wrap: wrap;
     }
+
  }
- @media screen and (max-width:700px) {
-    .container_images{
-        width: 90%;
-    }
-    .container_images .image{
-        width: 48%;
-    }
- }
- @media screen and (max-width:450px) {
-    h1{
-        font-size: 22px;
-    }
-    .container_images{
-        width: 98%;
-    }
-    .container_images .image{
-        width: 80%;
-    }
- }
- 
+
 </style>
