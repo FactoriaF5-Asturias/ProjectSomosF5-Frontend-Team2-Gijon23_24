@@ -1,22 +1,29 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const navbarVisible = ref(true);
 
 let lastScrollTop = window.scrollY || document.documentElement.scrollTop;
 
-window.addEventListener('scroll', () => {
-    const currentScrollTop = window.scrollY || document.documentElement.scrollTop;
+const handleScroll = () => {
+  const currentScrollTop = window.scrollY || document.documentElement.scrollTop;
 
-    if (currentScrollTop > lastScrollTop) {
-        navbarVisible.value = false;
-    } else {
-        navbarVisible.value = true;
-    }
+  if (currentScrollTop > lastScrollTop) {
+    navbarVisible.value = false;
+  } else {
+    navbarVisible.value = true;
+  }
 
-    lastScrollTop = currentScrollTop;
+  lastScrollTop = currentScrollTop;
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
 });
 
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 </script>
 
 <template>
@@ -30,7 +37,7 @@ window.addEventListener('scroll', () => {
 
 <style scoped lang="scss">
 .navbar {
-    transition: transform 0.8s ease-in-out;
+    transition: transform 3s ease-in-out;
 }
 
 .navbar-hidden {
@@ -44,17 +51,6 @@ nav {
     display: flex;
     align-items: center;
     gap: 3rem;
-
-    .link {
-        color: white;
-        text-decoration: none;
-        font-size: 1.2rem;
-        transition: color 0.3s ease;
-        
-        &:hover {
-            color: $primary-color;
-        }
-    }
 }
 
 .active {
