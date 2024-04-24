@@ -5,11 +5,15 @@ import Slider from "@/components/Slider.vue";
 </script>
 
 <template>
-	<main>
-		<!-- <Banner /> -->
-		<Slider />
-		<ExplorerCategory />
-	</main>
+    <main>
+        <Slider />
+        <Card/>
+        <ExplorerCategory/>
+        
+
+        
+      
+    </main>
 </template>
 
 <style lang="scss" scoped></style>
