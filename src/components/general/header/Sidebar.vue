@@ -53,6 +53,7 @@ router.beforeEach((to, from, next) => {
                         <p>Dashboard</p>
 					</div>
 				</router-link>
+                <hr>
         </div>
     </ol>
   </nav>
@@ -93,7 +94,7 @@ ol {
     transition: height 0.3s ease;
 
     > div {
-        height: 50vh;
+        height: fit-content;
         background-color: rgba(31, 31, 31, 0.923);
         display: flex;
         flex-direction: column;

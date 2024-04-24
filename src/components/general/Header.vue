@@ -20,6 +20,12 @@ const authStore = useAuthStore();
 			</div>
 
 			<div id="actions_container">
+				<router-link to="/dashboard" exact-active-class="active">
+					<div>
+                        <img src="/icons/admin-icon.svg" alt="">
+                        <p>Dashboard</p>
+					</div>
+				</router-link>
 				<router-link to="/favorites">
 					<div>
 						<img src="/icons/icon-heart.svg" alt="" />
@@ -89,6 +95,10 @@ header {
 			font-weight: 300;
 			color: $light-font;
 			font-size: 1.4rem;
+		}
+
+		img {
+			height: 3rem;
 		}
 	}
 

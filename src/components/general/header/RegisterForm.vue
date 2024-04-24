@@ -153,7 +153,6 @@ const LoginForm = () => {
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
-
   .modal_container {
     height: 60rem;
     width: 90rem;
@@ -322,6 +321,9 @@ const LoginForm = () => {
         }
       }
     }
+  }
+  .modal .modal_container .form_container {
+    gap: 0;
   }
 }
 </style>
