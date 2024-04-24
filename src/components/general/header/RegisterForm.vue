@@ -2,7 +2,7 @@
 import TermsPopup from './../../alerts/TermsPopup.vue'
 import SuccessPopup from './SuccessPopup.vue'
 import ErrorPassword from './ErrorPassword.vue'
-import { defineProps, ref } from 'vue';
+import { ref } from 'vue';
 import axios from 'axios';
 
 const props = defineProps({
