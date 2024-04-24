@@ -1,35 +1,20 @@
 <script setup>
- import { ref } from 'vue';
- import axios from 'axios';
- import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
- const router = useRouter();
+const router = useRouter();
+const name = ref('');
 
- const name = ref('');
-
- const uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS_BYNAME;
-
-
- const searchProducts = async () => {
+const searchProducts = async () => {
   try {
-    const response = await axios.get(`${uri}/${name.value}`);
-    console.log(response.data); 
-    router.push({ name: 'results', query: { results: JSON.stringify(response.data) } });
-  
+   
+  router.push({ name: 'results', query: { name: name.value } });
+
   } catch (error) {
     console.error('Error al buscar productos:', error);
   }
 }
 
-// onMounted(fetchProducts);
-
-// const filteredProducts = computed(() => {
-//   if (!searchByName.value) {
-//     return products.value;
-//   }
-//   const searchTerm = searchByName.value.toLowerCase();
-//   return products.value.filter(product => product.name.toLowerCase().includes(searchTerm));@input="searchProducts"@click="searchProducts"
-// });
 </script>
 
 <template>
@@ -41,11 +26,10 @@
     <div class="btn-container">
       <button class="btn" @click="searchProducts">Buscar</button>
     </div>
-
+   
   </div>
-
+  
 </template>
-
 
 <style lang="scss" scoped>
 
@@ -87,5 +71,4 @@
   color: #fff;
   background-color: #3C3057;
 }
-
 </style>

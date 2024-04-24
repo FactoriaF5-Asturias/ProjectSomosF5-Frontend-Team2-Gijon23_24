@@ -4,6 +4,7 @@ import HeaderButtons from "./header/HeaderButtons.vue";
 import LoggedProfile from "./header/LoggedProfile.vue";
 import FactoriaAlert from "./../alerts/FactoriaAlert.vue";
 import Navbar from "./header/Navbar.vue";
+import Sidebar from "./header/Sidebar.vue";
 
 const authStore = useAuthStore();
 </script>
@@ -14,21 +15,15 @@ const authStore = useAuthStore();
 
 		<div>
 			<div id="logotype_container">
-				<img
-					src="/images/logotype-printgo.svg"
-					alt="PrintGo logotype"
-				/>
+				<img class="mobile" src="/images/logotype-responsive.svg" alt="PrintGo logotype"/>
+				<img class="desk" src="/images/logotype-printgo.svg" alt="PrintGo logotype"/>
 			</div>
 
 			<div id="actions_container">
-				<router-link to="/dashboard">
+				<router-link to="/dashboard" exact-active-class="active">
 					<div>
-						<p>Dashboard</p>
-					</div>
-				</router-link>
-				<router-link to="/stripe-checkout">
-					<div>
-						<p>Stripe Pay</p>
+                        <img src="/icons/admin-icon.svg" alt="">
+                        <p>Dashboard</p>
 					</div>
 				</router-link>
 				<router-link to="/favorites">
@@ -48,9 +43,10 @@ const authStore = useAuthStore();
 				<HeaderButtons v-if="!authStore.isAuthenticated" />
 				<LoggedProfile v-if="authStore.isAuthenticated" />
 			</div>
+			<Sidebar />
 		</div>
-
 		<Navbar />
+
 	</header>
 </template>
 
@@ -100,6 +96,10 @@ header {
 			color: $light-font;
 			font-size: 1.4rem;
 		}
+
+		img {
+			height: 3rem;
+		}
 	}
 
 	a:hover > div {
@@ -107,4 +107,25 @@ header {
 	}
 }
 
+.mobile {
+		display: none;
+	}
+@media (max-width: 1000px) {
+
+	.desk {
+		display: none;
+	}
+
+	.mobile {
+		display: inline-block;
+	}
+
+	#actions_container {
+		display: none;
+	}
+
+	header > div {
+		gap: 2rem;
+	}
+}
 </style>

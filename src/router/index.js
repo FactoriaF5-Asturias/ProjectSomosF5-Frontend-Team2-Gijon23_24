@@ -77,7 +77,9 @@ const router = createRouter({
       path: '/results',
       name: 'results',
       component: ResultsPageView,
-      props: route => ({ results: JSON.parse(route.query.results) })
+      props: (route) => ({
+        name: route.query.name
+      })
     }
   ]
 });

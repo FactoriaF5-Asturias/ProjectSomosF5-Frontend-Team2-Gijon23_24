@@ -2,30 +2,37 @@
 import Card from './../components/card/Card.vue';
 import { onMounted, ref, computed } from 'vue';
 import axios from 'axios';
+import { useRoute } from 'vue-router';
 
-const Geek = ref([]);
+const route = useRoute();
+const Results = ref([]);
 const isLoaded = ref(false);
 const currentPage = ref(1);
 const ProductsPerPage = 25;
-const totalPages = computed(() => Math.ceil(Geek.value.length / ProductsPerPage));
+const totalPages = computed(() => Math.ceil(Results.value.length / ProductsPerPage));
+const uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS_BYNAME
 
-async function fetchGeekProducts() {
+const fetchResultProducts = async () => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_PRODUCTS}/getManyByCategoryName/Zona Geek`);
-    Geek.value = response.data;
+    const name = route.query.name;
+    const response = await axios.get(`${uri}/${name.value}`);
+    Results.value = response.data;
     isLoaded.value = true;
+
+    console.log(Results.value);
+
   } catch (error) {
-    console.error('Error al obtener productos de zona geek:', error);
+    console.error('Error al buscar productos:', error);
   }
 }
 
 onMounted(() => {
-  fetchGeekProducts();
+  fetchResultProducts();
 })
 
 const paginatedProducts = computed(() => {
     const startIndex = (currentPage.value - 1) * ProductsPerPage;
-    return Geek.value.slice(startIndex, startIndex + ProductsPerPage);
+    return Results.value.slice(startIndex, startIndex + ProductsPerPage);
 });
 
 const nextPage = () => {
@@ -61,7 +68,7 @@ const visiblePages = computed(() => {
 <template>
     <body>
         <div>
-            <h1>Geek</h1>
+            <h1>Resultado de la búsqueda</h1>
             <hr>
             <section>
                 <div v-if="paginatedProducts.length">
@@ -78,6 +85,7 @@ const visiblePages = computed(() => {
 </template>
   
 <style scoped lang="scss">
+
 body {
     padding: 4rem 0;
     background-color: $primary-background;
