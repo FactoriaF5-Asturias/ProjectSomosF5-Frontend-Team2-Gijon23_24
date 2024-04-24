@@ -4,10 +4,9 @@ import EditForm from "../components/admin-dashboard-components/EditForm.vue";
 import AddButton from "@/components/admin-dashboard-components/AddButton.vue";
 import { ref, onMounted, computed } from "vue";
 import axios from "axios";
-import Card from "@/components/card/Card.vue";
-
+import DashboardCard from "@/components/card/DashboardCard.vue";
 let showAddForm = ref(false);
-let showEditForm = ref(true);
+let showEditForm = ref(false);
 let products = ref([]);
 const isLoaded = ref(false);
 const currentPage = ref(1);
@@ -98,12 +97,13 @@ const visiblePages = computed(() => {
 			</section>
 			<section>
 				<div v-if="paginatedProducts.length">
-					<Card
-						:product="product"
-						v-for="product in paginatedProducts"
-						:key="product.id"
-						v-if="isLoaded"
-					/>
+					<div v-for="product in paginatedProducts">
+						<DashboardCard
+							:product="product"
+							:key="product.id"
+							v-if="isLoaded"
+						/>
+					</div>
 				</div>
 			</section>
 			<div id="pagination">
@@ -135,6 +135,13 @@ const visiblePages = computed(() => {
 </template>
 
 <style lang="scss" scoped>
+.card-options {
+	position: relative;
+	padding: 0 1.4rem;
+	display: flex;
+	justify-content: space-between;
+}
+
 main {
 	background-color: $primary-background;
 	display: flex;
