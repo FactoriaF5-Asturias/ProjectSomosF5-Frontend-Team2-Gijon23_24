@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import SearchBar from '@/components/searchbar/SearchBar.vue';
 
 const navbarVisible = ref(true);
 
@@ -28,10 +29,13 @@ onUnmounted(() => {
 
 <template>
     <nav :class="{ 'navbar-hidden': !navbarVisible }">
+      <div>
         <router-link to="/" exact-active-class="active" class="link">Inicio</router-link>
         <router-link to="/lithophane" exact-active-class="active" class="link">Litofanía</router-link>
         <router-link to="/house" exact-active-class="active" class="link">Hogar</router-link>
         <router-link to="/geek" exact-active-class="active" class="link">Geek</router-link>
+      </div>
+      <SearchBar />
     </nav>
 </template>
 
@@ -50,10 +54,15 @@ nav {
     padding-left: 7rem;
     display: flex;
     align-items: center;
-    gap: 3rem;
+    justify-content: space-between;
+    div {
+      display: flex;
+      gap: 3rem;
+    }
 }
 
 .active {
     color: $primary-color;
 }
+ 
 </style>

@@ -2,16 +2,18 @@
 import ExplorerCategory from "../components/ExploreCategory.vue";
 import Banner from "@/components/Banner.vue";
 import Slider from "@/components/Slider.vue";
+
 </script>
 
 <template>
     <main>
+       
         <Slider />
-        <ExplorerCategory/>
-        
 
-        
-      
+        <Card/>
+        <ExplorerCategory/>
+     
+
     </main>
 </template>
 
