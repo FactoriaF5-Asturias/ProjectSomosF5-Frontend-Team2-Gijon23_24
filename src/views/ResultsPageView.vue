@@ -11,15 +11,16 @@ const currentPage = ref(1);
 const ProductsPerPage = 25;
 const totalPages = computed(() => Math.ceil(Results.value.length / ProductsPerPage));
 const uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS_BYNAME
+const search = ref('')
 
 const fetchResultProducts = async () => {
   try {
     const name = route.query.name;
-    const response = await axios.get(`${uri}/${name.value}`);
+    const response = await axios.get(`${uri}/${name}`);
     Results.value = response.data;
     isLoaded.value = true;
-
-    console.log(Results.value);
+    search.value = name;
+    console.log(name);
 
   } catch (error) {
     console.error('Error al buscar productos:', error);
@@ -68,7 +69,7 @@ const visiblePages = computed(() => {
 <template>
     <body>
         <div>
-            <h1>Resultado de la búsqueda</h1>
+            <h1>Resultado de la búsqueda: "{{ search }}"</h1>
             <hr>
             <section>
                 <div v-if="paginatedProducts.length">

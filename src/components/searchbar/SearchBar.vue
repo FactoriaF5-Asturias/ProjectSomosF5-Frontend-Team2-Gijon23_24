@@ -21,10 +21,10 @@ const searchProducts = async () => {
 
   <div class="search-container">
 
-    <input type="text" class="input" v-model="name" placeholder="Buscar producto por nombre...">
+    <input type="text" class="input" v-model="name" placeholder="Buscar producto...">
 
     <div class="btn-container">
-      <button class="btn" @click="searchProducts">Buscar</button>
+      <button class="btn" @click="searchProducts"><img src="/icons/search-icon.svg" alt=""></button>
     </div>
    
   </div>
@@ -48,27 +48,29 @@ const searchProducts = async () => {
   height: 100%;
   padding: 1rem;
   padding-right: 145px;
-  border-radius: 3px;
   font-size: 1.5rem;
+  color: white;
+  border-bottom: 1px solid white;
+ 
 }
 
-.search-container .btn {
-
+.btn {
+  width: 3rem;
   position: absolute;
   top: 0;
   right: 0;
-  width: 9rem;
-  height: 100%;
-  background: $primary-color;
-  font-size: 1.8rem;
-  color: white;
-  border-radius: 0 4px 4px 0;
-  z-index: 1;
+  border-radius: 4px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn > img {
+  width: 100%;
 }
 
 .search-container .btn:hover {
   color: #fff;
-  background-color: #3C3057;
+  background-color: grey;
 }
+
 </style>

@@ -2,7 +2,7 @@
 import ExplorerCategory from "../components/ExploreCategory.vue";
 import Banner from "@/components/Banner.vue";
 import Slider from "@/components/Slider.vue";
-import SearchBar from '@/components/searchbar/SearchBar.vue';
+
 </script>
 
 <template>
@@ -12,7 +12,7 @@ import SearchBar from '@/components/searchbar/SearchBar.vue';
 
         <Card/>
         <ExplorerCategory/>
-        <SearchBar />
+     
 
     </main>
 </template>
