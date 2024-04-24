@@ -30,12 +30,12 @@ const paginatedProducts = computed(() => {
 });
 
 const nextPage = () => {
-    currentPage.value = Math.min(currentPage.value + 4, totalPages.value); // Avanzar de cuatro en cuatro páginas
+    currentPage.value = Math.min(currentPage.value + 4, totalPages.value);
     scrollToTop();
 };
 
 const prevPage = () => {
-    currentPage.value = Math.max(currentPage.value - 4, 1); // Retroceder de cuatro en cuatro páginas
+    currentPage.value = Math.max(currentPage.value - 4, 1);
     scrollToTop();
 };
 

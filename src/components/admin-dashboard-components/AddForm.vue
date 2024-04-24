@@ -92,7 +92,7 @@ async function uploadImages(productId) {
 	formData.append("file", selectedMainImage.value);
 	try {
 		await axios.post(
-			`http://localhost:8080/api/v1/images/uploadImages/${productId}`,
+			`http://localhost:8080/api/v1/images/uploadToS3/${productId}`,
 			formData,
 			{
 				headers: {
@@ -115,7 +115,9 @@ async function uploadImages(productId) {
 async function deleteProduct(productId) {
 	try {
 		await axios.delete(
-			`http://localhost:8080/api/v1/products/${productId}`
+			`http://localhost:8080/api/v1/products/${productId}`,
+			{},
+			{ withCredentials: true }
 		);
 
 		console.log("Producto borrado exitosamente.");
