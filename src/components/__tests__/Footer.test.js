@@ -23,7 +23,7 @@ test('renderiza el componente footer con logo, enlaces de navegación y logos de
  expect(visaLogo.exists()).toBe(true);
 
  const copyrightText = wrapper.find('.copyright');
- expect(copyrightText.text()).toBe('© 2024 Todos los derechos reservados');
+expect(copyrightText.text()).toBe('© 2024 Equipo 2 Dreamfusion');
 
  await wrapper.unmount();
 });
