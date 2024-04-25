@@ -5,6 +5,7 @@ const props = defineProps({
 	product: {
 		type: Object,
 		required: true,
+		
 	},
 });
 
@@ -48,6 +49,7 @@ onMounted(async () => {
 						>{{ product.price }} €</v-card-title
 					>
 				</div>
+				
 			</v-card>
 		</router-link>
 	</article>
