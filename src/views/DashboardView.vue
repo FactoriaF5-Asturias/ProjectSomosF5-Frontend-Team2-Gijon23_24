@@ -87,12 +87,12 @@ const visiblePages = computed(() => {
 
 <template>
 	<main>
-		<div>
+		<div class="admin-container">
 			<AddForm v-if="showAddForm" @close="closeForm" />
 			<EditForm v-if="showEditForm" @close="closeForm" productId="1" />
 			<section class="admin-panel">
 				<h1>ADMINISTRADOR</h1>
-				<AddButton @click="openAddForm()" />
+				<AddButton class="add-btn" @click="openAddForm()" />
 			</section>
 			<section>
 				<div v-if="paginatedProducts.length">
@@ -134,6 +134,10 @@ const visiblePages = computed(() => {
 </template>
 
 <style lang="scss" scoped>
+
+.admin-container {
+	padding-top: 5rem;
+}
 .card-options {
 	position: relative;
 	padding: 0 1.4rem;
@@ -212,6 +216,10 @@ button:hover {
 	background-color: $primary-color;
 }
 
+.add-btn {
+	background-color: #ae81d1;
+	margin-bottom: 2rem;
+}
 #product-container {
 	justify-self: center;
 }

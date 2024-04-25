@@ -1,6 +1,6 @@
 <script setup>
 import Card from './../components/card/Card.vue';
-import { onMounted, ref, computed } from 'vue';
+import { onMounted, ref, computed, watch } from 'vue';
 import axios from 'axios';
 import { useRoute } from 'vue-router';
 
@@ -13,13 +13,14 @@ const totalPages = computed(() => Math.ceil(Results.value.length / ProductsPerPa
 const uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS_BYNAME
 const search = ref('')
 
+
 const fetchResultProducts = async () => {
   try {
     const name = route.query.name;
     const response = await axios.get(`${uri}/${name}`);
     Results.value = response.data;
     isLoaded.value = true;
-    search.value = name;
+     search.value = name;
     console.log(name);
 
   } catch (error) {
@@ -29,7 +30,11 @@ const fetchResultProducts = async () => {
 
 onMounted(() => {
   fetchResultProducts();
-})
+});
+
+watch(() => route.query.name, () => {
+  fetchResultProducts();
+});
 
 const paginatedProducts = computed(() => {
   const startIndex = (currentPage.value - 1) * ProductsPerPage;
@@ -64,12 +69,22 @@ const visiblePages = computed(() => {
   }
   return visible;
 });
+
+const goback = () => {
+  window.history.length  > 1 ? history.go(-1) :  router.push('/');
+}
+
 </script>
 
 <template>
 
   <body>
     <div>
+      <div id="home-detail" class="product-detail">
+        <div class="goback">
+          <button class="goback" @click="goback"></button>
+        </div>
+      </div>
       <h1>Resultado de la búsqueda: "{{ search }}"</h1>
       <hr>
       <section>
@@ -105,6 +120,18 @@ body {
     font-weight: 200;
     font-family: "Poppins", sans-serif;
   }
+}
+
+.goback {
+   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-arrow-back-up-double' width='44' height='44' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23a905b6' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M13 14l-4 -4l4 -4' /%3E%3Cpath d='M8 14l-4 -4l4 -4' /%3E%3Cpath d='M9 10h7a4 4 0 1 1 0 8h-1' /%3E%3C/svg%3E");
+   width: 75px;
+   height: 55px;
+   cursor: pointer;
+   margin-left: 2%;
+
+
+   
+ 
 }
 
 h1 {
@@ -153,5 +180,18 @@ button:hover {
 
 .active-page {
   background-color: $primary-color;
+}
+
+.goback {
+   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-arrow-back-up-double' width='44' height='44' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23a905b6' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M13 14l-4 -4l4 -4' /%3E%3Cpath d='M8 14l-4 -4l4 -4' /%3E%3Cpath d='M9 10h7a4 4 0 1 1 0 8h-1' /%3E%3C/svg%3E");
+   width: 75px;
+   height: 55px;
+   cursor: pointer;
+   margin-left: 2%;
+   background-color: transparent;
+
+
+   
+ 
 }
 </style>

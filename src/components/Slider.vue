@@ -50,10 +50,12 @@ div {
     background-color:$primary-background;
     color: white;
     font-size: 3rem;
+    padding-top: 1rem;
 
     h1 {
         margin-left: 6rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
+        margin-top: 3rem;
         font-weight: 200;
     }
 }
