@@ -8,6 +8,7 @@ import LithophaneView from '../views/LithophaneView.vue'
 import UserProfileView from '../views/UserProfileView.vue'
 import AdminProfileView from '../views/AdminProfileView.vue'
 import StripeCheckoutView from '@/views/StripeCheckoutView.vue'
+import StripeReturnView from '@/views/StripeReturnView.vue'
 import DashboardView from '../views/DashboardView.vue'
 import { useAuthStore } from '@/stores/AuthStore'
 import LoginForm from '@/components/general/header/LoginForm.vue'
@@ -73,17 +74,17 @@ const router = createRouter({
       name: "stripe-checkout",
       component: StripeCheckoutView,
     },
+    {
+      path: "/return",
+      name: "return",
+      component: StripeReturnView,
+    },
 	  {
       path: "/dashboard",
       name: "dashboard",
       component: DashboardView,
       meta: {requiresAuth: true}
 	  },
-    // {
-    //   name: "login",
-    //   component: LoginForm
-    // }
-
     {
       path: '/results',
       name: 'results',
