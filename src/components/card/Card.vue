@@ -1,51 +1,91 @@
 <script setup>
+import { onMounted, ref } from "vue";
 
-import { useProductsStore } from '@/stores/productStore';
-import { onMounted } from 'vue';
-import ImagesService from '../../services/ImagesService';
-import CardUnic from './CardUnic.vue';
-
-const imagesService = new ImagesService();
-const productsStore = useProductsStore();
-
-onMounted(async () => {
-  await productsStore.fetchProducts();
+const props = defineProps({
+	product: {
+		type: Object,
+		required: true,
+		
+	},
 });
 
+const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES_S3;
+
+const imageDirectory = ref("");
+const isLoading = ref(true);
+
 function findImageForProduct(product) {
-  const image = product.images.find(img => img.mainImage === true);
-  return image ? image.imageName : null;
+	const image = product.images.find((img) => img.mainImage === true);
+	if (image == undefined) {
+		const defaultImage = "placeholder-image.jpg";
+		return defaultImage;
+	}
+	return image.imageName;
 }
 
+onMounted(async () => {
+	imageDirectory.value = uri + "/" + findImageForProduct(props.product);
+	isLoading.value = false;
+});
 </script>
+
 <template>
-  
-  <v-container class="container">
-    <v-row class="row-card">
-      <v-col class="col-card" cols="3" v-for="product in productsStore.products" :key="product.id">
-        <CardUnic :product="product" v-if="productsStore.isLoaded" />
-      </v-col>
-    </v-row>
-  </v-container>
+	<article>
+		<router-link :to="{ path: `/Detail/${product.id}` }">
+			<v-card class="mx-auto card-body" theme="dark">
+				<v-img
+					class="image"
+					:style="{
+						'background-image': 'url(' + imageDirectory + ')',
+					}"
+					:alt="product.productName"
+				>
+				</v-img>
+				<div class="product-data">
+					<v-card-title class="product-name">{{
+						product.productName
+					}}</v-card-title>
+					<v-card-title class="price"
+						>{{ product.price }} €</v-card-title
+					>
+				</div>
+				
+			</v-card>
+		</router-link>
+	</article>
 </template>
 
-
 <style scoped lang="scss">
-@import '../../assets/scss/main.scss';
+article {
+	transition: transform 0.2s ease-in-out;
+	filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.357));
+}
 
-.container {
-  // margin-top: 2rem;
-  max-width: 100%;
-
-  .row-card {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-
-    .col-card {
-
-      max-width: 22%;
-    }
-  }
+article:hover {
+	transform: translate(0, -10px);
+}
+.card-body {
+	width: 28rem;
+	color: white;
+}
+.image {
+	height: 20rem;
+	width: 100%;
+	background-color: rgb(73, 73, 73);
+	background-size: contain;
+	background-position: center;
+}
+.product-data {
+	display: flex;
+	font-size: 1.3rem;
+	background-color: $primary-background;
+	font-family: "Poppins", sans-serif;
+}
+.product-name {
+	width: 65%;
+}
+.price {
+	width: 35%;
+	text-align: end;
 }
 </style>

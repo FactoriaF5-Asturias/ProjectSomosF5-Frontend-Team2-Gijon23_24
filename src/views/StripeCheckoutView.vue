@@ -1,40 +1,26 @@
 <script setup>
 import { ref, onMounted, reactive } from "vue";
-import { loadStripe} from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import StripeService from "@/services/StripeService";
 import StripeMessages from "@/components/payments/stripe/StripeMessages.vue";
-
-const service = new StripeService()
-
-const isLoading = ref(false)
-const messages = ref([])
-
-let stripe
-let elements
-let appearance
-
+import { useCartStore } from './../stores/CartStore';
+const items = ref([]);
+console.log('arrays items contenedor!!!', items.value);
+const store = useCartStore();
 const cart = reactive({
-    "items": [
-        {
-            "id": 1,
-            "productName": "Earring",
-            "price": 1699
-        },
-        {
-            "id": 2,
-            "productName": "Necklace",
-            "price": 3499
-        }
-    ]
-})
-
+});
+const service = new StripeService();
+const isLoading = ref(false);
+const messages = ref([]);
+let stripe;
+let elements;
+let appearance;
 onMounted(async () => {
-
-  const publishableKey = import.meta.env.VITE_APP_STRIPE_PK
-  stripe = (await loadStripe(publishableKey))
-
-  const clientSecret = (await service.post(cart)).clientSecret
-
+  const storeItems = store.getItems;
+  items.value.push(...storeItems);
+  cart.value = {items: items.value};
+  const publishableKey = import.meta.env.VITE_APP_STRIPE_PK;
+  stripe = await loadStripe(publishableKey);
   appearance = {
   theme: 'flat',
   variables: {
@@ -74,47 +60,41 @@ onMounted(async () => {
     }
   }
 }
-
-  // if (backendError) {
-  //   messages.value.push(backendError.message);
-  // }
-  // messages.value.push(`Client secret returned.`);
-
-  elements = stripe.elements({clientSecret, appearance});
+const clientSecret = (await service.post(cart.value)).clientSecret;
+  console.log("Client secret:", clientSecret);
+  elements = stripe.elements({ clientSecret, appearance });
   const paymentElement = elements.create('payment');
   paymentElement.mount("#payment-element");
   const linkAuthenticationElement = elements.create("linkAuthentication");
   linkAuthenticationElement.mount("#link-authentication-element");
-  isLoading.value = false;
-})
-
+  console.log('item recogido', items.value)
+  console.log('final que envio', cart.value);
+  return items.value;
+});
 const handleSubmit = async () => {
   if (isLoading.value) {
     return;
   }
-
+  console.log('dentrooooooooooo que envio', cart.value);
   isLoading.value = true;
-
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: {
       return_url: `${window.location.origin}/return`
     }
-  })
-
-  if (error.type === "card_error" || error.type === "validation_error") {
+  });
+  if (error) {
     messages.value.push(error.message);
   } else {
-    messages.value.push("An unexpected error occured.");
+    console.log('geniaaaaal!!')
+    messages.value.push("Payment successful!");
   }
-
   isLoading.value = false;
-}
+};
 </script>
 <template>
   <main>
     <h1>Payment</h1>
-
     <form
       id="payment-form"
       @submit.prevent="handleSubmit"
@@ -131,23 +111,19 @@ const handleSubmit = async () => {
     </form>
   </main>
 </template>
-
 <style lang="scss" scoped>
 h1 {
   text-align: center;
   font-size: 2rem;
   padding: 8% 0 2% 0;
-  
 }
 main {
   background-color: white;
 }
-
 #payment-element, #link-authentication-element {
   width: 50%;
   margin: auto;
 }
-
 button {
   background-color: $primary-color;
   padding: 1rem;
@@ -159,3 +135,17 @@ button {
   margin-bottom: 10%;
 }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

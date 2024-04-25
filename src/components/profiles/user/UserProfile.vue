@@ -44,9 +44,8 @@ const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 				withCredentials: true,
 			}
     );
-    console.log(response.data)
+
     content = response.data
-    console.log(content)
  
     id.value = response.data.id;
     firstName.value = response.data.firstName;
@@ -101,7 +100,6 @@ const cancelData = () => {
 
         if (response.status === 200) {
           location.reload();
-          console.log(response.data);
         } else {
           console.error("Error al editar el perfil");
         }
@@ -193,15 +191,21 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20rem;
   height: 85rem;
-  width: 60rem;
   border-radius: 1.5rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   background-color: white;
   position: sticky;
   max-height: 90rem;
   margin-bottom: 10rem;
-
+  
+}
+@media (max-width: 916px) {
+  .modal-container{
+    width: 80%;
+    
+  }
 }
 
 .user-profile {
@@ -258,6 +262,13 @@ form {
   }
 }
 
+@media (max-width: 539px) {
+  .input-box{
+    input{
+      width: 100%;
+    }
+  }
+}
 .second-row {
   display: flex;
   flex-direction: row;
@@ -292,6 +303,19 @@ form {
     font-size: 1.8rem;
     border: 1px solid gray;
     border-radius: 0.5rem;
+  }
+
+  @media (max-width: 517px){
+    #postal-code, #city{
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 517px) {
+  .input-box-2{
+    flex-direction: column;
+    
   }
 }
 

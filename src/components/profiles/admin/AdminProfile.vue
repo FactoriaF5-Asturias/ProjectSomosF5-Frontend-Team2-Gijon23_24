@@ -1,91 +1,132 @@
 <script setup>
-// import { ref } from 'vue';
-// import axios from 'axios';
-// import { VAlert } from 'vuetify/lib';
+import SuccessPopup from '@/components/alerts/SuccessPopup.vue';
+import ErrorPassword from '@/components/alerts/ErrorPassword.vue';
 
-// const currentPassword = ref('');
-// const newPassword = ref('');
-// const confirmPassword = ref('');
-// const successMessage = ref('');
-// const errorMessage = ref('');
+import { ref } from 'vue';
+import axios from 'axios';
 
-// const saveData = async () => {
+const newPassword = ref('');
+const confirmPassword = ref('');
+const showPassword = ref(false);
 
-//   if (newPassword.value !== confirmPassword.value) {
-//     errorMessage.value = 'Las contraseñas no coinciden';
-//     return;
-//   }
+const successVisible = ref(false);
+const errorVisible = ref(false);
+const errorMessage = ref('');
 
-//   try {
-//     const response = await axios.post('http://localhost:8080/api/v1/profiles/admin/change-password', {
-//       currentPassword: currentPassword.value,
-//       newPassword: newPassword.value
-//     });
-//     successMessage.value = '¡Contraseña cambiada con éxito!';
-//     console.log('Contraseña cambiada con éxito:', response.data);
+const passwordConfirmation = () => {
+  if (newPassword.value === confirmPassword.value) {
+    errorMessage.value = "Las contraseñas coinciden.";
+  } else {
+    errorMessage.value = "Las contraseñas no coinciden.";
+  }
+}
 
-//   } catch (error) {
-//     errorMessage.value = 'Error al cambiar la contraseña';
-//     console.error('Error al cambiar la contraseña:', error);
+ const uri = import.meta.env.VITE_API_ENDPOINT_CHANGE_PASSWORD;
 
-//   }
-// };
+const changePassword = async () => {
+  try {
+    if (newPassword.value !== confirmPassword.value) {
 
-// const cancelData = () => {
-//   currentPassword.value = "";
-//   newPassword.value = "";
-//   confirmPassword.value = "";
-//   successMessage.value = '';
-//   errorMessage.value = '';
-// };
+       successVisible.value = false;
+       errorVisible.value = true;
+       errorMessage.value = "Las contraseñas no coinciden";
+      setTimeout(() => {
+        errorVisible.value = false;
+      }, 5000);
+      return;
+    }
+
+    const encodedPassword = btoa(newPassword.value);
+
+    const data = {
+      password: encodedPassword
+    }
+
+    const credentials = {
+      withCredentials: true
+    }
+    const response = await axios.put(uri, data, credentials);
+
+    if (response.status === 202) {
+      console.log('El cambio de contraseña se ha realizado con éxito.');
+      successVisible.value = true;
+
+      setTimeout(() => {
+        successVisible.value = false;
+        clearForm();
+      }, 5000);
+      
+    } else {
+      console.log('Error al cambiar la contraseña.');
+      errorVisible.value = true;
+      errorMessage.value = "Error al cambiar la contraseña";
+
+      setTimeout(() => {
+        errorVisible.value = false;
+      }, 5000);
+    }
+
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const clearForm = () => {
+  newPassword.value = "";
+  confirmPassword.value = "";
+};
+
+const cancelData = () => {
+  newPassword.value = "";
+  confirmPassword.value = "";
+};
 
 </script>
 
 <template>
 
   <body>
+    <div class="principal-Container">
 
-    <div class="user-profile">
-      <h1>PERFIL DEL ADMINISTRADOR</h1>
-    </div>
+      <SuccessPopup :show="successVisible" message="El cambio de contraseña se ha realizado con éxito." />
+      <ErrorPassword :show="errorVisible" message="Error al cambiar la contraseña." @close="errorPassword = false" />
 
-    <div class=" modal-container">
+      <div class="user-profile">
+        <h1>PERFIL DEL ADMINISTRADOR</h1>
+      </div>
 
-      <div class="logo-container">
-        <img class="image-logo" src="/images/logo.svg" alt="logo-profile">
-       <h2>Bienvenido Andrés</h2> 
-    </div>
+      <div class=" modal-container">
 
-      <form @submit.prevent="submitForm">
-
-        <div class="input-box">
-          <label>Contraseña Antigüa</label>
-          <input type="text" id="current-password" v-model="currentPassword">
+        <div class="logo-container">
+          <img class="image-logo" src="/images/logo.svg" alt="logo-profile">
+          <h2>Bienvenido Andrés</h2>
         </div>
 
-        <div class="input-box">
-          <label>Contraseña</label>
-          <input type="text" id="newPassword" v-model="newPassword">
-        </div>
+        <form @submit.prevent="changePassword">
 
-        <div class="input-box">
-          <label>Confirma tu contraseña</label>
-          <input type="text" id="confirmPassword" v-model="confirmPassword">
-        </div>
+          <div class="input-box">
+            <label for="newPassword">Contraseña</label>
+            <input type="password" id="newPassword" v-model="newPassword" required>
+          </div>
 
-        <div class="btns-container">
-          <button id="cancel" @click="cancelData()">Cancelar</button>
-          <button id="save" @click="saveData()">Guardar</button>
-        </div>
+          <div class="input-box">
+            <label for="confirmPassword">Confirmar Contraseña</label>
+            <input :type="showPassword ? 'text' : 'password'" id="confirmPassword" v-model="confirmPassword"
+              @input="passwordConfirmation" required>
+              <span>{{ errorMessage }}</span> 
+          </div>
 
-      </form>
+          <div class="check-box">
+            <input type="checkbox" id="showPassword" v-model="showPassword">
+            <label for="showPassword">Mostrar Contraseña</label>
+          </div>
 
-      <div>
+          <div class="btns-container">
+            <button id="cancel" @click="cancelData()">Cancelar</button>
+            <button type="submit" id="save">Guardar</button>
+          </div>
 
-        <v-alert v-if="successMessage" type="success" outlined>{{ successMessage }}</v-alert>
-
-
-        <v-alert v-if="errorMessage" type="error" outlined>{{ errorMessage }}</v-alert>
+        </form>
       </div>
     </div>
   </body>
@@ -93,14 +134,13 @@
 </template>
 
 <style lang="scss" scoped>
-
 body {
   background-color: #CBABE4;
+}
+.principal-Container{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100vw;
+    flex-direction: column;
+    align-items: center;
 }
 
 .modal-container {
@@ -109,13 +149,20 @@ body {
   justify-content: center;
   align-items: center;
   height: 70rem;
-  width: 60rem;
+  padding: 20rem;
   border-radius: 1.5rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   background-color: white;
   position: sticky;
-  max-height: 70rem;
+  max-height: 90rem;
   margin-bottom: 10rem;
+}
+
+@media (max-width: 916px) {
+  .modal-container{
+    width: 80%;
+    
+  }
 }
 
 .user-profile {
@@ -143,13 +190,13 @@ h1 {
 
 .image-logo {
   height: 13rem;
-  
+
 }
 
 h2 {
-    font-family: "Poppins", sans-serif; 
-    color: #3C3057; 
-    font-size: 4rem;
+  font-family: "Poppins", sans-serif;
+  color: #3C3057;
+  font-size: 3rem;
 }
 
 form {
@@ -181,6 +228,26 @@ form {
   }
 }
 
+@media (max-width: 539px) {
+  .input-box{
+    input{
+      width: 100%;
+    }
+  }
+}
+
+.check-box {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+}
+
+#showPassword {
+  height: 2rem;
+  width: 2rem;
+}
+
 .btns-container {
   margin-top: 2rem;
   display: flex;
@@ -202,12 +269,12 @@ form {
     transition: transform 0.2s ease;
   }
 
-   button:hover {
-     background-color: #3C3057;
-   }
+  button:hover {
+    background-color: #3C3057;
+  }
 
-   button:active {
-     transform: scale(1.1);
-   }
+  button:active {
+    transform: scale(1.1);
+  }
 }
 </style>

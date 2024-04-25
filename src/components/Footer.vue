@@ -6,9 +6,9 @@
 	  <div class="footer-center">
 		<div class="nav">
 		  <router-link to="/">Inicio</router-link>
-		  <router-link to="/faq">Preguntas Frecuentes</router-link>
-		  <router-link to="/about">Sobre Nosotros</router-link>
-		  <router-link to="/contact">Contacto</router-link>
+		  <router-link to="/">Preguntas Frecuentes</router-link>
+		  <router-link to="/">Sobre Nosotros</router-link>
+		  <router-link to="/">Contacto</router-link>
 		</div>
 		<div class="copyright-container">
 		  <div class="copyright">
@@ -36,21 +36,40 @@
   
   .logo {
 	width: 86px;
-	margin-left: 40%;
-	margin-bottom: 24%;
   }
-  
+
   .footer-left,
   .footer-center,
   .footer-right {
 	display: flex;
 	align-items: center;
+	margin: 1rem;
+	justify-content: center
+  }
+
+  @media (max-width: 1200px) {
+	.footer{
+		flex-direction: column;
+		text-align: center;
+	}
   }
   
   .footer-center {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	flex-wrap: wrap;
+  }
+  @media (max-width: 636px) {
+	.nav{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.footer{
+		align-items: center;
+		justify-content: center;
+	}
   }
   
   .nav {
@@ -61,10 +80,10 @@
   .nav a {
 	color: aliceblue;
 	font-size: x-large;
+	transition: all 0.3s ease-in-out;
   }
   .nav a:hover {
 	color: $primary-color;
-	transition: 1s;
   }
   
   router-link {
@@ -80,6 +99,8 @@
   
   .footer-right {
 	margin-right: 2%;
+	gap: 1rem;
+	
   }
   
   .paypal-logo,

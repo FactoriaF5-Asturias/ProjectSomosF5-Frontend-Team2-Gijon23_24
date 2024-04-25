@@ -1,105 +1,262 @@
-<template>
-  <div id="home-detail" class="product-detail">
-    <div class="goback">
-    <button class="goback" @click="goback"></button>
-    </div>
-  
-    
-    <div class="detail-image-container">
-      <div class="detail-mainImage-container">
-        <img :src="imageDirectory" alt="Main image" />
-      </div>
-      <div class="detail-miniPics-container">
-      <img :src="imageDirectory" alt="Miniatura" @click="changeMainImage(imageDirectory)" :class="{ 'active': imageDirectory === selectedThumbnail }" />
-      <img v-for="(image, index) in product.additionalImages" :key="index" :src="image" alt="Miniatura" @click="changeMainImage(image)" :class="{ 'active': image === selectedThumbnail }" />
-    </div>
-
-    </div>
-    <div class="detail-text-container">
-      <h3 class="product-name">
-        {{ product.productName }}
-      </h3>
-      <h2>
-        {{ product.price }}<span style="font-size: 1.5rem">€</span>
-      </h2>
-      <p>
-        {{ product.productDescription}}
-      </p>
-    </div>
-    <div class="añadirCarrito-container">
-      <div class="cantidad-container">
-        <label for="cantidad" class="label">Cantidad:</label>
-        <input type="number" id="cantidad" name="cantidad" v-model="cantidad" min="1" class="cantidad-input">
-        <button type="button" class="btn-restar" @click="restarCantidad">-</button>
-        <button type="button" class="btn-sumar" @click="sumarCantidad">+</button>
-      </div>
-      <button class="añadirCarrito">Añadir al carrito</button>
-      <button class="añadirFavorito"><i class="fas fa-heart"></i></button>
-    </div>
-  </div>
-</template>
 <script setup>
 import axios from "axios";
 import { onMounted, reactive, ref } from 'vue';
-import { useRoute,useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import { useCartStore } from "./../stores/CartStore";
+import FavoriteHeart from "@/components/favorite/FavoriteHeart.vue";
+import { useFavoritesStore } from '@/stores/FavoritesStore';
+
+const store = useCartStore();
+const favoritesStore = useFavoritesStore();
+
+
+import AddToCartAlert from "./../components/alerts/AddCartAlert.vue";
+
+
+
+const router  = useRouter();
+const route = useRoute();
+
+const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES_S3;
+const url = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
+
+const imageDirectory = ref('');
+const isLoading = ref(true);
+const ConfirmationCartAlert = ref(false);
 
 const goback = () => {
   window.history.length  > 1 ? history.go(-1) :  router.push('/');
 }
 
 
-const router  = useRouter();
-console.log(router)
-const route = useRoute();
+
+
+const addCart = () => {
+
+  let productData = {
+    id: product.id,
+    name: product.productName,
+    price: changePrice(product.price),
+  };
+
+  store.addToCart(product, productData);
+}
+const showConfirmation = () => {
+
+
+  ConfirmationCartAlert.value = true;
+}
+
+const cancelConfirmationCartAlert = () => {
+    ConfirmationCartAlert.value = false;
+};
 
 let product = reactive({
+  id: '',
   productName: '',
   price: '',
   description: '',
-  image: '',
-  additionalImages: []
+  images: []
 });
+
+
+
+console.log(product.additionalImages);
+
 const cantidad = ref(1);
-let selectedThumbnail = '';
-onMounted(async () => {
-  const id = route.params.id_product;
-  const response = await axios.get(`https://api-printgo.factoriaf5asturias.org/api/v1/products/${id}`);
-  product = response.data;
-  selectedThumbnail = product.additionalImages[0];
-  imageDirectory.value = uri + "/" + findImageForProduct(product);
-});
+
 function sumarCantidad() {
   cantidad.value++;
 }
 function restarCantidad() {
   if (cantidad.value > 1) {
     cantidad.value--;
+  }}
+
+function findImageForProduct(product) {
+	const image = product.images.find((img) => img.mainImage === true);
+	if (image == undefined) {
+		const defaultImage = "placeholder-image.jpg";
+		return defaultImage;
+	}
+	return image.imageName;
+
+}
+
+const changeMainImage = (image) => {
+  imageDirectory.value = uri + "/" + image.imageName;
+}
+
+onMounted(async () => {
+  const id = route.params.id_product;
+  const response = await axios.get(`${url}/${id}`);
+  product = response.data;
+  console.log(product)
+
+  imageDirectory.value = uri + "/" + findImageForProduct(product);
+
+  isLoading.value = false;
+});
+</script>
+
+
+<template>
+
+  <div class="product-detail">
+    <div class="product-detail-container">
+      
+      <AddToCartAlert :show="ConfirmationCartAlert" :product="product" @cancel="cancelConfirmationCartAlert" />
+          <div class="goback">
+            <button class="goback" @click="goback"></button>
+          </div>
+          
+          <div class="detail-image-container">
+
+            <img :src="imageDirectory" alt="Main image" />
+            <div>
+              <img v-for="(image, index) in product.images" :key="index" :src="uri + '/' + image.imageName" alt="Miniatura"  @click="changeMainImage(image)"/>
+            </div>
+    
+          </div>
+      
+          <div class="detail-text-container">
+            <h3>
+              {{ product.productName }}
+            </h3>
+            <h2>
+              {{ product.price }}
+              <span>€</span>
+            </h2>
+            <hr>
+            <p>
+              {{ product.productDescription}}
+            </p>
+            <hr>
+            <div class="add-container">
+              <button class="add-cart" @click="showConfirmation">Añadir al carrito</button>
+              <FavoriteHeart :key="id" :product="product" />
+            </div>
+          </div>
+
+    </div>
+  </div>
+</template>
+
+
+<style lang="scss" scoped>
+
+.product-detail {
+  padding: 4rem 0;
+  background-color:#252525;
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.product-detail-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.goback {
+   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-arrow-back-up-double' width='44' height='44' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23a905b6' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M13 14l-4 -4l4 -4' /%3E%3Cpath d='M8 14l-4 -4l4 -4' /%3E%3Cpath d='M9 10h7a4 4 0 1 1 0 8h-1' /%3E%3C/svg%3E");
+   width: 75px;
+   height: 55px;
+   cursor: pointer;
+   margin-left: 2%;
+}
+
+.detail-image-container {
+  width: 100%;
+
+  > img {
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  > div {
+    padding: 1rem 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+
+    > img {
+      border-radius: 5px;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 
-
-const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
-const imageDirectory = ref('');
-const defaultImage = '../../../public/images/banner-logo.svg';
-const isLoading = ref(true);
-function findImageForProduct(product) {
-  const image = product.images.find(img => img.mainImage === true);
-  return image.imageName ? image.imageName : defaultImage;
-};
-
-onMounted(async () => {
-  await new Promise(resolve => setTimeout(resolve, 2000));
-  imageDirectory.value = uri + "/" + findImageForProduct(product);
-  isLoading.value = false;
-});
-function changeMainImage(image) {
-  imageDirectory.value = uri + "/" + image;
-  selectedThumbnail = image;
+.detail-text-container {
+  font-size: 1.8rem;
+  color: white;
+  margin-top: 3rem;
 }
 
+h3 {
+  font-size: 3rem;
+  font-weight: 600;
+}
 
-</script>
-<style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import '/src/assets/scss/ProductDetail.scss';
+h2 {
+  font-size: 2rem;
+  margin: 1rem 0;
+  font-weight: 400;
+}
+
+hr {
+  color: white;
+  margin: 3rem 0;
+}
+
+.add-container {
+  display: flex;
+  gap: 2rem;
+
+  button {
+    background-color: $primary-color;
+    border-radius: 10px;
+    height: 5rem;
+    padding: 0.5rem;
+  }
+
+  .heart {
+    background-color: transparent;
+  }
+}
+
+@media (min-width: 1000px) {
+
+.product-detail-container {
+  width: 90%;
+  justify-content: space-around;
+  gap: 1rem;
+  flex-direction: row;
+}
+
+.detail-image-container {
+  width: 40%;
+}
+
+.detail-text-container {
+  width: 40%;
+  font-size: 1.8rem;
+  color: white;
+  margin-top: 3rem;
+}
+
+h3 {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 1rem 0;
+  font-weight: 400;
+}
+
+}
 </style>

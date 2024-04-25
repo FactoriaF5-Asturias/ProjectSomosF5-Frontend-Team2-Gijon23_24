@@ -1,11 +1,17 @@
-import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import FactoriaAlert from '../alerts/FactoriaAlert.vue';
-describe('FactoriaAlert', () => {
- it('renders the alert correctly', () => {
+
+
+describe('FactoriaAlert.vue', () => {
+ it('renders the alert message correctly', () => {
     const wrapper = mount(FactoriaAlert);
 
-    expect(wrapper.find('img').exists()).toBe(true);
-    expect(wrapper.find('p').text()).toBe('"Este sitio es solo para fines educativos. No ingrese información personal o realice pagos aquí"');
+   
+    const alertMessage = wrapper.find('p');
+    expect(alertMessage.text()).toBe('"Este sitio es solo para fines educativos. No ingrese información personal ni realice pagos aquí."');
+
+    
+    const alertImage = wrapper.find('img');
+    expect(alertImage.attributes('src')).toBe('/images/factoria5-logo.png');
  });
 });
