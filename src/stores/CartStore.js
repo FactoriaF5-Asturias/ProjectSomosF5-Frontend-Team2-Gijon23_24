@@ -12,11 +12,15 @@ export const useCartStore = defineStore({
       this.cart.push(product);
     },
   },
-
   
   getters: {
+    
     getItems() {
       return this.items;
+    },
+
+    cartProductsCount() {
+      return this.cart.length;
     },
   },
 });
