@@ -196,7 +196,7 @@ h1 {
 h2 {
   font-family: "Poppins", sans-serif;
   color: #3C3057;
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 form {
