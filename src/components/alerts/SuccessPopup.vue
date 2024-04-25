@@ -1,13 +1,14 @@
 <script setup>
 const props = defineProps({
-  show: Boolean
+  show: Boolean,
+  message: String
 });
 </script>
 
 <template>
   <div v-if="show">
     <img src="/icons/icon-confirm.svg" alt="">
-    <p>Se ha registrado con éxito, revise su correo electronico para confirmar su solicitud.</p>
+    <p>{{ message }}</p>
   </div>
 </template>
 
