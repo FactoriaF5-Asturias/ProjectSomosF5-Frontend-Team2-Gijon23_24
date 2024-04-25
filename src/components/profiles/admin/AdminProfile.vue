@@ -47,8 +47,6 @@ const changePassword = async () => {
     }
     const response = await axios.put(uri, data, credentials);
 
-    console.log(response)
-
     if (response.status === 202) {
       console.log('El cambio de contraseña se ha realizado con éxito.');
       successVisible.value = true;
