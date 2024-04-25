@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 import TermsPopup from './../../alerts/TermsPopup.vue'
 import SuccessPopup from '../../alerts/SuccessPopup.vue'
 import ErrorPassword from '../../alerts/ErrorPassword.vue'

@@ -1,47 +1,49 @@
 <script setup>
-import { useCartStore } from "./../../stores/CartStore";
-
-const store = useCartStore();
+import { useAuthStore } from '@/stores/AuthStore';
 
 const props = defineProps({
-    show: Boolean,
-    product: Object
+    show: Boolean
 });
+
+const authStore = useAuthStore();
+const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 
 const emit = defineEmits(['cancel']);
 
-const cancelAddToCart = () => {
+const refuse = () => {
     emit('cancel');
 };
 
-function changePrice(decimalPrice) {
-    let priceString = decimalPrice.toString();
-    let [integerPart, decimalPart] = priceString.split('.');
-    let priceInteger = parseInt(integerPart) * 100 + (decimalPart ? parseInt(decimalPart) : 0);
+const accept = () => {
+    userLogout()
+    emit('cancel');
+};
 
-    return priceInteger;
+async function userLogout() {
+
+try {
+    const response = await fetch(uri + '/logout', {
+        method: 'GET',
+        credentials: 'include'
+    });
+    console.log("Logout successfull"); 
+    authStore.userRole = '';
+    authStore.username = '';
+    authStore.isAuthenticated = false;
+    return response.status
+} catch (error) {
+    throw new Error('Error occured during API fetch GET request while logout')
 }
-
-const addCart = () => {
-    let productData = {
-        id: props.product.id,
-        name: props.product.productName,
-        price: changePrice(props.product.price),
-    };
-
-    store.addToCart(props.product, productData);
-
-    cancelAddToCart()
 }
 </script>
 
 <template>
     <div v-if="props.show" class="popup-container" @click.stop>
         <div class="confirmation-content">
-            <h1>¿Quieres añadir <b>"{{ product.productName }}"</b> a tu carrito?</h1>
+            <h1>¿Seguro que desea cerrar su sesión?</h1>
             <section>
-                <button @click="addCart">Sí</button>
-                <button @click="cancelAddToCart">No</button>
+                <button @click="accept">Sí</button>
+                <button @click="refuse">No</button>
             </section>
         </div>
     </div>
@@ -63,6 +65,7 @@ const addCart = () => {
 
 .confirmation-content {
   max-width: 30rem;
+  color: black;
   height: 20rem;
   padding: 20px;
   border: 1px solid #ccc;
