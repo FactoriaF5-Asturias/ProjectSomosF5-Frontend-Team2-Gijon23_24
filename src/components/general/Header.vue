@@ -1,12 +1,21 @@
 <script setup>
+import { ref, watch } from 'vue';
 import { useAuthStore } from "./../../stores/AuthStore";
 import HeaderButtons from "./header/HeaderButtons.vue";
 import LoggedProfile from "./header/LoggedProfile.vue";
 import FactoriaAlert from "./../alerts/FactoriaAlert.vue";
 import Navbar from "./header/Navbar.vue";
 import Sidebar from "./header/Sidebar.vue";
+import { useCartStore } from "@/stores/CartStore";
 
+const cartStore = useCartStore();
 const authStore = useAuthStore();
+
+const cartProductsCount = ref(cartStore.getItems.length);
+
+watch(() => cartStore.getItems.length, (newCount) => {
+  cartProductsCount.value = newCount;
+});
 </script>
 
 <template>
@@ -35,7 +44,10 @@ const authStore = useAuthStore();
 
 				<router-link to="/cart">
 					<div>
-					<img src="/icons/icon-shopping-cart.svg" alt="">
+						<div id="cart-container">
+							<img src="/icons/icon-shopping-cart.svg" alt="">
+							<span> {{ cartProductsCount }} </span>
+						</div>
 					<p>Carrito</p>
 					</div>
 				</router-link>
@@ -52,6 +64,7 @@ const authStore = useAuthStore();
 
 <style lang="scss" scoped>
 header {
+	font-family: "Poppins", sans-serif;
 	position: fixed;
 	width: 100%;
 	z-index: 100;
@@ -106,7 +119,16 @@ header {
 		background-color: rgb(72, 72, 72);
 	}
 }
+#cart-container {
 
+	span  {
+		background-color: red;
+		border-radius: 100%;
+		padding: 0.5rem;
+		color: white;
+		font-weight: 700;
+	}
+}
 .mobile {
 		display: none;
 	}

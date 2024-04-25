@@ -1,94 +1,63 @@
 <script setup>
 import axios from "axios";
 import { onMounted, reactive, ref } from 'vue';
-import { useRoute,useRouter } from 'vue-router';
-import { useCartStore } from "./../stores/CartStore";
+import { useRoute, useRouter } from 'vue-router';
+import AddToCartAlert from "./../components/alerts/AddCartAlert.vue";
 
-const store = useCartStore();
 
 const router  = useRouter();
 const route = useRoute();
+
+const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
+const url = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
+
+const imageDirectory = ref('');
+const isLoading = ref(true);
+const ConfirmationCartAlert = ref(false);
 
 const goback = () => {
   window.history.length  > 1 ? history.go(-1) :  router.push('/');
 }
 
-const addCart = () => {
+const showConfirmation = () => {
 
-  let productData = {
-    id: product.id,
-    name: product.productName,
-    price: changePrice(product.price),
-  };
-
-  store.addToCart(product, productData);
-
-  console.log(store.items)
+  ConfirmationCartAlert.value = true;
 }
+
+const cancelConfirmationCartAlert = () => {
+    ConfirmationCartAlert.value = false;
+};
 
 let product = reactive({
   id: '',
   productName: '',
   price: '',
   description: '',
-  image: '',
-  additionalImages: []
+  images: []
 });
 
-console.log(product.additionalImages);
-
-const cantidad = ref(1);
-
-function sumarCantidad() {
-  cantidad.value++;
+function findImageForProduct(product) {
+	const image = product.images.find((img) => img.mainImage === true);
+	if (image == undefined) {
+		const defaultImage = "placeholder-image.jpg";
+		return defaultImage;
+	}
+	return image.imageName;
 }
-function restarCantidad() {
-  if (cantidad.value > 1) {
-    cantidad.value--;
-  }
-}
-let selectedThumbnail = '';
-const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
-const url = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
 
-const imageDirectory = ref('');
-const defaultImage = '../../../public/images/banner-logo.svg';
-const isLoading = ref(true);
+const changeMainImage = (image) => {
+  imageDirectory.value = uri + "/" + image.imageName;
+}
 
 onMounted(async () => {
   const id = route.params.id_product;
   const response = await axios.get(`${url}/${id}`);
   product = response.data;
-  selectedThumbnail = product.additionalImages[0];
+
   imageDirectory.value = uri + "/" + findImageForProduct(product);
-});
 
-
-function findImageForProduct(product) {
-  const image = product.images.find(img => img.mainImage === true);
-  return image.imageName ? image.imageName : defaultImage;
-};
-
-onMounted(async () => {
-  await new Promise(resolve => setTimeout(resolve, 2000));
-  imageDirectory.value = uri + "/" + findImageForProduct(product);
   isLoading.value = false;
 });
-
-function changeMainImage(image) {
-  imageDirectory.value = uri + "/" + image;
-  selectedThumbnail = image;
-}
-
-function changePrice(decimalPrice) {
-
-  let priceString = decimalPrice.toString();
-  let [integerPart, decimalPart] = priceString.split('.');
-  let priceInteger = parseInt(integerPart) * 100 + (decimalPart ? parseInt(decimalPart) : 0);
-  
-  console.log('precio:' + priceInteger )
-  return priceInteger;
-}
 </script>
 
 <template>
@@ -103,8 +72,7 @@ function changePrice(decimalPrice) {
 
             <img :src="imageDirectory" alt="Main image" />
             <div>
-              <img :src="imageDirectory" alt="Miniatura" @click="changeMainImage(imageDirectory)" :class="{ 'active': imageDirectory === selectedThumbnail }" />
-              <img v-for="(image, index) in product.additionalImages" :key="index" :src="image" alt="Miniatura" @click="changeMainImage(image)" :class="{ 'active': image === selectedThumbnail }" />
+              <img v-for="(image, index) in product.images" :key="index" :src="uri + '/' + image.imageName" alt="Miniatura"  @click="changeMainImage(image)"/>
             </div>
     
           </div>
@@ -123,11 +91,12 @@ function changePrice(decimalPrice) {
             </p>
             <hr>
             <div class="add-container">
-              <button class="add-cart" @click="addCart">Añadir al carrito</button>
+              <button class="add-cart" @click="showConfirmation">Añadir al carrito</button>
               <button class="heart"><i class="fas fa-heart"></i></button>
             </div>
           </div>
     </div>
+    <AddToCartAlert :show="ConfirmationCartAlert" :product="product" @cancel="cancelConfirmationCartAlert" />
   </div>
 </template>
 
