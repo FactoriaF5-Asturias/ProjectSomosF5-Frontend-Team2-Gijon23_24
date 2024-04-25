@@ -3,7 +3,6 @@ import EditForm from '@/components/admin-dashboard-components/EditForm.vue';
 import { ref } from 'vue';
 import { useProductStore } from "@/stores/product";
 import { useRouter } from 'vue-router';
-import { defineEmits } from 'vue';
 
 const router = useRouter()
 const store = useArticleStore()
@@ -30,7 +29,6 @@ const closeEditForm = () => {
      if (isDeleted) {
         store.products.pop()
      }
-
 }
 </script>  
 

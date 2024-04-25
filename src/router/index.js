@@ -7,8 +7,13 @@ import HouseView from '../views/HouseView.vue'
 import LithophaneView from '../views/LithophaneView.vue'
 import UserProfileView from '../views/UserProfileView.vue'
 import AdminProfileView from '../views/AdminProfileView.vue'
+import StripeCheckoutView from '@/views/StripeCheckoutView.vue'
+import StripeReturnView from '@/views/StripeReturnView.vue'
+import DashboardView from '../views/DashboardView.vue'
+import { useAuthStore } from '@/stores/AuthStore'
+import LoginForm from '@/components/general/header/LoginForm.vue'
 
-
+import ResultsPageView from '../views/ResultsPageView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -19,13 +24,23 @@ const router = createRouter({
     },
     {
       path: '/cart',
-      name: 'carrito',
-      component: CartView
+      name: 'cart',
+      component: CartView,
+      meta: {requiresAuth: true}
+    },
+    
+    {
+      path:'/Detail/:id_product',
+      name: "detail",
+      component: () => import('../views/ProductDetailView.vue'),
+      props: true
+      
     },
     {
       path: '/favorites',
       name: 'favoritos',
-      component: FavoritesView
+      component: FavoritesView,
+      meta: {requiresAuth: true}
     },
     {
       path: '/geek',
@@ -43,16 +58,57 @@ const router = createRouter({
       component: LithophaneView
     },
     {
-			path: "/user/profile",
-			name: "user-Profile",
-			component: UserProfileView,
-		},
-		{
-			path: "/admin/profile",
-			name: "admin-Profile",
-			component: AdminProfileView,
-		}
+      path: "/user/profile",
+      name: "user-Profile",
+      component: UserProfileView,
+      props: true,
+      meta: {requiresAuth: true}
+      
+    },
+    {
+      path: "/admin/profile",
+      name: "admin-Profile",
+      component: AdminProfileView,
+      meta: {requiresAuth: true}
+    },
+    {
+      path: "/stripe-checkout",
+      name: "stripe-checkout",
+      component: StripeCheckoutView,
+    },
+    {
+      path: "/return",
+      name: "return",
+      component: StripeReturnView,
+    },
+	  {
+      path: "/dashboard",
+      name: "dashboard",
+      component: DashboardView,
+      meta: {requiresAuth: true}
+	  },
+    {
+      path: '/results',
+      name: 'results',
+      component: ResultsPageView,
+      props: (route) => ({
+        name: route.query.name
+      })
+    }
   ]
 });
 
-export default router
+router.afterEach(() => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+router.beforeEach((to) =>{
+  const store = useAuthStore()
+
+  if (to.meta.requiresAuth && !store.isAuthenticated){
+    alert("debe iniciar sesion")
+    return {name: 'inicio'}
+  }
+})
+
+export default router;

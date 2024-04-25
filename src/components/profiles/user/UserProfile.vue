@@ -1,4 +1,117 @@
 <script setup>
+import { useAuthStore } from '@/stores/AuthStore';
+import { onMounted, ref} from 'vue';
+// import { useRouter } from "vue-router";
+import axios from "axios";
+import axiosRetry from 'axios-retry';
+	
+// const router = useRouter();
+const store = useAuthStore();
+// const profileDetails = ref(null);
+
+const id = ref(Number)
+console.log(id)
+const firstName = ref('');
+let lastName = ref('');
+// const email = ref('');
+const numberPhone = ref('');
+const address = ref('');
+const postalCode = ref('');
+const city = ref('');
+const province = ref('');
+
+axiosRetry(axios, {
+ retries: 3, 
+ retryDelay: (retryCount) => {
+    return retryCount * 1000; 
+ },
+ retryCondition: (error) => {
+    return error.code === 'ERR_NETWORK';
+ },
+});
+
+async function getProfileData(email) {
+let content = ref('')
+const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
+
+	try {
+		const response = await axios.get(
+      `${uri}/profiles/getByEmail/${email}`,
+			{
+				headers: {
+					"Content-Type": "application/json",
+				},
+				withCredentials: true,
+			}
+    );
+
+    content = response.data
+ 
+    id.value = response.data.id;
+    firstName.value = response.data.firstName;
+    lastName.value = response.data.lastName;
+    numberPhone.value = response.data.numberPhone;
+    address.value = response.data.address;
+    postalCode.value = response.data.postalCode;
+    city.value = response.data.city;
+    province.value = response.data.province;
+	} catch (error) {
+		console.error("Error al conseguir los datos del producto", error);
+		throw error;
+	}
+
+  return { content }
+}
+
+console.log(store.username)
+
+onMounted(() => {
+  getProfileData(store.username);
+});
+
+const cancelData = () => {
+  	firstName.value = ""
+     lastName.value = ""
+     numberPhone.value = ""
+     address.value = ""
+     postalCode.value = ""
+     city.value = ""
+     province.value = ""  
+    };
+
+ const saveData = async () => {
+    const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
+
+      try {
+        const data = {
+          firstName: firstName.value,
+          lastName: lastName.value,
+          numberPhone: numberPhone.value,
+          address: address.value,
+          postalCode: postalCode.value,
+          city: city.value,
+          province: province.value,
+        };
+
+      const response = await axios.put(`${uri}/profiles/${id.value}`, data, {
+        withCredentials: true,
+      });
+      console.log(response);
+
+        if (response.status === 200) {
+          location.reload();
+        } else {
+          console.error("Error al editar el perfil");
+        }
+
+     } catch (error) {
+      if (!error.response) {
+        console.error('Error de red:', error);
+      } else {
+        console.error('Error de respuesta:', error.response);
+      }
+    }
+};
 
 </script>
 
@@ -19,18 +132,18 @@
         <form @submit.prevent="submitForm">
 
           <div class="input-box">
-            <label>Nombre y Apellidos</label>
-            <input type="text" id="name" v-model="name">
+            <label>Nombre</label>
+            <input type="text" id="firstName" v-model="firstName"> 
           </div>
 
           <div class="input-box">
-            <label>E-Mail</label>
-            <input type="text" id="email" v-model="email">
+            <label>Apellidos</label>
+            <input type="text" id="lastName" v-model="lastName">
           </div>
 
           <div class="input-box">
             <label>Teléfono</label>
-            <input type="text" id="phone" v-model="phone">
+            <input type="text" id="numberPhone" v-model="numberPhone">
           </div>
 
           <div class="input-box">
@@ -41,10 +154,10 @@
           <div class="input-box-2">
             <label>C. P.</label>
             <input type="text" id="postal-code" v-model="postalCode">
+
             <label>Ciudad</label>
             <input type="text" id="city" v-model="city">
           </div>
-
 
           <div class="input-box">
             <label>Provincia</label>
@@ -53,7 +166,7 @@
 
           <div class="btns-container">
             <button id="cancel" @click="cancelData()">Cancelar</button>
-            <button id="save" @click="saveData()">Guardar</button>
+            <button id="save" @click="saveData">Guardar</button>
           </div>
 
         </form>
@@ -78,15 +191,21 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 75rem;
-  width: 50rem;
+  padding: 20rem;
+  height: 85rem;
   border-radius: 1.5rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   background-color: white;
   position: sticky;
-  max-height: 70rem;
+  max-height: 90rem;
   margin-bottom: 10rem;
-
+  
+}
+@media (max-width: 916px) {
+  .modal-container{
+    width: 80%;
+    
+  }
 }
 
 .user-profile {
@@ -98,7 +217,7 @@ body {
 h1 {
   font-weight: 600;
   text-align: center;
-  font-size: 4rem;
+  font-size: 5rem;
   color: $primary-background;
   font-family: "Poppins", sans-serif;
 }
@@ -121,6 +240,7 @@ form {
   align-items: center;
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
+
 }
 
 .input-box {
@@ -142,6 +262,13 @@ form {
   }
 }
 
+@media (max-width: 539px) {
+  .input-box{
+    input{
+      width: 100%;
+    }
+  }
+}
 .second-row {
   display: flex;
   flex-direction: row;
@@ -176,6 +303,19 @@ form {
     font-size: 1.8rem;
     border: 1px solid gray;
     border-radius: 0.5rem;
+  }
+
+  @media (max-width: 517px){
+    #postal-code, #city{
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 517px) {
+  .input-box-2{
+    flex-direction: column;
+    
   }
 }
 

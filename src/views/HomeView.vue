@@ -1,17 +1,20 @@
 <script setup>
-import ExplorerCategory from '../components/ExploreCategory.vue';
+import ExplorerCategory from "../components/ExploreCategory.vue";
 import Banner from "@/components/Banner.vue";
-import Card from '@/components/card/Card.vue';
-import Slider from '@/components/Slider.vue';
+import Slider from "@/components/Slider.vue";
+
 </script>
 
 <template>
-	<main>
-		<Slider />
-		<Card/>
-		<ExplorerCategory/>
-	</main>
+    <main>
+       
+        <Slider />
+
+        <Card/>
+        <ExplorerCategory/>
+     
+
+    </main>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

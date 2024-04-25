@@ -1,5 +1,4 @@
 <script setup>
-
 </script>
 
 <template>
@@ -8,21 +7,21 @@
     <h1 class="text-center">Explora nuestras categorías</h1>
     <span class="line"></span>
     <div class="container_images">
-        <Router-link to="/lithophane" class="image">
-            <img src="../assets/img/litofanias.png" alt="">
+        <router-link to="/lithophane" class="image">
+            <img src="/images/litofanias.png" alt="">
             <h2 class="category_title">Litofanias</h2>
             <div class="overlay"></div> 
-        </Router-link to="/">
-        <Router-link to="/house" class="image">
-            <img src="../assets/img/hogar.png" alt="">
+        </router-link>
+        <router-link to="/house" class="image">
+            <img src="/images/hogar.png" alt="">
             <h2 class="category_title">Hogar</h2>
             <div class="overlay"></div>
-        </Router-link to="/">
-        <Router-link to="/geek" class="image">
-            <img src="../assets/img/geek.png" alt="">
+        </router-link>
+        <router-link to="/geek" class="image">
+            <img src="/images/geek.png" alt="">
             <h2 class="category_title">Geek</h2>
             <div class="overlay"></div>
-        </Router-link to="/">
+        </router-link>
     </div>
   </div>  
 </template>
@@ -34,7 +33,6 @@
     padding: 0;
 }
 
-
 .galery{
     
     background-color: #B976ED;
@@ -44,8 +42,8 @@
     
         h1{
             color: #fff;
-            font-size: 30px;
-            padding: 3%;
+            font-size: 3rem;
+            padding: 2rem;
         }
         .line{
             position: relative;
@@ -59,15 +57,15 @@
     
     .container_images{
         display: flex;
-        width: 100%;
+        flex-direction: row;
+        gap: 1rem;
         margin: auto;
         justify-content: space-around;
-        flex-wrap: wrap;
         padding: 5%;
     }
 
     .container_images  .image{
-        width: 32%;
+        // width: 32%;
         position: relative;
         height: 400px;
         margin-bottom: 5px;
@@ -104,36 +102,18 @@
         backdrop-filter: blur(10px);
         border-radius: 5px;
     }
-     
+
     .image:hover .overlay{
         height: 100%;
         text-decoration: underline;
         cursor: pointer;
     }
 }
- @media screen and (max-width:1000px) {
+ @media (max-width:700px) {
     .container_images{
-        width: 95%;
+        flex-wrap: wrap;
     }
+
  }
- @media screen and (max-width:700px) {
-    .container_images{
-        width: 90%;
-    }
-    .container_images .image{
-        width: 48%;
-    }
- }
- @media screen and (max-width:450px) {
-    h1{
-        font-size: 22px;
-    }
-    .container_images{
-        width: 98%;
-    }
-    .container_images .image{
-        width: 80%;
-    }
- }
- 
+
 </style>
