@@ -21,7 +21,7 @@ const passwordConfirmation = () => {
   }
 }
 
- const uri = import.meta.env.VITE_API_ENDPOINT_USERS;
+ const uri = import.meta.env.VITE_API_ENDPOINT_CHANGE_PASSWORD;
 
 const changePassword = async () => {
   try {
