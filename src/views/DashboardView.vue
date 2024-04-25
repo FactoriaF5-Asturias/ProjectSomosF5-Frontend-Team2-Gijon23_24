@@ -5,9 +5,12 @@ import AddButton from "@/components/admin-dashboard-components/AddButton.vue";
 import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 import DashboardCard from "@/components/card/DashboardCard.vue";
+
 let showAddForm = ref(false);
 let showEditForm = ref(false);
+
 let products = ref([]);
+
 const isLoaded = ref(false);
 const currentPage = ref(1);
 const ProductsPerPage = 25;
@@ -37,10 +40,6 @@ const openAddForm = () => {
 	console.log(showAddForm.value);
 };
 
-const openEditForm = () => {
-	showAddForm.value = false;
-	showEditForm.value = true;
-};
 
 const closeForm = () => {
 	showAddForm.value = false;

@@ -1,4 +1,5 @@
 <script setup>
+import axios from 'axios';
 const props = defineProps({
     show: Boolean,
     product: Object
@@ -15,6 +16,8 @@ const accept = () => {
     emit('cancel');
 };
 
+const uriProduct= import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
+
 async function deleteProduct(id) {
 	try {
 		const response = await axios.delete(
@@ -24,13 +27,7 @@ async function deleteProduct(id) {
 				withCredentials: true,
 			}
 		);
-		if (response.status === 200) {
-			location.reload();
-			console.log(response.data);
-			return response.data;
-		} else {
-			console.error("Error al editar el perfil");
-		}
+		return response.data;
 	} catch (error) {
 		console.error("Error deleting products:", error);
 		throw error;

@@ -59,6 +59,7 @@ const addCart = () => {
   background-color: rgba(0, 0, 0, 0.209);
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 }
 
 .confirmation-content {
@@ -68,7 +69,6 @@ const addCart = () => {
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: #fff;
-  z-index: 9999;
   font-size: 1.7rem;
   display: flex;
   flex-direction: column;

@@ -64,6 +64,7 @@ onMounted(async () => {
   <div class="product-detail">
     <div class="product-detail-container">
       
+      <AddToCartAlert :show="ConfirmationCartAlert" :product="product" @cancel="cancelConfirmationCartAlert" />
           <div class="goback">
             <button class="goback" @click="goback"></button>
           </div>
@@ -96,7 +97,6 @@ onMounted(async () => {
             </div>
           </div>
     </div>
-    <AddToCartAlert :show="ConfirmationCartAlert" :product="product" @cancel="cancelConfirmationCartAlert" />
   </div>
 </template>
 
