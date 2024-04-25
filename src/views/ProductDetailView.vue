@@ -8,7 +8,7 @@ import AddToCartAlert from "./../components/alerts/AddCartAlert.vue";
 const router  = useRouter();
 const route = useRoute();
 
-const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
+const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES_S3;
 const url = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
 
 const imageDirectory = ref('');
@@ -53,6 +53,7 @@ onMounted(async () => {
   const id = route.params.id_product;
   const response = await axios.get(`${url}/${id}`);
   product = response.data;
+  console.log(product)
 
   imageDirectory.value = uri + "/" + findImageForProduct(product);
 
