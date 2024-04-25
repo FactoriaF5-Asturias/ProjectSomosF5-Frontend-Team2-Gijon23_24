@@ -11,7 +11,7 @@ export const useFavoritesStore = defineStore('favorites', {
   actions: {
     async addToFavorites(product) {
       try {
-        const uri = import.meta.env.VITE_API_ENDPOINT_FAVORITES ; 
+        const uri = import.meta.env.VITE_API_ENDPOINT_FAVORITES; 
         const response = await axios.put(uri + '/' + product, {
           productId: product.id,
         }, { withCredentials: true });
