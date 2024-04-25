@@ -5,10 +5,22 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const name = ref('');
 
+// const normalizeText = (text) => {
+//   return text
+//     .replace(/[áÁ]/g, 'a')
+//     .replace(/[éÉ]/g, 'e')
+//     .replace(/[íÍ]/g, 'i')
+//     .replace(/[óÓ]/g, 'o')
+//     .replace(/[úÚ]/g, 'u')
+//     .toLowerCase();
+// };
+
 const searchProducts = async () => {
   try {
-   
-  router.push({ name: 'results', query: { name: name.value } });
+    //const normalizedSearchTerm = normalizeText(name.value);
+    //console.log('Término de búsqueda:', normalizedSearchTerm);
+    //router.push({ name: 'results', query: { name: normalizedSearchTerm } });
+   router.push({ name: 'results', query: { name: name.value } });
 
   } catch (error) {
     console.error('Error al buscar productos:', error);

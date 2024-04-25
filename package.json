@@ -16,6 +16,7 @@
 		"@stripe/stripe-js": "^3.3.0",
 		"axios": "^1.6.8",
 		"axios-retry": "^4.1.0",
+		"lodash": "^4.17.21",
 		"vue": "^3.4.15",
 		"vue-router": "^4.2.5",
 		"vuetify": "^3.5.7"
