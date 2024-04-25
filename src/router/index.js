@@ -61,13 +61,15 @@ const router = createRouter({
       path: "/user/profile",
       name: "user-Profile",
       component: UserProfileView,
-      props: true
+      props: true,
+      meta: {requiresAuth: true}
       
     },
     {
       path: "/admin/profile",
       name: "admin-Profile",
       component: AdminProfileView,
+      meta: {requiresAuth: true}
     },
     {
       path: "/stripe-checkout",
