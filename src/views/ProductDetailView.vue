@@ -1,8 +1,7 @@
 <script setup>
 import axios from "axios";
 import { onMounted, reactive, ref } from 'vue';
-
-import { useRoute,useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useCartStore } from "./../stores/CartStore";
 import FavoriteHeart from "@/components/favorite/FavoriteHeart.vue";
 import { useFavoritesStore } from '@/stores/FavoritesStore';
@@ -10,7 +9,7 @@ import { useFavoritesStore } from '@/stores/FavoritesStore';
 const store = useCartStore();
 const favoritesStore = useFavoritesStore();
 
-import { useRoute, useRouter } from 'vue-router';
+
 import AddToCartAlert from "./../components/alerts/AddCartAlert.vue";
 
 
@@ -30,8 +29,7 @@ const goback = () => {
 }
 
 
-// let id;
-// id = route.params.id_product;
+
 
 const addCart = () => {
 
@@ -42,7 +40,7 @@ const addCart = () => {
   };
 
   store.addToCart(product, productData);
-
+}
 const showConfirmation = () => {
 
 
@@ -73,7 +71,7 @@ function sumarCantidad() {
 function restarCantidad() {
   if (cantidad.value > 1) {
     cantidad.value--;
-  }
+  }}
 
 function findImageForProduct(product) {
 	const image = product.images.find((img) => img.mainImage === true);
@@ -103,43 +101,6 @@ onMounted(async () => {
 
 
 <template>
-
-  <div id="home-detail" class="product-detail">
-    <div class="goback">
-      <button class="goback" @click="goBack"></button>
-    </div>
-    
-    <div class="detail-image-container">
-      <div class="detail-mainImage-container">
-        <img :src="imageDirectory" alt="Main image" />
-      </div>
-      <div class="detail-miniPics-container">
-        <img :src="imageDirectory" alt="Miniatura" @click="changeMainImage(imageDirectory)" :class="{ 'active': imageDirectory === selectedThumbnail }" />
-        <img v-for="(image, index) in product.additionalImages" :key="index" :src="image" alt="Miniatura" @click="changeMainImage(image)" :class="{ 'active': image === selectedThumbnail }" />
-      </div>
-    </div>
-    
-    <div class="detail-text-container">
-      <h3 class="product-name">
-        {{ product.productName }}
-      </h3>
-      <h2>
-        {{ product.price }}<span style="font-size: 3rem">€</span>
-      </h2>
-      <p>
-        {{ product.productDescription }}
-      </p>
-    </div>
-    
-    <div class="añadirCarrito-container">
-      <div class="cantidad-container">
-        <label for="cantidad" class="label">Cantidad:</label>
-        <input type="number" id="cantidad" name="cantidad" v-model="cantidad" min="1" class="cantidad-input">
-        <button type="button" class="btn-restar" @click="restarCantidad">-</button>
-        <button type="button" class="btn-sumar" @click="sumarCantidad">+</button>
-      </div>
-      <button class="añadirCarrito" @click="addCart">Añadir al carrito</button>
-      <FavoriteHeart :key="id" :product="product" />
 
   <div class="product-detail">
     <div class="product-detail-container">
@@ -173,7 +134,7 @@ onMounted(async () => {
             <hr>
             <div class="add-container">
               <button class="add-cart" @click="showConfirmation">Añadir al carrito</button>
-              <button class="heart"><i class="fas fa-heart"></i></button>
+              <FavoriteHeart :key="id" :product="product" />
             </div>
           </div>
 

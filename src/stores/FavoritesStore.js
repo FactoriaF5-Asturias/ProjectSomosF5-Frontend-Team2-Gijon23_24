@@ -4,13 +4,10 @@ import { ref } from "vue";
 
 export const useFavoritesStore = defineStore('favorites', {
   state: () => ({
-    favoriteProducts: ref([]),
+    favoriteProducts: [],
+    isLoaded: false,
   }),
-  getters: {
-    uri: () => {
-      return import.meta.env.VITE_API_ENDPOINT_FAVORITES;
-    },
-  },
+
   actions: {
     async addToFavorites(product) {
       try {
@@ -20,7 +17,7 @@ export const useFavoritesStore = defineStore('favorites', {
         }, { withCredentials: true });
         console.log('esto es para añadir:',response);
         if (response.status === 200) {
-          this.favoriteProducts.push(product);
+          this.favoriteProducts.push(product); 
         } else {
           console.error('Error al agregar el producto a favoritos');
         }
@@ -30,6 +27,9 @@ export const useFavoritesStore = defineStore('favorites', {
     },
   },
 });
+
+
+
 
 
     // Otras acciones que puedas tener

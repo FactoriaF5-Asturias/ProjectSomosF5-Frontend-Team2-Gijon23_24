@@ -1,6 +1,8 @@
 <template>
+  
   <h1>Mis Favoritos</h1>
-  <section><div>
+  <section>
+    <div>
     <Card
       v-for="product in favoritesStore.favoriteProducts"
       :key="product.id"
@@ -8,6 +10,11 @@
       v-if="favoritesStore.isLoaded"
     />
   </div>
+  <div id="pagination">
+            <button class="pagination-arrow" @click="prevPage" :disabled="currentPage <= 1"> << </button>
+            <button v-for="page in visiblePages" :key="page" @click="changePage(page)" :class="{ 'active-page': currentPage === page }">{{ page }}</button>
+            <button class="pagination-arrow" @click="nextPage" :disabled="currentPage >= totalPages"> >> </button>
+          </div>
   </section>
 </template>
 
@@ -52,8 +59,12 @@ onMounted(() => {
 
 <style scoped lang="scss">
 
+body{
+  background-color: #252525;
+}
 
-> div {
+
+ div {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
