@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-import TermsPopup from './../../alerts/TermsPopup.vue'
-import SuccessPopup from '../../alerts/SuccessPopup.vue'
-import ErrorPassword from '../../alerts/ErrorPassword.vue'
+import TermsPopup from '@/components/alerts/TermsPopup.vue'
+import SuccessPopup from '@/components/alerts/SuccessPopup.vue'
+import ErrorPassword from '@/components/alerts/ErrorPassword.vue'
 import axios from 'axios';
 
 const props = defineProps({
@@ -86,8 +86,8 @@ const LoginForm = () => {
   <div>
 
     
-    <SuccessPopup :show="successVisible" />
-    <ErrorPassword :show="errorVisible" />
+    <SuccessPopup :show="successVisible" message="El registro se ha realizado con éxito." />
+    <ErrorPassword :show="errorVisible" message="Error al realizar el registro." @close="errorPassword = false" />
     
     <div class="modal" @click="closeForm">
       <TermsPopup v-if="termsPopupVisible" />
