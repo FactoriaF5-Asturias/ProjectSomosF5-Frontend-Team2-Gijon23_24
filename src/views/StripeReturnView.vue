@@ -16,7 +16,7 @@ clientSecret.value = currentRoute.value?.payment_intent_client_secret;
 let stripe;
 
 onMounted(async () => {
-  const { publishableKey } = await fetch("/api/config").then((res) => res.json());   
+  const publishableKey = import.meta.env.VITE_APP_STRIPE_PK;   
   stripe = await loadStripe(publishableKey);
 
   const {error, paymentIntent} = await stripe.retrievePaymentIntent(
@@ -34,12 +34,25 @@ onMounted(async () => {
 <template>
   <body>
     <main>
-      <a href="/">home</a>
-      <h1>Thank you!</h1>
-      <StripeMessages
+      <h1>Thank you for the purchase!</h1>
+      <StripeMessages class="message"
         v-if="clientSecret"
         :messages="messages"
       />
     </main>
   </body>
 </template>
+
+<style scoped lang="scss">
+h1 {
+  text-align: center;
+  font-size: 3rem;
+  margin: 5rem;
+}
+
+.message {
+  text-align: center;
+  margin: 5rem;
+  font-size: 2rem;
+}
+</style>

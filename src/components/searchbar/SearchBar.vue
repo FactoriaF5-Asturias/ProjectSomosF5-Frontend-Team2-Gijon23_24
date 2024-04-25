@@ -46,31 +46,19 @@ const searchProducts = async () => {
 <style lang="scss" scoped>
 
 .search-container {
-  position: relative;
-  width: 50rem;
+  width: fit-content;
   height: 4rem;
-  margin: 5rem;
+  border-bottom: 1px solid white;
 }
 
 .search-container .input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   padding: 1rem;
-  padding-right: 145px;
   font-size: 1.5rem;
   color: white;
-  border-bottom: 1px solid white;
- 
 }
 
 .btn {
   width: 3rem;
-  position: absolute;
-  top: 0;
-  right: 0;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;

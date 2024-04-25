@@ -35,7 +35,7 @@ onUnmounted(() => {
         <router-link to="/house" exact-active-class="active" class="link">Hogar</router-link>
         <router-link to="/geek" exact-active-class="active" class="link">Geek</router-link>
       </div>
-      <SearchBar />
+      <SearchBar class="mobile"/>
     </nav>
 </template>
 
@@ -51,10 +51,11 @@ onUnmounted(() => {
 nav {
     background-color: $primary-background;
     height: 6rem;
-    padding-left: 7rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 6rem;
+
     div {
       display: flex;
       gap: 3rem;
@@ -64,5 +65,13 @@ nav {
 .active {
     color: $primary-color;
 }
- 
+
+@media (max-width: 1000px) {
+  .mobile {
+    display: none;
+  }
+  nav {
+    justify-content: center
+}
+}
 </style>

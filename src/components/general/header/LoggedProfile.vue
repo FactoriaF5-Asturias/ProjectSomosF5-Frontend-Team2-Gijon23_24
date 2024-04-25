@@ -1,32 +1,25 @@
 <script setup>
 import { ref } from 'vue';
 import { useAuthStore } from './../../../stores/AuthStore';
+import LogOutAlert from '@/components/alerts/LogOutAlert.vue';
 
 const authStore = useAuthStore();
-const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 
 const usernameCleaned = ref('');
+const ConfirmationLogOutAlert = ref(false);
+
+const showConfirmation = () => {
+
+  ConfirmationLogOutAlert.value = true;
+}
+
+const refuse = () => {
+  ConfirmationLogOutAlert.value = false;
+};
 
 function cleanUsername(email) {
     const cleaned = email.replace(/@.*/, "");
     usernameCleaned.value = cleaned;
-}
-
-async function userLogout() {
-
-try {
-    const response = await fetch(uri + '/logout', {
-        method: 'GET',
-        credentials: 'include'
-    });
-    console.log("Logout successfull"); 
-    authStore.userRole = '';
-    authStore.username = '';
-    authStore.isAuthenticated = false;
-    return response.status
-} catch (error) {
-    throw new Error('Error occured during API fetch GET request while logout')
-}
 }
 
 cleanUsername(authStore.username);
@@ -44,10 +37,12 @@ cleanUsername(authStore.username);
     </router-link>
     
     <hr class="mobile">
-    <button @click.prevent="userLogout()">
+    <button @click="showConfirmation">
       <p class="mobile">Cerrar sesión</p>
       <img class="desk" src="/icons/log-out-icon.svg" alt="">
     </button>
+
+    <LogOutAlert :show="ConfirmationLogOutAlert" :product="product" @cancel="refuse"/>
   </div>
 </template>
 
@@ -76,6 +71,7 @@ a {
   align-items: center;
   gap: 1rem ;
   max-width: 18rem;
+  transition: all 0.3s ease-in-out;
 
   img {
     height: 54px;
@@ -91,15 +87,19 @@ a {
 }
 }
 
-a:hover{
+a:hover, button:hover{
   color: #fff;
-  background-color: #3C3057;
+  background-color: #484848;
 }
 
 button {
+  height: 100%;
+  padding: 0.5rem;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   gap: 2rem;
+  transition: all 0.3s ease-in-out;
 
   img {
     height: 3rem;
