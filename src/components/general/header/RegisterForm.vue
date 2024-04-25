@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 import TermsPopup from './../../alerts/TermsPopup.vue'
 import SuccessPopup from '../../alerts/SuccessPopup.vue'
 import ErrorPassword from '../../alerts/ErrorPassword.vue'
@@ -151,7 +152,8 @@ const LoginForm = () => {
   height: 90vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+  z-index: 500;
+
   .modal_container {
     height: 60rem;
     width: 90rem;

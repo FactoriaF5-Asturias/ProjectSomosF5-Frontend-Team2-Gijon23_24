@@ -88,10 +88,10 @@ const closePopup = () => {
   width: 100vw;
   height: 90vh;
   display: flex;
-  backdrop-filter: blur(2px);
   background-color: rgba(0, 0, 0, 0.209);
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 }
 
 .terms-popup {
@@ -101,7 +101,6 @@ const closePopup = () => {
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: #fff;
-  z-index: 9999;
   font-size: 1.3rem;
   display: flex;
 }
