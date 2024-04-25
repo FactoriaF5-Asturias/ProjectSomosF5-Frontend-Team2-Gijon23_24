@@ -80,10 +80,10 @@
   .nav a {
 	color: aliceblue;
 	font-size: x-large;
+	transition: all 0.3s ease-in-out;
   }
   .nav a:hover {
 	color: $primary-color;
-	transition: 1s;
   }
   
   router-link {

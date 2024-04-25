@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import axios from "axios";
+import DelateProductAlert from "../alerts/DelateProductAlert.vue";
 
 const props = defineProps({
 	product: {
@@ -29,41 +30,32 @@ onMounted(async () => {
 	isLoading.value = false;
 });
 
-async function deleteProduct(id) {
-	try {
-		const response = await axios.delete(
-			uriProduct + `/${id}`,
-			{},
-			{
-				withCredentials: true,
-			}
-		);
-		if (response.status === 200) {
-			location.reload();
-			console.log(response.data);
-			return response.data;
-		} else {
-			console.error("Error al editar el perfil");
-		}
-	} catch (error) {
-		console.error("Error deleting products:", error);
-		throw error;
-	}
+const ConfirmationDeleteAlert = ref(false);
+
+const showConfirmation = () => {
+
+	ConfirmationDeleteAlert.value = true;
 }
+
+const refuse = () => {
+	ConfirmationDeleteAlert.value = false;
+};
+
 </script>
 
 <template>
 	<article>
+		<DelateProductAlert :show="ConfirmationDeleteAlert" :product="product" @cancel="refuse"/>
 		<v-card class="mx-auto card-body" theme="dark">
 			<v-img
-				class="image"
-				:style="{
-					'background-image': 'url(' + imageDirectory + ')',
-				}"
+			class="image"
+			:style="{
+				'background-image': 'url(' + imageDirectory + ')',
+			}"
 				:alt="product.productName"
-			>
+				>
 				<div class="card-options">
-					<button @click="deleteProduct(props.product.id)">X</button>
+					<button @click="showConfirmation">X</button>
 				</div>
 			</v-img>
 			<div class="product-data">
@@ -72,6 +64,7 @@ async function deleteProduct(id) {
 				}}</v-card-title>
 				<v-card-title class="price">{{ product.price }} €</v-card-title>
 			</div>
+			
 		</v-card>
 	</article>
 </template>
@@ -81,6 +74,7 @@ async function deleteProduct(id) {
 	display: flex;
 	justify-content: flex-end;
 	padding: 1rem;
+	
 	> button {
 		font-size: large;
 		background-color: $primary-color;
@@ -91,6 +85,8 @@ async function deleteProduct(id) {
 }
 
 article {
+	
+	width: fit-content;
 	transition: transform 0.2s ease-in-out;
 	filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.357));
 }

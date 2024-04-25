@@ -1,9 +1,10 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from './../../../stores/AuthStore'
 import HeaderButtons from './HeaderButtons.vue'
 import LoggedProfile from './LoggedProfile.vue'
+import SearchBar from '@/components/searchbar/SearchBar.vue'
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -47,13 +48,16 @@ router.beforeEach((to, from, next) => {
 					</div>
 				</router-link>
                 <hr>
+                <div class="mobile">
+                    <SearchBar/>
+                </div>
                 <router-link to="/dashboard" exact-active-class="active" v-if="authStore.userRole == 'ROLE_ADMIN'">
 					<div>
                         <img src="/icons/admin-icon.svg" alt="">
                         <p>Dashboard</p>
 					</div>
 				</router-link>
-                <hr>
+                <hr v-if="authStore.userRole == 'ROLE_ADMIN'">
         </div>
     </ol>
   </nav>
@@ -69,6 +73,7 @@ nav {
 button {
     border-radius: 10px;
     padding: 0.5rem;
+    transition: all 0.3s ease-in-out;
 
     img {
         height: 5rem;
@@ -120,7 +125,7 @@ ol.show {
     height: 100vh;
 }
 
-a {
+a, .mobile {
     display: flex;
     font-weight: 200;
 
@@ -154,7 +159,11 @@ hr {
     font-weight: 700;
 }
 
+.mobile {
+    padding-bottom: 3rem;
+}
 @media (min-width: 1000px) {
+    
     nav {
         display: none;
     }
