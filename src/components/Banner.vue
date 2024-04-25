@@ -16,7 +16,6 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  pad
 
   background-image: linear-gradient(
       to right,
