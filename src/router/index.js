@@ -12,6 +12,7 @@ import DashboardView from '../views/DashboardView.vue'
 import { useAuthStore } from '@/stores/AuthStore'
 import LoginForm from '@/components/general/header/LoginForm.vue'
 
+import ResultsPageView from '../views/ResultsPageView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -82,6 +83,15 @@ const router = createRouter({
     //   name: "login",
     //   component: LoginForm
     // }
+
+    {
+      path: '/results',
+      name: 'results',
+      component: ResultsPageView,
+      props: (route) => ({
+        name: route.query.name
+      })
+    }
   ]
 });
 
