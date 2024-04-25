@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import axios from "axios";
-import DelateProductAlert from "../alerts/DelateProductAlert.vue";
+import DelateProductAlert from "../alerts/DeleteProductAlert.vue";
 
 const props = defineProps({
 	product: {
