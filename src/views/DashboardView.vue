@@ -5,9 +5,12 @@ import AddButton from "@/components/admin-dashboard-components/AddButton.vue";
 import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 import DashboardCard from "@/components/card/DashboardCard.vue";
+
 let showAddForm = ref(false);
 let showEditForm = ref(false);
+
 let products = ref([]);
+
 const isLoaded = ref(false);
 const currentPage = ref(1);
 const ProductsPerPage = 25;
@@ -37,10 +40,6 @@ const openAddForm = () => {
 	console.log(showAddForm.value);
 };
 
-const openEditForm = () => {
-	showAddForm.value = false;
-	showEditForm.value = true;
-};
 
 const closeForm = () => {
 	showAddForm.value = false;
@@ -97,7 +96,7 @@ const visiblePages = computed(() => {
 			</section>
 			<section>
 				<div v-if="paginatedProducts.length">
-					<div v-for="product in paginatedProducts">
+					<div id="product-container" v-for="product in paginatedProducts">
 						<DashboardCard
 							:product="product"
 							:key="product.id"
@@ -211,5 +210,9 @@ button:hover {
 }
 .active-page {
 	background-color: $primary-color;
+}
+
+#product-container {
+	justify-self: center;
 }
 </style>
