@@ -86,7 +86,7 @@ const cancelData = () => {
 <template>
 
   <body>
-    <div>
+    <div class="principal-Container">
 
       <SuccessPopup :show="successVisible" message="El cambio de contraseña se ha realizado con éxito." />
       <ErrorPassword :show="errorVisible" message="Error al cambiar la contraseña." @close="errorPassword = false" />
@@ -136,11 +136,11 @@ const cancelData = () => {
 <style lang="scss" scoped>
 body {
   background-color: #CBABE4;
+}
+.principal-Container{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100vw;
+    flex-direction: column;
+    align-items: center;
 }
 
 .modal-container {
@@ -149,13 +149,20 @@ body {
   justify-content: center;
   align-items: center;
   height: 70rem;
-  width: 60rem;
+  padding: 20rem;
   border-radius: 1.5rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   background-color: white;
   position: sticky;
-  max-height: 70rem;
+  max-height: 90rem;
   margin-bottom: 10rem;
+}
+
+@media (max-width: 916px) {
+  .modal-container{
+    width: 80%;
+    
+  }
 }
 
 .user-profile {
@@ -218,6 +225,14 @@ form {
     font-size: 1.8rem;
     border: 1px solid gray;
     border-radius: 0.5rem;
+  }
+}
+
+@media (max-width: 539px) {
+  .input-box{
+    input{
+      width: 100%;
+    }
   }
 }
 
