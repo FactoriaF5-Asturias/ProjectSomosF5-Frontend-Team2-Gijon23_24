@@ -75,6 +75,7 @@ const submitForm = async () => {
 
 const toggleTermsPopup = () => {
   termsPopupVisible.value = !termsPopupVisible.value;
+  acceptedTerms.value = true;
 };
 
 const LoginForm = () => {
@@ -86,8 +87,8 @@ const LoginForm = () => {
   <div>
 
     
-    <SuccessPopup :show="successVisible" />
-    <ErrorPassword :show="errorVisible" />
+    <SuccessPopup :show="successVisible" message="El registro se ha realizado con éxito."/>
+    <ErrorPassword :show="errorVisible" message="Error al realizar el registro." />
     
     <div class="modal" @click="closeForm">
       <TermsPopup v-if="termsPopupVisible" />
