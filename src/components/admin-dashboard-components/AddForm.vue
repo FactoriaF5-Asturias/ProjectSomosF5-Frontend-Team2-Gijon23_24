@@ -13,8 +13,8 @@ const closeForm = () => {
 	props.onClose();
 };
 
-// uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
-// uriImages = import.meta.env.VITE_API_ENDPOINT_IMAGES;
+const uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
+const uriImagesS3 = import.meta.env.VITE_API_ENDPOINT_IMAGES_S3;
 
 const resetForm = () => {
 	productName.value = "";
@@ -67,7 +67,7 @@ async function createProduct() {
 	console.log(data);
 	try {
 		const response = await axios.post(
-			`http://localhost:8080/api/v1/products`,
+			uri,
 			data,
 			{
 				headers: {
@@ -92,7 +92,7 @@ async function uploadImages(productId) {
 	formData.append("file", selectedMainImage.value);
 	try {
 		await axios.post(
-			`http://localhost:8080/api/v1/images/uploadToS3/${productId}`,
+			uriImagesS3 + `/${productId}`,
 			formData,
 			{
 				headers: {
@@ -115,7 +115,7 @@ async function uploadImages(productId) {
 async function deleteProduct(productId) {
 	try {
 		await axios.delete(
-			`http://localhost:8080/api/v1/products/${productId}`,
+			uri + `/${productId}`,
 			{},
 			{ withCredentials: true }
 		);

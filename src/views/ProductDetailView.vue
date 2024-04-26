@@ -2,13 +2,22 @@
 import axios from "axios";
 import { onMounted, reactive, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useCartStore } from "./../stores/CartStore";
+import FavoriteHeart from "@/components/favorite/FavoriteHeart.vue";
+import { useFavoritesStore } from '@/stores/FavoritesStore';
+
+const store = useCartStore();
+const favoritesStore = useFavoritesStore();
+
+
 import AddToCartAlert from "./../components/alerts/AddCartAlert.vue";
+
 
 
 const router  = useRouter();
 const route = useRoute();
 
-const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES;
+const uri = import.meta.env.VITE_API_ENDPOINT_IMAGES_S3;
 const url = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
 
 const imageDirectory = ref('');
@@ -19,7 +28,21 @@ const goback = () => {
   window.history.length  > 1 ? history.go(-1) :  router.push('/');
 }
 
+
+
+
+const addCart = () => {
+
+  let productData = {
+    id: product.id,
+    name: product.productName,
+    price: changePrice(product.price),
+  };
+
+  store.addToCart(product, productData);
+}
 const showConfirmation = () => {
+
 
   ConfirmationCartAlert.value = true;
 }
@@ -36,6 +59,20 @@ let product = reactive({
   images: []
 });
 
+
+
+console.log(product.additionalImages);
+
+const cantidad = ref(1);
+
+function sumarCantidad() {
+  cantidad.value++;
+}
+function restarCantidad() {
+  if (cantidad.value > 1) {
+    cantidad.value--;
+  }}
+
 function findImageForProduct(product) {
 	const image = product.images.find((img) => img.mainImage === true);
 	if (image == undefined) {
@@ -43,6 +80,7 @@ function findImageForProduct(product) {
 		return defaultImage;
 	}
 	return image.imageName;
+
 }
 
 const changeMainImage = (image) => {
@@ -53,6 +91,7 @@ onMounted(async () => {
   const id = route.params.id_product;
   const response = await axios.get(`${url}/${id}`);
   product = response.data;
+  console.log(product)
 
   imageDirectory.value = uri + "/" + findImageForProduct(product);
 
@@ -60,7 +99,9 @@ onMounted(async () => {
 });
 </script>
 
+
 <template>
+
   <div class="product-detail">
     <div class="product-detail-container">
       
@@ -93,13 +134,13 @@ onMounted(async () => {
             <hr>
             <div class="add-container">
               <button class="add-cart" @click="showConfirmation">Añadir al carrito</button>
-              <button class="heart"><i class="fas fa-heart"></i></button>
+              <FavoriteHeart :key="id" :product="product" />
             </div>
           </div>
+
     </div>
   </div>
 </template>
-
 
 
 <style lang="scss" scoped>
