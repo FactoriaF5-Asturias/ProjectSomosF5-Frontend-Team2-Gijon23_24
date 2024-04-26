@@ -27,7 +27,7 @@ async function deleteProduct(id) {
 				withCredentials: true,
 			}
 		);
-		return response.data;
+		return response.status;
 	} catch (error) {
 		console.error("Error deleting products:", error);
 		throw error;
