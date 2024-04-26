@@ -16,7 +16,7 @@ const searchProducts = async () => {
   }
 }
 
-const actualizarPlaceholder = () => {
+const updatePlaceholder = () => {
   const isMobile = window.innerWidth <= 1000; 
   const inputElement = document.querySelector('.input');
 
@@ -32,14 +32,14 @@ const actualizarPlaceholder = () => {
 }
 
 onMounted(() => {
-  window.addEventListener('resize', actualizarPlaceholder);
+  window.addEventListener('resize', updatePlaceholder);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', actualizarPlaceholder);
+  window.removeEventListener('resize', updatePlaceholder);
 });
 
-actualizarPlaceholder();
+updatePlaceholder();
 
 </script>
 
