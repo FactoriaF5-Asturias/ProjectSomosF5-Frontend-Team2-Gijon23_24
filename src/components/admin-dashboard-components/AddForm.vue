@@ -14,7 +14,7 @@ const closeForm = () => {
 };
 
 const uri = import.meta.env.VITE_API_ENDPOINT_PRODUCTS;
-const uriImagesS3 = import.meta.env.VITE_API_ENDPOINT_IMAGES_S3;
+const uriImagesS3 = import.meta.env.VITE_API_ENDPOINT_IMAGES_S3_UPLOAD;
 
 const resetForm = () => {
 	productName.value = "";
