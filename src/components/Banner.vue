@@ -17,6 +17,7 @@ section {
   align-items: center;
   justify-content: center;
 
+
   background-image: linear-gradient(
       to right,
       rgba(0, 0, 0, 0.3),
