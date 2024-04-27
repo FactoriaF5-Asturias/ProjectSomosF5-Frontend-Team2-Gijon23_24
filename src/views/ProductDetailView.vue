@@ -59,7 +59,7 @@ let product = reactive({
   images: []
 });
 
-
+let sortedImages = reactive({})
 
 console.log(product.additionalImages);
 
@@ -91,6 +91,7 @@ onMounted(async () => {
   const id = route.params.id_product;
   const response = await axios.get(`${url}/${id}`);
   product = response.data;
+  sortedImages = product.images.sort((a, b) => a.id - b.id)
   console.log(product)
 
   imageDirectory.value = uri + "/" + findImageForProduct(product);
@@ -114,7 +115,7 @@ onMounted(async () => {
 
             <img :src="imageDirectory" alt="Main image" />
             <div>
-              <img v-for="(image, index) in product.images" :key="index" :src="uri + '/' + image.imageName" alt="Miniatura"  @click="changeMainImage(image)"/>
+              <img v-for="(image, index) in sortedImages" :key="index" :src="uri + '/' + image.imageName" alt="Miniatura"  @click="changeMainImage(image)"/>
             </div>
     
           </div>
@@ -178,13 +179,13 @@ onMounted(async () => {
   > div {
     padding: 1rem 0;
     display: grid;
+    align-items: center;
     grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
 
     > img {
       border-radius: 5px;
       width: 100%;
-      height: 100%;
     }
   }
 }
