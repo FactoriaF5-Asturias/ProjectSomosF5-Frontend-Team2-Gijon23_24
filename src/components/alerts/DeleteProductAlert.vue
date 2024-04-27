@@ -1,9 +1,12 @@
 <script setup>
+import { useProductsStore } from '@/stores/productStore';
 import axios from 'axios';
 const props = defineProps({
     show: Boolean,
     product: Object
 });
+
+const store = useProductsStore()
 
 const emit = defineEmits(['cancel']);
 
@@ -27,11 +30,18 @@ async function deleteProduct(id) {
 				withCredentials: true,
 			}
 		);
+        store.products.splice(findProduct(), 1)
+        console.log(response.status)
 		return response.status;
 	} catch (error) {
 		console.error("Error deleting products:", error);
 		throw error;
 	}
+}
+
+function findProduct() {
+    const productIndex = store.products.findIndex((product) => product.id == props.product.id)
+    return productIndex
 }
 </script>
 
