@@ -2,8 +2,9 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
+import { useProductsStore } from "@/stores/productStore";
 
-const router = useRouter();
+const store = useProductsStore()
 
 const props = defineProps({
 	onClose: Function,
@@ -48,6 +49,7 @@ async function handlePost() {
 	try {
 		await createProduct();
 		await uploadImages(productId.value);
+		await store.fetchProducts()
 
 		console.log("Proceso completado exitosamente.");
 	} catch (error) {
