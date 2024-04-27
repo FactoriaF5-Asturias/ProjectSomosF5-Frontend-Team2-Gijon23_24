@@ -3,35 +3,22 @@ import AddForm from "../components/admin-dashboard-components/AddForm.vue";
 import EditForm from "../components/admin-dashboard-components/EditForm.vue";
 import AddButton from "@/components/admin-dashboard-components/AddButton.vue";
 import { ref, onMounted, computed } from "vue";
-import axios from "axios";
 import DashboardCard from "@/components/card/DashboardCard.vue";
+import { useProductsStore } from "@/stores/productStore";
+
+const store = useProductsStore()
 
 let showAddForm = ref(false);
 let showEditForm = ref(false);
 
-let products = ref([]);
-
-const isLoaded = ref(false);
 const currentPage = ref(1);
 const ProductsPerPage = 25;
 const totalPages = computed(() =>
-	Math.ceil(products.value.length / ProductsPerPage)
+	Math.ceil(store.products.length / ProductsPerPage)
 );
 
-async function fetchProducts() {
-	try {
-		const response = await axios.get(
-			`${import.meta.env.VITE_API_ENDPOINT_PRODUCTS}`
-		);
-		products.value = response.data;
-		isLoaded.value = true;
-	} catch (error) {
-		console.error("Error al obtener productos:", error);
-	}
-}
-
 onMounted(() => {
-	fetchProducts();
+	store.fetchProducts()
 });
 
 const openAddForm = () => {
@@ -48,7 +35,7 @@ const closeForm = () => {
 
 const paginatedProducts = computed(() => {
 	const startIndex = (currentPage.value - 1) * ProductsPerPage;
-	return products.value.slice(startIndex, startIndex + ProductsPerPage);
+	return store.products.slice(startIndex, startIndex + ProductsPerPage);
 });
 
 const nextPage = () => {
@@ -100,7 +87,7 @@ const visiblePages = computed(() => {
 						<DashboardCard
 							:product="product"
 							:key="product.id"
-							v-if="isLoaded"
+							v-if="store.isLoaded"
 						/>
 					</div>
 				</div>

@@ -42,7 +42,7 @@ cleanUsername(authStore.username);
       <img class="desk" src="/icons/log-out-icon.svg" alt="">
     </button>
 
-    <LogOutAlert :show="ConfirmationLogOutAlert" :product="product" @cancel="refuse"/>
+    <LogOutAlert :show="ConfirmationLogOutAlert" @cancel="refuse"/>
   </div>
 </template>
 
