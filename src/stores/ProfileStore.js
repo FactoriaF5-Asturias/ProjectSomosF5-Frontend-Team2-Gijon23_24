@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-uri = import.meta.env.VITE_API_ENDPOINT_PROFILE;
+const uri = import.meta.env.VITE_API_ENDPOINT_PROFILE;
 
 export const useProfileStore = defineStore('profile', {
   state: () => ({
