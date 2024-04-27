@@ -10,7 +10,6 @@ import Slider from "@/components/Slider.vue";
        <Banner />
         <Slider />
 
-        <Card/>
         <ExplorerCategory/>
      
 
