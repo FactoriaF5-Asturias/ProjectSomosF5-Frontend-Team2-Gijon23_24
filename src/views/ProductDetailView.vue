@@ -135,7 +135,7 @@ onMounted(async () => {
             <hr>
             <div class="add-container">
               <button class="add-cart" @click="showConfirmation">Añadir al carrito</button>
-              <FavoriteHeart :key="id" :product="product" />
+              <FavoriteHeart :product="product" />
             </div>
           </div>
 

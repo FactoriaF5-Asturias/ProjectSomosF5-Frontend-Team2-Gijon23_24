@@ -26,7 +26,7 @@ getProducts();
         <h1>Novedades</h1>
         <v-slide-group prev-icon="mdi-chevron-left" next-icon="mdi-chevron-right" show-arrows class="slideGroup">
             <router-link class="slideCard" :to="'/Detail/' + product.id" v-for="product in products" :key="product.id">
-                <v-slide-group-item class="display">
+                <v-slide-group-item>
                     <Card :product="product" />
                 </v-slide-group-item>
             </router-link>
