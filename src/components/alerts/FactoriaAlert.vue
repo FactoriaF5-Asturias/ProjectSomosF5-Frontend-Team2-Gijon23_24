@@ -12,6 +12,7 @@
 
 <style scoped lang="scss">
 article {
+    position: relative;
     padding: 0 2rem;
     height: 10rem;
     background-color: #FF4700;
