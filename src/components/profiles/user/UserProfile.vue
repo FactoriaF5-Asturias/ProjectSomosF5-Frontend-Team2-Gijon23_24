@@ -116,67 +116,49 @@ const cancelData = () => {
 </script>
 
 <template>
-
   <body>
-
       <div class="user-profile">
         <h1>PERFIL DE USUARIO</h1>
       </div>
-
       <div class=" modal-container">
-
         <div class="logo-container">
           <img class="image-logo" src="/images/logo.svg" alt="logo-profile">
         </div>
-
         <form @submit.prevent="submitForm">
-
           <div class="input-box">
             <label>Nombre</label>
-            <input type="text" id="firstName" v-model="firstName"> 
+            <input type="text" id="firstName" v-model="firstName">
           </div>
-
           <div class="input-box">
             <label>Apellidos</label>
             <input type="text" id="lastName" v-model="lastName">
           </div>
-
           <div class="input-box">
             <label>Teléfono</label>
             <input type="text" id="numberPhone" v-model="numberPhone">
           </div>
-
           <div class="input-box">
             <label>Dirección</label>
             <input type="text" id="address" v-model="address">
           </div>
-
           <div class="input-box-2">
             <label>C. P.</label>
             <input type="text" id="postal-code" v-model="postalCode">
-
             <label>Ciudad</label>
             <input type="text" id="city" v-model="city">
           </div>
-
           <div class="input-box">
             <label>Provincia</label>
             <input type="text" id="province" v-model="province">
           </div>
-
           <div class="btns-container">
             <button id="cancel" @click="cancelData()">Cancelar</button>
             <button id="save" @click="saveData">Guardar</button>
           </div>
-
         </form>
-
       </div>
     </body>
-    
-  
 </template>
-
 <style lang="scss" scoped>
 body {
   background-color: #CBABE4;
@@ -185,74 +167,63 @@ body {
   align-items: center;
   flex-direction: column;
 }
-
 .modal-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20rem;
-  height: 85rem;
+  padding: 4rem;
+  height: 70rem;
+  width: 60;
   border-radius: 1.5rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   background-color: white;
   position: sticky;
   max-height: 90rem;
   margin-bottom: 10rem;
-  
 }
-@media (max-width: 916px) {
+@media (max-width: 1000px) {
   .modal-container{
     width: 80%;
-    
   }
 }
-
 .user-profile {
   display: flex;
   justify-content: center;
-  margin: 20rem 0 5rem 0;
+  margin: 5rem 0 5rem 0;
 }
-
 h1 {
   font-weight: 600;
   text-align: center;
-  font-size: 5rem;
+  font-size: 4rem;
   color: $primary-background;
   font-family: "Poppins", sans-serif;
 }
-
 .logo-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
-
 .image-logo {
   height: 13rem;
 }
-
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
-
 }
-
 .input-box {
   display: flex;
   flex-direction: column;
-
   label {
     font-size: 1.8rem;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
   }
-
   input {
     width: 40rem;
     padding: 0.5rem 1rem;
@@ -261,7 +232,6 @@ form {
     border-radius: 0.5rem;
   }
 }
-
 @media (max-width: 539px) {
   .input-box{
     input{
@@ -273,30 +243,23 @@ form {
   display: flex;
   flex-direction: row;
 }
-
 .input-box-2 {
-
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
   margin-top: 2rem;
-
   label {
     font-size: 2rem;
     margin-top: 1rem;
     margin-right: 1rem;
-
   }
-
   #postal-code {
     width: 10rem;
     padding: 0.5rem 1rem;
     font-size: 1.8rem;
     border: 1px solid gray;
     border-radius: 0.5rem;
-
   }
-
   #city {
     width: 15rem;
     padding: 0.5rem 1rem;
@@ -304,33 +267,27 @@ form {
     border: 1px solid gray;
     border-radius: 0.5rem;
   }
-
   @media (max-width: 517px){
     #postal-code, #city{
       width: 100%;
     }
   }
 }
-
 @media (max-width: 517px) {
   .input-box-2{
     flex-direction: column;
-    
   }
 }
-
 .btns-container {
   margin-top: 2rem;
   display: flex;
   gap: 4rem;
-
   button {
     background-color: $primary-color;
     font-family: "Poppins", sans-serif;
     font-size: 1.8rem;
     color: white;
     border-radius: 0.5rem;
-
     width: 12rem;
     height: 4rem;
     display: flex;
@@ -339,11 +296,9 @@ form {
     cursor: pointer;
     transition: transform 0.2s ease;
   }
-
   button:hover {
     background-color: #3C3057;
   }
-
   button:active {
     transform: scale(1.1);
   }
