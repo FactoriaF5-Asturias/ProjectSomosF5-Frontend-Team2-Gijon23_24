@@ -25,18 +25,19 @@ getProducts();
     <div>
         <h1>Novedades</h1>
         <v-slide-group prev-icon="mdi-chevron-left" next-icon="mdi-chevron-right" show-arrows class="slideGroup">
-            <router-link class="slideCard" :to="'/Detail/' + product.id" v-for="product in products" :key="product.id">
-                <v-slide-group-item class="display">
-                    <Card :product="product" />
-                </v-slide-group-item>
-            </router-link>
+            <v-slide-group-item v-for="product in products" :key="product.id" class="card-container">
+                <div class="slideCard">
+                    <Card :product="product"/>
+                </div>
+            </v-slide-group-item>
         </v-slide-group>
     </div>
 </template>
 
 <style lang="scss" scoped>
 .slideGroup {
-    color: white
+    color: white;
+    display: flex;
 }
 
 .slideCard {
