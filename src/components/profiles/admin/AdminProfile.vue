@@ -132,8 +132,160 @@ const cancelData = () => {
   </body>
 
 </template>
-
 <style lang="scss" scoped>
+body {
+  background-color: #CBABE4;
+}
+.principal-Container{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60rem;
+  width: 50rem;
+  padding: 4rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+  background-color: white;
+  position: sticky;
+  max-height: 90rem;
+  margin-bottom: 10rem;
+}
+
+@media (max-width: 1000px) {
+  .modal-container{
+    width: 80%;
+    
+  }
+}
+
+.user-profile {
+  display: flex;
+  justify-content: center;
+  margin: 5rem 0 5rem 0;
+}
+
+h1 {
+  font-weight: 600;
+  text-align: center;
+  font-size: 4rem;
+  color: $primary-background;
+  font-family: "Poppins", sans-serif;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+
+.image-logo {
+  height: 13rem;
+
+}
+
+.welcome {
+  width: 40rem;
+  display: flex;
+  justify-content: center;
+}
+
+h2 {
+  font-family: "Poppins", sans-serif;
+  color: #3C3057;
+  font-size: 3rem;
+
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 8rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    width: 40rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.8rem;
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+  }
+}
+
+@media (max-width: 539px) {
+  .input-box{
+    input{
+      width: 100%;
+    }
+  }
+}
+
+.check-box {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+}
+
+#showPassword {
+  height: 2rem;
+  width: 2rem;
+}
+
+.btns-container {
+  margin-top: 2rem;
+  display: flex;
+  gap: 4rem;
+
+  button {
+    background-color: $primary-color;
+    font-family: "Poppins", sans-serif;
+    font-size: 2rem;
+    color: white;
+    border-radius: 0.5rem;
+
+    width: 12rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  button:hover {
+    background-color: #3C3057;
+  }
+
+  button:active {
+    transform: scale(1.1);
+  }
+}
+</style>
+<!-- <style lang="scss" scoped>
 body {
   background-color: #CBABE4;
 }
@@ -277,4 +429,4 @@ form {
     transform: scale(1.1);
   }
 }
-</style>
+</style> -->

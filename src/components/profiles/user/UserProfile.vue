@@ -176,8 +176,181 @@ const cancelData = () => {
     
   
 </template>
-
 <style lang="scss" scoped>
+
+body {
+  background-color: #CBABE4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  height: 70rem;
+  width: 60;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+  background-color: white;
+  position: sticky;
+  max-height: 90rem;
+  margin-bottom: 10rem;
+  
+}
+@media (max-width: 1000px) {
+  .modal-container{
+    width: 80%;
+    
+  }
+}
+
+.user-profile {
+  display: flex;
+  justify-content: center;
+  margin: 5rem 0 5rem 0;
+}
+
+h1 {
+  font-weight: 600;
+  text-align: center;
+  font-size: 4rem;
+  color: $primary-background;
+  font-family: "Poppins", sans-serif;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.image-logo {
+  height: 13rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 1.8rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    width: 40rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.8rem;
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+  }
+}
+
+@media (max-width: 539px) {
+  .input-box{
+    input{
+      width: 100%;
+    }
+  }
+}
+.second-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.input-box-2 {
+
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  margin-top: 2rem;
+
+  label {
+    font-size: 2rem;
+    margin-top: 1rem;
+    margin-right: 1rem;
+
+  }
+
+  #postal-code {
+    width: 10rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.8rem;
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+
+  }
+
+  #city {
+    width: 15rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.8rem;
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+  }
+
+  @media (max-width: 517px){
+    #postal-code, #city{
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 517px) {
+  .input-box-2{
+    flex-direction: column;
+    
+  }
+}
+
+.btns-container {
+  margin-top: 2rem;
+  display: flex;
+  gap: 4rem;
+
+  button {
+    background-color: $primary-color;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.8rem;
+    color: white;
+    border-radius: 0.5rem;
+
+    width: 12rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  button:hover {
+    background-color: #3C3057;
+  }
+
+  button:active {
+    transform: scale(1.1);
+  }
+}
+</style>
+<!-- <style lang="scss" scoped>
 body {
   background-color: #CBABE4;
   display: flex;
@@ -348,4 +521,4 @@ form {
     transform: scale(1.1);
   }
 }
-</style>
+</style> -->
