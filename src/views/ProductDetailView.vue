@@ -49,6 +49,8 @@ let product = reactive({
   images: []
 });
 
+let sortedImages = reactive({})
+
 console.log(product.additionalImages);
 
 function findImageForProduct(product) {
@@ -69,6 +71,8 @@ onMounted(async () => {
 
   const id = route.params.id_product;
   const response = await axios.get(`${url}/${id}`);
+  product = response.data
+  sortedImages = product.images.sort((a, b) => a.id - b.id)
   Object.assign(product, response.data);
 
   console.log(product)
