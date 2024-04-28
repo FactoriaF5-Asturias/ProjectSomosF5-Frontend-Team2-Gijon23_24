@@ -1,7 +1,15 @@
 import { mount } from '@vue/test-utils';
 import Card from '../card/Card.vue';
+import { createPinia } from 'pinia';
+
 describe('Card.vue', () => {
- it('renders the product name and price', async () => {
+  let pinia;
+
+  beforeEach(() => {
+    pinia = createPinia();
+  });
+
+  it('renders the product name and price', async () => {
     const product = {
       id: 1,
       productName: 'Test Product',
@@ -15,13 +23,16 @@ describe('Card.vue', () => {
       props: {
         product,
       },
+      global: {
+        plugins: [pinia],
+      },
     });
 
     await wrapper.vm.$nextTick(); // Espera a que se actualice el DOM
 
     expect(wrapper.find('.product-name').text()).toBe(product.productName);
     expect(wrapper.find('.price').text()).toBe(`${product.price} €`);
- });
+  });
 
  it('renders the default image if no main image is provided', async () => {
     const product = {
