@@ -1,6 +1,7 @@
 <script setup>
 import { useAuthStore } from '@/stores/AuthStore';
 import { useRouter } from 'vue-router';
+import { useCartStore } from '@/stores/CartStore';
 
 const router = useRouter();
 
@@ -9,6 +10,8 @@ const props = defineProps({
 });
 
 const authStore = useAuthStore();
+const cartStore = useCartStore();
+
 const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 
 const emit = defineEmits(['cancel']);
@@ -32,6 +35,7 @@ try {
     console.log("Logout successfull"); 
     authStore.userRole = '';
     authStore.username = '';
+    cartStore.clearCart();
     authStore.isAuthenticated = false;
     return response.status
 } catch (error) {

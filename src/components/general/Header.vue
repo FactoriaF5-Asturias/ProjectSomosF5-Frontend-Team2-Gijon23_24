@@ -46,7 +46,7 @@ watch(() => cartStore.getItems.length, (newCount) => {
 					<div>
 						<div id="cart-container">
 							<img src="/icons/icon-shopping-cart.svg" alt="">
-							<span> {{ cartProductsCount }} </span>
+							<span v-if="cartProductsCount >= 1 && authStore.isAuthenticated"> {{ cartProductsCount }} </span>
 						</div>
 					<p>Carrito</p>
 					</div>

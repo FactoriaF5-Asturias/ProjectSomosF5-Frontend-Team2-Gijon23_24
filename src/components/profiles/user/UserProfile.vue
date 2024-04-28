@@ -19,6 +19,9 @@ const postalCode = ref('');
 const city = ref('');
 const province = ref('');
 
+const successVisible = ref(false);
+const errorVisible = ref(false);
+
 axiosRetry(axios, {
  retries: 3, 
  retryDelay: (retryCount) => {
@@ -54,6 +57,7 @@ const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
     postalCode.value = response.data.postalCode;
     city.value = response.data.city;
     province.value = response.data.province;
+
 	} catch (error) {
 		console.error("Error al conseguir los datos del producto", error);
 		throw error;
@@ -97,7 +101,7 @@ const cancelData = () => {
       });
       console.log(response);
 
-      if (response.status === 202) {
+        if (response.status === 202) {
           successVisible.value = true;
 
           setTimeout(() => {

@@ -11,6 +11,10 @@ export const useCartStore = defineStore({
       this.items.push(shortProduct);
       this.cart.push(product);
     },
+    clearCart() {
+      this.items = [];
+      this.cart = [];
+    }
   },
   
   getters: {
