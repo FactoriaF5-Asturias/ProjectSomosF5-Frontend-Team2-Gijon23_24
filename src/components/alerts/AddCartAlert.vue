@@ -64,6 +64,8 @@ const addCart = () => {
 
 .confirmation-content {
   max-width: 30rem;
+  text-align: center;
+  line-height: 2rem;
   height: 20rem;
   padding: 20px;
   border: 1px solid #ccc;

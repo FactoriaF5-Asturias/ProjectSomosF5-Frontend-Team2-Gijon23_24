@@ -5,6 +5,7 @@ import SuccessPopup from '@/components/alerts/SuccessPopup.vue'
 import ErrorPassword from '@/components/alerts/ErrorPassword.vue'
 import axios from 'axios';
 
+
 const props = defineProps({
   onClose: Function,
   loginClick: Function
@@ -62,11 +63,12 @@ const submitForm = async () => {
       console.log('El usuario se ha registrado correctamente.');
       successVisible.value = true;
       setTimeout(() => {
-        successVisible.value = false;
-        closeForm();
-      }, 10000);
+        props.loginClick();
+      }, 500);
+
     } else {
       console.log('Error al registrar el usuario.');
+      errorVisible.value = true;
     }
   } catch (error) {
     console.error(error);
@@ -86,7 +88,6 @@ const LoginForm = () => {
 <template>
   <div>
 
-    
     <SuccessPopup :show="successVisible" message="El registro se ha realizado con éxito."/>
     <ErrorPassword :show="errorVisible" message="Error al realizar el registro." />
     
@@ -97,7 +98,7 @@ const LoginForm = () => {
         
         <section id="welcome_image">
                 <div id="images_container">
-                  <img src="/images/logo.svg" alt="">
+                  <img class="desk" src="/images/logo.svg" alt="">
                   <img src="/images/PrintGo.svg" alt="">
                   <p>Haciendo tangible lo inimaginable.</p>
                   <button @click="LoginForm">¿Ya tienes una cuenta?</button>
@@ -153,35 +154,34 @@ const LoginForm = () => {
   height: 90vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 500;
+  z-index: 900;
 
   .modal_container {
-    height: 60rem;
-    width: 90rem;
+    height: 45rem;
+    width: 80rem;
     display: flex;
 
     section {
       background-color: white;
       width: 50%;
-      border-radius: 10px 0 0 10px;
+      border-radius: 0 10px 10px 0;
     }
 
     #welcome_image {
       background-color: $primary-background;
-      border-radius: 0 10px 10px 0;
+      border-radius: 10px 0 0 10px;
       display: flex;
-      justify-content: space-between;
-      padding-bottom: 10%;
+      align-items: center;
       flex-direction: column;
-      gap: 3rem;
 
       #images_container {
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
         height: 100%;
         font-size: 2rem;
+        gap:2rem;
 
         img {
           width: 40%;
@@ -212,12 +212,11 @@ const LoginForm = () => {
     form {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding-bottom: 40%;
+      justify-content: center;
       flex-direction: column;
-      gap: 3rem;
-      height: 100%;
+      gap: 2rem;
       width: 100%;
+      height: 100%;
 
       h1 {
         font-size: 3rem;
@@ -267,6 +266,7 @@ const LoginForm = () => {
         font-size: 1.8rem;
         border: 1px solid gray;
         border-radius: 5px;
+        width:100%
       }
     }
 
@@ -275,9 +275,6 @@ const LoginForm = () => {
       display: flex;
       justify-content: end;
       
-      button {
-        margin: 2rem 2rem 0 0;
-      }
       img {
         width: 2.5rem;
       }
@@ -296,6 +293,13 @@ const LoginForm = () => {
 
 
 @media (max-width: 1000px) {
+  .modal {
+    max-height: 100vh;
+  }
+
+  .desk {
+    display: none;
+  }
   .modal .modal_container {
     height: 90vh;
     width: 100vw;
@@ -304,28 +308,59 @@ const LoginForm = () => {
 
     section {
       width: 100%;
-      height: 50%;
+      height: 70%;
       border-radius: 0;
     }
 
     #welcome_image {
       gap: 0;
-      justify-content: center;
       border-radius: 10px 10px 0 0;
       padding-bottom: 0;
+      height: 30%;
       
       #images_container {
-        justify-content: space-between;
-        height: 80%;
+        
+        p {
+      font-size: 1.3rem;
+    }
 
-        img {
-          width: 15rem;
+        button {
+          font-size: 1.3rem;
+          padding: 0.5rem;
+          height: 3rem;
+
         }
+
+
       }
     }
   }
-  .modal .modal_container .form_container {
-    gap: 0;
+
+  #button_container {
+      
+      button {
+        margin: 0;
+      }
+    }
+
+
+  .modal .modal_container .input_box input {
+    font-size: 1.3rem;
+  }
+
+  .modal .form_container form {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .modal .modal_container form article > div button {
+    font-size: 1.3rem;
+    height: 100%;
+    padding: 0.5rem
+  }
+  #terms {
+    font-size: 1rem
   }
 }
 </style>

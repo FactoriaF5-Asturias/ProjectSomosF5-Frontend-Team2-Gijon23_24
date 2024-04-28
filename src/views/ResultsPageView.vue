@@ -92,7 +92,7 @@ const goback = () => {
           <Card :product="product" v-for="product in paginatedProducts" :key="product.id" v-if="isLoaded" />
         </div>
       </section>
-      <div id="pagination">
+      <div id="pagination" v-if="Results.length >= 1">
         <button class="pagination-arrow" @click="prevPage" :disabled="currentPage <= 1">
           << </button>
             <button v-for="page in visiblePages" :key="page" @click="changePage(page)"
@@ -110,6 +110,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 60vh;
 
   >div {
     width: 85%;

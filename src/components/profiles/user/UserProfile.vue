@@ -1,13 +1,12 @@
 <script setup>
 import { useAuthStore } from '@/stores/AuthStore';
 import { onMounted, ref} from 'vue';
-// import { useRouter } from "vue-router";
 import axios from "axios";
 import axiosRetry from 'axios-retry';
+import SuccessPopup from './../../alerts/SuccessPopup.vue'
+import ErrorPassword from './../../alerts/ErrorPassword.vue'
 	
-// const router = useRouter();
 const store = useAuthStore();
-// const profileDetails = ref(null);
 
 const id = ref(Number)
 console.log(id)
@@ -19,6 +18,9 @@ const address = ref('');
 const postalCode = ref('');
 const city = ref('');
 const province = ref('');
+
+const successVisible = ref(false);
+const errorVisible = ref(false);
 
 axiosRetry(axios, {
  retries: 3, 
@@ -55,6 +57,7 @@ const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
     postalCode.value = response.data.postalCode;
     city.value = response.data.city;
     province.value = response.data.province;
+
 	} catch (error) {
 		console.error("Error al conseguir los datos del producto", error);
 		throw error;
@@ -98,13 +101,22 @@ const cancelData = () => {
       });
       console.log(response);
 
-        if (response.status === 200) {
-          location.reload();
+        if (response.status === 202) {
+          successVisible.value = true;
+
+          setTimeout(() => {
+            successVisible.value = false;
+          }, 3000);
         } else {
           console.error("Error al editar el perfil");
+          errorVisible.value = true;
+
+          setTimeout(() => {
+            errorVisible.value = false;
+          }, 3000);
         }
 
-     } catch (error) {
+      } catch (error) {
       if (!error.response) {
         console.error('Error de red:', error);
       } else {
@@ -117,6 +129,10 @@ const cancelData = () => {
 
 <template>
   <body>
+
+    <SuccessPopup :show="successVisible" message="Has cambiado tu información personal con éxito."/>
+    <ErrorPassword :show="errorVisible" message="Error al realizar el cambio de datos." />
+
       <div class="user-profile">
         <h1>PERFIL DE USUARIO</h1>
       </div>

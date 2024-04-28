@@ -23,10 +23,10 @@ watch(() => cartStore.getItems.length, (newCount) => {
 		<FactoriaAlert />
 
 		<div>
-			<div id="logotype_container">
+			<router-link to="/" id="logotype_container">
 				<img class="mobile" src="/images/logotype-responsive.svg" alt="PrintGo logotype"/>
 				<img class="desk" src="/images/logotype-printgo.svg" alt="PrintGo logotype"/>
-			</div>
+			</router-link>
 
 			<div id="actions_container">
 				<router-link to="/dashboard" exact-active-class="active" v-if="authStore.userRole == 'ROLE_ADMIN'">
@@ -46,7 +46,7 @@ watch(() => cartStore.getItems.length, (newCount) => {
 					<div>
 						<div id="cart-container">
 							<img src="/icons/icon-shopping-cart.svg" alt="">
-							<span> {{ cartProductsCount }} </span>
+							<span v-if="cartProductsCount >= 1 && authStore.isAuthenticated"> {{ cartProductsCount }} </span>
 						</div>
 					<p>Carrito</p>
 					</div>

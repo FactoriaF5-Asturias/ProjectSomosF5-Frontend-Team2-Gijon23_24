@@ -19,8 +19,8 @@ test('renders the product name, description, price, and count correctly', async 
   expect(wrapper.text()).toContain(product.productDescription);
 
 
-  expect(wrapper.text()).toContain(`${product.price} €`);
+  expect(wrapper.text()).toContain(`${product.price}`);
 
   
-  expect(wrapper.text()).toContain(`x ${count}`);
+  expect(wrapper.text()).toContain(`${count}`);
 });

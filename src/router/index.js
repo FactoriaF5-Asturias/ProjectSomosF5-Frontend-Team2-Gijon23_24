@@ -11,9 +11,8 @@ import StripeCheckoutView from '@/views/StripeCheckoutView.vue'
 import StripeReturnView from '@/views/StripeReturnView.vue'
 import DashboardView from '../views/DashboardView.vue'
 import { useAuthStore } from '@/stores/AuthStore'
-import LoginForm from '@/components/general/header/LoginForm.vue'
-
 import ResultsPageView from '../views/ResultsPageView.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -99,7 +98,8 @@ const router = createRouter({
 });
 
 router.afterEach(() => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
 });
 
 router.beforeEach((to) =>{
