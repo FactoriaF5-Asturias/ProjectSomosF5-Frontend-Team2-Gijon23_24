@@ -25,7 +25,7 @@ getProducts();
     <div>
         <h1>Novedades</h1>
         <v-slide-group prev-icon="mdi-chevron-left" next-icon="mdi-chevron-right" show-arrows class="slideGroup">
-            <v-slide-group-item v-for="product in products" :key="product.id" class="card-container">
+            <v-slide-group-item v-for="product in products" :key="product.id">
                 <div class="slideCard">
                     <Card :product="product"/>
                 </div>
