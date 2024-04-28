@@ -1,7 +1,11 @@
-                                                                                                                                                                                                      <script setup>
+<script setup>
 import { ref } from 'vue';
 import axios from 'axios';
 import { useAuthStore } from "./../../../stores/AuthStore";
+import { useRouter } from 'vue-router';
+import ErrorPassword from '@/components/alerts/ErrorPassword.vue';
+
+const router  = useRouter();
 
 const props = defineProps({
   onClose: Function,
@@ -16,6 +20,8 @@ const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
 
 const usernameInput = ref('');
 const passwordInput = ref('');
+
+const errorVisible = ref(false);
 
 const authStore = useAuthStore();
 
@@ -38,10 +44,11 @@ const submitForm = async () => {
     authStore.isAuthenticated = true;
         
     console.log(authStore.userRole, authStore.username, authStore.isAuthenticated);
-
+    router.push('/');
     closeForm();
   } catch (error) {
     console.error(error);
+    errorVisible.value = true;
   }
 };
 
@@ -53,6 +60,8 @@ const registerForm = () => {
 
 <template>
   <div>
+
+    <ErrorPassword :show="errorVisible" message="Error al iniciar sesión, contraseña o usuario incorrecto." />
     
     <div class="modal" @click="closeForm">
         <div class="modal_container" @click.stop>
@@ -90,7 +99,7 @@ const registerForm = () => {
                   </button>
                 </div>
                 <div id="images_container">
-                  <img src="/images/logo.svg" alt="">
+                  <img class="desk" src="/images/logo.svg" alt="">
                   <img src="/images/PrintGo.svg" alt="">
                   <p>Haciendo tangible lo inimaginable.</p>
                   <button @click="registerForm">¿Aún no tienes cuenta?</button>
@@ -113,11 +122,11 @@ const registerForm = () => {
   height: 90vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+  z-index: 900;
 
   .modal_container {
-    height: 60rem;
-    width: 90rem;
+    height: 45rem;
+    width: 80rem;
     display: flex;
 
     section {
@@ -131,7 +140,6 @@ const registerForm = () => {
       border-radius: 0 10px 10px 0;
       display: flex;
       justify-content: space-between;
-      padding-bottom: 10%;
       flex-direction: column;
       gap: 3rem;
 
@@ -142,9 +150,10 @@ const registerForm = () => {
         align-items: center;
         height: 100%;
         font-size: 2rem;
+        gap: 2rem;
 
         img {
-          width: 40%;
+          width: 30%;
         }
 
         p {
@@ -172,8 +181,7 @@ const registerForm = () => {
     form {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding-bottom: 40%;
+      justify-content: center;
       flex-direction: column;
       gap: 3rem;
       height: 100%;
@@ -224,6 +232,7 @@ const registerForm = () => {
         font-size: 1.8rem;
         border: 1px solid gray;
         border-radius: 5px;
+        width: 100%;
       }
     }
 
@@ -260,6 +269,10 @@ const registerForm = () => {
     display: none;
   }
 
+  .modal {
+    max-height: 100vh;
+  }
+
   .modal .modal_container {
     height: 90vh;
     width: 100vw;
@@ -268,7 +281,7 @@ const registerForm = () => {
 
     section {
       width: 100%;
-      height: 50%;
+      height: 60%;
       border-radius: 0;
     }
 
@@ -277,27 +290,35 @@ const registerForm = () => {
       justify-content: center;
       border-radius: 10px 10px 0 0;
       padding-bottom: 0;
+      height: 40%;
       
       #images_container {
-        justify-content: space-between;
-        height: 80%;
+
+        p {
+          font-size: 1.3rem;
+        }
+
+        button {
+          font-size: 1.3rem;
+          padding: 0.5rem;
+          height: 3rem;
+        }
 
         img {
-          width: 15rem;
+          width: 10rem;
         }
       }
     }
+  }
 
-    form {
-      padding-bottom: 0;
+  .modal .modal_container form .form-content > article button {
+    font-size: 1.3rem;
+    height: 100%;
+    padding: 0.5rem
+  }
 
-      > article {
-        button {
-          height: 3.8rem;
-          font-size: 1.6rem;
-        }
-      }
-    }
+  .modal .modal_container .input_box input {
+    font-size: 1.3rem;
   }
 
   .modal .form_container form {

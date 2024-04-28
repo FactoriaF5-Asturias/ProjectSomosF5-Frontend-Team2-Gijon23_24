@@ -16,7 +16,7 @@ const refuse = () => {
 
 const accept = () => {
     userLogout()
-    emit('cancel');
+    router.push('/');
 };
 
 async function userLogout() {

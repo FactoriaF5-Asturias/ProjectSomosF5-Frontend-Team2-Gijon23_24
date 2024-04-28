@@ -64,6 +64,7 @@
         </div>
         <div class="actions">
           <button @click="closePopup">Aceptar</button>
+          <button @click="closePopup">Rechazar</button>
         </div>
       </article>
     </div>
@@ -96,7 +97,7 @@ const closePopup = () => {
 
 .terms-popup {
   max-width: 40rem;
-  height: 45rem;
+  height: 35rem;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -126,7 +127,10 @@ h2 {
 
 .actions {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 10px;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
 }
 
 button {
