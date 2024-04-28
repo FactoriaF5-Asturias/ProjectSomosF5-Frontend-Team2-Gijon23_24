@@ -5,6 +5,7 @@ import SuccessPopup from '@/components/alerts/SuccessPopup.vue'
 import ErrorPassword from '@/components/alerts/ErrorPassword.vue'
 import axios from 'axios';
 
+
 const props = defineProps({
   onClose: Function,
   loginClick: Function
@@ -61,6 +62,9 @@ const submitForm = async () => {
     if (response.status === 200) {
       console.log('El usuario se ha registrado correctamente.');
       successVisible.value = true;
+      setTimeout(() => {
+        props.loginClick();
+      }, 500);
 
     } else {
       console.log('Error al registrar el usuario.');

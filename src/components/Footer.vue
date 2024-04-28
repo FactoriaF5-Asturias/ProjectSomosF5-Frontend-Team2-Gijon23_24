@@ -32,6 +32,7 @@
 	padding: 54px;
 	color: white;
 	background-color: transparentize($color: #1c1b1b, $amount: 0);
+	font-family: "Poppins", sans-serif;
   }
   
   .logo {
@@ -79,7 +80,7 @@
   }
   .nav a {
 	color: aliceblue;
-	font-size: x-large;
+	font-size: 2rem;
 	transition: all 0.3s ease-in-out;
   }
   .nav a:hover {
