@@ -1,5 +1,8 @@
 <script setup>
 import { useAuthStore } from '@/stores/AuthStore';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const props = defineProps({
     show: Boolean
@@ -16,7 +19,7 @@ const refuse = () => {
 
 const accept = () => {
     userLogout()
-    emit('cancel');
+    router.push('/');
 };
 
 async function userLogout() {

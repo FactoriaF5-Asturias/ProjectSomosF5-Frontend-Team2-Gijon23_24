@@ -110,6 +110,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 60vh;
 
   >div {
     width: 85%;

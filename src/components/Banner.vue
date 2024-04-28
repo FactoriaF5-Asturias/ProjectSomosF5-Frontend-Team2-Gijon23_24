@@ -33,16 +33,23 @@ section {
 
 .text-container {
   display: flex;
+  text-align: center;
   justify-content: center;
   width: 100%;
 }
 
 h1 {
-	font-size: 5rem;
+	font-size: 4rem;
 	font-weight: 500;
+  padding: 0.5rem;
 	color: white;
    filter: drop-shadow(0 0 0.75rem black);
 }
 
+@media (min-width:1000px) {
+  h1 {
+    font-size: 5rem;
+  }
+}
 
 </style>

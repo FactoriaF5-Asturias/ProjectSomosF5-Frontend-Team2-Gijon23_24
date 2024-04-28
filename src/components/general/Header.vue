@@ -23,10 +23,10 @@ watch(() => cartStore.getItems.length, (newCount) => {
 		<FactoriaAlert />
 
 		<div>
-			<div id="logotype_container">
+			<router-link to="/" id="logotype_container">
 				<img class="mobile" src="/images/logotype-responsive.svg" alt="PrintGo logotype"/>
 				<img class="desk" src="/images/logotype-printgo.svg" alt="PrintGo logotype"/>
-			</div>
+			</router-link>
 
 			<div id="actions_container">
 				<router-link to="/dashboard" exact-active-class="active" v-if="authStore.userRole == 'ROLE_ADMIN'">
