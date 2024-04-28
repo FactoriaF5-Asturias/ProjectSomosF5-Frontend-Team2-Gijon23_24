@@ -11,12 +11,15 @@ const imageDirectory = ref("");
 const isLoading = ref(true);
 
 function findImageForProduct(product) {
-	const image = product.images.find((img) => img.mainImage === true);
-	if (image == undefined) {
-		const defaultImage = "placeholder-image.jpg";
-		return defaultImage;
-	}
-	return image.imageName;
+  if (!product || !product.images) {
+    return null;
+  }
+  const image = product.images.find((img) => img.mainImage === true);
+  if (!image) {
+    const defaultImage = "placeholder-image.jpg";
+    return defaultImage;
+  }
+  return image.url;
 }
 
 onMounted(async () => {
