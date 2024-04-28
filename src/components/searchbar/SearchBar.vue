@@ -47,7 +47,7 @@ updatePlaceholder();
 
   <div class="search-container">
     <div class="input-container">
-      <input type="text" class="input" v-model="name" :placeholder="placeholderText">
+      <input type="text" class="input" v-model="name" :placeholder="placeholderText" @keyup.enter="searchProducts">
       <button class="btn" @click="searchProducts"><img src="/icons/search-icon.svg" alt=""></button>
     </div>
    
